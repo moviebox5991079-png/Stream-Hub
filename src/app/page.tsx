@@ -143,10 +143,10 @@ export default function HomePage() {
                             </div>
                             <button className="ml-4 bg-white text-black px-4 py-2 rounded-full font-bold text-xs hover:bg-gray-200">Subscribe</button>
                          </div>
-                         <div className="flex gap-4">
+                         {/* <div className="flex gap-4">
                             <button className="flex items-center gap-2 bg-[#272727] px-4 py-2 rounded-full hover:bg-[#3f3f3f]"><Trophy size={16}/> Like</button>
                             <button className="flex items-center gap-2 bg-[#272727] px-4 py-2 rounded-full hover:bg-[#3f3f3f]"><Radio size={16}/> Share</button>
-                         </div>
+                         </div> */}
                       </div>
                    </div>
                    <div className="my-6 border-b border-gray-800"></div>

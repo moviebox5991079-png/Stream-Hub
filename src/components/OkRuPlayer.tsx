@@ -17,6 +17,9 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isLandscape, setIsLandscape] = useState<boolean>(false);
+  const [showRotateHint, setShowRotateHint] = useState<boolean>(false);
+  const [isIosSafari, setIsIosSafari] = useState<boolean>(false);
 
   // Smart ID Extractor
   const cleanVideoId = useMemo(() => {
@@ -38,8 +41,17 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
 
     try {
       if (!document.fullscreenElement) {
-        // 1. Enter Fullscreen
-        await containerRef.current.requestFullscreen();
+        // 1. Enter Fullscreen (with vendor prefixes)
+        const el: any = containerRef.current;
+        if (el.requestFullscreen) {
+          await el.requestFullscreen();
+        } else if (el.webkitRequestFullscreen) {
+          await el.webkitRequestFullscreen();
+        } else if (el.msRequestFullscreen) {
+          await el.msRequestFullscreen();
+        } else if (el.mozRequestFullScreen) {
+          await el.mozRequestFullScreen();
+        }
         
         // 2. Force Landscape (Mobile par screen teda karne k liye)
         // @ts-ignore (Typescript kabhi kabhi screen.orientation ko nahi maanta)
@@ -51,10 +63,19 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
             // Agar browser support na kare (jaise Desktop ya iPhone), to ignore karo
             console.log("Landscape lock not supported on this device");
           }
+        } else {
+          // iOS Safari ke liye hint dikhao (orientation lock supported nahi hota)
+          setShowRotateHint(true);
         }
       } else {
         // 3. Exit Fullscreen
-        await document.exitFullscreen();
+        if (document.exitFullscreen) {
+          await document.exitFullscreen();
+        } else if ((document as any).webkitExitFullscreen) {
+          await (document as any).webkitExitFullscreen();
+        } else if ((document as any).msExitFullscreen) {
+          await (document as any).msExitFullscreen();
+        }
         
         // 4. Wapas Portrait (Seedha) karo
         // @ts-ignore
@@ -62,6 +83,7 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
            // @ts-ignore
            screen.orientation.unlock();
         }
+        setShowRotateHint(false);
       }
     } catch (err) {
       console.error("Fullscreen error:", err);
@@ -74,6 +96,30 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
     return () => document.removeEventListener('fullscreenchange', handleChange);
   }, []);
 
+  // Track orientation changes for hint visibility
+  useEffect(() => {
+    const checkOrientation = () => {
+      const landscape = window.matchMedia('(orientation: landscape)').matches || (window.innerWidth > window.innerHeight);
+      setIsLandscape(landscape);
+      if (landscape) setShowRotateHint(false);
+    };
+    checkOrientation();
+    window.addEventListener('orientationchange', checkOrientation);
+    window.addEventListener('resize', checkOrientation);
+    return () => {
+      window.removeEventListener('orientationchange', checkOrientation);
+      window.removeEventListener('resize', checkOrientation);
+    };
+  }, []);
+
+  // Detect iOS Safari to manage expectations
+  useEffect(() => {
+    const ua = navigator.userAgent;
+    const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(ua));
+    const isSafari = /Safari/.test(ua) && !/Chrome|CriOS|FxiOS/.test(ua);
+    setIsIosSafari(isIOS && isSafari);
+  }, []);
+
   return (
     <div className="w-full max-w-6xl mx-auto my-6 animate-in fade-in zoom-in duration-500">
       <div 
@@ -83,9 +129,9 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
         {/* === SHIELDS === */}
         <div className="absolute top-0 left-0 w-[100%] h-[18%] md:h-[10%] z-50 bg-transparent" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
         <div className="absolute top-0 right-0 w-[15%] h-[20%] z-50 bg-transparent" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
-        <div className="absolute bottom-0 right-0 z-50 bg-transparent
+        {/* <div className="absolute bottom-0 right-0 z-50 bg-red-600
 
-    w-[36%] h-[29%]   /* default */
+    w-[5%] h-[5%]
 
     [@media(min-width:300px)]:w-[27%]
     [@media(min-width:300px)]:h-[15%]
@@ -105,7 +151,15 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
     [@media(min-width:820px)]:w-[8.5%]
     [@media(min-width:1300px)]:h-[28%]
 
-    [@media(min-width:1020px)]:w-[4%]
+    [@media(min-width:1020px)]:w-[4%] 
+
+        
+        
+        " onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} /> */}
+
+                <div className="absolute bottom-0 right-0 z-50 bg-red-600
+
+    w-[4%] h-[5%]   
         
         
         " onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
@@ -119,6 +173,13 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
         >
           {isFullscreen ? <Minimize size={24} /> : <Maximize size={24} />}
         </button>
+
+        {/* === ROTATE HINT (iOS/unsupported orientation lock) === */}
+        {/* {isFullscreen && !isLandscape && showRotateHint && (
+          <div className="absolute inset-x-0 bottom-16 mx-auto w-max max-w-[90%] z-[60] px-3 py-2 rounded-md bg-black/70 text-white text-xs sm:text-sm shadow-md">
+            Rotate your phone  ko landscape me ghumaye better fullscreen ke liye.
+          </div>
+        )} */}
 
         {/* === IFRAME PLAYER === */}
         {!isLoaded && (
@@ -134,6 +195,7 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
           className="absolute top-0 left-0 w-full h-full z-10"
           frameBorder="0"
           allow="autoplay; encrypted-media; picture-in-picture; screen-wake-lock"
+          // allowFullScreen
           onLoad={() => setIsLoaded(true)}
         />
       </div>

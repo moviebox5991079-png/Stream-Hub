@@ -43,3 +43,21 @@ a {
     color-scheme: dark;
   }
 }
+
+/* Subtle custom scrollbars */
+.scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #10b981 #111827; /* emerald on slate */
+}
+
+.scrollbar::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background: #111827;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #10b981, #059669);
+  border-radius: 8px;
+}

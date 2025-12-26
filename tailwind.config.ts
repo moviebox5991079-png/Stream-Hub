@@ -8,7 +8,21 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+
+
+      screens: {
+        xs: '300px',
+        smx: '500px',
+        mdx: '700px',
+        lgx: '900px',
+        xlx: '1100px',
+        xxlx: '1300px',
+      },
+
+
+
+    },
   },
   plugins: [],
 };

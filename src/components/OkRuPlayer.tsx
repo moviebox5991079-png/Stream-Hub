@@ -71,9 +71,35 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
         className="relative w-full aspect-[16/9] bg-black rounded-xl overflow-hidden shadow-2xl border border-gray-800 group"
       >
         {/* === SHIELDS (Popups/Redirects rokne ke liye) === */}
-        <div className="absolute top-0 left-0 w-[20%] h-[20%] z-50 bg-transparent" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
+        <div className="absolute top-0 left-0 w-[100%] h-[18%] md:h-[10%] z-50 bg-transparent" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
         <div className="absolute top-0 right-0 w-[15%] h-[20%] z-50 bg-transparent" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
-        <div className="absolute bottom-0 right-0 w-[12%] h-[15%] z-50 bg-transparent" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
+        {/* <div className="absolute bottom-0 right-0 w-[17%] h-[20%] z-50 bg-green-500" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} /> */}
+        <div className=" absolute bottom-0 right-0 z-50 bg-transparent
+
+    w-[36%] h-[29%]   /* default */
+
+    [@media(min-width:300px)]:w-[27%]
+    [@media(min-width:300px)]:h-[15%]
+
+    [@media(min-width:380px)]:w-[23%]
+    [@media(min-width:500px)]:h-[17%]
+
+    [@media(min-width:458px)]:w-[20%]
+    [@media(min-width:700px)]:h-[20%]
+
+    [@media(min-width:523px)]:w-[16%]
+    [@media(min-width:900px)]:h-[22%]
+
+    [@media(min-width:672px)]:w-[13%]
+    [@media(min-width:1100px)]:h-[25%]
+
+    [@media(min-width:820px)]:w-[8%]
+    [@media(min-width:1300px)]:h-[28%]
+
+    [@media(min-width:1020px)]:w-[4%]
+
+" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
+
 
         {/* === CUSTOM CONTROLS === */}
         <button

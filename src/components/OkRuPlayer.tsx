@@ -104,7 +104,9 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
         {/* === CUSTOM CONTROLS === */}
         <button
           onClick={toggleFullScreen}
-          className="absolute bottom-4 right-4 z-[60] p-2 bg-red-600/90 hover:bg-red-600 text-white rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform hover:scale-110 shadow-lg backdrop-blur-sm"
+          // className="absolute bottom-4 right-4 z-[60] p-2 bg-red-600/90 hover:bg-red-600 text-white rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform hover:scale-110 shadow-lg backdrop-blur-sm"
+          className="absolute bottom-4 right-4 z-[60] p-2 bg-red-600/90 hover:bg-red-600 text-white rounded-lg  group-hover:opacity-100 transition-all duration-300 transform hover:scale-110 shadow-lg backdrop-blur-sm"
+
           title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
         >
           {isFullscreen ? <Minimize size={24} /> : <Maximize size={24} />}

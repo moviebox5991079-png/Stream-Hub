@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { Maximize, Minimize, Loader2 } from 'lucide-react'; 
 
 interface OkRuPlayerProps {
-  videoId: string; // Yeh ID, URL, ya Iframe code ho sakta hai
+  videoId: string;
   title?: string;
   autoPlay?: boolean;
 }
@@ -18,43 +18,53 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
   const [isLoaded, setIsLoaded] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  // === SMART ID EXTRACTOR ===
-  // Yeh function check karega ke user ne kya paste kiya hai aur usme se asli ID nikalega
+  // Smart ID Extractor
   const cleanVideoId = useMemo(() => {
     if (!videoId) return '';
-    
-    // 1. Agar user ne poora Iframe code paste kiya hai
-    // Example: <iframe src="//ok.ru/videoembed/123456789"...>
     const iframeMatch = videoId.match(/videoembed\/(\d+)/);
-    if (iframeMatch && iframeMatch[1]) {
-      return iframeMatch[1];
-    }
-
-    // 2. Agar user ne poora URL paste kiya hai
-    // Example: https://ok.ru/video/123456789
+    if (iframeMatch && iframeMatch[1]) return iframeMatch[1];
     const urlMatch = videoId.match(/ok\.ru\/video\/(\d+)/);
-    if (urlMatch && urlMatch[1]) {
-      return urlMatch[1];
-    }
-
-    // 3. Agar user ne sirf numbers paste kiye hain (Sahi tareeqa)
+    if (urlMatch && urlMatch[1]) return urlMatch[1];
     return videoId;
   }, [videoId]);
 
   const embedUrl = `https://ok.ru/videoembed/${cleanVideoId}?nochat=1&autoplay=${autoPlay ? 1 : 0}`;
 
-  // Reset loader when video changes
-  useEffect(() => {
-    setIsLoaded(false);
-  }, [cleanVideoId]);
+  useEffect(() => { setIsLoaded(false); }, [cleanVideoId]);
 
-  // Fullscreen Logic
-  const toggleFullScreen = () => {
+  // === UPDATED FULLSCREEN LOGIC (WITH LANDSCAPE LOCK) ===
+  const toggleFullScreen = async () => {
     if (!containerRef.current) return;
-    if (!document.fullscreenElement) {
-      containerRef.current.requestFullscreen().catch((err) => console.error(err));
-    } else {
-      document.exitFullscreen();
+
+    try {
+      if (!document.fullscreenElement) {
+        // 1. Enter Fullscreen
+        await containerRef.current.requestFullscreen();
+        
+        // 2. Force Landscape (Mobile par screen teda karne k liye)
+        // @ts-ignore (Typescript kabhi kabhi screen.orientation ko nahi maanta)
+        if (screen.orientation && screen.orientation.lock) {
+          try {
+            // @ts-ignore
+            await screen.orientation.lock("landscape");
+          } catch (err) {
+            // Agar browser support na kare (jaise Desktop ya iPhone), to ignore karo
+            console.log("Landscape lock not supported on this device");
+          }
+        }
+      } else {
+        // 3. Exit Fullscreen
+        await document.exitFullscreen();
+        
+        // 4. Wapas Portrait (Seedha) karo
+        // @ts-ignore
+        if (screen.orientation && screen.orientation.unlock) {
+           // @ts-ignore
+           screen.orientation.unlock();
+        }
+      }
+    } catch (err) {
+      console.error("Fullscreen error:", err);
     }
   };
 
@@ -70,11 +80,10 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
         ref={containerRef} 
         className="relative w-full aspect-[16/9] bg-black rounded-xl overflow-hidden shadow-2xl border border-gray-800 group"
       >
-        {/* === SHIELDS (Popups/Redirects rokne ke liye) === */}
+        {/* === SHIELDS === */}
         <div className="absolute top-0 left-0 w-[100%] h-[18%] md:h-[10%] z-50 bg-transparent" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
         <div className="absolute top-0 right-0 w-[15%] h-[20%] z-50 bg-transparent" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
-        {/* <div className="absolute bottom-0 right-0 w-[17%] h-[20%] z-50 bg-green-500" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} /> */}
-        <div className=" absolute bottom-0 right-0 z-50 bg-transparent
+        <div className="absolute bottom-0 right-0 z-50 bg-transparent
 
     w-[36%] h-[29%]   /* default */
 
@@ -93,20 +102,19 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
     [@media(min-width:672px)]:w-[13%]
     [@media(min-width:1100px)]:h-[25%]
 
-    [@media(min-width:820px)]:w-[8%]
+    [@media(min-width:820px)]:w-[8.5%]
     [@media(min-width:1300px)]:h-[28%]
 
     [@media(min-width:1020px)]:w-[4%]
+        
+        
+        " onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
 
-" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
-
-
-        {/* === CUSTOM CONTROLS === */}
+        {/* === CUSTOM CONTROLS (Updated Button) === */}
         <button
           onClick={toggleFullScreen}
-          // className="absolute bottom-4 right-4 z-[60] p-2 bg-red-600/90 hover:bg-red-600 text-white rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform hover:scale-110 shadow-lg backdrop-blur-sm"
-          className="absolute bottom-4 right-4 z-[60] p-2 bg-red-600/90 hover:bg-red-600 text-white rounded-lg  group-hover:opacity-100 transition-all duration-300 transform hover:scale-110 shadow-lg backdrop-blur-sm"
-
+          // Maine 'opacity-0' hata diya hai jaisa aapne chaha, ab button hamesha dikhega (lekin dim hoga)
+          className="absolute bottom-4 right-4 z-[60] p-2 bg-red-600/80 hover:bg-red-600 text-white rounded-lg transition-all duration-300 transform hover:scale-110 shadow-lg backdrop-blur-sm"
           title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
         >
           {isFullscreen ? <Minimize size={24} /> : <Maximize size={24} />}
@@ -125,7 +133,6 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
           title={title}
           className="absolute top-0 left-0 w-full h-full z-10"
           frameBorder="0"
-          // Updated allow attribute to fix wake-lock error
           allow="autoplay; encrypted-media; picture-in-picture; screen-wake-lock"
           onLoad={() => setIsLoaded(true)}
         />
@@ -135,6 +142,157 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
 };
 
 export default OkRuPlayer;
+
+
+
+// 'use client';
+
+// import React, { useRef, useState, useEffect, useMemo } from 'react';
+// import { Maximize, Minimize, Loader2 } from 'lucide-react'; 
+
+// interface OkRuPlayerProps {
+//   videoId: string; // Yeh ID, URL, ya Iframe code ho sakta hai
+//   title?: string;
+//   autoPlay?: boolean;
+// }
+
+// const OkRuPlayer: React.FC<OkRuPlayerProps> = ({ 
+//   videoId, 
+//   title = "OK.ru Video Player",
+//   autoPlay = false 
+// }) => {
+//   const containerRef = useRef<HTMLDivElement>(null);
+//   const [isLoaded, setIsLoaded] = useState(false);
+//   const [isFullscreen, setIsFullscreen] = useState(false);
+
+//   // === SMART ID EXTRACTOR ===
+//   // Yeh function check karega ke user ne kya paste kiya hai aur usme se asli ID nikalega
+//   const cleanVideoId = useMemo(() => {
+//     if (!videoId) return '';
+    
+//     // 1. Agar user ne poora Iframe code paste kiya hai
+//     // Example: <iframe src="//ok.ru/videoembed/123456789"...>
+//     const iframeMatch = videoId.match(/videoembed\/(\d+)/);
+//     if (iframeMatch && iframeMatch[1]) {
+//       return iframeMatch[1];
+//     }
+
+//     // 2. Agar user ne poora URL paste kiya hai
+//     // Example: https://ok.ru/video/123456789
+//     const urlMatch = videoId.match(/ok\.ru\/video\/(\d+)/);
+//     if (urlMatch && urlMatch[1]) {
+//       return urlMatch[1];
+//     }
+
+//     // 3. Agar user ne sirf numbers paste kiye hain (Sahi tareeqa)
+//     return videoId;
+//   }, [videoId]);
+
+//   const embedUrl = `https://ok.ru/videoembed/${cleanVideoId}?nochat=1&autoplay=${autoPlay ? 1 : 0}`;
+
+//   // Reset loader when video changes
+//   useEffect(() => {
+//     setIsLoaded(false);
+//   }, [cleanVideoId]);
+
+//   // Fullscreen Logic
+//   const toggleFullScreen = () => {
+//     if (!containerRef.current) return;
+//     if (!document.fullscreenElement) {
+//       containerRef.current.requestFullscreen().catch((err) => console.error(err));
+//     } else {
+//       document.exitFullscreen();
+//     }
+//   };
+
+//   useEffect(() => {
+//     const handleChange = () => setIsFullscreen(!!document.fullscreenElement);
+//     document.addEventListener('fullscreenchange', handleChange);
+//     return () => document.removeEventListener('fullscreenchange', handleChange);
+//   }, []);
+
+//   return (
+//     <div className="w-full max-w-6xl mx-auto my-6 animate-in fade-in zoom-in duration-500">
+//       <div 
+//         ref={containerRef} 
+//         className="relative w-full aspect-[16/9] bg-black rounded-xl overflow-hidden shadow-2xl border border-gray-800 group"
+//       >
+//         {/* === SHIELDS (Popups/Redirects rokne ke liye) === */}
+//         <div className="absolute top-0 left-0 w-[100%] h-[18%] md:h-[10%] z-50 bg-transparent" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
+//         <div className="absolute top-0 right-0 w-[15%] h-[20%] z-50 bg-transparent" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
+//         {/* <div className="absolute bottom-0 right-0 w-[17%] h-[20%] z-50 bg-green-500" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} /> */}
+//         <div className=" absolute bottom-0 right-0 z-50 bg-transparent
+
+//     w-[36%] h-[29%]   /* default */
+
+//     [@media(min-width:300px)]:w-[27%]
+//     [@media(min-width:300px)]:h-[15%]
+
+//     [@media(min-width:380px)]:w-[23%]
+//     [@media(min-width:500px)]:h-[17%]
+
+//     [@media(min-width:458px)]:w-[20%]
+//     [@media(min-width:700px)]:h-[20%]
+
+//     [@media(min-width:523px)]:w-[16%]
+//     [@media(min-width:900px)]:h-[22%]
+
+//     [@media(min-width:672px)]:w-[13%]
+//     [@media(min-width:1100px)]:h-[25%]
+
+//     [@media(min-width:820px)]:w-[8%]
+//     [@media(min-width:1300px)]:h-[28%]
+
+//     [@media(min-width:1020px)]:w-[4%]
+
+// " onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
+
+
+//         {/* === CUSTOM CONTROLS === */}
+//         <button
+//           onClick={toggleFullScreen}
+//           // className="absolute bottom-4 right-4 z-[60] p-2 bg-red-600/90 hover:bg-red-600 text-white rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform hover:scale-110 shadow-lg backdrop-blur-sm"
+//           className="absolute bottom-4 right-4 z-[60] p-2 bg-red-600/90 hover:bg-red-600 text-white rounded-lg  group-hover:opacity-100 transition-all duration-300 transform hover:scale-110 shadow-lg backdrop-blur-sm"
+
+//           title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+//         >
+//           {isFullscreen ? <Minimize size={24} /> : <Maximize size={24} />}
+//         </button>
+
+//         {/* === IFRAME PLAYER === */}
+//         {!isLoaded && (
+//           <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-500 z-0 bg-[#0f0f0f]">
+//             <Loader2 className="w-10 h-10 animate-spin mb-2 text-red-600" />
+//             <span className="text-sm font-medium">Loading Stream...</span>
+//           </div>
+//         )}
+
+//         <iframe
+//           src={embedUrl}
+//           title={title}
+//           className="absolute top-0 left-0 w-full h-full z-10"
+//           frameBorder="0"
+//           // Updated allow attribute to fix wake-lock error
+//           allow="autoplay; encrypted-media; picture-in-picture; screen-wake-lock"
+//           onLoad={() => setIsLoaded(true)}
+//         />
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default OkRuPlayer;
+
+
+
+
+
+
+
+
+
+
+
 
 
 

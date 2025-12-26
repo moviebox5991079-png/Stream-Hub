@@ -157,7 +157,7 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
         
         " onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} /> */}
 
-                <div className="absolute bottom-0 right-0 z-50 bg-red-600
+                <div className="absolute bottom-0 right-0 z-50 bg-transparent
 
     w-[6%] h-[15%] md:w-[6%] h-[10%] 
         

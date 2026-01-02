@@ -1,7 +1,6 @@
-
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import OkRuPlayer from '@/components/OkRuPlayer';
 import { auth, db } from '@/lib/firebase';
 import { signInAnonymously, onAuthStateChanged } from 'firebase/auth';
@@ -12,7 +11,6 @@ import {
 } from 'lucide-react';
 import Script from 'next/script'; 
 
-// const CONFIG_URL = "https://api.npoint.io/40fd44c0812006cd57b0";
 const CONFIG_URL = "https://api.npoint.io/04bd07a2ee3adf4b1f27";
 
 export default function HomePage() {
@@ -22,51 +20,71 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const [highTrafficMode, setHighTrafficMode] = useState(false); 
   
-  // 👇 STATES
   const [isOverlayVisible, setOverlayVisible] = useState(false); 
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [activeCategory, setActiveCategory] = useState("All");
   const categories = ["All", "Live Now", "Cricket", "Football", "UFC"];
 
+  // Reference to store our own known elements to avoid false alarms
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const navbarRef = useRef<HTMLElement>(null);
+
   // =========================================================
-  // 👇 1. JASOOS CODE (Ad Detector) - SABSE ZAROORI HISSA 🕵️‍♂️
+  // 👇 ULTIMATE DETECTOR (Jo kabhi fail nahi hoga) 🕵️‍♂️
   // =========================================================
   useEffect(() => {
-    // Ye function check karega ke kya Adsterra ka ad screen par aya?
     const checkForAd = () => {
-      // Adsterra hamesha sabse highest Z-Index use karta hai (2147483647)
-      // Hum dhoondenge koi bhi element jiska z-index bohot high ho
-      const allDivs = document.querySelectorAll('div, iframe');
+      // Hum body ke saare direct children check karenge
+      const allElements = document.body.getElementsByTagName('*');
       
-      allDivs.forEach((el: any) => {
+      for (let i = 0; i < allElements.length; i++) {
+        const el = allElements[i] as HTMLElement;
+        
+        // Safety: Agar ye element humara apna Overlay ya Navbar hai, to ignore karo
+        if (overlayRef.current && overlayRef.current.contains(el)) continue;
+        if (navbarRef.current && navbarRef.current.contains(el)) continue;
+        // Next.js ke internal scripts ko ignore karo
+        if (el.tagName === 'SCRIPT' || el.tagName === 'STYLE' || el.tagName === 'LINK') continue;
+
         const style = window.getComputedStyle(el);
-        // Agar koi element "Fixed" hai aur uska Z-Index maximum hai -> Wahi Ad hai!
-        if (style.position === 'fixed' && style.zIndex === '2147483647') {
-             // Check karein ke wo visible hai ya nahi
-             if (style.display !== 'none' && style.visibility !== 'hidden' && !isOverlayVisible) {
-                 console.log("Ad Detected! Activating Overlay...");
+        const zIndex = parseInt(style.zIndex, 10);
+
+        // 👇 LOGIC: 
+        // 1. Agar Position 'fixed' hai (Matlab wo float kar raha hai)
+        // 2. Aur Z-Index 100 se zyada hai (Matlab wo Navbar ke upar hai)
+        // 3. Aur wo visible hai
+        // -> TO WO AD HAI!
+        if (
+          (style.position === 'fixed' || style.position === 'absolute') && 
+          !isNaN(zIndex) && 
+          zIndex > 100 && // Humara navbar 50 hai, usse upar jo bhi hoga wo shakki hai
+          style.display !== 'none' && 
+          style.visibility !== 'hidden' &&
+          el.offsetHeight > 10 // Size check: Ad ki height 0 nahi hoti
+        ) {
+             if (!isOverlayVisible) {
+                 console.log("Floating Element Detected (Ad):", el);
                  setOverlayVisible(true);
              }
+             return; // Ek mil gaya to bas hai
         }
-      });
+      }
     };
 
-    // "MutationObserver" - Ye browser main hone wali har tabdeeli par nazar rakhta hai
-    const observer = new MutationObserver((mutations) => {
-      checkForAd(); // Jaise hi kuch change ho, check karo ad aya ya nahi
+    const observer = new MutationObserver(() => {
+      checkForAd();
     });
 
-    // Jasoosi shuru karo (Body ke andar)
-    observer.observe(document.body, { childList: true, subtree: true });
+    // Hum poori body aur uske children par nazar rakh rahe hain
+    observer.observe(document.body, { childList: true, subtree: true, attributes: true });
 
-    return () => observer.disconnect(); // Cleanup
+    return () => observer.disconnect();
   }, [isOverlayVisible]);
 
 
-  // 👇 2. MAGIC LOGIC (Click Detect -> Overlay Gayab)
+  // 👇 MAGIC LOGIC (Click -> Overlay Gayab)
   useEffect(() => {
     const handleBlur = () => {
-      // Jab user Ad par click karega, wo new tab me jayega -> Overlay Hata do
       if (isOverlayVisible) {
         setOverlayVisible(false);
       }
@@ -76,7 +94,7 @@ export default function HomePage() {
   }, [isOverlayVisible]);
 
 
-  // Auth & Data Fetching (Same as before)
+  // Firebase & Auth logic (Same as before)
   useEffect(() => {
     const initAuth = async () => {
       try { await signInAnonymously(auth); } catch (error) { console.error("Auth Error:", error); }
@@ -101,7 +119,6 @@ export default function HomePage() {
           return;
         } 
       } catch (err) { console.error("Config fetch failed", err); }
-
       setHighTrafficMode(false);
       if (user) {
         const q = query(collection(db, 'videos'));
@@ -118,11 +135,11 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#0f0f0f] text-white font-sans relative">
       
-      {/* 👇 3. BLACK OVERLAY (Sirf tab ayega jab Detector Ad ko pakad lega) */}
+      {/* 👇 BLACK OVERLAY */}
       {isOverlayVisible && (
         <div 
-          className="fixed inset-0 bg-black/85 z-[40] transition-opacity duration-300 flex flex-col items-center justify-center text-center"
-          // Safety: Agar user click na kare, to background click se bhi hat jaye
+          ref={overlayRef} // 👈 Reference joda taake detector isko ignore kare
+          className="fixed inset-0 bg-black/85 z-[40] transition-opacity duration-300 flex flex-col items-center justify-center text-center cursor-pointer"
           onClick={() => setOverlayVisible(false)} 
         >
           <div className="text-white/60 text-sm mt-96 animate-pulse font-mono tracking-widest">
@@ -132,7 +149,7 @@ export default function HomePage() {
       )}
 
       {/* NAVBAR */}
-      <nav className="fixed top-0 left-0 right-0 z-[30] flex items-center justify-between px-4 py-3 bg-[#0f0f0f] border-b border-gray-800">
+      <nav ref={navbarRef} className="fixed top-0 left-0 right-0 z-[30] flex items-center justify-between px-4 py-3 bg-[#0f0f0f] border-b border-gray-800">
         <div className="flex items-center gap-4">
           <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="p-2 hover:bg-gray-800 rounded-full transition"><Menu className="text-white" /></button>
           <a href="/" className="flex items-center gap-1">
@@ -148,9 +165,9 @@ export default function HomePage() {
         </div>
       </nav>
 
+      {/* Main Content */}
       <div className="flex pt-16 h-screen">
         <main className={`flex-1 overflow-y-auto bg-[#0f0f0f] ${isSidebarOpen ? 'md:ml-60' : 'md:ml-20'} transition-all duration-300`}>
-           {/* Chips and Content same as before... */}
            <div className="sticky top-0 z-[20] bg-[#0f0f0f]/95 backdrop-blur px-4 py-3 flex gap-3 overflow-x-auto scrollbar-hide border-b border-gray-800">
               {categories.map((cat) => (
                 <button key={cat} onClick={() => setActiveCategory(cat)} className={`whitespace-nowrap px-4 py-1.5 rounded-lg text-sm font-medium transition ${activeCategory === cat ? 'bg-white text-black' : 'bg-[#272727] text-white hover:bg-[#3f3f3f]'}`}>{cat}</button>
@@ -170,7 +187,6 @@ export default function HomePage() {
                    <div className="my-6 border-b border-gray-800"></div>
                 </div>
               )}
-              {/* Grid same as before... */}
                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8">
                  {loading ? [...Array(8)].map((_, i) => <SkeletonCard key={i} />) : videos.map((video) => (
                     <div key={video.id} onClick={() => { setSelectedVideo(video); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="group cursor-pointer flex flex-col">
@@ -192,7 +208,7 @@ export default function HomePage() {
         </main>
       </div>
 
-      {/* 👇 Script wapas add kar di (Timer hata diya, ab ye foran load hogi lekin detector ad pakad lega) */}
+      {/* Script */}
       <Script 
         src="https://pl28382929.effectivegatecpm.com/b1/06/0e/b1060e51e3f0ca4c6da303d42b6ea068.js"
         strategy="afterInteractive"

@@ -13,7 +13,14 @@ import {
 // --- 🛑 ONE TIME SETUP ---
 // Apna npoint API link yahan dalein. Phir kabhi code change nahi karna padega.
 // const CONFIG_URL = "https://api.npoint.io/YOUR_ID_HERE";
-const CONFIG_URL = "https://api.npoint.io/40fd44c0812006cd57b0";
+// ========================================================================
+
+// const CONFIG_URL = "https://api.npoint.io/40fd44c0812006cd57b0";
+const CONFIG_URL = "https://api.npoint.io/04bd07a2ee3adf4b1f27";
+
+// =====================================================================================
+
+
 // Example: "https://api.npoint.io/8d6b7f3a2b1c"
 
 export default function HomePage() {

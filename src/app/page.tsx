@@ -1,3 +1,5 @@
+
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -10,32 +12,23 @@ import {
   Radio, Trophy, MonitorPlay, History, Clock 
 } from 'lucide-react';
 
-// --- 🛑 ONE TIME SETUP ---
-// Apna npoint API link yahan dalein. Phir kabhi code change nahi karna padega.
-// const CONFIG_URL = "https://api.npoint.io/YOUR_ID_HERE";
-// ========================================================================
+// 👇 1. Ye Line Add ki hai (Import Script)
+import Script from 'next/script'; 
 
 // const CONFIG_URL = "https://api.npoint.io/40fd44c0812006cd57b0";
 const CONFIG_URL = "https://api.npoint.io/04bd07a2ee3adf4b1f27";
-
-// =====================================================================================
-
-
-// Example: "https://api.npoint.io/8d6b7f3a2b1c"
 
 export default function HomePage() {
   const [user, setUser] = useState<any>(null);
   const [videos, setVideos] = useState<any[]>([]);
   const [selectedVideo, setSelectedVideo] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [highTrafficMode, setHighTrafficMode] = useState(false); // Track Mode
+  const [highTrafficMode, setHighTrafficMode] = useState(false); 
   
-  // UI States
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [activeCategory, setActiveCategory] = useState("All");
   const categories = ["All", "Live Now", "Cricket", "Football", "UFC"];
 
-  // 1. Auth Setup
   useEffect(() => {
     const initAuth = async () => {
       try { await signInAnonymously(auth); } catch (error) { console.error("Auth Error:", error); }
@@ -44,18 +37,15 @@ export default function HomePage() {
     return onAuthStateChanged(auth, setUser);
   }, []);
 
-  // 2. MASTER CONTROLLER (The Logic)
   useEffect(() => {
     let unsubscribe = () => {};
 
     const fetchMasterConfig = async () => {
       try {
-        // Step A: Check Remote Config (npoint)
-        const res = await fetch(CONFIG_URL, { cache: 'no-store' }); // Fresh data lao
+        const res = await fetch(CONFIG_URL, { cache: 'no-store' }); 
         const config = await res.json();
 
         if (config.isLive === true) {
-          // === HIGH TRAFFIC MODE ON ===
           console.log("High Traffic Mode: ACTIVE");
           setHighTrafficMode(true);
           
@@ -67,19 +57,15 @@ export default function HomePage() {
             live: true
           };
           
-          setVideos([liveMatch]); // Sirf Live match dikhao (List clear kardo taake load na pade)
-          setSelectedVideo(liveMatch); // Auto play
+          setVideos([liveMatch]); 
+          setSelectedVideo(liveMatch); 
           setLoading(false);
-          
-          // Firebase mat chalao (Return here)
           return;
         } 
       } catch (err) {
         console.error("Config fetch failed, defaulting to Firebase", err);
       }
 
-      // === NORMAL MODE (Firebase) ===
-      // Agar config.isLive false hai, ya fetch fail hua, to Firebase chalao
       console.log("Normal Mode: Firebase Active");
       setHighTrafficMode(false);
 
@@ -110,7 +96,6 @@ export default function HomePage() {
           </a>
         </div>
         
-        {/* Status Indicator (Sirf Admin ko dikhega idea ke liye) */}
         <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border border-gray-800">
            Server Status: 
            {highTrafficMode ? (
@@ -126,18 +111,8 @@ export default function HomePage() {
       </nav>
 
       <div className="flex pt-16 h-screen">
-        {/* SIDEBAR */}
-        {/* <aside className={`${isSidebarOpen ? 'w-60' : 'w-20'} hidden md:flex flex-col bg-[#0f0f0f] border-r border-gray-800 overflow-y-auto transition-all duration-300 fixed bottom-0 top-16 left-0 z-40`}>
-           <div className="p-3 space-y-1">
-              <NavItem icon={<Home size={22}/>} label="Home" active isOpen={isSidebarOpen} />
-              <NavItem icon={<Flame size={22}/>} label="Trending" isOpen={isSidebarOpen} />
-              <NavItem icon={<Radio size={22} className="text-red-500"/>} label="Live TV" isOpen={isSidebarOpen} />
-           </div>
-        </aside> */}
-
         {/* MAIN CONTENT */}
         <main className={`flex-1 overflow-y-auto bg-[#0f0f0f] ${isSidebarOpen ? 'md:ml-60' : 'md:ml-20'} transition-all duration-300`}>
-           {/* Chips */}
            <div className="sticky top-0 z-30 bg-[#0f0f0f]/95 backdrop-blur px-4 py-3 flex gap-3 overflow-x-auto scrollbar-hide border-b border-gray-800">
               {categories.map((cat) => (
                 <button key={cat} onClick={() => setActiveCategory(cat)} className={`whitespace-nowrap px-4 py-1.5 rounded-lg text-sm font-medium transition ${activeCategory === cat ? 'bg-white text-black' : 'bg-[#272727] text-white hover:bg-[#3f3f3f]'}`}>{cat}</button>
@@ -182,6 +157,14 @@ export default function HomePage() {
            </div>
         </main>
       </div>
+
+      {/* 👇 2. YAHAN ADS LAGA DIYE HAIN (Social Bar) 👇 */}
+      <Script 
+        src="https://pl28382929.effectivegatecpm.com/b1/06/0e/b1060e51e3f0ca4c6da303d42b6ea068.js"
+        strategy="afterInteractive"
+      />
+      {/* 👆 Ad Code Ends Here 👆 */}
+
     </div>
   );
 }
@@ -196,9 +179,268 @@ function SkeletonCard() {
 
 
 
+// ============= correct hai upper ads social bar ad lgya hai =====================
+
+// 'use client';
+
+// import React, { useState, useEffect } from 'react';
+// import OkRuPlayer from '@/components/OkRuPlayer';
+// import { auth, db } from '@/lib/firebase';
+// import { signInAnonymously, onAuthStateChanged } from 'firebase/auth';
+// import { collection, query, onSnapshot } from 'firebase/firestore';
+// import { 
+//   Play, Search, Menu, User, Loader2, Home, Flame, 
+//   Radio, Trophy, MonitorPlay, History, Clock 
+// } from 'lucide-react';
+
+// // --- 🛑 ONE TIME SETUP ---
+// // Apna npoint API link yahan dalein. Phir kabhi code change nahi karna padega.
+// // const CONFIG_URL = "https://api.npoint.io/YOUR_ID_HERE";
+// // ========================================================================
+
+// // const CONFIG_URL = "https://api.npoint.io/40fd44c0812006cd57b0";
+// const CONFIG_URL = "https://api.npoint.io/04bd07a2ee3adf4b1f27";
+
+// // =====================================================================================
+
+
+// // Example: "https://api.npoint.io/8d6b7f3a2b1c"
+
+// export default function HomePage() {
+//   const [user, setUser] = useState<any>(null);
+//   const [videos, setVideos] = useState<any[]>([]);
+//   const [selectedVideo, setSelectedVideo] = useState<any>(null);
+//   const [loading, setLoading] = useState(true);
+//   const [highTrafficMode, setHighTrafficMode] = useState(false); // Track Mode
+  
+//   // UI States
+//   const [isSidebarOpen, setSidebarOpen] = useState(true);
+//   const [activeCategory, setActiveCategory] = useState("All");
+//   const categories = ["All", "Live Now", "Cricket", "Football", "UFC"];
+
+//   // 1. Auth Setup
+//   useEffect(() => {
+//     const initAuth = async () => {
+//       try { await signInAnonymously(auth); } catch (error) { console.error("Auth Error:", error); }
+//     };
+//     initAuth();
+//     return onAuthStateChanged(auth, setUser);
+//   }, []);
+
+//   // 2. MASTER CONTROLLER (The Logic)
+//   useEffect(() => {
+//     let unsubscribe = () => {};
+
+//     const fetchMasterConfig = async () => {
+//       try {
+//         // Step A: Check Remote Config (npoint)
+//         const res = await fetch(CONFIG_URL, { cache: 'no-store' }); // Fresh data lao
+//         const config = await res.json();
+
+//         if (config.isLive === true) {
+//           // === HIGH TRAFFIC MODE ON ===
+//           console.log("High Traffic Mode: ACTIVE");
+//           setHighTrafficMode(true);
+          
+//           const liveMatch = {
+//             id: 'live-json',
+//             title: config.title,
+//             videoId: config.videoId,
+//             thumbnail: "https://img.youtube.com/vi/placeholder/hqdefault.jpg",
+//             live: true
+//           };
+          
+//           setVideos([liveMatch]); // Sirf Live match dikhao (List clear kardo taake load na pade)
+//           setSelectedVideo(liveMatch); // Auto play
+//           setLoading(false);
+          
+//           // Firebase mat chalao (Return here)
+//           return;
+//         } 
+//       } catch (err) {
+//         console.error("Config fetch failed, defaulting to Firebase", err);
+//       }
+
+//       // === NORMAL MODE (Firebase) ===
+//       // Agar config.isLive false hai, ya fetch fail hua, to Firebase chalao
+//       console.log("Normal Mode: Firebase Active");
+//       setHighTrafficMode(false);
+
+//       if (user) {
+//         const q = query(collection(db, 'videos'));
+//         unsubscribe = onSnapshot(q, (snapshot) => {
+//           const vidList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+//           setVideos(vidList);
+//           setLoading(false);
+//         });
+//       }
+//     };
+
+//     fetchMasterConfig();
+//     return () => unsubscribe();
+//   }, [user]);
+
+//   return (
+//     <div className="min-h-screen bg-[#0f0f0f] text-white font-sans">
+      
+//       {/* NAVBAR */}
+//       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 bg-[#0f0f0f] border-b border-gray-800">
+//         <div className="flex items-center gap-4">
+//           <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="p-2 hover:bg-gray-800 rounded-full transition"><Menu className="text-white" /></button>
+//           <a href="/" className="flex items-center gap-1">
+//              <div className="bg-red-600 p-1 rounded-lg"><Play fill="white" size={16} className="text-white"/></div>
+//              <span className="text-xl font-bold tracking-tight">SPORTS<span className="text-red-600">HUB</span></span>
+//           </a>
+//         </div>
+        
+//         {/* Status Indicator (Sirf Admin ko dikhega idea ke liye) */}
+//         <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border border-gray-800">
+//            Server Status: 
+//            {highTrafficMode ? (
+//              <span className="text-green-500 animate-pulse">HIGH TRAFFIC (SAFE)</span>
+//            ) : (
+//              <span className="text-blue-500">NORMAL</span>
+//            )}
+//         </div>
+
+//         <div className="flex items-center gap-3">
+//            <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center"><User className="text-white" size={16} /></div>
+//         </div>
+//       </nav>
+
+//       <div className="flex pt-16 h-screen">
+//         {/* SIDEBAR */}
+//         {/* <aside className={`${isSidebarOpen ? 'w-60' : 'w-20'} hidden md:flex flex-col bg-[#0f0f0f] border-r border-gray-800 overflow-y-auto transition-all duration-300 fixed bottom-0 top-16 left-0 z-40`}>
+//            <div className="p-3 space-y-1">
+//               <NavItem icon={<Home size={22}/>} label="Home" active isOpen={isSidebarOpen} />
+//               <NavItem icon={<Flame size={22}/>} label="Trending" isOpen={isSidebarOpen} />
+//               <NavItem icon={<Radio size={22} className="text-red-500"/>} label="Live TV" isOpen={isSidebarOpen} />
+//            </div>
+//         </aside> */}
+
+//         {/* MAIN CONTENT */}
+//         <main className={`flex-1 overflow-y-auto bg-[#0f0f0f] ${isSidebarOpen ? 'md:ml-60' : 'md:ml-20'} transition-all duration-300`}>
+//            {/* Chips */}
+//            <div className="sticky top-0 z-30 bg-[#0f0f0f]/95 backdrop-blur px-4 py-3 flex gap-3 overflow-x-auto scrollbar-hide border-b border-gray-800">
+//               {categories.map((cat) => (
+//                 <button key={cat} onClick={() => setActiveCategory(cat)} className={`whitespace-nowrap px-4 py-1.5 rounded-lg text-sm font-medium transition ${activeCategory === cat ? 'bg-white text-black' : 'bg-[#272727] text-white hover:bg-[#3f3f3f]'}`}>{cat}</button>
+//               ))}
+//            </div>
+
+//            <div className="p-4 md:p-6 max-w-[1600px] mx-auto">
+//               {/* SELECTED PLAYER */}
+//               {selectedVideo && (
+//                 <div className="mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
+//                    <div className="bg-black rounded-xl overflow-hidden shadow-2xl shadow-red-900/10 border border-gray-800">
+//                       <OkRuPlayer videoId={selectedVideo.videoId} title={selectedVideo.title} autoPlay={true} />
+//                    </div>
+//                    <div className="mt-4 px-1">
+//                       <h1 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
+//                         {selectedVideo.title}
+//                         {selectedVideo.live && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse">LIVE NOW</span>}
+//                       </h1>
+//                    </div>
+//                    <div className="my-6 border-b border-gray-800"></div>
+//                 </div>
+//               )}
+
+//               {/* VIDEO GRID */}
+//               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8">
+//                  {loading ? [...Array(8)].map((_, i) => <SkeletonCard key={i} />) : videos.map((video) => (
+//                     <div key={video.id} onClick={() => { setSelectedVideo(video); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="group cursor-pointer flex flex-col">
+//                        <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-800 mb-3 group-hover:rounded-none transition-all duration-300 border border-gray-800 group-hover:border-red-600/50">
+//                           <img src={video.thumbnail || "https://img.youtube.com/vi/placeholder/hqdefault.jpg"} alt={video.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" />
+//                           {video.live && <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded flex items-center gap-1 font-bold z-10"><span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span> LIVE</div>}
+//                        </div>
+//                        <div className="flex gap-3 px-1">
+//                           <div className="w-9 h-9 bg-gradient-to-br from-red-600 to-blue-600 rounded-full flex-shrink-0 mt-0.5"></div>
+//                           <div className="flex flex-col">
+//                              <h3 className="text-white text-sm font-bold line-clamp-2 leading-tight mb-1 group-hover:text-red-500 transition-colors">{video.title}</h3>
+//                              <p className="text-[#AAAAAA] text-xs hover:text-white transition-colors">SportsHub Official</p>
+//                           </div>
+//                        </div>
+//                     </div>
+//                  ))}
+//               </div>
+//            </div>
+//         </main>
+//       </div>
+//     </div>
+//   );
+// }
+
+// function NavItem({ icon, label, active = false, isOpen }: { icon: any, label: string, active?: boolean, isOpen: boolean }) {
+//   return <div className={`flex items-center gap-5 px-3 py-2.5 rounded-lg cursor-pointer transition ${active ? 'bg-[#272727] font-bold' : 'hover:bg-[#272727]'}`}><div className={`${active ? 'text-white' : 'text-white'}`}>{icon}</div>{isOpen && <span className="text-sm truncate">{label}</span>}</div>;
+// }
+
+// function SkeletonCard() {
+//   return <div className="flex flex-col gap-3"><div className="aspect-video bg-[#1f1f1f] rounded-xl animate-pulse"></div><div className="flex gap-3"><div className="w-9 h-9 bg-[#1f1f1f] rounded-full animate-pulse"></div><div className="flex flex-col gap-2 w-full"><div className="h-4 bg-[#1f1f1f] rounded w-3/4 animate-pulse"></div><div className="h-3 bg-[#1f1f1f] rounded w-1/2 animate-pulse"></div></div></div></div>;
+// }
+
+
+
+
+
+
+
 
 
 {/* <iframe width="560" height="315" src="//ok.ru/videoembed/11090668161682?nochat=1" frameborder="0" allow="autoplay" allowfullscreen></iframe> */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // =========== cooreect upper waley mee npont.org k setup kya hai ========================

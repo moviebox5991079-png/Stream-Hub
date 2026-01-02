@@ -1,5 +1,4 @@
 
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -9,10 +8,8 @@ import { signInAnonymously, onAuthStateChanged } from 'firebase/auth';
 import { collection, query, onSnapshot } from 'firebase/firestore';
 import { 
   Play, Search, Menu, User, Loader2, Home, Flame, 
-  Radio, Trophy, MonitorPlay, History, Clock 
+  Radio, Trophy, MonitorPlay, History, Clock, X 
 } from 'lucide-react';
-
-// 👇 1. Ye Line Add ki hai (Import Script)
 import Script from 'next/script'; 
 
 // const CONFIG_URL = "https://api.npoint.io/40fd44c0812006cd57b0";
@@ -25,10 +22,61 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const [highTrafficMode, setHighTrafficMode] = useState(false); 
   
+  // 👇 STATES
+  const [isOverlayVisible, setOverlayVisible] = useState(false); 
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [activeCategory, setActiveCategory] = useState("All");
   const categories = ["All", "Live Now", "Cricket", "Football", "UFC"];
 
+  // =========================================================
+  // 👇 1. JASOOS CODE (Ad Detector) - SABSE ZAROORI HISSA 🕵️‍♂️
+  // =========================================================
+  useEffect(() => {
+    // Ye function check karega ke kya Adsterra ka ad screen par aya?
+    const checkForAd = () => {
+      // Adsterra hamesha sabse highest Z-Index use karta hai (2147483647)
+      // Hum dhoondenge koi bhi element jiska z-index bohot high ho
+      const allDivs = document.querySelectorAll('div, iframe');
+      
+      allDivs.forEach((el: any) => {
+        const style = window.getComputedStyle(el);
+        // Agar koi element "Fixed" hai aur uska Z-Index maximum hai -> Wahi Ad hai!
+        if (style.position === 'fixed' && style.zIndex === '2147483647') {
+             // Check karein ke wo visible hai ya nahi
+             if (style.display !== 'none' && style.visibility !== 'hidden' && !isOverlayVisible) {
+                 console.log("Ad Detected! Activating Overlay...");
+                 setOverlayVisible(true);
+             }
+        }
+      });
+    };
+
+    // "MutationObserver" - Ye browser main hone wali har tabdeeli par nazar rakhta hai
+    const observer = new MutationObserver((mutations) => {
+      checkForAd(); // Jaise hi kuch change ho, check karo ad aya ya nahi
+    });
+
+    // Jasoosi shuru karo (Body ke andar)
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect(); // Cleanup
+  }, [isOverlayVisible]);
+
+
+  // 👇 2. MAGIC LOGIC (Click Detect -> Overlay Gayab)
+  useEffect(() => {
+    const handleBlur = () => {
+      // Jab user Ad par click karega, wo new tab me jayega -> Overlay Hata do
+      if (isOverlayVisible) {
+        setOverlayVisible(false);
+      }
+    };
+    window.addEventListener('blur', handleBlur);
+    return () => window.removeEventListener('blur', handleBlur);
+  }, [isOverlayVisible]);
+
+
+  // Auth & Data Fetching (Same as before)
   useEffect(() => {
     const initAuth = async () => {
       try { await signInAnonymously(auth); } catch (error) { console.error("Auth Error:", error); }
@@ -39,55 +87,52 @@ export default function HomePage() {
 
   useEffect(() => {
     let unsubscribe = () => {};
-
     const fetchMasterConfig = async () => {
       try {
         const res = await fetch(CONFIG_URL, { cache: 'no-store' }); 
         const config = await res.json();
-
         if (config.isLive === true) {
-          console.log("High Traffic Mode: ACTIVE");
           setHighTrafficMode(true);
-          
           const liveMatch = {
-            id: 'live-json',
-            title: config.title,
-            videoId: config.videoId,
-            thumbnail: "https://img.youtube.com/vi/placeholder/hqdefault.jpg",
-            live: true
+            id: 'live-json', title: config.title, videoId: config.videoId,
+            thumbnail: "https://img.youtube.com/vi/placeholder/hqdefault.jpg", live: true
           };
-          
-          setVideos([liveMatch]); 
-          setSelectedVideo(liveMatch); 
-          setLoading(false);
+          setVideos([liveMatch]); setSelectedVideo(liveMatch); setLoading(false);
           return;
         } 
-      } catch (err) {
-        console.error("Config fetch failed, defaulting to Firebase", err);
-      }
+      } catch (err) { console.error("Config fetch failed", err); }
 
-      console.log("Normal Mode: Firebase Active");
       setHighTrafficMode(false);
-
       if (user) {
         const q = query(collection(db, 'videos'));
         unsubscribe = onSnapshot(q, (snapshot) => {
           const vidList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-          setVideos(vidList);
-          setLoading(false);
+          setVideos(vidList); setLoading(false);
         });
       }
     };
-
     fetchMasterConfig();
     return () => unsubscribe();
   }, [user]);
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f] text-white font-sans">
+    <div className="min-h-screen bg-[#0f0f0f] text-white font-sans relative">
       
+      {/* 👇 3. BLACK OVERLAY (Sirf tab ayega jab Detector Ad ko pakad lega) */}
+      {isOverlayVisible && (
+        <div 
+          className="fixed inset-0 bg-black/85 z-[40] transition-opacity duration-300 flex flex-col items-center justify-center text-center"
+          // Safety: Agar user click na kare, to background click se bhi hat jaye
+          onClick={() => setOverlayVisible(false)} 
+        >
+          <div className="text-white/60 text-sm mt-96 animate-pulse font-mono tracking-widest">
+            Tap anywhere to Start Stream...
+          </div>
+        </div>
+      )}
+
       {/* NAVBAR */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 bg-[#0f0f0f] border-b border-gray-800">
+      <nav className="fixed top-0 left-0 right-0 z-[30] flex items-center justify-between px-4 py-3 bg-[#0f0f0f] border-b border-gray-800">
         <div className="flex items-center gap-4">
           <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="p-2 hover:bg-gray-800 rounded-full transition"><Menu className="text-white" /></button>
           <a href="/" className="flex items-center gap-1">
@@ -95,32 +140,23 @@ export default function HomePage() {
              <span className="text-xl font-bold tracking-tight">SPORTS<span className="text-red-600">HUB</span></span>
           </a>
         </div>
-        
         <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border border-gray-800">
-           Server Status: 
-           {highTrafficMode ? (
-             <span className="text-green-500 animate-pulse">HIGH TRAFFIC (SAFE)</span>
-           ) : (
-             <span className="text-blue-500">NORMAL</span>
-           )}
+           Server Status: {highTrafficMode ? <span className="text-green-500 animate-pulse">HIGH TRAFFIC</span> : <span className="text-blue-500">NORMAL</span>}
         </div>
-
         <div className="flex items-center gap-3">
            <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center"><User className="text-white" size={16} /></div>
         </div>
       </nav>
 
       <div className="flex pt-16 h-screen">
-        {/* MAIN CONTENT */}
         <main className={`flex-1 overflow-y-auto bg-[#0f0f0f] ${isSidebarOpen ? 'md:ml-60' : 'md:ml-20'} transition-all duration-300`}>
-           <div className="sticky top-0 z-30 bg-[#0f0f0f]/95 backdrop-blur px-4 py-3 flex gap-3 overflow-x-auto scrollbar-hide border-b border-gray-800">
+           {/* Chips and Content same as before... */}
+           <div className="sticky top-0 z-[20] bg-[#0f0f0f]/95 backdrop-blur px-4 py-3 flex gap-3 overflow-x-auto scrollbar-hide border-b border-gray-800">
               {categories.map((cat) => (
                 <button key={cat} onClick={() => setActiveCategory(cat)} className={`whitespace-nowrap px-4 py-1.5 rounded-lg text-sm font-medium transition ${activeCategory === cat ? 'bg-white text-black' : 'bg-[#272727] text-white hover:bg-[#3f3f3f]'}`}>{cat}</button>
               ))}
            </div>
-
            <div className="p-4 md:p-6 max-w-[1600px] mx-auto">
-              {/* SELECTED PLAYER */}
               {selectedVideo && (
                 <div className="mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
                    <div className="bg-black rounded-xl overflow-hidden shadow-2xl shadow-red-900/10 border border-gray-800">
@@ -128,16 +164,14 @@ export default function HomePage() {
                    </div>
                    <div className="mt-4 px-1">
                       <h1 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
-                        {selectedVideo.title}
-                        {selectedVideo.live && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse">LIVE NOW</span>}
+                        {selectedVideo.title} {selectedVideo.live && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse">LIVE NOW</span>}
                       </h1>
                    </div>
                    <div className="my-6 border-b border-gray-800"></div>
                 </div>
               )}
-
-              {/* VIDEO GRID */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8">
+              {/* Grid same as before... */}
+               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8">
                  {loading ? [...Array(8)].map((_, i) => <SkeletonCard key={i} />) : videos.map((video) => (
                     <div key={video.id} onClick={() => { setSelectedVideo(video); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="group cursor-pointer flex flex-col">
                        <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-800 mb-3 group-hover:rounded-none transition-all duration-300 border border-gray-800 group-hover:border-red-600/50">
@@ -158,12 +192,11 @@ export default function HomePage() {
         </main>
       </div>
 
-      {/* 👇 2. YAHAN ADS LAGA DIYE HAIN (Social Bar) 👇 */}
+      {/* 👇 Script wapas add kar di (Timer hata diya, ab ye foran load hogi lekin detector ad pakad lega) */}
       <Script 
         src="https://pl28382929.effectivegatecpm.com/b1/06/0e/b1060e51e3f0ca4c6da303d42b6ea068.js"
         strategy="afterInteractive"
       />
-      {/* 👆 Ad Code Ends Here 👆 */}
 
     </div>
   );
@@ -176,6 +209,239 @@ function NavItem({ icon, label, active = false, isOpen }: { icon: any, label: st
 function SkeletonCard() {
   return <div className="flex flex-col gap-3"><div className="aspect-video bg-[#1f1f1f] rounded-xl animate-pulse"></div><div className="flex gap-3"><div className="w-9 h-9 bg-[#1f1f1f] rounded-full animate-pulse"></div><div className="flex flex-col gap-2 w-full"><div className="h-4 bg-[#1f1f1f] rounded w-3/4 animate-pulse"></div><div className="h-3 bg-[#1f1f1f] rounded w-1/2 animate-pulse"></div></div></div></div>;
 }
+
+
+
+
+
+
+// ============== correct uuper waley mei black overlay add kya hai =====================
+
+// 'use client';
+
+// import React, { useState, useEffect } from 'react';
+// import OkRuPlayer from '@/components/OkRuPlayer';
+// import { auth, db } from '@/lib/firebase';
+// import { signInAnonymously, onAuthStateChanged } from 'firebase/auth';
+// import { collection, query, onSnapshot } from 'firebase/firestore';
+// import { 
+//   Play, Search, Menu, User, Loader2, Home, Flame, 
+//   Radio, Trophy, MonitorPlay, History, Clock 
+// } from 'lucide-react';
+
+// // 👇 1. Ye Line Add ki hai (Import Script)
+// import Script from 'next/script'; 
+
+// // const CONFIG_URL = "https://api.npoint.io/40fd44c0812006cd57b0";
+// const CONFIG_URL = "https://api.npoint.io/04bd07a2ee3adf4b1f27";
+
+// export default function HomePage() {
+//   const [user, setUser] = useState<any>(null);
+//   const [videos, setVideos] = useState<any[]>([]);
+//   const [selectedVideo, setSelectedVideo] = useState<any>(null);
+//   const [loading, setLoading] = useState(true);
+//   const [highTrafficMode, setHighTrafficMode] = useState(false); 
+  
+//   const [isSidebarOpen, setSidebarOpen] = useState(true);
+//   const [activeCategory, setActiveCategory] = useState("All");
+//   const categories = ["All", "Live Now", "Cricket", "Football", "UFC"];
+
+//   useEffect(() => {
+//     const initAuth = async () => {
+//       try { await signInAnonymously(auth); } catch (error) { console.error("Auth Error:", error); }
+//     };
+//     initAuth();
+//     return onAuthStateChanged(auth, setUser);
+//   }, []);
+
+//   useEffect(() => {
+//     let unsubscribe = () => {};
+
+//     const fetchMasterConfig = async () => {
+//       try {
+//         const res = await fetch(CONFIG_URL, { cache: 'no-store' }); 
+//         const config = await res.json();
+
+//         if (config.isLive === true) {
+//           console.log("High Traffic Mode: ACTIVE");
+//           setHighTrafficMode(true);
+          
+//           const liveMatch = {
+//             id: 'live-json',
+//             title: config.title,
+//             videoId: config.videoId,
+//             thumbnail: "https://img.youtube.com/vi/placeholder/hqdefault.jpg",
+//             live: true
+//           };
+          
+//           setVideos([liveMatch]); 
+//           setSelectedVideo(liveMatch); 
+//           setLoading(false);
+//           return;
+//         } 
+//       } catch (err) {
+//         console.error("Config fetch failed, defaulting to Firebase", err);
+//       }
+
+//       console.log("Normal Mode: Firebase Active");
+//       setHighTrafficMode(false);
+
+//       if (user) {
+//         const q = query(collection(db, 'videos'));
+//         unsubscribe = onSnapshot(q, (snapshot) => {
+//           const vidList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+//           setVideos(vidList);
+//           setLoading(false);
+//         });
+//       }
+//     };
+
+//     fetchMasterConfig();
+//     return () => unsubscribe();
+//   }, [user]);
+
+//   return (
+//     <div className="min-h-screen bg-[#0f0f0f] text-white font-sans">
+      
+//       {/* NAVBAR */}
+//       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 bg-[#0f0f0f] border-b border-gray-800">
+//         <div className="flex items-center gap-4">
+//           <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="p-2 hover:bg-gray-800 rounded-full transition"><Menu className="text-white" /></button>
+//           <a href="/" className="flex items-center gap-1">
+//              <div className="bg-red-600 p-1 rounded-lg"><Play fill="white" size={16} className="text-white"/></div>
+//              <span className="text-xl font-bold tracking-tight">SPORTS<span className="text-red-600">HUB</span></span>
+//           </a>
+//         </div>
+        
+//         <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border border-gray-800">
+//            Server Status: 
+//            {highTrafficMode ? (
+//              <span className="text-green-500 animate-pulse">HIGH TRAFFIC (SAFE)</span>
+//            ) : (
+//              <span className="text-blue-500">NORMAL</span>
+//            )}
+//         </div>
+
+//         <div className="flex items-center gap-3">
+//            <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center"><User className="text-white" size={16} /></div>
+//         </div>
+//       </nav>
+
+//       <div className="flex pt-16 h-screen">
+//         {/* MAIN CONTENT */}
+//         <main className={`flex-1 overflow-y-auto bg-[#0f0f0f] ${isSidebarOpen ? 'md:ml-60' : 'md:ml-20'} transition-all duration-300`}>
+//            <div className="sticky top-0 z-30 bg-[#0f0f0f]/95 backdrop-blur px-4 py-3 flex gap-3 overflow-x-auto scrollbar-hide border-b border-gray-800">
+//               {categories.map((cat) => (
+//                 <button key={cat} onClick={() => setActiveCategory(cat)} className={`whitespace-nowrap px-4 py-1.5 rounded-lg text-sm font-medium transition ${activeCategory === cat ? 'bg-white text-black' : 'bg-[#272727] text-white hover:bg-[#3f3f3f]'}`}>{cat}</button>
+//               ))}
+//            </div>
+
+//            <div className="p-4 md:p-6 max-w-[1600px] mx-auto">
+//               {/* SELECTED PLAYER */}
+//               {selectedVideo && (
+//                 <div className="mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
+//                    <div className="bg-black rounded-xl overflow-hidden shadow-2xl shadow-red-900/10 border border-gray-800">
+//                       <OkRuPlayer videoId={selectedVideo.videoId} title={selectedVideo.title} autoPlay={true} />
+//                    </div>
+//                    <div className="mt-4 px-1">
+//                       <h1 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
+//                         {selectedVideo.title}
+//                         {selectedVideo.live && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse">LIVE NOW</span>}
+//                       </h1>
+//                    </div>
+//                    <div className="my-6 border-b border-gray-800"></div>
+//                 </div>
+//               )}
+
+//               {/* VIDEO GRID */}
+//               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8">
+//                  {loading ? [...Array(8)].map((_, i) => <SkeletonCard key={i} />) : videos.map((video) => (
+//                     <div key={video.id} onClick={() => { setSelectedVideo(video); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="group cursor-pointer flex flex-col">
+//                        <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-800 mb-3 group-hover:rounded-none transition-all duration-300 border border-gray-800 group-hover:border-red-600/50">
+//                           <img src={video.thumbnail || "https://img.youtube.com/vi/placeholder/hqdefault.jpg"} alt={video.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" />
+//                           {video.live && <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded flex items-center gap-1 font-bold z-10"><span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span> LIVE</div>}
+//                        </div>
+//                        <div className="flex gap-3 px-1">
+//                           <div className="w-9 h-9 bg-gradient-to-br from-red-600 to-blue-600 rounded-full flex-shrink-0 mt-0.5"></div>
+//                           <div className="flex flex-col">
+//                              <h3 className="text-white text-sm font-bold line-clamp-2 leading-tight mb-1 group-hover:text-red-500 transition-colors">{video.title}</h3>
+//                              <p className="text-[#AAAAAA] text-xs hover:text-white transition-colors">SportsHub Official</p>
+//                           </div>
+//                        </div>
+//                     </div>
+//                  ))}
+//               </div>
+//            </div>
+//         </main>
+//       </div>
+
+//       {/* 👇 2. YAHAN ADS LAGA DIYE HAIN (Social Bar) 👇 */}
+//       <Script 
+//         src="https://pl28382929.effectivegatecpm.com/b1/06/0e/b1060e51e3f0ca4c6da303d42b6ea068.js"
+//         strategy="afterInteractive"
+//       />
+//       {/* 👆 Ad Code Ends Here 👆 */}
+
+//     </div>
+//   );
+// }
+
+// function NavItem({ icon, label, active = false, isOpen }: { icon: any, label: string, active?: boolean, isOpen: boolean }) {
+//   return <div className={`flex items-center gap-5 px-3 py-2.5 rounded-lg cursor-pointer transition ${active ? 'bg-[#272727] font-bold' : 'hover:bg-[#272727]'}`}><div className={`${active ? 'text-white' : 'text-white'}`}>{icon}</div>{isOpen && <span className="text-sm truncate">{label}</span>}</div>;
+// }
+
+// function SkeletonCard() {
+//   return <div className="flex flex-col gap-3"><div className="aspect-video bg-[#1f1f1f] rounded-xl animate-pulse"></div><div className="flex gap-3"><div className="w-9 h-9 bg-[#1f1f1f] rounded-full animate-pulse"></div><div className="flex flex-col gap-2 w-full"><div className="h-4 bg-[#1f1f1f] rounded w-3/4 animate-pulse"></div><div className="h-3 bg-[#1f1f1f] rounded w-1/2 animate-pulse"></div></div></div></div>;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

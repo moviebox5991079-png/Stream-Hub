@@ -252,6 +252,7 @@ function SkeletonCard() {
   return <div className="flex flex-col gap-3"><div className="aspect-video bg-[#1f1f1f] rounded-xl animate-pulse"></div><div className="flex gap-3"><div className="w-9 h-9 bg-[#1f1f1f] rounded-full animate-pulse"></div><div className="flex flex-col gap-2 w-full"><div className="h-4 bg-[#1f1f1f] rounded w-3/4 animate-pulse"></div><div className="h-3 bg-[#1f1f1f] rounded w-1/2 animate-pulse"></div></div></div></div>;
 }
 
+// hahahahah
 
 
 

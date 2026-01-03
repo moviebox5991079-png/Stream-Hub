@@ -165,6 +165,9 @@ export default function HomePage() {
         </div>
       </nav>
 
+
+
+
       {/* Main Content */}
       <div className="flex pt-16 h-screen">
         <main className={`flex-1 overflow-y-auto bg-[#0f0f0f] ${isSidebarOpen ? 'md:ml-60' : 'md:ml-20'} transition-all duration-300`}>
@@ -178,12 +181,24 @@ export default function HomePage() {
                 <div className="mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
                    <div className="bg-black rounded-xl overflow-hidden shadow-2xl shadow-red-900/10 border border-gray-800">
                       <OkRuPlayer videoId={selectedVideo.videoId} title={selectedVideo.title} autoPlay={true} />
+    
                    </div>
                    <div className="mt-4 px-1">
                       <h1 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
                         {selectedVideo.title} {selectedVideo.live && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse">LIVE NOW</span>}
                       </h1>
                    </div>
+
+                                       {/* 🔥🔥🔥 YAHAN BANNER LAGA DO 🔥🔥🔥 */}
+    <div className="flex justify-center my-6">
+        <iframe 
+            src="/ads/banner.html" 
+            width="300" 
+            height="250" 
+            style={{ border: 'none', overflow: 'hidden' }}
+            title="Sponsor Ad"
+        />
+    </div>
                    <div className="my-6 border-b border-gray-800"></div>
                 </div>
               )}
@@ -205,6 +220,17 @@ export default function HomePage() {
                  ))}
               </div>
            </div>
+
+                                                  {/* 🔥🔥🔥 YAHAN BANNER LAGA DO 🔥🔥🔥 */}
+    <div className="flex justify-center my-6">
+        <iframe 
+            src="/ads/banner.html" 
+            width="300" 
+            height="250" 
+            style={{ border: 'none', overflow: 'hidden' }}
+            title="Sponsor Ad"
+        />
+    </div>
         </main>
       </div>
 

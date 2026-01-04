@@ -135,7 +135,7 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
     w-[80%] 
     md:w-[100%] 
     h-[18%] md:h-[10%] 
-    z-50 bg-red-500
+    z-50 bg-transparent
   "
   onClick={(e) => {
     e.preventDefault();

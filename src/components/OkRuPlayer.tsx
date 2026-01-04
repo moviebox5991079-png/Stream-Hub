@@ -127,7 +127,23 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
         className="relative w-full aspect-[16/9] bg-black rounded-xl overflow-hidden shadow-2xl border border-gray-800 group"
       >
         {/* === SHIELDS === */}
-        <div className="absolute top-0 left-0 w-[100%] h-[18%] md:h-[10%] z-50 bg-transparent" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
+        {/* <div className="absolute top-0 left-0 w-[100%] h-[18%] md:h-[10%] z-50 bg-red-500" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} /> */}
+        <div
+  className="
+    absolute top-0 
+    right-0 
+    w-[80%] 
+    md:w-[100%] 
+    h-[18%] md:h-[10%] 
+    z-50 bg-red-500
+  "
+  onClick={(e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  }}
+  onContextMenu={(e) => e.preventDefault()}
+/>
+
         <div className="absolute top-0 right-0 w-[15%] h-[20%] z-50 bg-transparent" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
         {/* <div className="absolute bottom-0 right-0 z-50 bg-red-600
 

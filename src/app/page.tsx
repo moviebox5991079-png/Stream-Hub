@@ -1,258 +1,326 @@
-'use client';
+import HomeClient from '@/components/HomeClient';
 
-import React, { useState, useEffect, useRef } from 'react';
-import OkRuPlayer from '@/components/OkRuPlayer';
-import { auth, db } from '@/lib/firebase';
-import { signInAnonymously, onAuthStateChanged } from 'firebase/auth';
-import { collection, query, onSnapshot } from 'firebase/firestore';
-import { 
-  Play, Search, Menu, User, Loader2, Home, Flame, 
-  Radio, Trophy, MonitorPlay, History, Clock, X 
-} from 'lucide-react';
-import Script from 'next/script'; 
+// Cache revalidation time (seconds)
+// Iska matlab Vercel har 60 seconds baad check karega ke GitHub par naya link aaya hai ya nahi.
+export const revalidate = 60; 
 
-const CONFIG_URL = "https://api.npoint.io/04bd07a2ee3adf4b1f27";
+// Aapka GitHub RAW URL (Jahan data.json host hoga)
+// Replace this with your actual GitHub Raw URL after pushing code
+const DATA_SOURCE_URL = "https://raw.githubusercontent.com/YOUR_GITHUB_USER/YOUR_REPO/main/public/data.json";
 
-export default function HomePage() {
-  const [user, setUser] = useState<any>(null);
-  const [videos, setVideos] = useState<any[]>([]);
-  const [selectedVideo, setSelectedVideo] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [highTrafficMode, setHighTrafficMode] = useState(false); 
-  
-  const [isOverlayVisible, setOverlayVisible] = useState(false); 
-  const [isSidebarOpen, setSidebarOpen] = useState(true);
-  const [activeCategory, setActiveCategory] = useState("All");
-  const categories = ["All", "Live Now", "Cricket", "Football", "UFC"];
-
-  // Reference to store our own known elements to avoid false alarms
-  const overlayRef = useRef<HTMLDivElement>(null);
-  const navbarRef = useRef<HTMLElement>(null);
-
-  // =========================================================
-  // 👇 ULTIMATE DETECTOR (Jo kabhi fail nahi hoga) 🕵️‍♂️
-  // =========================================================
-  useEffect(() => {
-    const checkForAd = () => {
-      // Hum body ke saare direct children check karenge
-      const allElements = document.body.getElementsByTagName('*');
-      
-      for (let i = 0; i < allElements.length; i++) {
-        const el = allElements[i] as HTMLElement;
-        
-        // Safety: Agar ye element humara apna Overlay ya Navbar hai, to ignore karo
-        if (overlayRef.current && overlayRef.current.contains(el)) continue;
-        if (navbarRef.current && navbarRef.current.contains(el)) continue;
-        // Next.js ke internal scripts ko ignore karo
-        if (el.tagName === 'SCRIPT' || el.tagName === 'STYLE' || el.tagName === 'LINK') continue;
-
-        const style = window.getComputedStyle(el);
-        const zIndex = parseInt(style.zIndex, 10);
-
-        // 👇 LOGIC: 
-        // 1. Agar Position 'fixed' hai (Matlab wo float kar raha hai)
-        // 2. Aur Z-Index 100 se zyada hai (Matlab wo Navbar ke upar hai)
-        // 3. Aur wo visible hai
-        // -> TO WO AD HAI!
-        if (
-          (style.position === 'fixed' || style.position === 'absolute') && 
-          !isNaN(zIndex) && 
-          zIndex > 100 && // Humara navbar 50 hai, usse upar jo bhi hoga wo shakki hai
-          style.display !== 'none' && 
-          style.visibility !== 'hidden' &&
-          el.offsetHeight > 10 // Size check: Ad ki height 0 nahi hoti
-        ) {
-             if (!isOverlayVisible) {
-                 console.log("Floating Element Detected (Ad):", el);
-                 setOverlayVisible(true);
-             }
-             return; // Ek mil gaya to bas hai
-        }
-      }
-    };
-
-    const observer = new MutationObserver(() => {
-      checkForAd();
-    });
-
-    // Hum poori body aur uske children par nazar rakh rahe hain
-    observer.observe(document.body, { childList: true, subtree: true, attributes: true });
-
-    return () => observer.disconnect();
-  }, [isOverlayVisible]);
-
-
-  // 👇 MAGIC LOGIC (Click -> Overlay Gayab)
-  useEffect(() => {
-    const handleBlur = () => {
-      if (isOverlayVisible) {
-        setOverlayVisible(false);
-      }
-    };
-    window.addEventListener('blur', handleBlur);
-    return () => window.removeEventListener('blur', handleBlur);
-  }, [isOverlayVisible]);
-
-
-  // Firebase & Auth logic (Same as before)
-  useEffect(() => {
-    const initAuth = async () => {
-      try { await signInAnonymously(auth); } catch (error) { console.error("Auth Error:", error); }
-    };
-    initAuth();
-    return onAuthStateChanged(auth, setUser);
-  }, []);
-
-  useEffect(() => {
-    let unsubscribe = () => {};
-    const fetchMasterConfig = async () => {
-      try {
-        const res = await fetch(CONFIG_URL, { cache: 'no-store' }); 
-        const config = await res.json();
-        if (config.isLive === true) {
-          setHighTrafficMode(true);
-          const liveMatch = {
-            id: 'live-json', title: config.title, videoId: config.videoId,
-            thumbnail: "https://img.youtube.com/vi/placeholder/hqdefault.jpg", live: true
-          };
-          setVideos([liveMatch]); setSelectedVideo(liveMatch); setLoading(false);
-          return;
-        } 
-      } catch (err) { console.error("Config fetch failed", err); }
-      setHighTrafficMode(false);
-      if (user) {
-        const q = query(collection(db, 'videos'));
-        unsubscribe = onSnapshot(q, (snapshot) => {
-          const vidList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-          setVideos(vidList); setLoading(false);
-        });
-      }
-    };
-    fetchMasterConfig();
-    return () => unsubscribe();
-  }, [user]);
-
-  return (
-    <div className="min-h-screen bg-[#0f0f0f] text-white font-sans relative">
-      
-      {/* 👇 BLACK OVERLAY */}
-      {isOverlayVisible && (
-        <div 
-          ref={overlayRef} // 👈 Reference joda taake detector isko ignore kare
-          className="fixed inset-0 bg-black/85 z-[40] transition-opacity duration-300 flex flex-col items-center justify-center text-center cursor-pointer"
-          onClick={() => setOverlayVisible(false)} 
-        >
-          <div className="text-white/60 text-sm mt-96 animate-pulse font-mono tracking-widest">
-            Tap anywhere to Start Stream...
-          </div>
-        </div>
-      )}
-
-      {/* NAVBAR */}
-      <nav ref={navbarRef} className="fixed top-0 left-0 right-0 z-[30] flex items-center justify-between px-4 py-3 bg-[#0f0f0f] border-b border-gray-800">
-        <div className="flex items-center gap-4">
-          <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="p-2 hover:bg-gray-800 rounded-full transition"><Menu className="text-white" /></button>
-          <a href="/" className="flex items-center gap-1">
-             <div className="bg-red-600 p-1 rounded-lg"><Play fill="white" size={16} className="text-white"/></div>
-             <span className="text-xl font-bold tracking-tight">SPORTS<span className="text-red-600">HUB</span></span>
-          </a>
-        </div>
-        <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border border-gray-800">
-           Server Status: {highTrafficMode ? <span className="text-green-500 animate-pulse">HIGH TRAFFIC</span> : <span className="text-blue-500">NORMAL</span>}
-        </div>
-        <div className="flex items-center gap-3">
-           <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center"><User className="text-white" size={16} /></div>
-        </div>
-      </nav>
-
-
-
-
-      {/* Main Content */}
-      <div className="flex pt-16 h-screen">
-        <main className={`flex-1 overflow-y-auto bg-[#0f0f0f] ${isSidebarOpen ? 'md:ml-60' : 'md:ml-20'} transition-all duration-300`}>
-           <div className="sticky top-0 z-[20] bg-[#0f0f0f]/95 backdrop-blur px-4 py-3 flex gap-3 overflow-x-auto scrollbar-hide border-b border-gray-800">
-              {categories.map((cat) => (
-                <button key={cat} onClick={() => setActiveCategory(cat)} className={`whitespace-nowrap px-4 py-1.5 rounded-lg text-sm font-medium transition ${activeCategory === cat ? 'bg-white text-black' : 'bg-[#272727] text-white hover:bg-[#3f3f3f]'}`}>{cat}</button>
-              ))}
-           </div>
-           <div className="p-4 md:p-6 max-w-[1600px] mx-auto">
-              {selectedVideo && (
-                <div className="mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
-                   <div className="bg-black rounded-xl overflow-hidden shadow-2xl shadow-red-900/10 border border-gray-800">
-                      <OkRuPlayer videoId={selectedVideo.videoId} title={selectedVideo.title} autoPlay={true} />
+async function getData() {
+  try {
+    // Agar production hai to GitHub se uthao, agar local hai to direct file read karo ya API call
+    // Simplest approach for now:
+    const res = await fetch(DATA_SOURCE_URL);
     
-                   </div>
-                   <div className="mt-4 px-1">
-                      <h1 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
-                        {selectedVideo.title} {selectedVideo.live && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse">LIVE NOW</span>}
-                      </h1>
-                   </div>
+    if (!res.ok) {
+      // Fallback agar fetch fail ho jaye
+      return {
+        isLive: true,
+        title: "Live Match Stream",
+        // videoId: "default_id",
+        videoId: "11090668161682",
 
-                                       {/* 🔥🔥🔥 YAHAN BANNER LAGA DO 🔥🔥🔥 */}
-    <div className="flex justify-center my-6">
-        <iframe 
-            src="/ads/banner.html" 
-            width="300" 
-            height="250" 
-            style={{ border: 'none', overflow: 'hidden' }}
-            title="Sponsor Ad"
-        />
-    </div>
-                   <div className="my-6 border-b border-gray-800"></div>
-                </div>
-              )}
-               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8">
-                 {loading ? [...Array(8)].map((_, i) => <SkeletonCard key={i} />) : videos.map((video) => (
-                    <div key={video.id} onClick={() => { setSelectedVideo(video); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="group cursor-pointer flex flex-col">
-                       <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-800 mb-3 group-hover:rounded-none transition-all duration-300 border border-gray-800 group-hover:border-red-600/50">
-                          <img src={video.thumbnail || "https://img.youtube.com/vi/placeholder/hqdefault.jpg"} alt={video.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" />
-                          {video.live && <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded flex items-center gap-1 font-bold z-10"><span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span> LIVE</div>}
-                       </div>
-                       <div className="flex gap-3 px-1">
-                          <div className="w-9 h-9 bg-gradient-to-br from-red-600 to-blue-600 rounded-full flex-shrink-0 mt-0.5"></div>
-                          <div className="flex flex-col">
-                             <h3 className="text-white text-sm font-bold line-clamp-2 leading-tight mb-1 group-hover:text-red-500 transition-colors">{video.title}</h3>
-                             <p className="text-[#AAAAAA] text-xs hover:text-white transition-colors">SportsHub Official</p>
-                          </div>
-                       </div>
-                    </div>
-                 ))}
-              </div>
-           </div>
-
-                                                  {/* 🔥🔥🔥 YAHAN BANNER LAGA DO 🔥🔥🔥 */}
-    <div className="flex justify-center my-6">
-        <iframe 
-            src="/ads/banner.html" 
-            width="300" 
-            height="250" 
-            style={{ border: 'none', overflow: 'hidden' }}
-            title="Sponsor Ad"
-        />
-    </div>
-        </main>
-      </div>
-
-      {/* Script */}
-      <Script 
-        src="https://pl28382929.effectivegatecpm.com/b1/06/0e/b1060e51e3f0ca4c6da303d42b6ea068.js"
-        strategy="afterInteractive"
-      />
-
-    </div>
-  );
+        thumbnail: "https://img.youtube.com/vi/placeholder/hqdefault.jpg"
+      };
+    }
+    
+    return res.json();
+  } catch (error) {
+    console.error("Data fetch error", error);
+    return { isLive: false, title: "Stream Loading...", videoId: "", thumbnail: "" };
+  }
 }
 
-function NavItem({ icon, label, active = false, isOpen }: { icon: any, label: string, active?: boolean, isOpen: boolean }) {
-  return <div className={`flex items-center gap-5 px-3 py-2.5 rounded-lg cursor-pointer transition ${active ? 'bg-[#272727] font-bold' : 'hover:bg-[#272727]'}`}><div className={`${active ? 'text-white' : 'text-white'}`}>{icon}</div>{isOpen && <span className="text-sm truncate">{label}</span>}</div>;
+export default async function Page() {
+  const data = await getData();
+
+  return <HomeClient initialData={data} />;
 }
 
-function SkeletonCard() {
-  return <div className="flex flex-col gap-3"><div className="aspect-video bg-[#1f1f1f] rounded-xl animate-pulse"></div><div className="flex gap-3"><div className="w-9 h-9 bg-[#1f1f1f] rounded-full animate-pulse"></div><div className="flex flex-col gap-2 w-full"><div className="h-4 bg-[#1f1f1f] rounded w-3/4 animate-pulse"></div><div className="h-3 bg-[#1f1f1f] rounded w-1/2 animate-pulse"></div></div></div></div>;
-}
 
-// hahahahah
+// <iframe width="560" height="315" src="//ok.ru/videoembed/11090668161682?nochat=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+
+
+
+
+
+
+
+
+
+
+
+// ======== 100% correct website live for npoint techonology ================================
+
+
+// 'use client';
+
+// import React, { useState, useEffect, useRef } from 'react';
+// import OkRuPlayer from '@/components/OkRuPlayer';
+// import { auth, db } from '@/lib/firebase';
+// import { signInAnonymously, onAuthStateChanged } from 'firebase/auth';
+// import { collection, query, onSnapshot } from 'firebase/firestore';
+// import { 
+//   Play, Search, Menu, User, Loader2, Home, Flame, 
+//   Radio, Trophy, MonitorPlay, History, Clock, X 
+// } from 'lucide-react';
+// import Script from 'next/script'; 
+
+// const CONFIG_URL = "https://api.npoint.io/04bd07a2ee3adf4b1f27";
+
+// export default function HomePage() {
+//   const [user, setUser] = useState<any>(null);
+//   const [videos, setVideos] = useState<any[]>([]);
+//   const [selectedVideo, setSelectedVideo] = useState<any>(null);
+//   const [loading, setLoading] = useState(true);
+//   const [highTrafficMode, setHighTrafficMode] = useState(false); 
+  
+//   const [isOverlayVisible, setOverlayVisible] = useState(false); 
+//   const [isSidebarOpen, setSidebarOpen] = useState(true);
+//   const [activeCategory, setActiveCategory] = useState("All");
+//   const categories = ["All", "Live Now", "Cricket", "Football", "UFC"];
+
+//   // Reference to store our own known elements to avoid false alarms
+//   const overlayRef = useRef<HTMLDivElement>(null);
+//   const navbarRef = useRef<HTMLElement>(null);
+
+//   // =========================================================
+//   // 👇 ULTIMATE DETECTOR (Jo kabhi fail nahi hoga) 🕵️‍♂️
+//   // =========================================================
+//   useEffect(() => {
+//     const checkForAd = () => {
+//       // Hum body ke saare direct children check karenge
+//       const allElements = document.body.getElementsByTagName('*');
+      
+//       for (let i = 0; i < allElements.length; i++) {
+//         const el = allElements[i] as HTMLElement;
+        
+//         // Safety: Agar ye element humara apna Overlay ya Navbar hai, to ignore karo
+//         if (overlayRef.current && overlayRef.current.contains(el)) continue;
+//         if (navbarRef.current && navbarRef.current.contains(el)) continue;
+//         // Next.js ke internal scripts ko ignore karo
+//         if (el.tagName === 'SCRIPT' || el.tagName === 'STYLE' || el.tagName === 'LINK') continue;
+
+//         const style = window.getComputedStyle(el);
+//         const zIndex = parseInt(style.zIndex, 10);
+
+//         // 👇 LOGIC: 
+//         // 1. Agar Position 'fixed' hai (Matlab wo float kar raha hai)
+//         // 2. Aur Z-Index 100 se zyada hai (Matlab wo Navbar ke upar hai)
+//         // 3. Aur wo visible hai
+//         // -> TO WO AD HAI!
+//         if (
+//           (style.position === 'fixed' || style.position === 'absolute') && 
+//           !isNaN(zIndex) && 
+//           zIndex > 100 && // Humara navbar 50 hai, usse upar jo bhi hoga wo shakki hai
+//           style.display !== 'none' && 
+//           style.visibility !== 'hidden' &&
+//           el.offsetHeight > 10 // Size check: Ad ki height 0 nahi hoti
+//         ) {
+//              if (!isOverlayVisible) {
+//                  console.log("Floating Element Detected (Ad):", el);
+//                  setOverlayVisible(true);
+//              }
+//              return; // Ek mil gaya to bas hai
+//         }
+//       }
+//     };
+
+//     const observer = new MutationObserver(() => {
+//       checkForAd();
+//     });
+
+//     // Hum poori body aur uske children par nazar rakh rahe hain
+//     observer.observe(document.body, { childList: true, subtree: true, attributes: true });
+
+//     return () => observer.disconnect();
+//   }, [isOverlayVisible]);
+
+
+//   // 👇 MAGIC LOGIC (Click -> Overlay Gayab)
+//   useEffect(() => {
+//     const handleBlur = () => {
+//       if (isOverlayVisible) {
+//         setOverlayVisible(false);
+//       }
+//     };
+//     window.addEventListener('blur', handleBlur);
+//     return () => window.removeEventListener('blur', handleBlur);
+//   }, [isOverlayVisible]);
+
+
+//   // Firebase & Auth logic (Same as before)
+//   useEffect(() => {
+//     const initAuth = async () => {
+//       try { await signInAnonymously(auth); } catch (error) { console.error("Auth Error:", error); }
+//     };
+//     initAuth();
+//     return onAuthStateChanged(auth, setUser);
+//   }, []);
+
+//   useEffect(() => {
+//     let unsubscribe = () => {};
+//     const fetchMasterConfig = async () => {
+//       try {
+//         const res = await fetch(CONFIG_URL, { cache: 'no-store' }); 
+//         const config = await res.json();
+//         if (config.isLive === true) {
+//           setHighTrafficMode(true);
+//           const liveMatch = {
+//             id: 'live-json', title: config.title, videoId: config.videoId,
+//             thumbnail: "https://img.youtube.com/vi/placeholder/hqdefault.jpg", live: true
+//           };
+//           setVideos([liveMatch]); setSelectedVideo(liveMatch); setLoading(false);
+//           return;
+//         } 
+//       } catch (err) { console.error("Config fetch failed", err); }
+//       setHighTrafficMode(false);
+//       if (user) {
+//         const q = query(collection(db, 'videos'));
+//         unsubscribe = onSnapshot(q, (snapshot) => {
+//           const vidList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+//           setVideos(vidList); setLoading(false);
+//         });
+//       }
+//     };
+//     fetchMasterConfig();
+//     return () => unsubscribe();
+//   }, [user]);
+
+//   return (
+//     <div className="min-h-screen bg-[#0f0f0f] text-white font-sans relative">
+      
+//       {/* 👇 BLACK OVERLAY */}
+//       {isOverlayVisible && (
+//         <div 
+//           ref={overlayRef} // 👈 Reference joda taake detector isko ignore kare
+//           className="fixed inset-0 bg-black/85 z-[40] transition-opacity duration-300 flex flex-col items-center justify-center text-center cursor-pointer"
+//           onClick={() => setOverlayVisible(false)} 
+//         >
+//           <div className="text-white/60 text-sm mt-96 animate-pulse font-mono tracking-widest">
+//             Tap anywhere to Start Stream...
+//           </div>
+//         </div>
+//       )}
+
+//       {/* NAVBAR */}
+//       <nav ref={navbarRef} className="fixed top-0 left-0 right-0 z-[30] flex items-center justify-between px-4 py-3 bg-[#0f0f0f] border-b border-gray-800">
+//         <div className="flex items-center gap-4">
+//           <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="p-2 hover:bg-gray-800 rounded-full transition"><Menu className="text-white" /></button>
+//           <a href="/" className="flex items-center gap-1">
+//              <div className="bg-red-600 p-1 rounded-lg"><Play fill="white" size={16} className="text-white"/></div>
+//              <span className="text-xl font-bold tracking-tight">SPORTS<span className="text-red-600">HUB</span></span>
+//           </a>
+//         </div>
+//         <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border border-gray-800">
+//            Server Status: {highTrafficMode ? <span className="text-green-500 animate-pulse">HIGH TRAFFIC</span> : <span className="text-blue-500">NORMAL</span>}
+//         </div>
+//         <div className="flex items-center gap-3">
+//            <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center"><User className="text-white" size={16} /></div>
+//         </div>
+//       </nav>
+
+
+
+
+//       {/* Main Content */}
+//       <div className="flex pt-16 h-screen">
+//         <main className={`flex-1 overflow-y-auto bg-[#0f0f0f] ${isSidebarOpen ? 'md:ml-60' : 'md:ml-20'} transition-all duration-300`}>
+//            <div className="sticky top-0 z-[20] bg-[#0f0f0f]/95 backdrop-blur px-4 py-3 flex gap-3 overflow-x-auto scrollbar-hide border-b border-gray-800">
+//               {categories.map((cat) => (
+//                 <button key={cat} onClick={() => setActiveCategory(cat)} className={`whitespace-nowrap px-4 py-1.5 rounded-lg text-sm font-medium transition ${activeCategory === cat ? 'bg-white text-black' : 'bg-[#272727] text-white hover:bg-[#3f3f3f]'}`}>{cat}</button>
+//               ))}
+//            </div>
+//            <div className="p-4 md:p-6 max-w-[1600px] mx-auto">
+//               {selectedVideo && (
+//                 <div className="mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
+//                    <div className="bg-black rounded-xl overflow-hidden shadow-2xl shadow-red-900/10 border border-gray-800">
+//                       <OkRuPlayer videoId={selectedVideo.videoId} title={selectedVideo.title} autoPlay={true} />
+    
+//                    </div>
+//                    <div className="mt-4 px-1">
+//                       <h1 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
+//                         {selectedVideo.title} {selectedVideo.live && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse">LIVE NOW</span>}
+//                       </h1>
+//                    </div>
+
+//                                        {/* 🔥🔥🔥 YAHAN BANNER LAGA DO 🔥🔥🔥 */}
+//     <div className="flex justify-center my-6">
+//         <iframe 
+//             src="/ads/banner.html" 
+//             width="300" 
+//             height="250" 
+//             style={{ border: 'none', overflow: 'hidden' }}
+//             title="Sponsor Ad"
+//         />
+//     </div>
+//                    <div className="my-6 border-b border-gray-800"></div>
+//                 </div>
+//               )}
+//                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8">
+//                  {loading ? [...Array(8)].map((_, i) => <SkeletonCard key={i} />) : videos.map((video) => (
+//                     <div key={video.id} onClick={() => { setSelectedVideo(video); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="group cursor-pointer flex flex-col">
+//                        <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-800 mb-3 group-hover:rounded-none transition-all duration-300 border border-gray-800 group-hover:border-red-600/50">
+//                           <img src={video.thumbnail || "https://img.youtube.com/vi/placeholder/hqdefault.jpg"} alt={video.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy" />
+//                           {video.live && <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded flex items-center gap-1 font-bold z-10"><span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span> LIVE</div>}
+//                        </div>
+//                        <div className="flex gap-3 px-1">
+//                           <div className="w-9 h-9 bg-gradient-to-br from-red-600 to-blue-600 rounded-full flex-shrink-0 mt-0.5"></div>
+//                           <div className="flex flex-col">
+//                              <h3 className="text-white text-sm font-bold line-clamp-2 leading-tight mb-1 group-hover:text-red-500 transition-colors">{video.title}</h3>
+//                              <p className="text-[#AAAAAA] text-xs hover:text-white transition-colors">SportsHub Official</p>
+//                           </div>
+//                        </div>
+//                     </div>
+//                  ))}
+//               </div>
+//            </div>
+
+//                                                   {/* 🔥🔥🔥 YAHAN BANNER LAGA DO 🔥🔥🔥 */}
+//     <div className="flex justify-center my-6">
+//         <iframe 
+//             src="/ads/banner.html" 
+//             width="300" 
+//             height="250" 
+//             style={{ border: 'none', overflow: 'hidden' }}
+//             title="Sponsor Ad"
+//         />
+//     </div>
+//         </main>
+//       </div>
+
+//       {/* Script */}
+//       <Script 
+//         src="https://pl28382929.effectivegatecpm.com/b1/06/0e/b1060e51e3f0ca4c6da303d42b6ea068.js"
+//         strategy="afterInteractive"
+//       />
+
+//     </div>
+//   );
+// }
+
+// function NavItem({ icon, label, active = false, isOpen }: { icon: any, label: string, active?: boolean, isOpen: boolean }) {
+//   return <div className={`flex items-center gap-5 px-3 py-2.5 rounded-lg cursor-pointer transition ${active ? 'bg-[#272727] font-bold' : 'hover:bg-[#272727]'}`}><div className={`${active ? 'text-white' : 'text-white'}`}>{icon}</div>{isOpen && <span className="text-sm truncate">{label}</span>}</div>;
+// }
+
+// function SkeletonCard() {
+//   return <div className="flex flex-col gap-3"><div className="aspect-video bg-[#1f1f1f] rounded-xl animate-pulse"></div><div className="flex gap-3"><div className="w-9 h-9 bg-[#1f1f1f] rounded-full animate-pulse"></div><div className="flex flex-col gap-2 w-full"><div className="h-4 bg-[#1f1f1f] rounded w-3/4 animate-pulse"></div><div className="h-3 bg-[#1f1f1f] rounded w-1/2 animate-pulse"></div></div></div></div>;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -128,7 +128,9 @@ export default function HomeClient({ initialData }: HomeProps) {
 
                    {/* BANNER 1 */}
                    <div className="flex justify-center my-6">
-                       <iframe src="/ads/banner.html" width="300" height="250" style={{ border: 'none', overflow: 'hidden' }} title="Sponsor Ad" />
+                       <iframe src="/banner" width="300" height="250" style={{ border: 'none', overflow: 'hidden' }} title="Sponsor Ad" />
+
+                       {/* <iframe src="/ads/banner.html" width="300" height="250" style={{ border: 'none', overflow: 'hidden' }} title="Sponsor Ad" /> */}
                        {/* <iframe src="https://raw.githubusercontent.com/moviebox5991079-png/Stream-Hub/refs/heads/main/public/ads/banner.html" width="300" height="250" style={{ border: 'none', overflow: 'hidden' }} title="Sponsor Ad" /> */}
 
                    </div>
@@ -158,7 +160,7 @@ export default function HomeClient({ initialData }: HomeProps) {
            {/* BANNER 2 */}
            <div className="flex justify-center my-6">
                {/* <iframe src="/ads/banner.html" width="300" height="250" style={{ border: 'none', overflow: 'hidden' }} title="Sponsor Ad" /> */}
-               <iframe src="/banner.html" width="300" height="250" style={{ border: 'none', overflow: 'hidden' }} title="Sponsor Ad" />
+               <iframe src="/banner" width="300" height="250" style={{ border: 'none', overflow: 'hidden' }} title="Sponsor Ad" />
 
            </div>
         </main>

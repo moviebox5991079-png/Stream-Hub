@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   title: "Bulbul - Live Streaming",
 
   description: "Bulbul is your go-to platform for live streaming. Watch live, Stay updated with real-time and never miss a moment of the action!",
+  icons: {
+    icon: '/favicon.png', // Public folder mein jo image hai uska path
+  },
 };
 
 export default function RootLayout({

@@ -157,7 +157,9 @@ export default function HomeClient({ initialData }: HomeProps) {
 
            {/* BANNER 2 */}
            <div className="flex justify-center my-6">
-               <iframe src="/ads/banner.html" width="300" height="250" style={{ border: 'none', overflow: 'hidden' }} title="Sponsor Ad" />
+               {/* <iframe src="/ads/banner.html" width="300" height="250" style={{ border: 'none', overflow: 'hidden' }} title="Sponsor Ad" /> */}
+               <iframe src="/banner.html" width="300" height="250" style={{ border: 'none', overflow: 'hidden' }} title="Sponsor Ad" />
+
            </div>
         </main>
       </div>

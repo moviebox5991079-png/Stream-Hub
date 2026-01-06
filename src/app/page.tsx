@@ -6,7 +6,9 @@ export const revalidate = 60;
 
 // Aapka GitHub RAW URL (Jahan data.json host hoga)
 // Replace this with your actual GitHub Raw URL after pushing code
-const DATA_SOURCE_URL = "https://raw.githubusercontent.com/YOUR_GITHUB_USER/YOUR_REPO/main/public/data.json";
+// const DATA_SOURCE_URL = "https://raw.githubusercontent.com/YOUR_GITHUB_USER/YOUR_REPO/main/public/data.json";
+const DATA_SOURCE_URL = "https://raw.githubusercontent.com/moviebox5991079-png/Stream-Hub/refs/heads/main/public/data.json";
+
 
 async function getData() {
   try {
@@ -18,14 +20,14 @@ async function getData() {
       // Fallback agar fetch fail ho jaye
       return {
         isLive: true,
-        title: "Live Match Stream",
+        title: "Live Match Stream hahah",
         // videoId: "default_id",
         videoId: "11090668161682",
 
         thumbnail: "https://img.youtube.com/vi/placeholder/hqdefault.jpg"
       };
     }
-    
+    console.log("Data fetched from GitHub:", res);
     return res.json();
   } catch (error) {
     console.error("Data fetch error", error);

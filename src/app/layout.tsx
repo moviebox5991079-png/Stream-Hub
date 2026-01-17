@@ -15,12 +15,31 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   // title: "Create Next App",
-  title: "Bulbul - Live Streaming",
+  title: "Bulbul - Live Streaming", // Google Title
 
+  // Google Description
   description: "Bulbul is your go-to platform for live streaming. Watch live, Stay updated with real-time and never miss a moment of the action!",
-  icons: {
-    icon: '/favicon.png', // Public folder mein jo image hai uska path
-  },
+
+  // icons: {
+  //   icon: '/favicon.png', // Public folder mein jo image hai uska path
+  // },
+
+  // =====================================================================
+    // 👇 YE WALA HISSA ADD KAREIN (ICONS)
+    icons: {
+      icon: '/favicon.ico', // Ye file public folder mein honi chahiye
+      shortcut: '/favicon.ico',
+      apple: '/favicon.ico', // iPhone walon ke liye
+    },
+    
+    // 👇 OPEN GRAPH (Facebook/WhatsApp par link share karne par image dikhane ke liye)
+    openGraph: {
+      title: 'SportsHub Live',
+      description: 'Watch Live Sports Streaming',
+      images: ['/logo.png'], // Agar aap chahte hain link share karne par bara logo dikhe(public folder mein logo.png hona chahiye)
+    },
+
+  // ===============================================================
 };
 
 export default function RootLayout({

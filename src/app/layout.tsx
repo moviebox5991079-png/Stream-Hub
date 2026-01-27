@@ -57,6 +57,9 @@ export default function RootLayout({
           src="https://pl28382929.effectivegatecpm.com/b1/06/0e/b1060e51e3f0ca4c6da303d42b6ea068.js" 
           strategy="afterInteractive" 
         />
+
+        {/* yeh dosrey(bulbul) link hai social bar k */}
+        <script src="https://pl28584344.effectivegatecpm.com/83/25/89/83258922d22f1be4772c2766eefae9db.js"></script>
         
       </body>
     </html>

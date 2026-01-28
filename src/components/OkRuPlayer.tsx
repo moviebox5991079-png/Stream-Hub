@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useState, useEffect, useMemo } from 'react';
-import { Maximize, Minimize, Loader2, Volume2, VolumeX } from 'lucide-react'; 
+import { Maximize, Minimize, Loader2 } from 'lucide-react'; 
 
 interface OkRuPlayerProps {
   videoId: string;
@@ -15,15 +15,11 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
   autoPlay = false 
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const iframeRef = useRef<HTMLIFrameElement>(null); // Ref for iframe to attempt communication
   const [isLoaded, setIsLoaded] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isLandscape, setIsLandscape] = useState<boolean>(false);
   const [showRotateHint, setShowRotateHint] = useState<boolean>(false);
   const [isIosSafari, setIsIosSafari] = useState<boolean>(false);
-  
-  // New State for Sound
-  const [isMuted, setIsMuted] = useState(false);
 
   // Smart ID Extractor
   const cleanVideoId = useMemo(() => {
@@ -39,27 +35,13 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
 
   useEffect(() => { setIsLoaded(false); }, [cleanVideoId]);
 
-  // === SOUND TOGGLE LOGIC ===
-  const toggleMute = () => {
-    setIsMuted(!isMuted);
-    // Note: Cross-origin iframes usually block direct volume control without specific API support.
-    // This attempts to send a standard postMessage, but OK.ru might ignore it depending on their security.
-    if (iframeRef.current && iframeRef.current.contentWindow) {
-      try {
-        iframeRef.current.contentWindow.postMessage(JSON.stringify({ type: isMuted ? 'unmute' : 'mute' }), '*');
-      } catch (e) {
-        console.log("Cannot control iframe volume directly due to CORS");
-      }
-    }
-  };
-
-  // === FULLSCREEN LOGIC (WITH LANDSCAPE LOCK) ===
+  // === UPDATED FULLSCREEN LOGIC (WITH LANDSCAPE LOCK) ===
   const toggleFullScreen = async () => {
     if (!containerRef.current) return;
 
     try {
       if (!document.fullscreenElement) {
-        // 1. Enter Fullscreen
+        // 1. Enter Fullscreen (with vendor prefixes)
         const el: any = containerRef.current;
         if (el.requestFullscreen) {
           await el.requestFullscreen();
@@ -71,16 +53,18 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
           await el.mozRequestFullScreen();
         }
         
-        // 2. Force Landscape
-        // @ts-ignore 
+        // 2. Force Landscape (Mobile par screen teda karne k liye)
+        // @ts-ignore (Typescript kabhi kabhi screen.orientation ko nahi maanta)
         if (screen.orientation && screen.orientation.lock) {
           try {
             // @ts-ignore
             await screen.orientation.lock("landscape");
           } catch (err) {
+            // Agar browser support na kare (jaise Desktop ya iPhone), to ignore karo
             console.log("Landscape lock not supported on this device");
           }
         } else {
+          // iOS Safari ke liye hint dikhao (orientation lock supported nahi hota)
           setShowRotateHint(true);
         }
       } else {
@@ -93,7 +77,7 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
           await (document as any).msExitFullscreen();
         }
         
-        // 4. Unlock Orientation
+        // 4. Wapas Portrait (Seedha) karo
         // @ts-ignore
         if (screen.orientation && screen.orientation.unlock) {
            // @ts-ignore
@@ -112,6 +96,7 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
     return () => document.removeEventListener('fullscreenchange', handleChange);
   }, []);
 
+  // Track orientation changes for hint visibility
   useEffect(() => {
     const checkOrientation = () => {
       const landscape = window.matchMedia('(orientation: landscape)').matches || (window.innerWidth > window.innerHeight);
@@ -127,6 +112,7 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
     };
   }, []);
 
+  // Detect iOS Safari to manage expectations
   useEffect(() => {
     const ua = navigator.userAgent;
     const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(ua));
@@ -141,14 +127,16 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
         className="relative w-full aspect-[16/9] bg-black rounded-xl overflow-hidden shadow-2xl border border-gray-800 group"
       >
         {/* === SHIELDS === */}
-        {/* TOP SHIELD (Blocks VK Link) */}
+        {/* <div className="absolute top-0 left-0 w-[100%] h-[18%] md:h-[10%] z-50 bg-red-500" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} /> */}
+        
+        {/* UPDATED TOP SHIELD: Covers full width to block top-left 'VK Video' link */}
         <div
           className="
             absolute top-0 
-            left-0 
-            w-full 
+            right-0
+            w-[50%] 
             h-[18%] md:h-[10%] 
-            z-50 bg-transparent
+            z-50 bg-red-500
           "
           onClick={(e) => {
             e.preventDefault();
@@ -163,27 +151,24 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
           w-[6%] h-[15%] md:w-[6%] h-[10%] 
         " onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
 
-        {/* === CUSTOM CONTROLS === */}
-        
-        {/* 1. Fullscreen Button (Bottom Right) */}
+        {/* === CUSTOM CONTROLS (Updated Button) === */}
         <button
           onClick={toggleFullScreen}
-          className="absolute bottom-4 right-8 z-[60] p-2 bg-red-600/80 hover:bg-red-600 text-white rounded-lg transition-all duration-300 transform hover:scale-110 shadow-lg backdrop-blur-sm"
+          // Maine 'opacity-0' hata diya hai jaisa aapne chaha, ab button hamesha dikhega (lekin dim hoga)
+          className="absolute  bottom-4 right-8 z-[60] p-2 bg-red-600/80 hover:bg-red-600 text-white rounded-lg transition-all duration-300 transform hover:scale-110 shadow-lg backdrop-blur-sm"
           title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
         >
           {isFullscreen ? <Minimize size={24} /> : <Maximize size={24} />}
         </button>
 
-        {/* 2. Sound Toggle Button (Mobile Only - Bottom Left) */}
-        <button
-          onClick={toggleMute}
-          className="md:hidden absolute bottom-4 left-10 z-[60] p-2 bg-gray-800/80 hover:bg-gray-700 text-white rounded-full transition-all duration-300 transform active:scale-95 shadow-lg backdrop-blur-sm border border-gray-600"
-          title={isMuted ? "Unmute" : "Mute"}
-        >
-          {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
-        </button>
+        {/* === ROTATE HINT (iOS/unsupported orientation lock) === */}
+        {/* {isFullscreen && !isLandscape && showRotateHint && (
+          <div className="absolute inset-x-0 bottom-16 mx-auto w-max max-w-[90%] z-[60] px-3 py-2 rounded-md bg-black/70 text-white text-xs sm:text-sm shadow-md">
+            Rotate your phone  ko landscape me ghumaye better fullscreen ke liye.
+          </div>
+        )} */}
 
-        {/* === LOADING ANIMATION === */}
+        {/* === IFRAME PLAYER & NEW LOADING ANIMATION === */}
         {!isLoaded && (
           <div className="absolute inset-0 flex flex-col items-center justify-center z-0 bg-[#000000] overflow-hidden">
             {/* Background Glow Effect */}
@@ -214,7 +199,6 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
         )}
 
         <iframe
-          ref={iframeRef}
           src={embedUrl}
           title={title}
           className="absolute top-0 left-0 w-full h-full z-10"

@@ -1,25 +1,25 @@
 'use client';
 
 import React, { useRef, useState, useEffect, useMemo } from 'react';
-import { Maximize, Minimize, Loader2 } from 'lucide-react'; 
+import { Maximize, Minimize, Play, Loader2 } from 'lucide-react'; // Play icon add kiya
 
 interface OkRuPlayerProps {
   videoId: string;
   title?: string;
+  thumbnail?: string; // New Prop added
   autoPlay?: boolean;
 }
 
 const OkRuPlayer: React.FC<OkRuPlayerProps> = ({ 
   videoId, 
   title = "OK.ru Video Player",
+  thumbnail, 
   autoPlay = false 
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isPlayClicked, setIsPlayClicked] = useState(false); // New State
   const [isLoaded, setIsLoaded] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isLandscape, setIsLandscape] = useState<boolean>(false);
-  const [showRotateHint, setShowRotateHint] = useState<boolean>(false);
-  const [isIosSafari, setIsIosSafari] = useState<boolean>(false);
 
   // Smart ID Extractor
   const cleanVideoId = useMemo(() => {
@@ -31,59 +31,21 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
     return videoId;
   }, [videoId]);
 
-  const embedUrl = `https://ok.ru/videoembed/${cleanVideoId}?nochat=1&autoplay=${autoPlay ? 1 : 0}`;
+  // URL mein autoplay hamesha 1 rahega kyunke user ne click kar diya hai
+  const embedUrl = `https://ok.ru/videoembed/${cleanVideoId}?nochat=1&autoplay=1`;
 
-  useEffect(() => { setIsLoaded(false); }, [cleanVideoId]);
-
-  // === UPDATED FULLSCREEN LOGIC (WITH LANDSCAPE LOCK) ===
+  // === FULLSCREEN LOGIC (Same as your original) ===
   const toggleFullScreen = async () => {
     if (!containerRef.current) return;
-
     try {
       if (!document.fullscreenElement) {
-        // 1. Enter Fullscreen (with vendor prefixes)
         const el: any = containerRef.current;
-        if (el.requestFullscreen) {
-          await el.requestFullscreen();
-        } else if (el.webkitRequestFullscreen) {
-          await el.webkitRequestFullscreen();
-        } else if (el.msRequestFullscreen) {
-          await el.msRequestFullscreen();
-        } else if (el.mozRequestFullScreen) {
-          await el.mozRequestFullScreen();
-        }
-        
-        // 2. Force Landscape (Mobile par screen teda karne k liye)
-        // @ts-ignore (Typescript kabhi kabhi screen.orientation ko nahi maanta)
-        if (screen.orientation && screen.orientation.lock) {
-          try {
-            // @ts-ignore
-            await screen.orientation.lock("landscape");
-          } catch (err) {
-            // Agar browser support na kare (jaise Desktop ya iPhone), to ignore karo
-            console.log("Landscape lock not supported on this device");
-          }
-        } else {
-          // iOS Safari ke liye hint dikhao (orientation lock supported nahi hota)
-          setShowRotateHint(true);
-        }
+        if (el.requestFullscreen) await el.requestFullscreen();
+        else if (el.webkitRequestFullscreen) await el.webkitRequestFullscreen();
+        else if (el.msRequestFullscreen) await el.msRequestFullscreen();
       } else {
-        // 3. Exit Fullscreen
-        if (document.exitFullscreen) {
-          await document.exitFullscreen();
-        } else if ((document as any).webkitExitFullscreen) {
-          await (document as any).webkitExitFullscreen();
-        } else if ((document as any).msExitFullscreen) {
-          await (document as any).msExitFullscreen();
-        }
-        
-        // 4. Wapas Portrait (Seedha) karo
-        // @ts-ignore
-        if (screen.orientation && screen.orientation.unlock) {
-           // @ts-ignore
-           screen.orientation.unlock();
-        }
-        setShowRotateHint(false);
+        if (document.exitFullscreen) await document.exitFullscreen();
+        else if ((document as any).webkitExitFullscreen) await (document as any).webkitExitFullscreen();
       }
     } catch (err) {
       console.error("Fullscreen error:", err);
@@ -96,123 +58,544 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
     return () => document.removeEventListener('fullscreenchange', handleChange);
   }, []);
 
-  // Track orientation changes for hint visibility
-  useEffect(() => {
-    const checkOrientation = () => {
-      const landscape = window.matchMedia('(orientation: landscape)').matches || (window.innerWidth > window.innerHeight);
-      setIsLandscape(landscape);
-      if (landscape) setShowRotateHint(false);
-    };
-    checkOrientation();
-    window.addEventListener('orientationchange', checkOrientation);
-    window.addEventListener('resize', checkOrientation);
-    return () => {
-      window.removeEventListener('orientationchange', checkOrientation);
-      window.removeEventListener('resize', checkOrientation);
-    };
-  }, []);
-
-  // Detect iOS Safari to manage expectations
-  useEffect(() => {
-    const ua = navigator.userAgent;
-    const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(ua));
-    const isSafari = /Safari/.test(ua) && !/Chrome|CriOS|FxiOS/.test(ua);
-    setIsIosSafari(isIOS && isSafari);
-  }, []);
-
   return (
     <div className="w-full max-w-6xl mx-auto my-6 animate-in fade-in zoom-in duration-500">
       <div 
         ref={containerRef} 
         className="relative w-full aspect-[16/9] bg-black rounded-xl overflow-hidden shadow-2xl border border-gray-800 group"
       >
-        {/* === SHIELDS === */}
-        {/* <div className="absolute top-0 left-0 w-[100%] h-[18%] md:h-[10%] z-50 bg-red-500" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} /> */}
-        
-        {/* UPDATED TOP SHIELD: Covers full width to block top-left 'VK Video' link */}
-        <div
-          className="
-            absolute top-0 
-            right-0
-            w-[80%] 
-            h-[18%] md:h-[10%] 
-            z-50 bg-transparent
-          "
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-          }}
-          onContextMenu={(e) => e.preventDefault()}
-        />
-
-        <div className="absolute top-0 right-0 w-[15%] h-[20%] z-50 bg-transparent" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
-        
-        <div className="absolute bottom-0 right-0 z-50 bg-transparent
-          w-[6%] h-[15%] md:w-[6%] h-[10%] 
-        " onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
-
-        {/* === CUSTOM CONTROLS (Updated Button) === */}
-        <button
-          onClick={toggleFullScreen}
-          // Maine 'opacity-0' hata diya hai jaisa aapne chaha, ab button hamesha dikhega (lekin dim hoga)
-          className="absolute  bottom-4 right-8 z-[60] p-2 bg-red-600/80 hover:bg-red-600 text-white rounded-lg transition-all duration-300 transform hover:scale-110 shadow-lg backdrop-blur-sm"
-          title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
-        >
-          {isFullscreen ? <Minimize size={24} /> : <Maximize size={24} />}
-        </button>
-
-        {/* === ROTATE HINT (iOS/unsupported orientation lock) === */}
-        {/* {isFullscreen && !isLandscape && showRotateHint && (
-          <div className="absolute inset-x-0 bottom-16 mx-auto w-max max-w-[90%] z-[60] px-3 py-2 rounded-md bg-black/70 text-white text-xs sm:text-sm shadow-md">
-            Rotate your phone  ko landscape me ghumaye better fullscreen ke liye.
-          </div>
-        )} */}
-
-        {/* === IFRAME PLAYER & NEW LOADING ANIMATION === */}
-        {!isLoaded && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center z-0 bg-[#000000] overflow-hidden">
-            {/* Background Glow Effect */}
-            <div className="absolute w-64 h-64 bg-red-600/20 rounded-full blur-[100px] animate-pulse pointer-events-none"></div>
-            
-            <div className="relative flex flex-col items-center gap-6 z-10">
-              {/* Spinner Container */}
-              <div className="relative">
-                {/* Outer Ring */}
-                <div className="w-16 h-16 rounded-full border-[3px] border-red-900/30 animate-[spin_3s_linear_infinite]"></div>
-                {/* Middle Ring */}
-                <div className="absolute top-0 left-0 w-16 h-16 rounded-full border-[3px] border-t-red-600 border-r-transparent border-b-transparent border-l-transparent animate-spin"></div>
-                {/* Inner Dot */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-red-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(220,38,38,0.8)]"></div>
-              </div>
-              
-              {/* Text Animation */}
-              <div className="flex flex-col items-center gap-1">
-                <span className="text-white font-bold tracking-[0.2em] text-sm animate-pulse">
-                  ESTABLISHING CONNECTION
-                </span>
-                <span className="text-xs text-red-500/70 font-mono tracking-widest">
-                  BUFFERING STREAM...
-                </span>
-              </div>
+        {/* Step 1: Fake Thumbnail & Play Button (Dikhayen jab tak click na ho) */}
+        {!isPlayClicked ? (
+          <div 
+            className="absolute inset-0 z-50 flex items-center justify-center cursor-pointer bg-black"
+            onClick={() => setIsPlayClicked(true)}
+          >
+            {thumbnail && (
+              <img 
+                src={thumbnail} 
+                alt={title} 
+                className="absolute inset-0 w-full h-full object-cover opacity-60 hover:opacity-50 transition duration-300"
+              />
+            )}
+            <div className="relative z-10 w-20 h-20 bg-red-600/90 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(220,38,38,0.6)] transform group-hover:scale-110 transition-all">
+              <Play className="text-white ml-2" size={40} fill="white" />
             </div>
           </div>
-        )}
+        ) : (
+          /* Step 2: Iframe and Loading Animation (Click ke baad dikhayen) */
+          <>
+            {/* === SHIELDS === */}
+            <div className="absolute top-0 right-0 w-[80%] h-[18%] md:h-[10%] z-50 bg-transparent" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }} onContextMenu={(e) => e.preventDefault()} />
+            <div className="absolute top-0 right-0 w-[15%] h-[20%] z-50 bg-transparent" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }} onContextMenu={(e) => e.preventDefault()} />
+            <div className="absolute bottom-0 right-0 z-50 bg-transparent w-[6%] h-[15%] md:w-[6%] md:h-[10%]" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }} onContextMenu={(e) => e.preventDefault()} />
 
-        <iframe
-          src={embedUrl}
-          title={title}
-          className="absolute top-0 left-0 w-full h-full z-10"
-          frameBorder="0"
-          allow="autoplay; encrypted-media; picture-in-picture; screen-wake-lock"
-          // allowFullScreen
-          onLoad={() => setIsLoaded(true)}
-        />
+            {/* Custom Controls */}
+            <button
+              onClick={toggleFullScreen}
+              className="absolute bottom-4 right-8 z-[60] p-2 bg-red-600/80 hover:bg-red-600 text-white rounded-lg transition-all duration-300 transform hover:scale-110 shadow-lg backdrop-blur-sm"
+              title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+            >
+              {isFullscreen ? <Minimize size={24} /> : <Maximize size={24} />}
+            </button>
+
+            {/* Loading Animation */}
+            {!isLoaded && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center z-0 bg-[#000000] overflow-hidden">
+                <div className="absolute w-64 h-64 bg-red-600/20 rounded-full blur-[100px] animate-pulse pointer-events-none"></div>
+                <div className="relative flex flex-col items-center gap-6 z-10">
+                  <div className="relative">
+                    <div className="w-16 h-16 rounded-full border-[3px] border-red-900/30 animate-[spin_3s_linear_infinite]"></div>
+                    <div className="absolute top-0 left-0 w-16 h-16 rounded-full border-[3px] border-t-red-600 border-r-transparent border-b-transparent border-l-transparent animate-spin"></div>
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-red-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(220,38,38,0.8)]"></div>
+                  </div>
+                  <div className="flex flex-col items-center gap-1">
+                    <span className="text-white font-bold tracking-[0.2em] text-sm animate-pulse">CONNECTING STREAM</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Actual OK.ru Player */}
+            <iframe
+              src={embedUrl}
+              title={title}
+              className="absolute top-0 left-0 w-full h-full z-10"
+              frameBorder="0"
+              allow="autoplay; encrypted-media; picture-in-picture; screen-wake-lock"
+              onLoad={() => setIsLoaded(true)}
+            />
+          </>
+        )}
       </div>
     </div>
   );
 };
 
 export default OkRuPlayer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ================= king 1000% ok.ru k player ke liye client component =================
+
+
+// 'use client';
+
+// import React, { useRef, useState, useEffect, useMemo } from 'react';
+// import { Maximize, Minimize, Loader2 } from 'lucide-react'; 
+
+// interface OkRuPlayerProps {
+//   videoId: string;
+//   title?: string;
+//   autoPlay?: boolean;
+// }
+
+
+
+// const OkRuPlayer: React.FC<OkRuPlayerProps> = ({ 
+//   videoId, 
+//   title = "OK.ru Video Player",
+//   autoPlay = false 
+// }) => {
+//   const containerRef = useRef<HTMLDivElement>(null);
+//   const [isLoaded, setIsLoaded] = useState(false);
+//   const [isFullscreen, setIsFullscreen] = useState(false);
+//   const [isLandscape, setIsLandscape] = useState<boolean>(false);
+//   const [showRotateHint, setShowRotateHint] = useState<boolean>(false);
+//   const [isIosSafari, setIsIosSafari] = useState<boolean>(false);
+
+//   // Smart ID Extractor
+//   const cleanVideoId = useMemo(() => {
+//     if (!videoId) return '';
+//     const iframeMatch = videoId.match(/videoembed\/(\d+)/);
+//     if (iframeMatch && iframeMatch[1]) return iframeMatch[1];
+//     const urlMatch = videoId.match(/ok\.ru\/video\/(\d+)/);
+//     if (urlMatch && urlMatch[1]) return urlMatch[1];
+//     return videoId;
+//   }, [videoId]);
+
+
+//   const embedUrl = `https://ok.ru/videoembed/${cleanVideoId}?nochat=1&autoplay=${autoPlay ? 1 : 0}`;
+
+//   useEffect(() => { setIsLoaded(false); }, [cleanVideoId]);
+
+//   // === UPDATED FULLSCREEN LOGIC (WITH LANDSCAPE LOCK) ===
+//   const toggleFullScreen = async () => {
+//     if (!containerRef.current) return;
+
+//     try {
+//       if (!document.fullscreenElement) {
+//         // 1. Enter Fullscreen (with vendor prefixes)
+//         const el: any = containerRef.current;
+//         if (el.requestFullscreen) {
+//           await el.requestFullscreen();
+//         } else if (el.webkitRequestFullscreen) {
+//           await el.webkitRequestFullscreen();
+//         } else if (el.msRequestFullscreen) {
+//           await el.msRequestFullscreen();
+//         } else if (el.mozRequestFullScreen) {
+//           await el.mozRequestFullScreen();
+//         }
+        
+//         // 2. Force Landscape (Mobile par screen teda karne k liye)
+//         // @ts-ignore (Typescript kabhi kabhi screen.orientation ko nahi maanta)
+//         if (screen.orientation && screen.orientation.lock) {
+//           try {
+//             // @ts-ignore
+//             await screen.orientation.lock("landscape");
+//           } catch (err) {
+//             // Agar browser support na kare (jaise Desktop ya iPhone), to ignore karo
+//             console.log("Landscape lock not supported on this device");
+//           }
+//         } else {
+//           // iOS Safari ke liye hint dikhao (orientation lock supported nahi hota)
+//           setShowRotateHint(true);
+//         }
+//       } else {
+//         // 3. Exit Fullscreen
+//         if (document.exitFullscreen) {
+//           await document.exitFullscreen();
+//         } else if ((document as any).webkitExitFullscreen) {
+//           await (document as any).webkitExitFullscreen();
+//         } else if ((document as any).msExitFullscreen) {
+//           await (document as any).msExitFullscreen();
+//         }
+        
+//         // 4. Wapas Portrait (Seedha) karo
+//         // @ts-ignore
+//         if (screen.orientation && screen.orientation.unlock) {
+//            // @ts-ignore
+//            screen.orientation.unlock();
+//         }
+//         setShowRotateHint(false);
+//       }
+//     } catch (err) {
+//       console.error("Fullscreen error:", err);
+//     }
+//   };
+
+//   useEffect(() => {
+//     const handleChange = () => setIsFullscreen(!!document.fullscreenElement);
+//     document.addEventListener('fullscreenchange', handleChange);
+//     return () => document.removeEventListener('fullscreenchange', handleChange);
+//   }, []);
+
+//   // Track orientation changes for hint visibility
+//   useEffect(() => {
+//     const checkOrientation = () => {
+//       const landscape = window.matchMedia('(orientation: landscape)').matches || (window.innerWidth > window.innerHeight);
+//       setIsLandscape(landscape);
+//       if (landscape) setShowRotateHint(false);
+//     };
+//     checkOrientation();
+//     window.addEventListener('orientationchange', checkOrientation);
+//     window.addEventListener('resize', checkOrientation);
+//     return () => {
+//       window.removeEventListener('orientationchange', checkOrientation);
+//       window.removeEventListener('resize', checkOrientation);
+//     };
+//   }, []);
+
+//   // Detect iOS Safari to manage expectations
+//   useEffect(() => {
+//     const ua = navigator.userAgent;
+//     const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(ua));
+//     const isSafari = /Safari/.test(ua) && !/Chrome|CriOS|FxiOS/.test(ua);
+//     setIsIosSafari(isIOS && isSafari);
+//   }, []);
+
+//   return (
+//     <div className="w-full max-w-6xl mx-auto my-6 animate-in fade-in zoom-in duration-500">
+//       <div 
+//         ref={containerRef} 
+//         className="relative w-full aspect-[16/9] bg-black rounded-xl overflow-hidden shadow-2xl border border-gray-800 group"
+//       >
+//         {/* === SHIELDS === */}
+//         {/* <div className="absolute top-0 left-0 w-[100%] h-[18%] md:h-[10%] z-50 bg-red-500" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} /> */}
+        
+//         {/* UPDATED TOP SHIELD: Covers full width to block top-left 'VK Video' link */}
+//         <div
+//           className="
+//             absolute top-0 
+//             right-0
+//             w-[80%] 
+//             h-[18%] md:h-[10%] 
+//             z-50 bg-transparent
+//           "
+//           onClick={(e) => {
+//             e.preventDefault();
+//             e.stopPropagation();
+//           }}
+//           onContextMenu={(e) => e.preventDefault()}
+//         />
+
+//         <div className="absolute top-0 right-0 w-[15%] h-[20%] z-50 bg-transparent" onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
+        
+//         <div className="absolute bottom-0 right-0 z-50 bg-transparent
+//           w-[6%] h-[15%] md:w-[6%] h-[10%] 
+//         " onClick={(e) => {e.preventDefault(); e.stopPropagation();}} onContextMenu={(e) => e.preventDefault()} />
+
+//         {/* === CUSTOM CONTROLS (Updated Button) === */}
+//         <button
+//           onClick={toggleFullScreen}
+//           // Maine 'opacity-0' hata diya hai jaisa aapne chaha, ab button hamesha dikhega (lekin dim hoga)
+//           className="absolute  bottom-4 right-8 z-[60] p-2 bg-red-600/80 hover:bg-red-600 text-white rounded-lg transition-all duration-300 transform hover:scale-110 shadow-lg backdrop-blur-sm"
+//           title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+//         >
+//           {isFullscreen ? <Minimize size={24} /> : <Maximize size={24} />}
+//         </button>
+
+//         {/* === ROTATE HINT (iOS/unsupported orientation lock) === */}
+//         {/* {isFullscreen && !isLandscape && showRotateHint && (
+//           <div className="absolute inset-x-0 bottom-16 mx-auto w-max max-w-[90%] z-[60] px-3 py-2 rounded-md bg-black/70 text-white text-xs sm:text-sm shadow-md">
+//             Rotate your phone  ko landscape me ghumaye better fullscreen ke liye.
+//           </div>
+//         )} */}
+
+//         {/* === IFRAME PLAYER & NEW LOADING ANIMATION === */}
+//         {!isLoaded && (
+//           <div className="absolute inset-0 flex flex-col items-center justify-center z-0 bg-[#000000] overflow-hidden">
+//             {/* Background Glow Effect */}
+//             <div className="absolute w-64 h-64 bg-red-600/20 rounded-full blur-[100px] animate-pulse pointer-events-none"></div>
+            
+//             <div className="relative flex flex-col items-center gap-6 z-10">
+//               {/* Spinner Container */}
+//               <div className="relative">
+//                 {/* Outer Ring */}
+//                 <div className="w-16 h-16 rounded-full border-[3px] border-red-900/30 animate-[spin_3s_linear_infinite]"></div>
+//                 {/* Middle Ring */}
+//                 <div className="absolute top-0 left-0 w-16 h-16 rounded-full border-[3px] border-t-red-600 border-r-transparent border-b-transparent border-l-transparent animate-spin"></div>
+//                 {/* Inner Dot */}
+//                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-red-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(220,38,38,0.8)]"></div>
+//               </div>
+              
+//               {/* Text Animation */}
+//               <div className="flex flex-col items-center gap-1">
+//                 <span className="text-white font-bold tracking-[0.2em] text-sm animate-pulse">
+//                   ESTABLISHING CONNECTION
+//                 </span>
+//                 <span className="text-xs text-red-500/70 font-mono tracking-widest">
+//                   BUFFERING STREAM...
+//                 </span>
+//               </div>
+//             </div>
+//           </div>
+//         )}
+
+//         <iframe
+//           src={embedUrl}
+//           title={title}
+//           className="absolute top-0 left-0 w-full h-full z-10"
+//           frameBorder="0"
+//           allow="autoplay; encrypted-media; picture-in-picture; screen-wake-lock"
+//           // allowFullScreen
+//           onLoad={() => setIsLoaded(true)}
+//         />
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default OkRuPlayer;
 
 
 

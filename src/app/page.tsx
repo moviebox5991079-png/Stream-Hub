@@ -1,3 +1,238 @@
+// import HomeClient from '@/components/HomeClient';
+
+// export const revalidate = 60; 
+
+// const DATA_SOURCE_URL = "https://raw.githubusercontent.com/moviebox5991079-png/Stream-Hub/refs/heads/main/public/data.json";
+
+// async function getData() {
+//   try {
+//     // 👇 TEST MODE: Direct Bilibili data return kar rahe hain testing ke liye
+// // 👇 LIVE TEST MODE
+//     return {
+//       isLive: true,
+//       title: "🔴 Bilibili LIVE Match Test",
+//       videoId: "1809235763", // 👈 Aapke naye iframe ka CID (Live Room ID)
+//       thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuiOpt3tz_l1ECAVhlhW9KrrVqaH8jtFMIhQ&s",
+//       platform: "bilibili" as "bilibili"
+//     };
+
+//     /* --- NOTE: Jab test mukammal ho jaye toh isko un-comment kar lijiyega ---
+//     const res = await fetch(DATA_SOURCE_URL);
+//     if (!res.ok) {
+//       return {
+//         isLive: true,
+//         title: "Live Match Stream",
+//         videoId: "11090668161682",
+//         thumbnail: "https://img.youtube.com/vi/placeholder/hqdefault.jpg",
+//         platform: "okru"
+//       };
+//     }
+//     return res.json();
+//     ------------------------------------------------------------------------- */
+
+//   } catch (error) {
+//     console.error("Data fetch error", error);
+//     return { isLive: false, title: "Stream Loading...", videoId: "", thumbnail: "" };
+//   }
+// }
+
+// export default async function Page() {
+//   const data = await getData();
+//   return <HomeClient initialData={data} />;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ================= king 1000% ok.ru k player ke liye client component =================
+
+
+
 import HomeClient from '@/components/HomeClient';
 
 // Cache revalidation time (seconds)
@@ -43,6 +278,146 @@ export default async function Page() {
 
 
 // <iframe width="560" height="315" src="//ok.ru/videoembed/11090668161682?nochat=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

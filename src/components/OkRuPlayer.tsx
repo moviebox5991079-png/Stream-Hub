@@ -1,25 +1,29 @@
 'use client';
 
 import React, { useRef, useState, useEffect, useMemo } from 'react';
-import { Maximize, Minimize, Play, Loader2 } from 'lucide-react'; // Play icon add kiya
+import { Maximize, Minimize, Play } from 'lucide-react';
 
 interface OkRuPlayerProps {
   videoId: string;
   title?: string;
-  thumbnail?: string; // New Prop added
+  thumbnail?: string; 
   autoPlay?: boolean;
 }
 
 const OkRuPlayer: React.FC<OkRuPlayerProps> = ({ 
   videoId, 
   title = "OK.ru Video Player",
-  thumbnail, 
+  thumbnail,
   autoPlay = false 
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isPlayClicked, setIsPlayClicked] = useState(false); // New State
+  
+  const [isPlayClicked, setIsPlayClicked] = useState(false); 
   const [isLoaded, setIsLoaded] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isLandscape, setIsLandscape] = useState<boolean>(false);
+  const [showRotateHint, setShowRotateHint] = useState<boolean>(false);
+  const [isIosSafari, setIsIosSafari] = useState<boolean>(false);
 
   // Smart ID Extractor
   const cleanVideoId = useMemo(() => {
@@ -31,21 +35,62 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
     return videoId;
   }, [videoId]);
 
-  // URL mein autoplay hamesha 1 rahega kyunke user ne click kar diya hai
+  // Autoplay=1 fixed hai kyunke ab user manually click kar raha hai
   const embedUrl = `https://ok.ru/videoembed/${cleanVideoId}?nochat=1&autoplay=1`;
 
-  // === FULLSCREEN LOGIC (Same as your original) ===
+  useEffect(() => { setIsLoaded(false); }, [cleanVideoId]);
+
+  // === UPDATED & FIXED FULLSCREEN LOGIC ===
   const toggleFullScreen = async () => {
     if (!containerRef.current) return;
+
     try {
       if (!document.fullscreenElement) {
+        // 1. Enter Fullscreen
         const el: any = containerRef.current;
-        if (el.requestFullscreen) await el.requestFullscreen();
-        else if (el.webkitRequestFullscreen) await el.webkitRequestFullscreen();
-        else if (el.msRequestFullscreen) await el.msRequestFullscreen();
+        if (el.requestFullscreen) {
+          await el.requestFullscreen();
+        } else if (el.webkitRequestFullscreen) {
+          await el.webkitRequestFullscreen();
+        } else if (el.msRequestFullscreen) {
+          await el.msRequestFullscreen();
+        } else if (el.mozRequestFullScreen) {
+          await el.mozRequestFullScreen();
+        }
+        
+        // 2. FORCE LANDSCAPE (300ms delay taake browser glitch na kare)
+        setTimeout(async () => {
+          // @ts-ignore
+          if (screen.orientation && screen.orientation.lock) {
+            try {
+              // @ts-ignore
+              await screen.orientation.lock("landscape");
+            } catch (err) {
+              console.warn("Landscape lock not supported ya browser ne block kar diya:", err);
+              setShowRotateHint(true);
+            }
+          } else {
+            setShowRotateHint(true);
+          }
+        }, 300); 
+
       } else {
-        if (document.exitFullscreen) await document.exitFullscreen();
-        else if ((document as any).webkitExitFullscreen) await (document as any).webkitExitFullscreen();
+        // 3. Exit Fullscreen
+        if (document.exitFullscreen) {
+          await document.exitFullscreen();
+        } else if ((document as any).webkitExitFullscreen) {
+          await (document as any).webkitExitFullscreen();
+        } else if ((document as any).msExitFullscreen) {
+          await (document as any).msExitFullscreen();
+        }
+        
+        // 4. Unlock Orientation (Wapas Portrait)
+        // @ts-ignore
+        if (screen.orientation && screen.orientation.unlock) {
+           // @ts-ignore
+           screen.orientation.unlock();
+        }
+        setShowRotateHint(false);
       }
     } catch (err) {
       console.error("Fullscreen error:", err);
@@ -58,38 +103,72 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
     return () => document.removeEventListener('fullscreenchange', handleChange);
   }, []);
 
+  useEffect(() => {
+    const checkOrientation = () => {
+      const landscape = window.matchMedia('(orientation: landscape)').matches || (window.innerWidth > window.innerHeight);
+      setIsLandscape(landscape);
+      if (landscape) setShowRotateHint(false);
+    };
+    checkOrientation();
+    window.addEventListener('orientationchange', checkOrientation);
+    window.addEventListener('resize', checkOrientation);
+    return () => {
+      window.removeEventListener('orientationchange', checkOrientation);
+      window.removeEventListener('resize', checkOrientation);
+    };
+  }, []);
+
+  useEffect(() => {
+    const ua = navigator.userAgent;
+    const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(ua));
+    const isSafari = /Safari/.test(ua) && !/Chrome|CriOS|FxiOS/.test(ua);
+    setIsIosSafari(isIOS && isSafari);
+  }, []);
+
   return (
     <div className="w-full max-w-6xl mx-auto my-6 animate-in fade-in zoom-in duration-500">
       <div 
         ref={containerRef} 
         className="relative w-full aspect-[16/9] bg-black rounded-xl overflow-hidden shadow-2xl border border-gray-800 group"
       >
-        {/* Step 1: Fake Thumbnail & Play Button (Dikhayen jab tak click na ho) */}
+        {/* ========================================== */}
+        {/* 1. THUMBNAIL OVERLAY (Before Click)        */}
+        {/* ========================================== */}
         {!isPlayClicked ? (
           <div 
-            className="absolute inset-0 z-50 flex items-center justify-center cursor-pointer bg-black"
+            className="absolute inset-0 z-[70] flex flex-col items-center justify-center cursor-pointer bg-black"
             onClick={() => setIsPlayClicked(true)}
           >
-            {thumbnail && (
+            {thumbnail ? (
               <img 
                 src={thumbnail} 
                 alt={title} 
-                className="absolute inset-0 w-full h-full object-cover opacity-60 hover:opacity-50 transition duration-300"
+                className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-40 transition duration-500 group-hover:scale-105"
               />
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-black"></div>
             )}
-            <div className="relative z-10 w-20 h-20 bg-red-600/90 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(220,38,38,0.6)] transform group-hover:scale-110 transition-all">
-              <Play className="text-white ml-2" size={40} fill="white" />
+            
+            <div className="relative z-10 w-20 h-20 bg-red-600/90 hover:bg-red-600 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(220,38,38,0.6)] transform group-hover:scale-110 transition-all duration-300">
+              <Play className="text-white ml-2" size={36} fill="white" />
+            </div>
+            
+            <div className="relative z-10 mt-6 px-4 py-1.5 bg-black/70 backdrop-blur rounded-lg border border-gray-700/50">
+              <span className="text-white font-bold tracking-widest text-sm animate-pulse flex items-center gap-2">
+                <span className="w-2 h-2 bg-red-600 rounded-full"></span>
+                TAP TO WATCH LIVE
+              </span>
             </div>
           </div>
         ) : (
-          /* Step 2: Iframe and Loading Animation (Click ke baad dikhayen) */
+          /* ========================================== */
+          /* 2. ACTUAL PLAYER & SHIELDS (After Click)   */
+          /* ========================================== */
           <>
-            {/* === SHIELDS === */}
             <div className="absolute top-0 right-0 w-[80%] h-[18%] md:h-[10%] z-50 bg-transparent" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }} onContextMenu={(e) => e.preventDefault()} />
             <div className="absolute top-0 right-0 w-[15%] h-[20%] z-50 bg-transparent" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }} onContextMenu={(e) => e.preventDefault()} />
             <div className="absolute bottom-0 right-0 z-50 bg-transparent w-[6%] h-[15%] md:w-[6%] md:h-[10%]" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }} onContextMenu={(e) => e.preventDefault()} />
 
-            {/* Custom Controls */}
             <button
               onClick={toggleFullScreen}
               className="absolute bottom-4 right-8 z-[60] p-2 bg-red-600/80 hover:bg-red-600 text-white rounded-lg transition-all duration-300 transform hover:scale-110 shadow-lg backdrop-blur-sm"
@@ -98,7 +177,13 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
               {isFullscreen ? <Minimize size={24} /> : <Maximize size={24} />}
             </button>
 
-            {/* Loading Animation */}
+            {/* Hint for iOS users */}
+            {isFullscreen && !isLandscape && showRotateHint && (
+              <div className="absolute inset-x-0 bottom-16 mx-auto w-max max-w-[90%] z-[60] px-3 py-2 rounded-md bg-black/70 text-white text-xs sm:text-sm shadow-md">
+                Rotate your phone for better fullscreen view.
+              </div>
+            )}
+
             {!isLoaded && (
               <div className="absolute inset-0 flex flex-col items-center justify-center z-0 bg-[#000000] overflow-hidden">
                 <div className="absolute w-64 h-64 bg-red-600/20 rounded-full blur-[100px] animate-pulse pointer-events-none"></div>
@@ -109,13 +194,13 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-red-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(220,38,38,0.8)]"></div>
                   </div>
                   <div className="flex flex-col items-center gap-1">
-                    <span className="text-white font-bold tracking-[0.2em] text-sm animate-pulse">CONNECTING STREAM</span>
+                    <span className="text-white font-bold tracking-[0.2em] text-sm animate-pulse">ESTABLISHING CONNECTION</span>
+                    <span className="text-xs text-red-500/70 font-mono tracking-widest">BUFFERING STREAM...</span>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* Actual OK.ru Player */}
             <iframe
               src={embedUrl}
               title={title}
@@ -132,6 +217,148 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
 };
 
 export default OkRuPlayer;
+
+
+
+// ======= phase 1 ===========
+
+
+// 'use client';
+
+// import React, { useRef, useState, useEffect, useMemo } from 'react';
+// import { Maximize, Minimize, Play, Loader2 } from 'lucide-react'; // Play icon add kiya
+
+// interface OkRuPlayerProps {
+//   videoId: string;
+//   title?: string;
+//   thumbnail?: string; // New Prop added
+//   autoPlay?: boolean;
+// }
+
+// const OkRuPlayer: React.FC<OkRuPlayerProps> = ({ 
+//   videoId, 
+//   title = "OK.ru Video Player",
+//   thumbnail, 
+//   autoPlay = false 
+// }) => {
+//   const containerRef = useRef<HTMLDivElement>(null);
+//   const [isPlayClicked, setIsPlayClicked] = useState(false); // New State
+//   const [isLoaded, setIsLoaded] = useState(false);
+//   const [isFullscreen, setIsFullscreen] = useState(false);
+
+//   // Smart ID Extractor
+//   const cleanVideoId = useMemo(() => {
+//     if (!videoId) return '';
+//     const iframeMatch = videoId.match(/videoembed\/(\d+)/);
+//     if (iframeMatch && iframeMatch[1]) return iframeMatch[1];
+//     const urlMatch = videoId.match(/ok\.ru\/video\/(\d+)/);
+//     if (urlMatch && urlMatch[1]) return urlMatch[1];
+//     return videoId;
+//   }, [videoId]);
+
+//   // URL mein autoplay hamesha 1 rahega kyunke user ne click kar diya hai
+//   const embedUrl = `https://ok.ru/videoembed/${cleanVideoId}?nochat=1&autoplay=1`;
+
+//   // === FULLSCREEN LOGIC (Same as your original) ===
+//   const toggleFullScreen = async () => {
+//     if (!containerRef.current) return;
+//     try {
+//       if (!document.fullscreenElement) {
+//         const el: any = containerRef.current;
+//         if (el.requestFullscreen) await el.requestFullscreen();
+//         else if (el.webkitRequestFullscreen) await el.webkitRequestFullscreen();
+//         else if (el.msRequestFullscreen) await el.msRequestFullscreen();
+//       } else {
+//         if (document.exitFullscreen) await document.exitFullscreen();
+//         else if ((document as any).webkitExitFullscreen) await (document as any).webkitExitFullscreen();
+//       }
+//     } catch (err) {
+//       console.error("Fullscreen error:", err);
+//     }
+//   };
+
+
+
+//   useEffect(() => {
+//     const handleChange = () => setIsFullscreen(!!document.fullscreenElement);
+//     document.addEventListener('fullscreenchange', handleChange);
+//     return () => document.removeEventListener('fullscreenchange', handleChange);
+//   }, []);
+
+//   return (
+//     <div className="w-full max-w-6xl mx-auto my-6 animate-in fade-in zoom-in duration-500">
+//       <div 
+//         ref={containerRef} 
+//         className="relative w-full aspect-[16/9] bg-black rounded-xl overflow-hidden shadow-2xl border border-gray-800 group"
+//       >
+//         {/* Step 1: Fake Thumbnail & Play Button (Dikhayen jab tak click na ho) */}
+//         {!isPlayClicked ? (
+//           <div 
+//             className="absolute inset-0 z-50 flex items-center justify-center cursor-pointer bg-black"
+//             onClick={() => setIsPlayClicked(true)}
+//           >
+//             {thumbnail && (
+//               <img 
+//                 src={thumbnail} 
+//                 alt={title} 
+//                 className="absolute inset-0 w-full h-full object-cover opacity-60 hover:opacity-50 transition duration-300"
+//               />
+//             )}
+//             <div className="relative z-10 w-20 h-20 bg-red-600/90 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(220,38,38,0.6)] transform group-hover:scale-110 transition-all">
+//               <Play className="text-white ml-2" size={40} fill="white" />
+//             </div>
+//           </div>
+//         ) : (
+//           /* Step 2: Iframe and Loading Animation (Click ke baad dikhayen) */
+//           <>
+//             {/* === SHIELDS === */}
+//             <div className="absolute top-0 right-0 w-[80%] h-[18%] md:h-[10%] z-50 bg-transparent" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }} onContextMenu={(e) => e.preventDefault()} />
+//             <div className="absolute top-0 right-0 w-[15%] h-[20%] z-50 bg-transparent" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }} onContextMenu={(e) => e.preventDefault()} />
+//             <div className="absolute bottom-0 right-0 z-50 bg-transparent w-[6%] h-[15%] md:w-[6%] md:h-[10%]" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }} onContextMenu={(e) => e.preventDefault()} />
+
+//             {/* Custom Controls */}
+//             <button
+//               onClick={toggleFullScreen}
+//               className="absolute bottom-4 right-8 z-[60] p-2 bg-red-600/80 hover:bg-red-600 text-white rounded-lg transition-all duration-300 transform hover:scale-110 shadow-lg backdrop-blur-sm"
+//               title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+//             >
+//               {isFullscreen ? <Minimize size={24} /> : <Maximize size={24} />}
+//             </button>
+
+//             {/* Loading Animation */}
+//             {!isLoaded && (
+//               <div className="absolute inset-0 flex flex-col items-center justify-center z-0 bg-[#000000] overflow-hidden">
+//                 <div className="absolute w-64 h-64 bg-red-600/20 rounded-full blur-[100px] animate-pulse pointer-events-none"></div>
+//                 <div className="relative flex flex-col items-center gap-6 z-10">
+//                   <div className="relative">
+//                     <div className="w-16 h-16 rounded-full border-[3px] border-red-900/30 animate-[spin_3s_linear_infinite]"></div>
+//                     <div className="absolute top-0 left-0 w-16 h-16 rounded-full border-[3px] border-t-red-600 border-r-transparent border-b-transparent border-l-transparent animate-spin"></div>
+//                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-red-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(220,38,38,0.8)]"></div>
+//                   </div>
+//                   <div className="flex flex-col items-center gap-1">
+//                     <span className="text-white font-bold tracking-[0.2em] text-sm animate-pulse">CONNECTING STREAM</span>
+//                   </div>
+//                 </div>
+//               </div>
+//             )}
+
+//             {/* Actual OK.ru Player */}
+//             <iframe
+//               src={embedUrl}
+//               title={title}
+//               className="absolute top-0 left-0 w-full h-full z-10"
+//               frameBorder="0"
+//               allow="autoplay; encrypted-media; picture-in-picture; screen-wake-lock"
+//               onLoad={() => setIsLoaded(true)}
+//             />
+//           </>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default OkRuPlayer;
 
 
 

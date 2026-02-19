@@ -49,6 +49,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      
+      <head>
+        {/* Iframe load hone se pehle hi connection ready rakhne ke liye */}
+        <link rel="preconnect" href="https://ok.ru" />
+        <link rel="dns-prefetch" href="https://ok.ru" />
+      </head>
+
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
         

@@ -4,18 +4,13 @@
   "streams": [
     {
       "videoTitle": "(Server 1)",
-      "videoId": "13540386610795",
+      "videoId": "13589685935723",
       "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWhFkSJqhEGliezXcg-RtKlyYtCHAKNSCF7A&s"
     },
     {
       "videoTitle": "(Server 2)",
-      "videoId": "13540376190571",
-      "thumbnail": "https://ss-i.thgim.com/public/incoming/lqmnwp/article70730044.ece/alternates/FREE_1200/Pakistan_Bangladesh_Cricket_39901.jpg"
+      "videoId": "13589668568683",
+      "thumbnail": "https://media.crictracker.com/media/attachments/1741196284946_David-Milelr-Crying.jpeg"
     },
-    {
-      "videoTitle": "(Server 3)",
-      "videoId": "12451604930166",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8ZGCBt4ddxom10PvGJYAcMin8Zvss0YsBaw&s"
-    }
   ]
 }

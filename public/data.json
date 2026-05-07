@@ -18,14 +18,15 @@
         "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s",
       },
       "channels": [
-        { "name": "Star Sports", "videoId": "14601603391083" },
-        { "name": "Ten Sports", "videoId": "1234567890" }
+        { "name": "Channel-1 ", "videoId": "15254238731883" },
+        { "name": "Channel-2 ", "videoId": "15254260751979" },
+        { "name": "Channel-3", "videoId": "15254285524587" }
       ]
     },
     {
       "videoTitle": "sports-2",
       "videoId": "",
-      "activeThumbnail": "laliga", 
+      "activeThumbnail": "pakvsbang", 
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
         "pakvsbang": "https://www.shutterstock.com/image-vector/pakistan-vs-bangladesh-match-cricket-260nw-2566876727.jpg",
@@ -38,9 +39,9 @@
         "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s",
       },
       "channels": [
-        { "name": "PTV Sports", "videoId": "14601696583275" },
-        { "name": "A Sports", "videoId": "0987654321" },
-        { "name": "Sky Sports", "videoId": "1122334455" }
+        { "name": "Channel-1 ", "videoId": "15254299352683" },
+        { "name": "Channel-2 ", "videoId": "15254308986475" },
+        { "name": "Channel-3", "videoId": "15254328122987" }
       ]
     },
 
@@ -60,16 +61,16 @@
         "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s",
       },
       "channels": [
-        { "name": "PTV Sports", "videoId": "14601696583275" },
-        { "name": "A Sports", "videoId": "0987654321" },
-        { "name": "Sky Sports", "videoId": "1122334455" }
+        { "name": "Channel-1 ", "videoId": "15254341885547" },
+        { "name": "Channel-2 ", "videoId": "15254357089899" },
+        { "name": "Channel-3", "videoId": "15254367510123" }
       ]
     },
 
     {
       "videoTitle": "sports-4",
       "videoId": "14617940008555",
-      "activeThumbnail": "epl", 
+      "activeThumbnail": "epl1", 
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
         "pakvsbang": "https://www.shutterstock.com/image-vector/pakistan-vs-bangladesh-match-cricket-260nw-2566876727.jpg",
@@ -82,8 +83,9 @@
         "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s",
       },
       "channels": [
-        { "name": "Sony Ten 2", "videoId": "14617940008555" },
-        { "name": "BeIN Sports", "videoId": "9988776655" }
+        { "name": "Channel-1 ", "videoId": "15255022345835" },
+        { "name": "Channel-2 ", "videoId": "15255038074475" },
+        { "name": "Channel-3", "videoId": "15255045480043" }
       ]
     }
   ]

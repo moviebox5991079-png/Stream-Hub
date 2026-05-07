@@ -4,20 +4,50 @@
   "streams": [
     {
       "videoTitle": "sports-1",
-      "videoId": "",
-      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-r1JxoU8reAG3pfXbMY9QogUoWMxWHPsSw&s",
+      "videoId": "14601603391083",
+      "activeThumbnail": "ipl", 
+      "thumbnailsList": {
+        "ipl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:AND9GcQe-r1JxoU8reAG3pfXbMY9QogUoWMxWHPssw&s",
+        "psl": "https://pakobserver.net/wp-content/uploads/2026/03/hbl-psl-2026.jpg",
+        "laliga": "https://static.okko.sport/images/v2/4482701?scale=1&quality=80",
+        "epl": "https://resources.premierleague.com/premierleague/photo/2023/06/15/8e0dc72c-d2b3-463d-b4b9-8e4d25ab254c/PL-Lion.png"
+      },
       "channels": [
-        { "name": "Star sport", "videoId": "14601603391083" },
-        { "name": "Ten Sports", "videoId": "123" } 
+        { "name": "Star Sports", "videoId": "14601603391083" },
+        { "name": "Ten Sports", "videoId": "1234567890" }
       ]
     },
     {
       "videoTitle": "sports-2",
       "videoId": "14601696583275",
-      "thumbnail": "https://pakobserver.net/wp-content/uploads/2026/03/hbl-psl-2026-season-11-a-guide-to-2026-pakistan-super-league-pakobserver-744274-1-900x511.jpg",
+      "activeThumbnail": "laliga", 
+      "thumbnailsList": {
+        "ipl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:AND9GcQe-r1JxoU8reAG3pfXbMY9QogUoWMxWHPssw&s",
+        "psl": "https://pakobserver.net/wp-content/uploads/2026/03/hbl-psl-2026.jpg",
+        "laliga": "https://static.okko.sport/images/v2/4482701?scale=1&quality=80",
+        "epl": "https://resources.premierleague.com/premierleague/photo/2023/06/15/8e0dc72c-d2b3-463d-b4b9-8e4d25ab254c/PL-Lion.png",
+        "ufc": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl/s3/2024-03/HERO-UFC300-PEREIRA-VS-HILL.jpg"
+      },
       "channels": [
-        { "name": "PTV Sports", "videoId": "1460169658" },
-        { "name": "A Sports", "videoId": "0987654" }
+        { "name": "PTV Sports", "videoId": "14601696583275" },
+        { "name": "A Sports", "videoId": "0987654321" },
+        { "name": "Sky Sports", "videoId": "1122334455" }
+      ]
+    },
+    {
+      "videoTitle": "sports-3",
+      "videoId": "14617940008555",
+      "activeThumbnail": "epl", 
+      "thumbnailsList": {
+        "ipl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:AND9GcQe-r1JxoU8reAG3pfXbMY9QogUoWMxWHPssw&s",
+        "psl": "https://pakobserver.net/wp-content/uploads/2026/03/hbl-psl-2026.jpg",
+        "laliga": "https://static.okko.sport/images/v2/4482701?scale=1&quality=80",
+        "epl": "https://resources.premierleague.com/premierleague/photo/2023/06/15/8e0dc72c-d2b3-463d-b4b9-8e4d25ab254c/PL-Lion.png",
+        "wwe": "https://www.wwe.com/f/styles/og_image/public/all/2024/04/WM40_Night1_04062024_1--0be10db8421c97a5de6dbce96ab7b198.jpg"
+      },
+      "channels": [
+        { "name": "Sony Ten 2", "videoId": "14617940008555" },
+        { "name": "BeIN Sports", "videoId": "9988776655" }
       ]
     }
   ]

@@ -18,8 +18,8 @@
         "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s",
       },
       "channels": [
-        { "name": "Channel-1 ", "videoId": "15254238731883" },
-        { "name": "Channel-2 ", "videoId": "15254260751979" },
+        { "name": "Channel-1", "videoId": "15254238731883" },
+        { "name": "Channel-2", "videoId": "15254260751979" },
         { "name": "Channel-3", "videoId": "15254285524587" }
       ]
     },
@@ -39,8 +39,8 @@
         "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s",
       },
       "channels": [
-        { "name": "Channel-1 ", "videoId": "15254299352683" },
-        { "name": "Channel-2 ", "videoId": "15254308986475" },
+        { "name": "Channel-1", "videoId": "15254299352683" },
+        { "name": "Channel-2", "videoId": "15254308986475" },
         { "name": "Channel-3", "videoId": "15254328122987" }
       ]
     },
@@ -61,8 +61,8 @@
         "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s",
       },
       "channels": [
-        { "name": "Channel-1 ", "videoId": "15254341885547" },
-        { "name": "Channel-2 ", "videoId": "15254357089899" },
+        { "name": "Channel-1", "videoId": "15254341885547" },
+        { "name": "Channel-2", "videoId": "15254357089899" },
         { "name": "Channel-3", "videoId": "15254367510123" }
       ]
     },
@@ -83,9 +83,14 @@
         "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s",
       },
       "channels": [
-        { "name": "Channel-1 ", "videoId": "15255022345835" },
-        { "name": "Channel-2 ", "videoId": "15255038074475" },
-        { "name": "Channel-3", "videoId": "15255045480043" }
+        { "name": "Channel-1", "videoId": "15255022345835" },
+        { "name": "Channel-2", "videoId": "15255038074475" },
+        
+        { "name": "Channel-3",  "videoId": "15255045480043" },
+        { "name": "Channel-4",  "videoId": "15255208599147" },
+        
+        { "name": "Channel-5",  "videoId": "15255217708651" },
+        { "name": "Channel-6",  "videoId": "15255227670123" }
       ]
     }
   ]

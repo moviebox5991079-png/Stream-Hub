@@ -260,7 +260,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                           <div className="mt-4 mb-4 p-4 bg-gradient-to-r from-[#161616] to-[#0f0f0f] border border-gray-800/80 rounded-xl flex flex-col sm:flex-row sm:items-center gap-4 shadow-lg">
                             <div className="flex items-center gap-2 text-gray-400 whitespace-nowrap">
                                <Tv size={20} className="text-red-500"/>
-                               <span className="text-sm font-bold uppercase tracking-wider">Select Server :</span>
+                               <span className="text-sm font-bold uppercase tracking-wider">Select Channels  :</span>
                             </div>
                             <div className="flex flex-wrap gap-2.5">
                               {selectedVideo.channels.map((channel, idx) => {

@@ -4,10 +4,10 @@
   "streams": [
     {
       "videoTitle": "sports-1",
-      "videoId": "14601603391083",
+      "videoId": "",
       "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe-r1JxoU8reAG3pfXbMY9QogUoWMxWHPsSw&s",
       "channels": [
-        { "name": "Star sport", "videoId": "146" },
+        { "name": "Star sport", "videoId": "14601603391083" },
         { "name": "Ten Sports", "videoId": "123" } 
       ]
     },

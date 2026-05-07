@@ -244,7 +244,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                         {isChangingChannel && (
                            <div className="absolute inset-0 z-50 bg-black/90 flex flex-col items-center justify-center backdrop-blur-sm transition-all duration-300">
                               <div className="w-12 h-12 border-4 border-gray-800 border-t-red-600 rounded-full animate-spin mb-4"></div>
-                              <p className="text-white text-lg font-bold tracking-widest animate-pulse">Switching Server...</p>
+                              <p className="text-white text-lg font-bold tracking-widest animate-pulse">Switching Channel...</p>
                            </div>
                         )}
 
@@ -266,7 +266,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                           <div className="mt-4 mb-4 p-4 bg-gradient-to-r from-[#161616] to-[#0f0f0f] border border-gray-800/80 rounded-xl flex flex-col sm:flex-row sm:items-center gap-4 shadow-lg">
                             <div className="flex items-center gap-2 text-gray-400 whitespace-nowrap">
                                <Tv size={20} className="text-red-500"/>
-                               <span className="text-sm font-bold uppercase tracking-wider">Select Server :</span>
+                               <span className="text-sm font-bold uppercase tracking-wider">Select Channels :</span>
                             </div>
                             <div className="flex flex-wrap gap-2.5">
                               {selectedVideo.channels.map((channel, idx) => {

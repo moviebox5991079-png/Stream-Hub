@@ -2,6 +2,147 @@
 
 
 
+========================================== yeh eek error ata hai jab data.json mei koi data add karey json format not match , below code mei yeh error ata hai ===========================
+
+
+{
+  "isLive": true,
+  "title": "⚠️ ",
+  "streams": [
+    {
+      "videoTitle": "sports-1",
+      "videoId": "",
+      "activeThumbnail": "ipl", 
+      "thumbnailsList": {
+        "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
+        "pakvsbang": "https://www.shutterstock.com/image-vector/pakistan-vs-bangladesh-match-cricket-260nw-2566876727.jpg",
+        "laliga1": "https://w0.peakpx.com/wallpaper/125/610/HD-wallpaper-laliga-golden-logo-football-leagues-artwork-la-liga-brown-metal-background-creative-laliga-logo-brands-laliga-thumbnail.jpg",
+        "laliga2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAYkeMf-fM1_LJReoyzIuNh-rC5KQZWsXclA&s",
+        "laliga3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLDxyZ3-b-NHD1rg7LC6b-GMsjnF6GMg4Zxw&s",
+        "epl1" : "https://w0.peakpx.com/wallpaper/22/114/HD-wallpaper-premier-league-football-england-logo-premier-league-emblem-blue-silk-texture-thumbnail.jpg",
+        "epl2" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNYhQXJavwkR9qk-rTiuBV6l-KzmK1wAJKOA&s",
+        "epl3" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNwBQarZ2CuGTLMf20yXBZen_galjvuVaIw&s",
+        "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s"
+      },
+      "channels": [
+        { "name": "Channel-1", "videoId": "15254238731883" },
+        { "name": "Channel-2", "videoId": "15254260751979" },
+        { "name": "Channel-3", "videoId": "15254285524587" }
+      ]
+    },
+    {
+      "videoTitle": "sports-2",
+      "videoId": "",
+      "activeThumbnail": "pakvsbang", 
+      "thumbnailsList": {
+        "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
+        "pakvsbang": "https://www.shutterstock.com/image-vector/pakistan-vs-bangladesh-match-cricket-260nw-2566876727.jpg",
+        "laliga1": "https://w0.peakpx.com/wallpaper/125/610/HD-wallpaper-laliga-golden-logo-football-leagues-artwork-la-liga-brown-metal-background-creative-laliga-logo-brands-laliga-thumbnail.jpg",
+        "laliga2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAYkeMf-fM1_LJReoyzIuNh-rC5KQZWsXclA&s",
+        "laliga3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLDxyZ3-b-NHD1rg7LC6b-GMsjnF6GMg4Zxw&s",
+        "epl1" : "https://w0.peakpx.com/wallpaper/22/114/HD-wallpaper-premier-league-football-england-logo-premier-league-emblem-blue-silk-texture-thumbnail.jpg",
+        "epl2" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNYhQXJavwkR9qk-rTiuBV6l-KzmK1wAJKOA&s",
+        "epl3" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNwBQarZ2CuGTLMf20yXBZen_galjvuVaIw&s",
+        "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s"
+      },
+      "channels": [
+        { "name": "Channel-1", "videoId": "15254299352683" },
+        { "name": "Channel-2", "videoId": "15254308986475" },
+        { "name": "Channel-3", "videoId": "15254328122987" }
+      ]
+    },
+
+    {
+      "videoTitle": "sports-3",
+      "videoId": "",
+      "activeThumbnail": "laliga1", 
+      "thumbnailsList": {
+        "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
+        "pakvsbang": "https://www.shutterstock.com/image-vector/pakistan-vs-bangladesh-match-cricket-260nw-2566876727.jpg",
+        "laliga1": "https://w0.peakpx.com/wallpaper/125/610/HD-wallpaper-laliga-golden-logo-football-leagues-artwork-la-liga-brown-metal-background-creative-laliga-logo-brands-laliga-thumbnail.jpg",
+        "laliga2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAYkeMf-fM1_LJReoyzIuNh-rC5KQZWsXclA&s",
+        "laliga3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLDxyZ3-b-NHD1rg7LC6b-GMsjnF6GMg4Zxw&s",
+        "epl1" : "https://w0.peakpx.com/wallpaper/22/114/HD-wallpaper-premier-league-football-england-logo-premier-league-emblem-blue-silk-texture-thumbnail.jpg",
+        "epl2" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNYhQXJavwkR9qk-rTiuBV6l-KzmK1wAJKOA&s",
+        "epl3" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNwBQarZ2CuGTLMf20yXBZen_galjvuVaIw&s",
+        "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s"
+      },
+      "channels": [
+        { "name": "Channel-1", "videoId": "15254341885547" },
+        { "name": "Channel-2", "videoId": "15254357089899" },
+        { "name": "Channel-3", "videoId": "15254367510123" }
+      ]
+    },
+
+    {
+      "videoTitle": "sports-4",
+      "videoId": "",
+      "activeThumbnail": "epl1", 
+      "thumbnailsList": {
+        "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
+        "pakvsbang": "https://www.shutterstock.com/image-vector/pakistan-vs-bangladesh-match-cricket-260nw-2566876727.jpg",
+        "laliga1": "https://w0.peakpx.com/wallpaper/125/610/HD-wallpaper-laliga-golden-logo-football-leagues-artwork-la-liga-brown-metal-background-creative-laliga-logo-brands-laliga-thumbnail.jpg",
+        "laliga2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAYkeMf-fM1_LJReoyzIuNh-rC5KQZWsXclA&s",
+        "laliga3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLDxyZ3-b-NHD1rg7LC6b-GMsjnF6GMg4Zxw&s",
+        "epl1" : "https://w0.peakpx.com/wallpaper/22/114/HD-wallpaper-premier-league-football-england-logo-premier-league-emblem-blue-silk-texture-thumbnail.jpg",
+        "epl2" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNYhQXJavwkR9qk-rTiuBV6l-KzmK1wAJKOA&s",
+        "epl3" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNwBQarZ2CuGTLMf20yXBZen_galjvuVaIw&s",
+        "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s"
+      },
+      "channels": [
+        { "name": "Match-1", "videoId": "15255022345835" },
+        { "name": "Match-1", "videoId": "15255038074475" },
+        
+        { "name": "Match-2",  "videoId": "15255045480043" },
+        { "name": "Match-2",  "videoId": "15255208599147" },
+        
+        { "name": "Match-3",  "videoId": "15255217708651" },
+        { "name": "Match-3",  "videoId": "15255227670123" }
+      ]
+    },
+
+    {
+      "videoTitle": "sports-5",
+      "videoId": "",
+      "activeThumbnail": "germanyLeague", 
+      "thumbnailsList": {
+        "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
+        "pakvsbang": "https://www.shutterstock.com/image-vector/pakistan-vs-bangladesh-match-cricket-260nw-2566876727.jpg",
+        "laliga1": "https://w0.peakpx.com/wallpaper/125/610/HD-wallpaper-laliga-golden-logo-football-leagues-artwork-la-liga-brown-metal-background-creative-laliga-logo-brands-laliga-thumbnail.jpg",
+        "laliga2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAYkeMf-fM1_LJReoyzIuNh-rC5KQZWsXclA&s",
+        "laliga3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLDxyZ3-b-NHD1rg7LC6b-GMsjnF6GMg4Zxw&s",
+        "epl1" : "https://w0.peakpx.com/wallpaper/22/114/HD-wallpaper-premier-league-football-england-logo-premier-league-emblem-blue-silk-texture-thumbnail.jpg",
+        "epl2" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNYhQXJavwkR9qk-rTiuBV6l-KzmK1wAJKOA&s",
+        "epl3" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNwBQarZ2CuGTLMf20yXBZen_galjvuVaIw&s",
+        "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s",
+        "germanyLeague": "https://media.dfl.de/sites/3/2018/02/BL_Teaser_BL-Logo_Pitch_HD-1200x675.jpg"
+        
+      },
+      "channels": [
+        { "name": "Match-1", "videoId": "15273689226859" },
+        { "name": "Match-1", "videoId": "15273713933931" },
+        
+        { "name": "Match-2",  "videoId": "15273722257003" },
+        { "name": "Match-2",  "videoId": "15273739624043" },
+        
+        { "name": "Match-3",  "videoId": "15273750175339" },
+        { "name": "Match-3",  "videoId": "15273760071275" },
+
+        { "name": "Match-4",  "videoId": "15273767935595" },
+        { "name": "Match-4",  "videoId": "15273778683499" }
+        
+        
+      ]
+    }
+    
+  ]
+}
+
+
+
+
+
+
 
 // 1
 

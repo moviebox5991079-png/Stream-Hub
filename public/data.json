@@ -172,8 +172,8 @@
     {
       "videoTitle": "sports-7",
       "videoId": "",
-      "isLive": false, 
-      "activeThumbnail": "pakvsbang", 
+      "isLive": true, 
+      "activeThumbnail": "SerieA", 
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
         "pakvsbang": "https://www.shutterstock.com/image-vector/pakistan-vs-bangladesh-match-cricket-260nw-2566876727.jpg",

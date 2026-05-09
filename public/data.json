@@ -5,7 +5,7 @@
     {
       "videoTitle": "sports-1",
       "videoId": "",
-      "isMatch": true, 
+      "isLive": true, 
       "activeThumbnail": "ipl", 
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
@@ -27,7 +27,7 @@
     {
       "videoTitle": "sports-2",
       "videoId": "",
-      "isMatch": true, 
+      "isLive": true, 
       "activeThumbnail": "pakvsbang", 
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
@@ -49,7 +49,7 @@
     {
       "videoTitle": "sports-3",
       "videoId": "",
-      "isMatch": false, 
+      "isLive": false, 
       "activeThumbnail": "laliga1", 
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
@@ -71,7 +71,7 @@
     {
       "videoTitle": "sports-4",
       "videoId": "",
-      "isMatch": true, 
+      "isLive": true, 
       "activeThumbnail": "epl1", 
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
@@ -96,7 +96,7 @@
     {
       "videoTitle": "sports-5",
       "videoId": "",
-      "isMatch": false, 
+      "isLive": false, 
       "activeThumbnail": "germanyLeague", 
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",

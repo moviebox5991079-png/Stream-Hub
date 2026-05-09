@@ -16,6 +16,9 @@
         "epl1": "https://w0.peakpx.com/wallpaper/22/114/HD-wallpaper-premier-league-football-england-logo-premier-league-emblem-blue-silk-texture-thumbnail.jpg",
         "epl2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNYhQXJavwkR9qk-rTiuBV6l-KzmK1wAJKOA&s",
         "epl3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNwBQarZ2CuGTLMf20yXBZen_galjvuVaIw&s",
+        "SerieA" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ50j3BSa8Cwy66KxJrKAlxc_xkt0-NdpWaA&s",
+        "franceLeague1" : "https://1000logos.net/wp-content/uploads/2019/01/Ligue-1-Logo.jpg",
+        "saudiProLeague" : "https://perpetualgroup.com/wp-content/uploads/2024/08/spl-1.webp",
         "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s"
       },
       "channels": [
@@ -38,6 +41,9 @@
         "epl1": "https://w0.peakpx.com/wallpaper/22/114/HD-wallpaper-premier-league-football-england-logo-premier-league-emblem-blue-silk-texture-thumbnail.jpg",
         "epl2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNYhQXJavwkR9qk-rTiuBV6l-KzmK1wAJKOA&s",
         "epl3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNwBQarZ2CuGTLMf20yXBZen_galjvuVaIw&s",
+        "SerieA" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ50j3BSa8Cwy66KxJrKAlxc_xkt0-NdpWaA&s",
+        "franceLeague1" : "https://1000logos.net/wp-content/uploads/2019/01/Ligue-1-Logo.jpg",
+        "saudiProLeague" : "https://perpetualgroup.com/wp-content/uploads/2024/08/spl-1.webp",
         "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s"
       },
       "channels": [
@@ -49,7 +55,7 @@
     {
       "videoTitle": "sports-3",
       "videoId": "",
-      "isLive": false, 
+      "isLive": true, 
       "activeThumbnail": "laliga1", 
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
@@ -60,6 +66,9 @@
         "epl1": "https://w0.peakpx.com/wallpaper/22/114/HD-wallpaper-premier-league-football-england-logo-premier-league-emblem-blue-silk-texture-thumbnail.jpg",
         "epl2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNYhQXJavwkR9qk-rTiuBV6l-KzmK1wAJKOA&s",
         "epl3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNwBQarZ2CuGTLMf20yXBZen_galjvuVaIw&s",
+        "SerieA" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ50j3BSa8Cwy66KxJrKAlxc_xkt0-NdpWaA&s",
+        "franceLeague1" : "https://1000logos.net/wp-content/uploads/2019/01/Ligue-1-Logo.jpg",
+        "saudiProLeague" : "https://perpetualgroup.com/wp-content/uploads/2024/08/spl-1.webp",
         "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s"
       },
       "channels": [
@@ -82,6 +91,9 @@
         "epl1": "https://w0.peakpx.com/wallpaper/22/114/HD-wallpaper-premier-league-football-england-logo-premier-league-emblem-blue-silk-texture-thumbnail.jpg",
         "epl2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNYhQXJavwkR9qk-rTiuBV6l-KzmK1wAJKOA&s",
         "epl3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNwBQarZ2CuGTLMf20yXBZen_galjvuVaIw&s",
+        "SerieA" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ50j3BSa8Cwy66KxJrKAlxc_xkt0-NdpWaA&s",
+        "franceLeague1" : "https://1000logos.net/wp-content/uploads/2019/01/Ligue-1-Logo.jpg",
+        "saudiProLeague" : "https://perpetualgroup.com/wp-content/uploads/2024/08/spl-1.webp",
         "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s"
       },
       "channels": [
@@ -96,7 +108,7 @@
     {
       "videoTitle": "sports-5",
       "videoId": "",
-      "isLive": false, 
+      "isLive": true, 
       "activeThumbnail": "germanyLeague", 
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
@@ -108,6 +120,9 @@
         "epl2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNYhQXJavwkR9qk-rTiuBV6l-KzmK1wAJKOA&s",
         "epl3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNwBQarZ2CuGTLMf20yXBZen_galjvuVaIw&s",
         "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s",
+        "SerieA" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ50j3BSa8Cwy66KxJrKAlxc_xkt0-NdpWaA&s",
+        "franceLeague1" : "https://1000logos.net/wp-content/uploads/2019/01/Ligue-1-Logo.jpg",
+        "saudiProLeague" : "https://perpetualgroup.com/wp-content/uploads/2024/08/spl-1.webp",
         "germanyLeague": "https://media.dfl.de/sites/3/2018/02/BL_Teaser_BL-Logo_Pitch_HD-1200x675.jpg"
       },
       "channels": [
@@ -119,6 +134,72 @@
         { "name": "Match-3", "videoId": "15273760071275" },
         { "name": "Match-4", "videoId": "15273767935595" },
         { "name": "Match-4", "videoId": "15273778683499" }
+      ]
+    },
+    {
+      "videoTitle": "sports-6",
+      "videoId": "",
+      "isLive": true, 
+      "activeThumbnail": "saudiProLeague", 
+      "thumbnailsList": {
+        "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
+        "pakvsbang": "https://www.shutterstock.com/image-vector/pakistan-vs-bangladesh-match-cricket-260nw-2566876727.jpg",
+        "laliga1": "https://w0.peakpx.com/wallpaper/125/610/HD-wallpaper-laliga-golden-logo-football-leagues-artwork-la-liga-brown-metal-background-creative-laliga-logo-brands-laliga-thumbnail.jpg",
+        "laliga2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAYkeMf-fM1_LJReoyzIuNh-rC5KQZWsXclA&s",
+        "laliga3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLDxyZ3-b-NHD1rg7LC6b-GMsjnF6GMg4Zxw&s",
+        "epl1": "https://w0.peakpx.com/wallpaper/22/114/HD-wallpaper-premier-league-football-england-logo-premier-league-emblem-blue-silk-texture-thumbnail.jpg",
+        "epl2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNYhQXJavwkR9qk-rTiuBV6l-KzmK1wAJKOA&s",
+        "epl3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNwBQarZ2CuGTLMf20yXBZen_galjvuVaIw&s",
+        "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s",
+        "SerieA" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ50j3BSa8Cwy66KxJrKAlxc_xkt0-NdpWaA&s",
+        "franceLeague1" : "https://1000logos.net/wp-content/uploads/2019/01/Ligue-1-Logo.jpg",
+        "saudiProLeague" : "https://perpetualgroup.com/wp-content/uploads/2024/08/spl-1.webp",
+        "germanyLeague": "https://media.dfl.de/sites/3/2018/02/BL_Teaser_BL-Logo_Pitch_HD-1200x675.jpg"
+      },
+      "channels": [
+        { "name": "Match-1", "videoId": "14204232736303" },
+        { "name": "Match-2", "videoId": "14204288179759" },
+        { "name": "Match-3", "videoId": "14204319768111" },
+        { "name": "Match-4", "videoId": "14204331957807" },
+        { "name": "Match-5", "videoId": "14204346572335" },
+        { "name": "Match-6", "videoId": "14204361252399" },
+        { "name": "Match-7", "videoId": "14204370492975" },
+        { "name": "Match-8", "videoId": "14204395527727" },
+        { "name": "Match-9", "videoId": "14204411387439" },
+        { "name": "Match-10", "videoId": "14204424691247" }
+      ]
+    },
+    {
+      "videoTitle": "sports-7",
+      "videoId": "",
+      "isLive": false, 
+      "activeThumbnail": "pakvsbang", 
+      "thumbnailsList": {
+        "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
+        "pakvsbang": "https://www.shutterstock.com/image-vector/pakistan-vs-bangladesh-match-cricket-260nw-2566876727.jpg",
+        "laliga1": "https://w0.peakpx.com/wallpaper/125/610/HD-wallpaper-laliga-golden-logo-football-leagues-artwork-la-liga-brown-metal-background-creative-laliga-logo-brands-laliga-thumbnail.jpg",
+        "laliga2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAYkeMf-fM1_LJReoyzIuNh-rC5KQZWsXclA&s",
+        "laliga3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLDxyZ3-b-NHD1rg7LC6b-GMsjnF6GMg4Zxw&s",
+        "epl1": "https://w0.peakpx.com/wallpaper/22/114/HD-wallpaper-premier-league-football-england-logo-premier-league-emblem-blue-silk-texture-thumbnail.jpg",
+        "epl2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNYhQXJavwkR9qk-rTiuBV6l-KzmK1wAJKOA&s",
+        "epl3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNwBQarZ2CuGTLMf20yXBZen_galjvuVaIw&s",
+        "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s",
+        "SerieA" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ50j3BSa8Cwy66KxJrKAlxc_xkt0-NdpWaA&s",
+        "franceLeague1" : "https://1000logos.net/wp-content/uploads/2019/01/Ligue-1-Logo.jpg",
+        "saudiProLeague" : "https://perpetualgroup.com/wp-content/uploads/2024/08/spl-1.webp",
+        "germanyLeague": "https://media.dfl.de/sites/3/2018/02/BL_Teaser_BL-Logo_Pitch_HD-1200x675.jpg"
+      },
+      "channels": [
+        { "name": "Match-1", "videoId": "14204490948143" },
+        { "name": "Match-2", "videoId": "14204506742319" },
+        { "name": "Match-3", "videoId": "14204523322927" },
+        { "name": "Match-4", "videoId": "14204540034607" },
+        { "name": "Match-5", "videoId": "14204555304495" },
+        { "name": "Match-6", "videoId": "14204565200431" },
+        { "name": "Match-7", "videoId": "14204577259055" },
+        { "name": "Match-8", "videoId": "14204592528943" },
+        { "name": "Match-9", "videoId": "14204602621487" },
+        { "name": "Match-10", "videoId": "14204612976175" }
       ]
     }
   ]

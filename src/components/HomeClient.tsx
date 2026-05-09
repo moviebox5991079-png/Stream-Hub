@@ -17,12 +17,12 @@ interface StreamData {
   activeThumbnail: string; 
   thumbnailsList: { [key: string]: string }; 
   channels?: ChannelData[]; 
-  isMatch?: boolean; // === UPDATE: isMatch interface mein add kiya ===
+  isLive?: boolean; // === UPDATE: yahan isLive add kar diya hai ===
 }
 
 interface HomeProps {
   initialData: {
-    isLive: boolean;
+    isLive: boolean; // Yeh root wala isLive hai (Global Live Badge ke liye)
     title: string; 
     streams: StreamData[]; 
   };
@@ -30,8 +30,10 @@ interface HomeProps {
 
 export default function HomeClient({ initialData }: HomeProps) {
   
-  // === UPDATE: Filter logic - Sirf wo streams jin ka isMatch false NAHI hai ===
-  const availableStreams = initialData.streams ? initialData.streams.filter((stream) => stream.isMatch !== false) : [];
+  // === UPDATE: Filter logic - Sirf wo streams jin ka stream.isLive 'false' NAHI hai ===
+  const availableStreams = initialData.streams 
+    ? initialData.streams.filter((stream) => stream.isLive !== false) 
+    : [];
 
   const [selectedVideo, setSelectedVideo] = useState<StreamData | null>(
     availableStreams.length > 0 ? availableStreams[0] : null
@@ -264,7 +266,7 @@ export default function HomeClient({ initialData }: HomeProps) {
 
                      <div className="mt-5 px-1">
                         <h1 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
-                          {selectedVideo.videoTitle} {initialData.isLive && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse">LIVE NOW</span>}
+                          {selectedVideo.videoTitle} {selectedVideo.isLive && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse">LIVE NOW</span>}
                         </h1>
 
                         {selectedVideo.channels && selectedVideo.channels.length > 0 && (
@@ -304,7 +306,6 @@ export default function HomeClient({ initialData }: HomeProps) {
                 )}
 
                 {/* MULTIPLE STREAMS GRID */}
-                {/* === UPDATE: Grid map mein initialData.streams ki jagah availableStreams use kiya === */}
                 {availableStreams && availableStreams.length > 0 && (
                   <>
                     <div className="flex items-center justify-between mt-8 mb-4 px-1">
@@ -344,7 +345,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                                   </div>
                                 </div>
 
-                                {initialData.isLive && <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded flex items-center gap-1 font-bold z-10"><span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span> LIVE</div>}
+                                {video.isLive !== false && <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded flex items-center gap-1 font-bold z-10"><span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span> LIVE</div>}
                              </div>
                              <div className="flex gap-3 px-1">
                                 <div className="w-9 h-9 bg-gradient-to-br from-red-600 to-blue-600 rounded-full flex-shrink-0 mt-0.5"></div>
@@ -376,7 +377,6 @@ export default function HomeClient({ initialData }: HomeProps) {
     </>
   );
 }
-
 
 
 

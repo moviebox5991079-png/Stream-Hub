@@ -55,7 +55,7 @@
     {
       "videoTitle": "sports-3",
       "videoId": "",
-      "isLive": true, 
+      "isLive": false, 
       "activeThumbnail": "laliga1", 
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
@@ -98,11 +98,11 @@
       },
       "channels": [
         { "name": "Match-1", "videoId": "15255022345835" },
-        { "name": "Match-1", "videoId": "15255038074475" },
-        { "name": "Match-2", "videoId": "15255045480043" },
-        { "name": "Match-2", "videoId": "15255208599147" },
-        { "name": "Match-3", "videoId": "15255217708651" },
-        { "name": "Match-3", "videoId": "15255227670123" }
+        { "name": "Match-2", "videoId": "15255038074475" },
+        { "name": "Match-3", "videoId": "15255045480043" },
+        { "name": "Match-4", "videoId": "15255208599147" },
+        { "name": "Match-5", "videoId": "15255217708651" },
+        { "name": "Match-6", "videoId": "15255227670123" }
       ]
     },
     {
@@ -127,20 +127,20 @@
       },
       "channels": [
         { "name": "Match-1", "videoId": "15273689226859" },
-        { "name": "Match-1", "videoId": "15273713933931" },
-        { "name": "Match-2", "videoId": "15273722257003" },
-        { "name": "Match-2", "videoId": "15273739624043" },
-        { "name": "Match-3", "videoId": "15273750175339" },
-        { "name": "Match-3", "videoId": "15273760071275" },
-        { "name": "Match-4", "videoId": "15273767935595" },
-        { "name": "Match-4", "videoId": "15273778683499" }
+        { "name": "Match-2", "videoId": "15273713933931" },
+        { "name": "Match-3", "videoId": "15273722257003" },
+        { "name": "Match-4", "videoId": "15273739624043" },
+        { "name": "Match-5", "videoId": "15273750175339" },
+        { "name": "Match-6", "videoId": "15273760071275" },
+        { "name": "Match-7", "videoId": "15273767935595" },
+        { "name": "Match-8", "videoId": "15273778683499" }
       ]
     },
     {
       "videoTitle": "sports-6",
       "videoId": "",
       "isLive": true, 
-      "activeThumbnail": "saudiProLeague", 
+      "activeThumbnail": "laliga1", 
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
         "pakvsbang": "https://www.shutterstock.com/image-vector/pakistan-vs-bangladesh-match-cricket-260nw-2566876727.jpg",

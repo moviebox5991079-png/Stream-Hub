@@ -224,9 +224,7 @@ export default function HomeClient({ initialData }: HomeProps) {
 
         {/* Main Content */}
         <div className="flex pt-16 h-screen">
-          <div className="flex justify-center my-6">
-            <iframe src="/banner" width="300" height="250" style={{ border: 'none', overflow: 'hidden' }} title="Sponsor Ad" />
-          </div>
+          
           <main className={`flex-1 overflow-y-auto bg-[#0f0f0f] ${isSidebarOpen ? 'md:ml-60' : 'md:ml-20'} transition-all duration-300`}>
              
              {/* Categories */}
@@ -315,6 +313,12 @@ export default function HomeClient({ initialData }: HomeProps) {
                   <>
                     <div className="flex items-center justify-between mt-8 mb-4 px-1">
                       <h2 className="text-xl font-bold text-white flex items-center gap-2">
+
+                        <div className="flex justify-center my-6">
+                          <iframe src="/banner" width="300" height="250" style={{ border: 'none', overflow: 'hidden' }} title="Sponsor Ad" />
+                        </div>
+
+                        
                         <span className="w-3 h-3 bg-red-600 rounded-full animate-pulse"></span> 
                         Check Below for More Streams!
                       </h2>

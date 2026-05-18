@@ -47,28 +47,65 @@ const DATA_SOURCE_URL = "https://raw.githubusercontent.com/moviebox5991079-png/S
 
 async function getData() {
   try {
-    // Agar production hai to GitHub se uthao, agar local hai to direct file read karo ya API call
-    // Simplest approach for now:
+    console.log("=== 🔍 FETCHING START ===");
+    console.log("Fetching from URL:", DATA_SOURCE_URL);
+
     const res = await fetch(DATA_SOURCE_URL);
     
+    console.log("Response Status Code:", res.status); // 200 matlab OK, 404 matlab File Not Found
+    console.log("Response OK Status:", res.ok);
+    
     if (!res.ok) {
-      // Fallback agar fetch fail ho jaye
+      console.log("❌ GitHub Fetch Failed! Returning Fallback Data.");
       return {
         isLive: true,
         title: "Live Match Stream hahah",
-        // videoId: "default_id",
         videoId: "11090668161682",
-
         thumbnail: "https://img.youtube.com/vi/placeholder/hqdefault.jpg"
       };
     }
-    console.log("Data fetched from GitHub:", res);
-    return res.json();
+    
+    // Pehle JSON parse karenge taakey console mein poora data dekh sakein
+    const data = await res.json();
+    
+    console.log("✅ ACTUAL DATA FROM GITHUB:", JSON.stringify(data, null, 2));
+    console.log("=== 🔍 FETCHING END ===");
+    
+    return data;
   } catch (error) {
-    console.error("Data fetch error", error);
+    console.error("❌ CRITICAL ERROR IN FETCH:", error);
     return { isLive: false, title: "Stream Loading...", videoId: "", thumbnail: "" };
   }
 }
+
+
+
+
+
+// async function getData() {
+//   try {
+//     // Agar production hai to GitHub se uthao, agar local hai to direct file read karo ya API call
+//     // Simplest approach for now:
+//     const res = await fetch(DATA_SOURCE_URL);
+    
+//     if (!res.ok) {
+//       // Fallback agar fetch fail ho jaye
+//       return {
+//         isLive: true,
+//         title: "Live Match Stream hahah",
+//         // videoId: "default_id",
+//         videoId: "11090668161682",
+
+//         thumbnail: "https://img.youtube.com/vi/placeholder/hqdefault.jpg"
+//       };
+//     }
+//     console.log("Data fetched from GitHub:", res);
+//     return res.json();
+//   } catch (error) {
+//     console.error("Data fetch error", error);
+//     return { isLive: false, title: "Stream Loading...", videoId: "", thumbnail: "" };
+//   }
+// }
 
 // =======================================================================================
 

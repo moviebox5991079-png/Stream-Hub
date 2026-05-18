@@ -1,4 +1,3 @@
-export const dynamic = 'force-dynamic';
 import HomeClient from '@/components/HomeClient';
 
 // Cache revalidation time (seconds)

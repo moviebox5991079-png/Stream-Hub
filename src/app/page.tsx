@@ -1,17 +1,20 @@
 import HomeClient from '@/components/HomeClient';
 
-// YEH LINE ZAROORI HAI: Is se Vercel cache nahi karega aur har dafa logs print karega
-export const dynamic = 'force-dynamic';
+// Yahan se force-dynamic hata diya gaya hai taake static build fail na ho
 
 const DATA_SOURCE_URL = "https://raw.githubusercontent.com/moviebox5991079-png/Stream-Hub/refs/heads/main/public/data.json";
 
 async function getData() {
   try {
-    console.log("=== 🔍 FETCHING START ===");
-    console.log("Fetching from URL:", DATA_SOURCE_URL);
+    console.log("=== 🔍 BUILD TIME FETCHING START ===");
+    
+    // GitHub ka cache bypass karne ke liye URL mein timestamp add kiya
+    const timeStamp = Date.now();
+    const freshUrl = `${DATA_SOURCE_URL}?t=${timeStamp}`;
+    
+    console.log("Fetching from URL:", freshUrl);
 
-    // cache: 'no-store' laga diya taake Github se hamesha fresh data check kare
-    const res = await fetch(DATA_SOURCE_URL, { cache: 'no-store' });
+    const res = await fetch(freshUrl);
     
     console.log("Response Status Code:", res.status);
     console.log("Response OK Status:", res.ok);
@@ -19,17 +22,17 @@ async function getData() {
     if (!res.ok) {
       console.log("❌ GitHub Fetch Failed! Returning Fallback Data.");
       return {
-        isLive: true,
-        title: "Live Match Stream hahah",
+        isLive: false,
+        title: "Server Error",
         videoId: "11090668161682",
-        streams: [] // frontend crash se bachane ke liye empty array
+        streams: [] // Frontend crash se bachane ke liye empty array
       };
     }
     
     const data = await res.json();
     
     console.log("✅ ACTUAL DATA FROM GITHUB:", JSON.stringify(data, null, 2));
-    console.log("=== 🔍 FETCHING END ===");
+    console.log("=== 🔍 BUILD TIME FETCHING END ===");
     
     return data;
   } catch (error) {
@@ -42,7 +45,6 @@ export default async function Page() {
   const data = await getData();
   return <HomeClient initialData={data} />;
 }
-
 
 
 

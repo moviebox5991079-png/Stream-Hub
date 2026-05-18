@@ -55,7 +55,7 @@
     {
       "videoTitle": "sports-3",
       "videoId": "",
-      "isLive": true, 
+      "isLive": false, 
       "activeThumbnail": "laliga1", 
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",

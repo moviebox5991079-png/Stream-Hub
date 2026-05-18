@@ -24,14 +24,13 @@ async function getData() {
         cache: 'no-store' 
     });
 
-    if (!res.ok) {
-      // Fallback agar fetch fail ho jaye
-      return {
-        isLive: true,
-        title: "Live Match Stream hahah",
-        videoId: "default_id"
-      };
-    }
+if (!res.ok) {
+  return {
+    isLive: false,
+    title: "Server Error",
+    streams: [] // Yeh empty array dena laazmi hai taake frontend crash na ho
+  };
+}
 
     return res.json();
   } catch (error) {

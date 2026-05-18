@@ -10,30 +10,68 @@ export const revalidate = 60;
 const DATA_SOURCE_URL = "https://raw.githubusercontent.com/moviebox5991079-png/Stream-Hub/refs/heads/main/public/data.json";
 // here data.json mein aapka live stream info hoga
 
+
+// =================================================================================
+
 async function getData() {
   try {
-    // Agar production hai to GitHub se uthao, agar local hai to direct file read karo ya API call
-    // Simplest approach for now:
-    const res = await fetch(DATA_SOURCE_URL);
-    
+    // 1. GitHub cache bypass (Har request par naya number add hoga taake GitHub fresh file de)
+    const timeStamp = Date.now();
+    const freshUrl = `${DATA_SOURCE_URL}?t=${timeStamp}`;
+
+    // 2. Next.js cache bypass (Next.js ko force kiya ke purana data use na kare)
+    const res = await fetch(freshUrl, { 
+        cache: 'no-store' 
+    });
+
     if (!res.ok) {
       // Fallback agar fetch fail ho jaye
       return {
         isLive: true,
         title: "Live Match Stream hahah",
-        // videoId: "default_id",
-        videoId: "11090668161682",
-
-        thumbnail: "https://img.youtube.com/vi/placeholder/hqdefault.jpg"
+        videoId: "default_id"
       };
     }
-    console.log("Data fetched from GitHub:", res);
+
     return res.json();
   } catch (error) {
-    console.error("Data fetch error", error);
-    return { isLive: false, title: "Stream Loading...", videoId: "", thumbnail: "" };
+    console.log("Data fetch error:", error);
+    return {
+        isLive: false,
+        title: "Error loading stream",
+        videoId: "default_id"
+    };
   }
 }
+
+
+
+// async function getData() {
+//   try {
+//     // Agar production hai to GitHub se uthao, agar local hai to direct file read karo ya API call
+//     // Simplest approach for now:
+//     const res = await fetch(DATA_SOURCE_URL);
+    
+//     if (!res.ok) {
+//       // Fallback agar fetch fail ho jaye
+//       return {
+//         isLive: true,
+//         title: "Live Match Stream hahah",
+//         // videoId: "default_id",
+//         videoId: "11090668161682",
+
+//         thumbnail: "https://img.youtube.com/vi/placeholder/hqdefault.jpg"
+//       };
+//     }
+//     console.log("Data fetched from GitHub:", res);
+//     return res.json();
+//   } catch (error) {
+//     console.error("Data fetch error", error);
+//     return { isLive: false, title: "Stream Loading...", videoId: "", thumbnail: "" };
+//   }
+// }
+
+// =======================================================================================
 
 export default async function Page() {
   const data = await getData();

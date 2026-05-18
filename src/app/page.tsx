@@ -1,58 +1,19 @@
 import HomeClient from '@/components/HomeClient';
 
-// Cache revalidation time (seconds)
-// Iska matlab Vercel har 60 seconds baad check karega ke GitHub par naya link aaya hai ya nahi.
-export const revalidate = 60; 
+// YEH LINE ZAROORI HAI: Is se Vercel cache nahi karega aur har dafa logs print karega
+export const dynamic = 'force-dynamic';
 
-// Aapka GitHub RAW URL (Jahan data.json host hoga)
-// Replace this with your actual GitHub Raw URL after pushing code
-// const DATA_SOURCE_URL = "https://raw.githubusercontent.com/YOUR_GITHUB_USER/YOUR_REPO/main/public/data.json";
 const DATA_SOURCE_URL = "https://raw.githubusercontent.com/moviebox5991079-png/Stream-Hub/refs/heads/main/public/data.json";
-// here data.json mein aapka live stream info hoga
-
-
-// =================================================================================
-
-// async function getData() {
-//   try {
-//     // 1. GitHub cache bypass (Har request par naya number add hoga taake GitHub fresh file de)
-//     const timeStamp = Date.now();
-//     const freshUrl = `${DATA_SOURCE_URL}?t=${timeStamp}`;
-
-//     // 2. Next.js cache bypass (Next.js ko force kiya ke purana data use na kare)
-//     const res = await fetch(freshUrl, { 
-//         cache: 'no-store' 
-//     });
-
-// if (!res.ok) {
-//   return {
-//     isLive: false,
-//     title: "Server Error",
-//     streams: [] // Yeh empty array dena laazmi hai taake frontend crash na ho
-//   };
-// }
-
-//     return res.json();
-//   } catch (error) {
-//     console.log("Data fetch error:", error);
-//     return {
-//         isLive: false,
-//         title: "Error loading stream",
-//         videoId: "default_id"
-//     };
-//   }
-// }
-
-
 
 async function getData() {
   try {
     console.log("=== 🔍 FETCHING START ===");
     console.log("Fetching from URL:", DATA_SOURCE_URL);
 
-    const res = await fetch(DATA_SOURCE_URL);
+    // cache: 'no-store' laga diya taake Github se hamesha fresh data check kare
+    const res = await fetch(DATA_SOURCE_URL, { cache: 'no-store' });
     
-    console.log("Response Status Code:", res.status); // 200 matlab OK, 404 matlab File Not Found
+    console.log("Response Status Code:", res.status);
     console.log("Response OK Status:", res.ok);
     
     if (!res.ok) {
@@ -61,11 +22,10 @@ async function getData() {
         isLive: true,
         title: "Live Match Stream hahah",
         videoId: "11090668161682",
-        thumbnail: "https://img.youtube.com/vi/placeholder/hqdefault.jpg"
+        streams: [] // frontend crash se bachane ke liye empty array
       };
     }
     
-    // Pehle JSON parse karenge taakey console mein poora data dekh sakein
     const data = await res.json();
     
     console.log("✅ ACTUAL DATA FROM GITHUB:", JSON.stringify(data, null, 2));
@@ -74,46 +34,148 @@ async function getData() {
     return data;
   } catch (error) {
     console.error("❌ CRITICAL ERROR IN FETCH:", error);
-    return { isLive: false, title: "Stream Loading...", videoId: "", thumbnail: "" };
+    return { isLive: false, title: "Stream Loading...", videoId: "", streams: [] };
   }
 }
 
+export default async function Page() {
+  const data = await getData();
+  return <HomeClient initialData={data} />;
+}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ========================== Alhamdullah ============================
+
+
+
+// import HomeClient from '@/components/HomeClient';
+
+// // Cache revalidation time (seconds)
+// // Iska matlab Vercel har 60 seconds baad check karega ke GitHub par naya link aaya hai ya nahi.
+// export const revalidate = 60; 
+
+// // Aapka GitHub RAW URL (Jahan data.json host hoga)
+// // Replace this with your actual GitHub Raw URL after pushing code
+// // const DATA_SOURCE_URL = "https://raw.githubusercontent.com/YOUR_GITHUB_USER/YOUR_REPO/main/public/data.json";
+// const DATA_SOURCE_URL = "https://raw.githubusercontent.com/moviebox5991079-png/Stream-Hub/refs/heads/main/public/data.json";
+// // here data.json mein aapka live stream info hoga
+
+
+// // =================================================================================
+
+// // async function getData() {
+// //   try {
+// //     // 1. GitHub cache bypass (Har request par naya number add hoga taake GitHub fresh file de)
+// //     const timeStamp = Date.now();
+// //     const freshUrl = `${DATA_SOURCE_URL}?t=${timeStamp}`;
+
+// //     // 2. Next.js cache bypass (Next.js ko force kiya ke purana data use na kare)
+// //     const res = await fetch(freshUrl, { 
+// //         cache: 'no-store' 
+// //     });
+
+// // if (!res.ok) {
+// //   return {
+// //     isLive: false,
+// //     title: "Server Error",
+// //     streams: [] // Yeh empty array dena laazmi hai taake frontend crash na ho
+// //   };
+// // }
+
+// //     return res.json();
+// //   } catch (error) {
+// //     console.log("Data fetch error:", error);
+// //     return {
+// //         isLive: false,
+// //         title: "Error loading stream",
+// //         videoId: "default_id"
+// //     };
+// //   }
+// // }
 
 
 
 // async function getData() {
 //   try {
-//     // Agar production hai to GitHub se uthao, agar local hai to direct file read karo ya API call
-//     // Simplest approach for now:
+//     console.log("=== 🔍 FETCHING START ===");
+//     console.log("Fetching from URL:", DATA_SOURCE_URL);
+
 //     const res = await fetch(DATA_SOURCE_URL);
     
+//     console.log("Response Status Code:", res.status); // 200 matlab OK, 404 matlab File Not Found
+//     console.log("Response OK Status:", res.ok);
+    
 //     if (!res.ok) {
-//       // Fallback agar fetch fail ho jaye
+//       console.log("❌ GitHub Fetch Failed! Returning Fallback Data.");
 //       return {
 //         isLive: true,
 //         title: "Live Match Stream hahah",
-//         // videoId: "default_id",
 //         videoId: "11090668161682",
-
 //         thumbnail: "https://img.youtube.com/vi/placeholder/hqdefault.jpg"
 //       };
 //     }
-//     console.log("Data fetched from GitHub:", res);
-//     return res.json();
+    
+//     // Pehle JSON parse karenge taakey console mein poora data dekh sakein
+//     const data = await res.json();
+    
+//     console.log("✅ ACTUAL DATA FROM GITHUB:", JSON.stringify(data, null, 2));
+//     console.log("=== 🔍 FETCHING END ===");
+    
+//     return data;
 //   } catch (error) {
-//     console.error("Data fetch error", error);
+//     console.error("❌ CRITICAL ERROR IN FETCH:", error);
 //     return { isLive: false, title: "Stream Loading...", videoId: "", thumbnail: "" };
 //   }
 // }
 
-// =======================================================================================
 
-export default async function Page() {
-  const data = await getData();
 
-  return <HomeClient initialData={data} />;
-}
+
+
+// // async function getData() {
+// //   try {
+// //     // Agar production hai to GitHub se uthao, agar local hai to direct file read karo ya API call
+// //     // Simplest approach for now:
+// //     const res = await fetch(DATA_SOURCE_URL);
+    
+// //     if (!res.ok) {
+// //       // Fallback agar fetch fail ho jaye
+// //       return {
+// //         isLive: true,
+// //         title: "Live Match Stream hahah",
+// //         // videoId: "default_id",
+// //         videoId: "11090668161682",
+
+// //         thumbnail: "https://img.youtube.com/vi/placeholder/hqdefault.jpg"
+// //       };
+// //     }
+// //     console.log("Data fetched from GitHub:", res);
+// //     return res.json();
+// //   } catch (error) {
+// //     console.error("Data fetch error", error);
+// //     return { isLive: false, title: "Stream Loading...", videoId: "", thumbnail: "" };
+// //   }
+// // }
+
+// // =======================================================================================
+
+// export default async function Page() {
+//   const data = await getData();
+
+//   return <HomeClient initialData={data} />;
+// }
 
 
 // <iframe width="560" height="315" src="//ok.ru/videoembed/11090668161682?nochat=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>

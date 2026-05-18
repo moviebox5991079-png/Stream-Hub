@@ -1,43 +1,24 @@
 import HomeClient from '@/components/HomeClient';
-
-// Yahan se force-dynamic hata diya gaya hai taake static build fail na ho
-
-const DATA_SOURCE_URL = "https://raw.githubusercontent.com/moviebox5991079-png/Stream-Hub/refs/heads/main/public/data.json";
+import fs from 'fs';
+import path from 'path';
 
 async function getData() {
   try {
-    console.log("=== 🔍 BUILD TIME FETCHING START ===");
+    console.log("=== 🔍 READING LOCAL DATA START ===");
     
-    // GitHub ka cache bypass karne ke liye URL mein timestamp add kiya
-    const timeStamp = Date.now();
-    const freshUrl = `${DATA_SOURCE_URL}?t=${timeStamp}`;
+    // Internet (GitHub URL) se mangwane ke bajaye direct Vercel/Local file read karein
+    const filePath = path.join(process.cwd(), 'public', 'data.json');
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+    const data = JSON.parse(fileContents);
     
-    console.log("Fetching from URL:", freshUrl);
-
-    const res = await fetch(freshUrl);
-    
-    console.log("Response Status Code:", res.status);
-    console.log("Response OK Status:", res.ok);
-    
-    if (!res.ok) {
-      console.log("❌ GitHub Fetch Failed! Returning Fallback Data.");
-      return {
-        isLive: false,
-        title: "Server Error",
-        videoId: "11090668161682",
-        streams: [] // Frontend crash se bachane ke liye empty array
-      };
-    }
-    
-    const data = await res.json();
-    
-    console.log("✅ ACTUAL DATA FROM GITHUB:", JSON.stringify(data, null, 2));
-    console.log("=== 🔍 BUILD TIME FETCHING END ===");
+    console.log("✅ ACTUAL FRESH DATA:", JSON.stringify(data, null, 2));
+    console.log("=== 🔍 READING LOCAL DATA END ===");
     
     return data;
   } catch (error) {
-    console.error("❌ CRITICAL ERROR IN FETCH:", error);
-    return { isLive: false, title: "Stream Loading...", videoId: "", streams: [] };
+    console.error("❌ CRITICAL ERROR IN READING FILE:", error);
+    // Fallback data
+    return { isLive: false, title: "Stream Loading...", streams: [] };
   }
 }
 
@@ -45,7 +26,6 @@ export default async function Page() {
   const data = await getData();
   return <HomeClient initialData={data} />;
 }
-
 
 
 

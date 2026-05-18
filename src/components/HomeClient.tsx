@@ -131,6 +131,13 @@ export default function HomeClient({ initialData }: HomeProps) {
         <link rel="dns-prefetch" href="https://ok.ru" />
       </Head>
 
+
+      <div className="flex justify-center my-6">
+          <iframe src="/banner" width="300" height="250" style={{ border: 'none', overflow: 'hidden' }} title="Sponsor Ad" />
+      </div>
+
+      
+
       <div className="min-h-screen bg-[#0f0f0f] text-white font-sans relative">
         
         {/* === WELCOME MODAL === */}

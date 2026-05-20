@@ -1,63 +1,152 @@
 backend:
   name: git-gateway
-  branch: main # Aapki repo ki main branch ka naam
+  branch: main
 
-# ---> YEH 2 LINES ADD KARNI HAIN <---
-media_folder: "images"
+media_folder: "public/images"
 public_folder: "/images"
 
 collections:
   - name: "live_data"
-    label: "Live Stream Manager"
+    label: "🔴 Live Stream Manager"
+    description: "Yahan se aap apni website ki saari live streams, channels aur notices control kar sakte hain."
     files:
-      - label: "Stream Data (data.json)"
+      - label: "⚙️ Main Website Data"
         name: "data"
-        # file: "data.json"    # Agar file kisi folder mein hai toh path theek kar lein (e.g., "public/data.json")
         file: "public/data.json"
         fields:
-          # --- Global Settings ---
-          - label: "Global Is Live"
+          
+          # --- GLOBAL SETTINGS ---
+          - label: "🌐 Global Website Status (Live)"
             name: "isLive"
             widget: "boolean"
             default: true
+            hint: "Isko OFF karne se poori website ka live status band ho jayega."
 
-          - label: "Global Notice/Title"
+          - label: "📢 Global Notice / Marquee Text"
             name: "title"
-            widget: "text" # 'text' widget lamba notice likhne ke liye best hai
+            widget: "string"
+            hint: "Website par jo warning ya notice chal raha hai, usay yahan likhein."
 
-          # --- Streams Array ---
-          - label: "All Streams"
+          # --- STREAMS LIST (CRUD) ---
+          - label: "📺 All Streams (Matches)"
             name: "streams"
-            widget: "list" # Yeh array [] ke liye use hota hai
+            widget: "list"
+            label_singular: "Stream" # <-- Is se button ka naam "Add Stream" ho jayega
+            collapsed: true
+            summary: '📺 {{fields.videoTitle}} (Live: {{fields.isLive}})'
+            hint: "Naya match/stream add karne ke liye neechay 'Add Stream' ka button dabayein."
             fields:
-              - { label: "Video Title (e.g., sports-1)", name: "videoTitle", widget: "string" }
-              - { label: "Video ID", name: "videoId", widget: "string", required: false }
-              - { label: "Is Stream Live?", name: "isLive", widget: "boolean", default: true }
-              - { label: "Active Thumbnail Key", name: "activeThumbnail", widget: "string" }
+              - { label: "📌 Video Title (Internal Name)", name: "videoTitle", widget: "string", hint: "Example: sports-1, sports98876" }
+              - { label: "🎥 Video ID (Optional)", name: "videoId", widget: "string", required: false }
+              - { label: "🔴 Is This Stream Live?", name: "isLive", widget: "boolean", default: true }
+              - { label: "🖼️ Active Thumbnail Name", name: "activeThumbnail", widget: "string", hint: "Neechay di gayi list mein se koi ek naam likhein (e.g. ipl, laliga1)" }
               
-              # --- Thumbnails Object ---
-              - label: "Thumbnails List URLs"
+              # --- THUMBNAILS (Fixed) ---
+              - label: "📸 Thumbnails Links"
                 name: "thumbnailsList"
-                widget: "object" # Yeh nested object {} ke liye use hota hai
+                widget: "object"
+                collapsed: true
+                hint: "Apne image links yahan paste karein. Jo link nahi chahiye usay khali chor dein."
                 fields:
-                  - { label: "IPL URL", name: "ipl", widget: "string", required: false }
-                  - { label: "Pak vs Bang URL", name: "pakvsbang", widget: "string", required: false }
-                  - { label: "La Liga 1 URL", name: "laliga1", widget: "string", required: false }
-                  - { label: "La Liga 2 URL", name: "laliga2", widget: "string", required: false }
-                  - { label: "La Liga 3 URL", name: "laliga3", widget: "string", required: false }
-                  - { label: "EPL 1 URL", name: "epl1", widget: "string", required: false }
-                  - { label: "EPL 2 URL", name: "epl2", widget: "string", required: false }
-                  - { label: "EPL 3 URL", name: "epl3", widget: "string", required: false }
-                  - { label: "Champions League URL", name: "cl", widget: "string", required: false }
-                  - { label: "Serie A URL", name: "SerieA", widget: "string", required: false }
-                  - { label: "France League 1 URL", name: "franceLeague1", widget: "string", required: false }
-                  - { label: "Saudi Pro League URL", name: "saudiProLeague", widget: "string", required: false }
-                  - { label: "Germany League URL", name: "germanyLeague", widget: "string", required: false }
+                  - { label: "🏏 IPL URL", name: "ipl", widget: "string", required: false }
+                  - { label: "🏏 Pak vs Bang URL", name: "pakvsbang", widget: "string", required: false }
+                  - { label: "⚽ La Liga 1 URL", name: "laliga1", widget: "string", required: false }
+                  - { label: "⚽ La Liga 2 URL", name: "laliga2", widget: "string", required: false }
+                  - { label: "⚽ La Liga 3 URL", name: "laliga3", widget: "string", required: false }
+                  - { label: "⚽ EPL 1 URL", name: "epl1", widget: "string", required: false }
+                  - { label: "⚽ EPL 2 URL", name: "epl2", widget: "string", required: false }
+                  - { label: "⚽ EPL 3 URL", name: "epl3", widget: "string", required: false }
+                  - { label: "🏆 Champions League URL", name: "cl", widget: "string", required: false }
+                  - { label: "⚽ Serie A URL", name: "SerieA", widget: "string", required: false }
+                  - { label: "⚽ France League 1 URL", name: "franceLeague1", widget: "string", required: false }
+                  - { label: "⚽ Saudi Pro League URL", name: "saudiProLeague", widget: "string", required: false }
+                  - { label: "⚽ Germany League URL", name: "germanyLeague", widget: "string", required: false }
 
-              # --- Channels Array ---
-              - label: "Channels / Matches"
+              # --- CHANNELS LIST (CRUD) ---
+              - label: "📡 Channels / Servers"
                 name: "channels"
                 widget: "list"
+                label_singular: "Channel" # <-- Button "Add Channel" ban jayega
+                collapsed: true
+                summary: '📡 {{fields.name}}'
+                hint: "Ek stream mein naye channels (servers) daalne ke liye 'Add Channel' par click karein."
                 fields:
-                  - { label: "Channel/Match Name", name: "name", widget: "string" }
-                  - { label: "Video ID", name: "videoId", widget: "string" }
+                  - { label: "📝 Channel Name", name: "name", widget: "string", hint: "Example: Channel-1, Match-1" }
+                  - { label: "🔗 Channel Video ID", name: "videoId", widget: "string", hint: "Yahan apni stream ki ID ya link dalein" }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# backend:
+#   name: git-gateway
+#   branch: main # Aapki repo ki main branch ka naam
+
+# # ---> YEH 2 LINES ADD KARNI HAIN <---
+# media_folder: "images"
+# public_folder: "/images"
+
+# collections:
+#   - name: "live_data"
+#     label: "Live Stream Manager"
+#     files:
+#       - label: "Stream Data (data.json)"
+#         name: "data"
+#         # file: "data.json"    # Agar file kisi folder mein hai toh path theek kar lein (e.g., "public/data.json")
+#         file: "public/data.json"
+#         fields:
+#           # --- Global Settings ---
+#           - label: "Global Is Live"
+#             name: "isLive"
+#             widget: "boolean"
+#             default: true
+
+#           - label: "Global Notice/Title"
+#             name: "title"
+#             widget: "text" # 'text' widget lamba notice likhne ke liye best hai
+
+#           # --- Streams Array ---
+#           - label: "All Streams"
+#             name: "streams"
+#             widget: "list" # Yeh array [] ke liye use hota hai
+#             fields:
+#               - { label: "Video Title (e.g., sports-1)", name: "videoTitle", widget: "string" }
+#               - { label: "Video ID", name: "videoId", widget: "string", required: false }
+#               - { label: "Is Stream Live?", name: "isLive", widget: "boolean", default: true }
+#               - { label: "Active Thumbnail Key", name: "activeThumbnail", widget: "string" }
+              
+#               # --- Thumbnails Object ---
+#               - label: "Thumbnails List URLs"
+#                 name: "thumbnailsList"
+#                 widget: "object" # Yeh nested object {} ke liye use hota hai
+#                 fields:
+#                   - { label: "IPL URL", name: "ipl", widget: "string", required: false }
+#                   - { label: "Pak vs Bang URL", name: "pakvsbang", widget: "string", required: false }
+#                   - { label: "La Liga 1 URL", name: "laliga1", widget: "string", required: false }
+#                   - { label: "La Liga 2 URL", name: "laliga2", widget: "string", required: false }
+#                   - { label: "La Liga 3 URL", name: "laliga3", widget: "string", required: false }
+#                   - { label: "EPL 1 URL", name: "epl1", widget: "string", required: false }
+#                   - { label: "EPL 2 URL", name: "epl2", widget: "string", required: false }
+#                   - { label: "EPL 3 URL", name: "epl3", widget: "string", required: false }
+#                   - { label: "Champions League URL", name: "cl", widget: "string", required: false }
+#                   - { label: "Serie A URL", name: "SerieA", widget: "string", required: false }
+#                   - { label: "France League 1 URL", name: "franceLeague1", widget: "string", required: false }
+#                   - { label: "Saudi Pro League URL", name: "saudiProLeague", widget: "string", required: false }
+#                   - { label: "Germany League URL", name: "germanyLeague", widget: "string", required: false }
+
+#               # --- Channels Array ---
+#               - label: "Channels / Matches"
+#                 name: "channels"
+#                 widget: "list"
+#                 fields:
+#                   - { label: "Channel/Match Name", name: "name", widget: "string" }
+#                   - { label: "Video ID", name: "videoId", widget: "string" }

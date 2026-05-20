@@ -1,0 +1,63 @@
+backend:
+  name: git-gateway
+  branch: main # Aapki repo ki main branch ka naam
+
+# ---> YEH 2 LINES ADD KARNI HAIN <---
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "live_data"
+    label: "Live Stream Manager"
+    files:
+      - label: "Stream Data (data.json)"
+        name: "data"
+        # file: "data.json"    # Agar file kisi folder mein hai toh path theek kar lein (e.g., "public/data.json")
+        file: "public/data.json"
+        fields:
+          # --- Global Settings ---
+          - label: "Global Is Live"
+            name: "isLive"
+            widget: "boolean"
+            default: true
+
+          - label: "Global Notice/Title"
+            name: "title"
+            widget: "text" # 'text' widget lamba notice likhne ke liye best hai
+
+          # --- Streams Array ---
+          - label: "All Streams"
+            name: "streams"
+            widget: "list" # Yeh array [] ke liye use hota hai
+            fields:
+              - { label: "Video Title (e.g., sports-1)", name: "videoTitle", widget: "string" }
+              - { label: "Video ID", name: "videoId", widget: "string", required: false }
+              - { label: "Is Stream Live?", name: "isLive", widget: "boolean", default: true }
+              - { label: "Active Thumbnail Key", name: "activeThumbnail", widget: "string" }
+              
+              # --- Thumbnails Object ---
+              - label: "Thumbnails List URLs"
+                name: "thumbnailsList"
+                widget: "object" # Yeh nested object {} ke liye use hota hai
+                fields:
+                  - { label: "IPL URL", name: "ipl", widget: "string", required: false }
+                  - { label: "Pak vs Bang URL", name: "pakvsbang", widget: "string", required: false }
+                  - { label: "La Liga 1 URL", name: "laliga1", widget: "string", required: false }
+                  - { label: "La Liga 2 URL", name: "laliga2", widget: "string", required: false }
+                  - { label: "La Liga 3 URL", name: "laliga3", widget: "string", required: false }
+                  - { label: "EPL 1 URL", name: "epl1", widget: "string", required: false }
+                  - { label: "EPL 2 URL", name: "epl2", widget: "string", required: false }
+                  - { label: "EPL 3 URL", name: "epl3", widget: "string", required: false }
+                  - { label: "Champions League URL", name: "cl", widget: "string", required: false }
+                  - { label: "Serie A URL", name: "SerieA", widget: "string", required: false }
+                  - { label: "France League 1 URL", name: "franceLeague1", widget: "string", required: false }
+                  - { label: "Saudi Pro League URL", name: "saudiProLeague", widget: "string", required: false }
+                  - { label: "Germany League URL", name: "germanyLeague", widget: "string", required: false }
+
+              # --- Channels Array ---
+              - label: "Channels / Matches"
+                name: "channels"
+                widget: "list"
+                fields:
+                  - { label: "Channel/Match Name", name: "name", widget: "string" }
+                  - { label: "Video ID", name: "videoId", widget: "string" }

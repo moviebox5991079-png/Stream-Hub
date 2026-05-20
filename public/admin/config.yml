@@ -20,59 +20,46 @@ collections:
             name: "isLive"
             widget: "boolean"
             default: true
-            hint: "Isko OFF karne se poori website ka live status band ho jayega."
 
           - label: "📢 Global Notice / Marquee Text"
             name: "title"
             widget: "string"
-            hint: "Website par jo warning ya notice chal raha hai, usay yahan likhein."
 
           # --- STREAMS LIST (CRUD) ---
           - label: "📺 All Streams (Matches)"
             name: "streams"
             widget: "list"
-            label_singular: "Stream" # <-- Is se button ka naam "Add Stream" ho jayega
+            label_singular: "Stream"
             collapsed: true
             summary: '📺 {{fields.videoTitle}} (Live: {{fields.isLive}})'
-            hint: "Naya match/stream add karne ke liye neechay 'Add Stream' ka button dabayein."
             fields:
-              - { label: "📌 Video Title (Internal Name)", name: "videoTitle", widget: "string", hint: "Example: sports-1, sports98876" }
+              - { label: "📌 Video Title (Internal Name)", name: "videoTitle", widget: "string" }
               - { label: "🎥 Video ID (Optional)", name: "videoId", widget: "string", required: false }
               - { label: "🔴 Is This Stream Live?", name: "isLive", widget: "boolean", default: true }
-              - { label: "🖼️ Active Thumbnail Name", name: "activeThumbnail", widget: "string", hint: "Neechay di gayi list mein se koi ek naam likhein (e.g. ipl, laliga1)" }
+              - { label: "🖼️ Active Thumbnail Name", name: "activeThumbnail", widget: "string", hint: "Neechay di gayi list mein se Thumbnail ka exact Name likhein (e.g. ipl)" }
               
-              # --- THUMBNAILS (Fixed) ---
-              - label: "📸 Thumbnails Links"
+              # --- THUMBNAILS (FULLY DYNAMIC CRUD) ---
+              - label: "📸 Thumbnails Database"
                 name: "thumbnailsList"
-                widget: "object"
+                widget: "list"   # <-- 'object' se 'list' kar diya gaya hai
+                label_singular: "Thumbnail" # <-- "Add Thumbnail" ka button aayega
                 collapsed: true
-                hint: "Apne image links yahan paste karein. Jo link nahi chahiye usay khali chor dein."
+                summary: '🖼️ {{fields.name}}' # <-- Thumbnail ka naam bahar nazar aayega
+                hint: "Naya thumbnail add karne ke liye 'Add Thumbnail' par click karein."
                 fields:
-                  - { label: "🏏 IPL URL", name: "ipl", widget: "string", required: false }
-                  - { label: "🏏 Pak vs Bang URL", name: "pakvsbang", widget: "string", required: false }
-                  - { label: "⚽ La Liga 1 URL", name: "laliga1", widget: "string", required: false }
-                  - { label: "⚽ La Liga 2 URL", name: "laliga2", widget: "string", required: false }
-                  - { label: "⚽ La Liga 3 URL", name: "laliga3", widget: "string", required: false }
-                  - { label: "⚽ EPL 1 URL", name: "epl1", widget: "string", required: false }
-                  - { label: "⚽ EPL 2 URL", name: "epl2", widget: "string", required: false }
-                  - { label: "⚽ EPL 3 URL", name: "epl3", widget: "string", required: false }
-                  - { label: "🏆 Champions League URL", name: "cl", widget: "string", required: false }
-                  - { label: "⚽ Serie A URL", name: "SerieA", widget: "string", required: false }
-                  - { label: "⚽ France League 1 URL", name: "franceLeague1", widget: "string", required: false }
-                  - { label: "⚽ Saudi Pro League URL", name: "saudiProLeague", widget: "string", required: false }
-                  - { label: "⚽ Germany League URL", name: "germanyLeague", widget: "string", required: false }
+                  - { label: "Thumbnail Name (Key)", name: "name", widget: "string", hint: "Bina spaces ke naam likhein, e.g., ipl, psl, worldcup" }
+                  - { label: "Image URL", name: "url", widget: "string" }
 
               # --- CHANNELS LIST (CRUD) ---
               - label: "📡 Channels / Servers"
                 name: "channels"
                 widget: "list"
-                label_singular: "Channel" # <-- Button "Add Channel" ban jayega
+                label_singular: "Channel"
                 collapsed: true
                 summary: '📡 {{fields.name}}'
-                hint: "Ek stream mein naye channels (servers) daalne ke liye 'Add Channel' par click karein."
                 fields:
-                  - { label: "📝 Channel Name", name: "name", widget: "string", hint: "Example: Channel-1, Match-1" }
-                  - { label: "🔗 Channel Video ID", name: "videoId", widget: "string", hint: "Yahan apni stream ki ID ya link dalein" }
+                  - { label: "📝 Channel Name", name: "name", widget: "string" }
+                  - { label: "🔗 Channel Video ID", name: "videoId", widget: "string" }
 
 
 

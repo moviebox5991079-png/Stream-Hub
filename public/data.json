@@ -37,10 +37,10 @@
       ]
     },
     {
-      "videoTitle": "sports-2223456",
+      "videoTitle": "sports-2",
       "videoId": "",
       "isLive": true,
-      "activeThumbnail": "pakvsbang",
+      "activeThumbnail": "dfbPokal",
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
         "SerieA": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ50j3BSa8Cwy66KxJrKAlxc_xkt0-NdpWaA&s",
@@ -53,7 +53,8 @@
         "saudiProLeague": "https://perpetualgroup.com/wp-content/uploads/2024/08/spl-1.webp",
         "epl1": "https://w0.peakpx.com/wallpaper/22/114/HD-wallpaper-premier-league-football-england-logo-premier-league-emblem-blue-silk-texture-thumbnail.jpg",
         "epl2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNYhQXJavwkR9qk-rTiuBV6l-KzmK1wAJKOA&s",
-        "epl3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNwBQarZ2CuGTLMf20yXBZen_galjvuVaIw&s"
+        "epl3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNwBQarZ2CuGTLMf20yXBZen_galjvuVaIw&s",
+        "dfbPokal": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgwpOxKXj0TNphgEKvoaTSJdrOhfEqHtJFTA&s"
       },
       "channels": [
         {

@@ -58,7 +58,7 @@
       },
       "channels": [
         {
-          "name": "Channel-1",
+          "name": "Bayern München vs VfB Stuttgart - 11:00 PM - Today",
           "videoId": "15254299352683"
         },
         {
@@ -74,8 +74,8 @@
     {
       "videoTitle": "sports-3",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "laliga1",
+      "isLive": true,
+      "activeThumbnail": "SerieA",
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
         "SerieA": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ50j3BSa8Cwy66KxJrKAlxc_xkt0-NdpWaA&s",
@@ -92,11 +92,11 @@
       },
       "channels": [
         {
-          "name": "Channel-1",
+          "name": "Bologna vs Inter - 9:00 PM - 23/05/2026",
           "videoId": "15254341885547"
         },
         {
-          "name": "Channel-2",
+          "name": "Lazio vs Pisa - 11:45 PM - 23/05/2026",
           "videoId": "15254357089899"
         },
         {
@@ -228,39 +228,39 @@
       },
       "channels": [
         {
-          "name": "Celta Vigo vs Sevilla",
+          "name": "Celta Vigo vs Sevilla - 12:00 AM - Tomorrow",
           "videoId": "14204232736303"
         },
         {
-          "name": "Deportivo Alaves vs Rayo Vallecano",
+          "name": "Deportivo Alaves vs Rayo Vallecano - 12:00 AM - Tomorrow",
           "videoId": "14204288179759"
         },
         {
-          "name": "Espanyol vs Real Sociedad",
+          "name": "Espanyol vs Real Sociedad - 12:00 AM - Tomorrow",
           "videoId": "14204319768111"
         },
         {
-          "name": "Getafe vs Osasuna",
+          "name": "Getafe vs Osasuna - 12:00 AM - Tomorrow",
           "videoId": "14204331957807"
         },
         {
-          "name": "Girona vs Elche",
+          "name": "Girona vs Elche - 12:00 AM - Tomorrow",
           "videoId": "14204346572335"
         },
         {
-          "name": "Mallorca vs Real Oviedo",
+          "name": "Mallorca vs Real Oviedo - 12:00 AM - Tomorrow",
           "videoId": "14204361252399"
         },
         {
-          "name": "Real Betis vs Levante",
+          "name": "Real Betis vs Levante - 12:00 AM - Tomorrow",
           "videoId": "14204370492975"
         },
         {
-          "name": "Real Madrid vs Athletic Club",
+          "name": "Real Madrid vs Athletic Club - 12:00 AM - Tomorrow",
           "videoId": "14204395527727"
         },
         {
-          "name": "Valencia vs Barcelona",
+          "name": "Valencia vs Barcelona - 12:00 AM - Tomorrow",
           "videoId": "14204411387439"
         },
         {

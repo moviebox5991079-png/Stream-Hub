@@ -108,7 +108,7 @@
     {
       "videoTitle": "sports-4",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "epl1",
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
@@ -210,7 +210,7 @@
       "videoTitle": "sports-6",
       "videoId": "",
       "isLive": true,
-      "activeThumbnail": "laliga1",
+      "activeThumbnail": "laliga2",
       "thumbnailsList": {
         "germanyLeague": "https://media.dfl.de/sites/3/2018/02/BL_Teaser_BL-Logo_Pitch_HD-1200x675.jpg",
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
@@ -228,39 +228,39 @@
       },
       "channels": [
         {
-          "name": "Match-1",
+          "name": "Celta Vigo vs Sevilla",
           "videoId": "14204232736303"
         },
         {
-          "name": "Match-2",
+          "name": "Deportivo Alaves vs Rayo Vallecano",
           "videoId": "14204288179759"
         },
         {
-          "name": "Match-3",
+          "name": "Espanyol vs Real Sociedad",
           "videoId": "14204319768111"
         },
         {
-          "name": "Match-4",
+          "name": "Getafe vs Osasuna",
           "videoId": "14204331957807"
         },
         {
-          "name": "Match-5",
+          "name": "Girona vs Elche",
           "videoId": "14204346572335"
         },
         {
-          "name": "Match-6",
+          "name": "Mallorca vs Real Oviedo",
           "videoId": "14204361252399"
         },
         {
-          "name": "Match-7",
+          "name": "Real Betis vs Levante",
           "videoId": "14204370492975"
         },
         {
-          "name": "Match-8",
+          "name": "Real Madrid vs Athletic Club",
           "videoId": "14204395527727"
         },
         {
-          "name": "Match-9",
+          "name": "Valencia vs Barcelona",
           "videoId": "14204411387439"
         },
         {
@@ -272,7 +272,7 @@
     {
       "videoTitle": "sports-7",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "SerieA",
       "thumbnailsList": {
         "germanyLeague": "https://media.dfl.de/sites/3/2018/02/BL_Teaser_BL-Logo_Pitch_HD-1200x675.jpg",

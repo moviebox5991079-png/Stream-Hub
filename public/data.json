@@ -37,10 +37,10 @@
       ]
     },
     {
-      "videoTitle": "sports-2love",
+      "videoTitle": "sports-2",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "dfbPokal",
+      "isLive": true,
+      "activeThumbnail": "laliga2",
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
         "SerieA": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ50j3BSa8Cwy66KxJrKAlxc_xkt0-NdpWaA&s",
@@ -58,7 +58,7 @@
       },
       "channels": [
         {
-          "name": "Bayern München vs VfB Stuttgart - 11:00 PM - Today",
+          "name": "Villarreal vs Madrid Atlético - 12:00 AM - Tomorrow ",
           "videoId": "15254299352683"
         },
         {

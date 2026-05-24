@@ -39,7 +39,7 @@
     {
       "videoTitle": "sports-2love",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "dfbPokal",
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
@@ -74,7 +74,7 @@
     {
       "videoTitle": "sports-3",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "SerieA",
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
@@ -154,8 +154,8 @@
     {
       "videoTitle": "sports-5",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "epl3",
+      "isLive": true,
+      "activeThumbnail": "SerieA",
       "thumbnailsList": {
         "germanyLeague": "https://media.dfl.de/sites/3/2018/02/BL_Teaser_BL-Logo_Pitch_HD-1200x675.jpg",
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
@@ -173,27 +173,27 @@
       },
       "channels": [
         {
-          "name": "Match-1",
+          "name": "Napoli vs Udinese - 9:00 PM",
           "videoId": "15273689226859"
         },
         {
-          "name": "Match-2",
+          "name": "Milan vs Cagliari - 11:45 PM",
           "videoId": "15273713933931"
         },
         {
-          "name": "Match-3",
+          "name": "Cremonese vs Como - 11:45 PM",
           "videoId": "15273722257003"
         },
         {
-          "name": "Match-4",
+          "name": "Hellas Verona vs Roma - 11:45 PM",
           "videoId": "15273739624043"
         },
         {
-          "name": "Match-5",
+          "name": "Lecce vs Genoa - 11:45 PM",
           "videoId": "15273750175339"
         },
         {
-          "name": "Match-6",
+          "name": "Torino vs Juventus - 11:45 PM",
           "videoId": "15273760071275"
         },
         {

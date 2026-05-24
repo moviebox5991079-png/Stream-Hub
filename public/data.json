@@ -210,7 +210,7 @@
       "videoTitle": "sports-6",
       "videoId": "",
       "isLive": true,
-      "activeThumbnail": "laliga2",
+      "activeThumbnail": "epl2",
       "thumbnailsList": {
         "germanyLeague": "https://media.dfl.de/sites/3/2018/02/BL_Teaser_BL-Logo_Pitch_HD-1200x675.jpg",
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
@@ -228,43 +228,43 @@
       },
       "channels": [
         {
-          "name": "Celta Vigo vs Sevilla - 12:00 AM - Tomorrow",
+          "name": "Brighton vs Man United - 8:00 PM - Today ",
           "videoId": "14204232736303"
         },
         {
-          "name": "Deportivo Alaves vs Rayo Vallecano - 12:00 AM - Tomorrow",
+          "name": "Burnley vs Wolves - 8:00 PM - Today ",
           "videoId": "14204288179759"
         },
         {
-          "name": "Espanyol vs Real Sociedad - 12:00 AM - Tomorrow",
+          "name": "Crystal Palace vs Arsenal - 8:00 PM - Today ",
           "videoId": "14204319768111"
         },
         {
-          "name": "Getafe vs Osasuna - 12:00 AM - Tomorrow",
+          "name": "Fulham vs Newcastle - 8:00 PM - Today ",
           "videoId": "14204331957807"
         },
         {
-          "name": "Girona vs Elche - 12:00 AM - Tomorrow",
+          "name": "Liverpool vs Brentford - 8:00 PM - Today ",
           "videoId": "14204346572335"
         },
         {
-          "name": "Mallorca vs Real Oviedo - 12:00 AM - Tomorrow",
+          "name": "Man City vs Aston Villa - 8:00 PM - Today ",
           "videoId": "14204361252399"
         },
         {
-          "name": "Real Betis vs Levante - 12:00 AM - Tomorrow",
+          "name": "Nottm Forest vs Bournemouth - 8:00 PM - Today ",
           "videoId": "14204370492975"
         },
         {
-          "name": "Real Madrid vs Athletic Club - 12:00 AM - Tomorrow",
+          "name": "Sunderland vs Chelsea - 8:00 PM - Today ",
           "videoId": "14204395527727"
         },
         {
-          "name": "Valencia vs Barcelona - 12:00 AM - Tomorrow",
+          "name": "Tottenham vs Everton - 8:00 PM - Today ",
           "videoId": "14204411387439"
         },
         {
-          "name": "Match-10",
+          "name": "West Ham vs Leeds - 8:00 PM - Today ",
           "videoId": "14204424691247"
         }
       ]

@@ -41,7 +41,7 @@
     {
       "videoTitle": "sports-2",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "laliga2",
       "channels": [
         {

@@ -5,7 +5,7 @@
     {
       "videoTitle": "Sports-1",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "ipl",
       "thumbnailsList": {
         "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
@@ -23,7 +23,7 @@
       },
       "channels": [
         {
-          "name": "DC vs KKR - 7:00 pm - Today",
+          "name": "RCB vs GT- 7:00 pm - Today 26 May",
           "videoId": "15254238731883"
         },
         {
@@ -154,7 +154,7 @@
     {
       "videoTitle": "sports-5",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "germanyLeague",
       "thumbnailsList": {
         "germanyLeague": "https://media.dfl.de/sites/3/2018/02/BL_Teaser_BL-Logo_Pitch_HD-1200x675.jpg",

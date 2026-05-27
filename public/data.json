@@ -15,17 +15,18 @@
     "epl2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNYhQXJavwkR9qk-rTiuBV6l-KzmK1wAJKOA&s",
     "epl3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNwBQarZ2CuGTLMf20yXBZen_galjvuVaIw&s",
     "dfbPokal": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgwpOxKXj0TNphgEKvoaTSJdrOhfEqHtJFTA&s",
-    "germanyLeague": "https://media.dfl.de/sites/3/2018/02/BL_Teaser_BL-Logo_Pitch_HD-1200x675.jpg"
+    "germanyLeague": "https://media.dfl.de/sites/3/2018/02/BL_Teaser_BL-Logo_Pitch_HD-1200x675.jpg",
+    "Uefa_europa_conference_league": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNBzGKMmjI22aDrQfDI9BdrDZPm4MzsKGfRd3XJQ5zAw&s=10"
   },
   "streams": [
     {
       "videoTitle": "Sports-1",
       "videoId": "",
       "isLive": true,
-      "activeThumbnail": "ipl",
+      "activeThumbnail": "Uefa_europa_conference_league",
       "channels": [
         {
-          "name": "SRH vs RR - 7:00 pm - Today 27 May",
+          "name": "Palace vs Rayo Vallecano - 12:00 AM - Today 28 May",
           "videoId": "15254238731883"
         },
         {

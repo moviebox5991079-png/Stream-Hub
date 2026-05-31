@@ -16,7 +16,8 @@
     "epl3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNwBQarZ2CuGTLMf20yXBZen_galjvuVaIw&s",
     "dfbPokal": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgwpOxKXj0TNphgEKvoaTSJdrOhfEqHtJFTA&s",
     "germanyLeague": "https://media.dfl.de/sites/3/2018/02/BL_Teaser_BL-Logo_Pitch_HD-1200x675.jpg",
-    "Uefa_europa_conference_league": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNBzGKMmjI22aDrQfDI9BdrDZPm4MzsKGfRd3XJQ5zAw&s=10"
+    "Uefa_europa_conference_league": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNBzGKMmjI22aDrQfDI9BdrDZPm4MzsKGfRd3XJQ5zAw&s=10",
+    "fifaFriendlies": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf4xk98bGa7elzuRj3bIYfXvTSzN-Bvrp24CSveBK69_kQRQbA13XLxFow&s=10"
   },
   "streams": [
     {
@@ -42,19 +43,19 @@
     {
       "videoTitle": "sports-2",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "laliga2",
+      "isLive": true,
+      "activeThumbnail": "fifaFriendlies",
       "channels": [
         {
-          "name": "Villarreal vs Madrid Atlético - 12:00 AM - Tomorrow ",
+          "name": "Germany vs Finland - Today 31 May 🔴 ",
           "videoId": "15254299352683"
         },
         {
-          "name": "Channel-2",
+          "name": "",
           "videoId": "15254308986475"
         },
         {
-          "name": "Channel-3",
+          "name": "",
           "videoId": "15254328122987"
         }
       ]

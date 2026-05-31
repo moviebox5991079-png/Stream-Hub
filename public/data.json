@@ -23,7 +23,7 @@
     {
       "videoTitle": "Sports-1",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "ipl",
       "channels": [
         {

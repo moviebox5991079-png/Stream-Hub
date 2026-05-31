@@ -23,18 +23,18 @@
       "videoTitle": "Sports-1",
       "videoId": "",
       "isLive": true,
-      "activeThumbnail": "cl",
+      "activeThumbnail": "ipl",
       "channels": [
         {
-          "name": "PSG vs Arsenal - Today 30 May 🔴 ",
+          "name": "RCB vs GT Final - Today 31 May 🔴 ",
           "videoId": "15254238731883"
         },
         {
-          "name": "PSG vs Arsenal - Today 30 May 🔴_ch-2",
+          "name": "RCB vs GT Final - Today 31 May 🔴 Ch-2",
           "videoId": "15254260751979"
         },
         {
-          "name": "ch-3",
+          "name": "",
           "videoId": "15254285524587"
         }
       ]

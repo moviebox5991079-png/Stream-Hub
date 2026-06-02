@@ -18,21 +18,22 @@
     "germanyLeague": "https://media.dfl.de/sites/3/2018/02/BL_Teaser_BL-Logo_Pitch_HD-1200x675.jpg",
     "Uefa_europa_conference_league": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNBzGKMmjI22aDrQfDI9BdrDZPm4MzsKGfRd3XJQ5zAw&s=10",
     "fifaFriendlies": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf4xk98bGa7elzuRj3bIYfXvTSzN-Bvrp24CSveBK69_kQRQbA13XLxFow&s=10",
-    "pak_Vs_aus": "https://media.crictracker.com/media/attachments/1780293376738_Pakistan-and-Australia.jpeg"
+    "pak_Vs_aus": "https://media.crictracker.com/media/attachments/1780293376738_Pakistan-and-Australia.jpeg",
+    "cricket_all": "https://t4.ftcdn.net/jpg/14/73/25/83/360_F_1473258395_ouRUkjIQ5TnRlP2tioWhc3DGAn1NEerY.jpg"
   },
   "streams": [
     {
       "videoTitle": "Sports-1",
       "videoId": "",
       "isLive": true,
-      "activeThumbnail": "pak_Vs_aus",
+      "activeThumbnail": "cricket_all",
       "channels": [
         {
-          "name": "Pak vs Aus 2nd ODI - Today 2 june 🔴 ",
+          "name": "Pak vs Aus 2nd ODI - Men - Today 2 june 🔴 ",
           "videoId": "15254238731883"
         },
         {
-          "name": "",
+          "name": "India vs England T20 - Women - Today 2 june 🔴 ",
           "videoId": "15254260751979"
         },
         {

@@ -17,21 +17,22 @@
     "dfbPokal": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgwpOxKXj0TNphgEKvoaTSJdrOhfEqHtJFTA&s",
     "germanyLeague": "https://media.dfl.de/sites/3/2018/02/BL_Teaser_BL-Logo_Pitch_HD-1200x675.jpg",
     "Uefa_europa_conference_league": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNBzGKMmjI22aDrQfDI9BdrDZPm4MzsKGfRd3XJQ5zAw&s=10",
-    "fifaFriendlies": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf4xk98bGa7elzuRj3bIYfXvTSzN-Bvrp24CSveBK69_kQRQbA13XLxFow&s=10"
+    "fifaFriendlies": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf4xk98bGa7elzuRj3bIYfXvTSzN-Bvrp24CSveBK69_kQRQbA13XLxFow&s=10",
+    "pak_Vs_aus": "https://media.crictracker.com/media/attachments/1780293376738_Pakistan-and-Australia.jpeg"
   },
   "streams": [
     {
       "videoTitle": "Sports-1",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "ipl",
       "channels": [
         {
-          "name": "RCB vs GT Final - Today 31 May 🔴 ",
+          "name": "Pak vs Aus 2nd ODI - Today 2 june 🔴 ",
           "videoId": "15254238731883"
         },
         {
-          "name": "RCB vs GT Final - Today 31 May 🔴 Ch-2",
+          "name": "",
           "videoId": "15254260751979"
         },
         {
@@ -115,7 +116,7 @@
     {
       "videoTitle": "sports-5",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "fifaFriendlies",
       "channels": [
         {

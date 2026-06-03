@@ -25,7 +25,7 @@
     {
       "videoTitle": "Sports-1",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "cricket_all",
       "channels": [
         {
@@ -117,39 +117,39 @@
     {
       "videoTitle": "sports-5",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "fifaFriendlies",
       "channels": [
         {
-          "name": "Croatia vs Belgium 🔴 ",
+          "name": "Gibraltar vs British Virgin Islands - 10:00 PM - 🔴 - Asian Time Standard",
           "videoId": "15273689226859"
         },
         {
-          "name": "Georgia vs Romania 🔴 ",
+          "name": "Albania vs Israel - 11:00 PM - 🔴 - Asian Time Standard",
           "videoId": "15273713933931"
         },
         {
-          "name": "Morocco vs Madagascar🔴 ",
+          "name": "DR Congo vs Denmark - 11:00 PM - 🔴 - Asian Time Standard",
           "videoId": "15273722257003"
         },
         {
-          "name": "Wales vs Ghana🔴 ",
+          "name": "Luxembourg vs Italy - 11:45 PM - 🔴 - Asian Time Standard",
           "videoId": "15273739624043"
         },
         {
-          "name": "Haiti vs New Zealand 🔴 ",
+          "name": "Netherlands vs Algeria - 11:45 PM - 🔴 - Asian Time Standard",
           "videoId": "15273750175339"
         },
         {
-          "name": "",
+          "name": "Poland vs Nigeria - 11:45 PM - 🔴 - Asian Time Standard",
           "videoId": "15273760071275"
         },
         {
-          "name": "",
+          "name": "Panama vs Dominican Republic - 5:45 AM - 🔴 - Asian Time Standard",
           "videoId": "15273767935595"
         },
         {
-          "name": "",
+          "name": "South Korea vs El Salvador - 6:00 AM - 🔴 - Asian Time Standard",
           "videoId": "15273778683499"
         }
       ]

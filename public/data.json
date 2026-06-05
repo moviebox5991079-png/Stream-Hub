@@ -118,7 +118,7 @@
     {
       "videoTitle": "sports-5",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "fifaFriendlies",
       "channels": [
         {
@@ -158,7 +158,7 @@
     {
       "videoTitle": "sports-6",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "fifaFriendlies2",
       "channels": [
         {

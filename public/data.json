@@ -19,7 +19,8 @@
     "Uefa_europa_conference_league": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNBzGKMmjI22aDrQfDI9BdrDZPm4MzsKGfRd3XJQ5zAw&s=10",
     "fifaFriendlies": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf4xk98bGa7elzuRj3bIYfXvTSzN-Bvrp24CSveBK69_kQRQbA13XLxFow&s=10",
     "pak_Vs_aus": "https://media.crictracker.com/media/attachments/1780293376738_Pakistan-and-Australia.jpeg",
-    "cricket_all": "https://t4.ftcdn.net/jpg/14/73/25/83/360_F_1473258395_ouRUkjIQ5TnRlP2tioWhc3DGAn1NEerY.jpg"
+    "cricket_all": "https://t4.ftcdn.net/jpg/14/73/25/83/360_F_1473258395_ouRUkjIQ5TnRlP2tioWhc3DGAn1NEerY.jpg",
+    "fifaFriendlies2": "https://upload.wikimedia.org/wikipedia/en/0/00/FIFA_Series_2026_-_International_Friendlies.webp"
   },
   "streams": [
     {
@@ -117,39 +118,39 @@
     {
       "videoTitle": "sports-5",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "fifaFriendlies",
       "channels": [
         {
-          "name": "Northern Ireland vs Guinea - 9:00 PM - 🔴 - 4 or 5 June Matches - Asian Time Standard",
+          "name": "Puerto Rico vs Saudi Arabia - 4:00 AM - 🔴 - 4 or 5 June Matches - Asian Time Standard",
           "videoId": "15273689226859"
         },
         {
-          "name": "Slovenia vs Cyprus - 9:00 PM - 🔴 - 4 or 5 June Matches - Asian Time Standard",
+          "name": "Canada vs Ireland - 4:45 AM - 🔴 - 4 or 5 June Matches - Asian Time Standard",
           "videoId": "15273713933931"
         },
         {
-          "name": "Andorra vs Liechtenstein - 10:00 PM - 🔴 - 4 or 5 June Matches - Asian Time Standard",
+          "name": "Haiti vs Peru - 5:00 AM - 🔴 - 4 or 5 June Matches - Asian Time Standard",
           "videoId": "15273722257003"
         },
         {
-          "name": "Sweden vs Greece - 10:00 PM - 🔴 - 4 or 5 June Matches - Asian Time Standard",
+          "name": "",
           "videoId": "15273739624043"
         },
         {
-          "name": "Spain vs Iraq - 12:00 AM - 🔴 - 4 or 5 June Matches - Asian Time Standard",
+          "name": "",
           "videoId": "15273750175339"
         },
         {
-          "name": "France vs Ivory Coast - 12:10 AM - 🔴 - 4 or 5 June Matches - Asian Time Standard",
+          "name": "",
           "videoId": "15273760071275"
         },
         {
-          "name": "Czechia vs Guatemala - 5:00 AM - 🔴 - 4 or 5 June Matches - Asian Time Standard",
+          "name": "",
           "videoId": "15273767935595"
         },
         {
-          "name": "Mexico vs Serbia - 7:00 AM - 🔴 - 4 or 5 June Matches - Asian Time Standard",
+          "name": "",
           "videoId": "15273778683499"
         }
       ]
@@ -157,47 +158,47 @@
     {
       "videoTitle": "sports-6",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "epl2",
+      "isLive": true,
+      "activeThumbnail": "fifaFriendlies2",
       "channels": [
         {
-          "name": "Brighton vs Man United - 8:00 PM - Today ",
+          "name": "Belarus vs Syria - 9:00 PM - 🔴 - 5 or 6 June Matches - Asian Time Standard",
           "videoId": "14204232736303"
         },
         {
-          "name": "Burnley vs Wolves - 8:00 PM - Today ",
+          "name": "Georgia vs Bahrain - 9:00 PM - 🔴 - 5 or 6 June Matches - Asian Time Standard",
           "videoId": "14204288179759"
         },
         {
-          "name": "Crystal Palace vs Arsenal - 8:00 PM - Today ",
+          "name": "Slovakia vs Montenegro - 9:30 PM - 🔴 - 5 or 6 June Matches - Asian Time Standard",
           "videoId": "14204319768111"
         },
         {
-          "name": "Fulham vs Newcastle - 8:00 PM - Today ",
+          "name": "Moldova vs Bulgaria - 10:00 PM - 🔴 - 5 or 6 June Matches - Asian Time Standard",
           "videoId": "14204331957807"
         },
         {
-          "name": "Liverpool vs Brentford - 8:00 PM - Today ",
+          "name": "Russia vs Burkina Faso - 10:00 PM - 🔴 - 5 or 6 June Matches - Asian Time Standard",
           "videoId": "14204346572335"
         },
         {
-          "name": "Man City vs Aston Villa - 8:00 PM - Today ",
+          "name": "San Marino vs Bangladesh - 10:00 PM - 🔴 - 5 or 6 June Matches - Asian Time Standard",
           "videoId": "14204361252399"
         },
         {
-          "name": "Nottm Forest vs Bournemouth - 8:00 PM - Today ",
+          "name": "Hungary vs Finland - 10:45 PM - 🔴 - 5 or 6 June Matches - Asian Time Standard",
           "videoId": "14204370492975"
         },
         {
-          "name": "Sunderland vs Chelsea - 8:00 PM - Today ",
+          "name": "Azerbaijan vs Malta - 11:00 PM - 🔴 - 5 or 6 June Matches - Asian Time Standard",
           "videoId": "14204395527727"
         },
         {
-          "name": "Tottenham vs Everton - 8:00 PM - Today ",
+          "name": "",
           "videoId": "14204411387439"
         },
         {
-          "name": "West Ham vs Leeds - 8:00 PM - Today ",
+          "name": "",
           "videoId": "14204424691247"
         }
       ]

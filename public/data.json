@@ -158,7 +158,7 @@
     {
       "videoTitle": "Fifa-Friendly-Part1",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "fifaFriendlies2",
       "channels": [
         {
@@ -206,7 +206,7 @@
     {
       "videoTitle": "Fifa-Friendly-Part2",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "fifaFriendlies",
       "channels": [
         {

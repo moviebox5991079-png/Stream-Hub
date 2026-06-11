@@ -20,25 +20,26 @@
     "fifaFriendlies": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf4xk98bGa7elzuRj3bIYfXvTSzN-Bvrp24CSveBK69_kQRQbA13XLxFow&s=10",
     "pak_Vs_aus": "https://media.crictracker.com/media/attachments/1780293376738_Pakistan-and-Australia.jpeg",
     "cricket_all": "https://t4.ftcdn.net/jpg/14/73/25/83/360_F_1473258395_ouRUkjIQ5TnRlP2tioWhc3DGAn1NEerY.jpg",
-    "fifaFriendlies2": "https://upload.wikimedia.org/wikipedia/en/0/00/FIFA_Series_2026_-_International_Friendlies.webp"
+    "fifaFriendlies2": "https://upload.wikimedia.org/wikipedia/en/0/00/FIFA_Series_2026_-_International_Friendlies.webp",
+    "Fifa2026": "https://mir-s3-cdn-cf.behance.net/projects/404/068660250702437.Y3JvcCwxMDA3LDc4OCwxOTcsMA.jpg"
   },
   "streams": [
     {
-      "videoTitle": "More Matches Starts From 12 June FIFA-2026",
+      "videoTitle": "Fifa - 2026 Group A Match 11 June or 12 June",
       "videoId": "",
       "isLive": true,
-      "activeThumbnail": "fifaFriendlies",
+      "activeThumbnail": "Fifa2026",
       "channels": [
         {
-          "name": "",
+          "name": "Fifa 2026 Ceremony Today at 10:00 pm - Asain Time Standard 🔴 ",
           "videoId": "15254238731883"
         },
         {
-          "name": "",
+          "name": "Mexico vs South Africa - 12:00 am - Asian Time Standard 🔴 ",
           "videoId": "15254260751979"
         },
         {
-          "name": "",
+          "name": "South Korea vs Czechia - 7:00 am - Asian Time Standard 🔴 ",
           "videoId": "15254285524587"
         }
       ]

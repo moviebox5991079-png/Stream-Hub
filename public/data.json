@@ -1,6 +1,6 @@
 {
   "isLive": true,
-  "title": "⚠️ Note: Slow internet ki wajah se aksar sound aur video aage peeche ho jate hain. Isko theek karne ke liye bas video ko halka sa peeche karein aur screen ke bottom-left par 'Live' ka button daba dein! ( check Your Internet ) .!!Copyright © 2026 bulbul4u-live. All Rights Reserved.",
+  "title": "⚠️ Note: Due to slow internet, the audio and video often get out of sync. To fix this, simply rewind the video slightly and press the 'Live' button at the bottom-left of the screen! (Check your internet).!! Copyright © 2026 bulbul4u-live. All Rights Reserved.",
   "thumbnails": {
     "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
     "SerieA": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ50j3BSa8Cwy66KxJrKAlxc_xkt0-NdpWaA&s",
@@ -27,19 +27,19 @@
     {
       "videoTitle": "Fifa - 2026 Matches 12 or 13 June",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "Fifa2026",
       "channels": [
         {
-          "name": "Match 1 - Canada vs Bosnia and Herzegovina - 12:00 AM - Asian Time Standard 🔴 ",
+          "name": "Qatar vs Switzerland - 12:00 AM - Asian Time Standard 🔴",
           "videoId": "15254238731883"
         },
         {
-          "name": "Match 2 -USA vs Paraguay - 6:00 AM - Asian Time Standard 🔴 ",
+          "name": "Brazil vs Morocco - 3:00 AM - Asian Time Standard 🔴",
           "videoId": "15254260751979"
         },
         {
-          "name": "",
+          "name": "Haiti vs Scotland - 6:00 AM - Asian Time Standard 🔴",
           "videoId": "15254285524587"
         }
       ]
@@ -85,33 +85,33 @@
       ]
     },
     {
-      "videoTitle": "sports-4",
+      "videoTitle": "Fifa - 2026 Matches 13 or 14 June",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "epl1",
+      "isLive": true,
+      "activeThumbnail": "Fifa2026",
       "channels": [
         {
-          "name": "Match-1",
+          "name": "Match 5/104 - Qatar vs Switzerland - 12:00 AM - Asian Time Standard 🔴 ",
           "videoId": "15255022345835"
         },
         {
-          "name": "Match-2",
+          "name": "Match 6/104 - Brazil vs Morocco - 3:00 AM - Asian Time Standard 🔴 ",
           "videoId": "15255038074475"
         },
         {
-          "name": "Match-3",
+          "name": "Match 7/104 - Haiti vs Scotland - 6:00 AM - Asian Time Standard 🔴 ",
           "videoId": "15255045480043"
         },
         {
-          "name": "Match-4",
+          "name": "Match 8/104 - Australia vs Turkiye - 9:00 AM - Asian Time Standard 🔴 ",
           "videoId": "15255208599147"
         },
         {
-          "name": "Match-5",
+          "name": "",
           "videoId": "15255217708651"
         },
         {
-          "name": "Match-6",
+          "name": "",
           "videoId": "15255227670123"
         }
       ]

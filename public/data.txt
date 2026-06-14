@@ -1,3 +1,317 @@
+// below code is good-1
+
+{
+  "isLive": true,
+  "title": "⚠️ Note: Due to slow internet, the audio and video often get out of sync. To fix this, simply rewind the video slightly and press the 'Live' button at the bottom-left of the screen! (Check your internet).!! Copyright © 2026 bulbul4u-live. All Rights Reserved.",
+  "thumbnails": {
+    "ipl": "https://thesamikhsya.com/wp-content/uploads/2020/08/ipl.jpg",
+    "SerieA": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ50j3BSa8Cwy66KxJrKAlxc_xkt0-NdpWaA&s",
+    "laliga1": "https://w0.peakpx.com/wallpaper/125/610/HD-wallpaper-laliga-golden-logo-football-leagues-artwork-la-liga-brown-metal-background-creative-laliga-logo-brands-laliga-thumbnail.jpg",
+    "laliga2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAYkeMf-fM1_LJReoyzIuNh-rC5KQZWsXclA&s",
+    "franceLeague1": "https://1000logos.net/wp-content/uploads/2019/01/Ligue-1-Logo.jpg",
+    "laliga3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLDxyZ3-b-NHD1rg7LC6b-GMsjnF6GMg4Zxw&s",
+    "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s",
+    "pakvsbang": "https://www.shutterstock.com/image-vector/pakistan-vs-bangladesh-match-cricket-260nw-2566876727.jpg",
+    "saudiProLeague": "https://perpetualgroup.com/wp-content/uploads/2024/08/spl-1.webp",
+    "epl1": "https://w0.peakpx.com/wallpaper/22/114/HD-wallpaper-premier-league-football-england-logo-premier-league-emblem-blue-silk-texture-thumbnail.jpg",
+    "epl2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNYhQXJavwkR9qk-rTiuBV6l-KzmK1wAJKOA&s",
+    "epl3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNwBQarZ2CuGTLMf20yXBZen_galjvuVaIw&s",
+    "dfbPokal": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgwpOxKXj0TNphgEKvoaTSJdrOhfEqHtJFTA&s",
+    "germanyLeague": "https://media.dfl.de/sites/3/2018/02/BL_Teaser_BL-Logo_Pitch_HD-1200x675.jpg",
+    "Uefa_europa_conference_league": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNBzGKMmjI22aDrQfDI9BdrDZPm4MzsKGfRd3XJQ5zAw&s=10",
+    "fifaFriendlies": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf4xk98bGa7elzuRj3bIYfXvTSzN-Bvrp24CSveBK69_kQRQbA13XLxFow&s=10",
+    "pak_Vs_aus": "https://media.crictracker.com/media/attachments/1780293376738_Pakistan-and-Australia.jpeg",
+    "cricket_all": "https://t4.ftcdn.net/jpg/14/73/25/83/360_F_1473258395_ouRUkjIQ5TnRlP2tioWhc3DGAn1NEerY.jpg",
+    "fifaFriendlies2": "https://upload.wikimedia.org/wikipedia/en/0/00/FIFA_Series_2026_-_International_Friendlies.webp",
+    "Fifa2026": "https://mir-s3-cdn-cf.behance.net/projects/404/068660250702437.Y3JvcCwxMDA3LDc4OCwxOTcsMA.jpg"
+  },
+  "streams": [
+    {
+      "videoTitle": "Fifa - 2026 Matches 12 or 13 June",
+      "videoId": "",
+      "isLive": false,
+      "activeThumbnail": "Fifa2026",
+      "channels": [
+        {
+          "name": "Qatar vs Switzerland - 12:00 AM - Asian Time Standard 🔴",
+          "videoId": "15254238731883"
+        },
+        {
+          "name": "Brazil vs Morocco - 3:00 AM - Asian Time Standard 🔴",
+          "videoId": "15254260751979"
+        },
+        {
+          "name": "Haiti vs Scotland - 6:00 AM - Asian Time Standard 🔴",
+          "videoId": "15254285524587"
+        }
+      ]
+    },
+    {
+      "videoTitle": "sports-2",
+      "videoId": "",
+      "isLive": false,
+      "activeThumbnail": "fifaFriendlies",
+      "channels": [
+        {
+          "name": "Germany vs Finland - Today 31 May 🔴 - Match 1",
+          "videoId": "15254299352683"
+        },
+        {
+          "name": "USA Vs Senegal - 1 June 🔴 -  Match 2",
+          "videoId": "15254308986475"
+        },
+        {
+          "name": "Brazil Vs Panama - 1 June 🔴  - Match 3",
+          "videoId": "15254328122987"
+        }
+      ]
+    },
+    {
+      "videoTitle": "sports-3",
+      "videoId": "",
+      "isLive": false,
+      "activeThumbnail": "SerieA",
+      "channels": [
+        {
+          "name": "Bologna vs Inter - 9:00 PM - 23/05/2026",
+          "videoId": "15254341885547"
+        },
+        {
+          "name": "Lazio vs Pisa - 11:45 PM - 23/05/2026",
+          "videoId": "15254357089899"
+        },
+        {
+          "name": "Channel-3",
+          "videoId": "15254367510123"
+        }
+      ]
+    },
+    {
+      "videoTitle": "Fifa - 2026 Matches 13 or 14 June",
+      "videoId": "",
+      "isLive": true,
+      "activeThumbnail": "Fifa2026",
+      "channels": [
+        {
+          "name": "Match 5/104 - Qatar vs Switzerland - 12:00 AM - Asian Time Standard 🔴 ",
+          "videoId": "15255022345835"
+        },
+        {
+          "name": "Match 6/104 - Brazil vs Morocco - 3:00 AM - Asian Time Standard 🔴 ",
+          "videoId": "15255038074475"
+        },
+        {
+          "name": "Match 7/104 - Haiti vs Scotland - 6:00 AM - Asian Time Standard 🔴 ",
+          "videoId": "15255045480043"
+        },
+        {
+          "name": "Match 8/104 - Australia vs Turkiye - 9:00 AM - Asian Time Standard 🔴 ",
+          "videoId": "15255208599147"
+        },
+        {
+          "name": "",
+          "videoId": "15255217708651"
+        },
+        {
+          "name": "",
+          "videoId": "15255227670123"
+        }
+      ]
+    },
+    {
+      "videoTitle": "sports-5",
+      "videoId": "",
+      "isLive": false,
+      "activeThumbnail": "fifaFriendlies",
+      "channels": [
+        {
+          "name": "Puerto Rico vs Saudi Arabia - 4:00 AM - 🔴 - 4 or 5 June Matches - Asian Time Standard",
+          "videoId": "15273689226859"
+        },
+        {
+          "name": "Canada vs Ireland - 4:45 AM - 🔴 - 4 or 5 June Matches - Asian Time Standard",
+          "videoId": "15273713933931"
+        },
+        {
+          "name": "Haiti vs Peru - 5:00 AM - 🔴 - 4 or 5 June Matches - Asian Time Standard",
+          "videoId": "15273722257003"
+        },
+        {
+          "name": "",
+          "videoId": "15273739624043"
+        },
+        {
+          "name": "",
+          "videoId": "15273750175339"
+        },
+        {
+          "name": "",
+          "videoId": "15273760071275"
+        },
+        {
+          "name": "",
+          "videoId": "15273767935595"
+        },
+        {
+          "name": "",
+          "videoId": "15273778683499"
+        }
+      ]
+    },
+    {
+      "videoTitle": "Fifa-Friendly-Part1",
+      "videoId": "",
+      "isLive": false,
+      "activeThumbnail": "fifaFriendlies2",
+      "channels": [
+        {
+          "name": "Belgium vs Tunisia - 6:00 PM - - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "videoId": "14204232736303"
+        },
+        {
+          "name": "Armenia vs Kazakhstan - 7:00 PM - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "videoId": "14204288179759"
+        },
+        {
+          "name": "Estonia vs Faroe Islands - 8:00 PM - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "videoId": "14204319768111"
+        },
+        {
+          "name": "Gibraltar vs Cayman Islands - 10:00 PM - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "videoId": "14204331957807"
+        },
+        {
+          "name": "Portugal vs Chile - 10:45 PM - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "videoId": "14204346572335"
+        },
+        {
+          "name": "Romania vs Wales - 10:45 PM - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "videoId": "14204361252399"
+        },
+        {
+          "name": "Albania vs Luxembourg - 11:00 PM - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "videoId": "14204370492975"
+        },
+        {
+          "name": "USA vs Germany - 11:30 PM - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "videoId": "14204395527727"
+        },
+        {
+          "name": "Panama vs Bosnia and Herzegovina - 12:00 AM - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "videoId": "14204411387439"
+        },
+        {
+          "name": "Switzerland vs Australia - 12:00 AM - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "videoId": "14204424691247"
+        }
+      ]
+    },
+    {
+      "videoTitle": "Fifa-Friendly-Part2",
+      "videoId": "",
+      "isLive": false,
+      "activeThumbnail": "fifaFriendlies",
+      "channels": [
+        {
+          "name": "Bolivia vs Scotland - 1:00 AM - - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "videoId": "14204490948143"
+        },
+        {
+          "name": "England vs New Zealand - 1:00 AM - - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "videoId": "14204506742319"
+        },
+        {
+          "name": "Qatar vs El Salvador - 1:00 AM - - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "videoId": "14204523322927"
+        },
+        {
+          "name": "Brazil vs Egypt - 3:00 AM - - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "videoId": "14204540034607"
+        },
+        {
+          "name": "Turkiye vs Venezuela - 3:00 AM - - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "videoId": "14204555304495"
+        },
+        {
+          "name": "Argentina vs Honduras - 5:00 AM - - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "videoId": "14204565200431"
+        },
+        {
+          "name": "",
+          "videoId": "14204577259055"
+        },
+        {
+          "name": "",
+          "videoId": "14204592528943"
+        },
+        {
+          "name": "",
+          "videoId": "14204602621487"
+        },
+        {
+          "name": "Match-10",
+          "videoId": "14206184136239"
+        }
+      ]
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // below code 26 may 2026 
 
 {

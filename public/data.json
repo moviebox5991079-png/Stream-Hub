@@ -123,7 +123,7 @@
       "activeThumbnail": "Fifa2026",
       "channels": [
         {
-          "name": "USA vs Australia - 12:00 AM - Match 1 Live",
+          "name": "Main ",
           "videoId": "15273689226859"
         },
         {
@@ -131,27 +131,27 @@
           "videoId": "15273713933931"
         },
         {
-          "name": "Scotland vs Morocco - 3:00 AM - Match 3 Live",
+          "name": "",
           "videoId": "15273722257003"
         },
         {
-          "name": "Brazil vs Haiti - 5:30 AM - Match 4 Live",
+          "name": "",
           "videoId": "15273739624043"
         },
         {
-          "name": "Netherlands vs Sweden - 10:00 PM - Match 5 Live",
+          "name": "",
           "videoId": "15273750175339"
         },
         {
-          "name": "Germany vs Ivory Coast - 1:00 AM - Match 6 Live",
+          "name": "",
           "videoId": "15273760071275"
         },
         {
-          "name": "Ecuador vs Curacao - 5:00 AM - Match 7 Live",
+          "name": "",
           "videoId": "15273767935595"
         },
         {
-          "name": "Tunisia vs Japan - 9:00 AM - Match 8 Live",
+          "name": "",
           "videoId": "15273778683499"
         }
       ]

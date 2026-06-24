@@ -49,22 +49,31 @@ export default function HomeClient({ initialData }: HomeProps) {
   const navbarRef = useRef<HTMLElement>(null);
   const welcomeModalRef = useRef<HTMLDivElement>(null);
 
-  // === UPDATE: SMART TIME MATCHER LOGIC ===
+  // === UPDATE: SMART TIME & EXPIRATION MATCHER LOGIC ===
   const getSmartActiveChannel = (channels: ChannelData[] | undefined) => {
     if (!channels || channels.length === 0) return null;
 
-    // 1. Get current time in PKT (UTC+5)
+    // 1. Current time in PKT (UTC+5)
     const now = new Date();
     const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
     const pktDate = new Date(utc + (3600000 * 5));
     const currentMinutes = pktDate.getHours() * 60 + pktDate.getMinutes();
 
-    // 2. Parse times from channel names
-    const parsedChannels = channels.map(ch => {
-      // Regex to find time like 10:00 PM or 1:00 AM
+    // 2. Parse times & durations from channel names
+    const parsedChannels = channels.map((ch, index) => {
+      // Regex for Start Time (10:00 PM)
       const timeMatch = ch.name.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
-      let timeInMins = -1;
       
+      // Regex for Duration flag like [2H], (3h), [8H]
+      const durationMatch = ch.name.match(/\[(\d+)H\]/i) || ch.name.match(/\((\d+)H\)/i);
+      
+      let timeInMins = -1;
+      let durationMins = 150; // Default 2.5 hours (150 mins) agar koi flag na ho
+      
+      if (durationMatch) {
+        durationMins = parseInt(durationMatch[1], 10) * 60; // Convert hours to minutes
+      }
+
       if (timeMatch) {
         let hours = parseInt(timeMatch[1], 10);
         const mins = parseInt(timeMatch[2], 10);
@@ -74,30 +83,48 @@ export default function HomeClient({ initialData }: HomeProps) {
         if (hours < 12 && period === 'PM') hours += 12;
         timeInMins = hours * 60 + mins;
       }
+
+      // Check if match is expired
+      let isExpired = false;
+      if (timeInMins !== -1) {
+        let delta = currentMinutes - timeInMins;
+        // Handle midnight crossover (e.g. started 11 PM, now it's 1 AM)
+        if (delta < -720) delta += 1440; 
+        if (delta > 720) delta -= 1440; 
+        
+        // Agar match ko start hue uski duration se zyada time ho gaya hai, tou expired.
+        if (delta > durationMins) {
+          isExpired = true;
+        }
+      }
       
       return {
         ...ch,
+        originalIndex: index,
         timeInMins,
-        hasPriority: ch.name.includes('!') // ! sign check
+        hasPriority: ch.name.includes('!'),
+        isExpired
       };
     });
 
-    const timeChannels = parsedChannels.filter(c => c.timeInMins !== -1);
+    // 3. Filter out expired matches and ones without valid time
+    const validFutureOrLiveChannels = parsedChannels.filter(c => c.timeInMins !== -1 && !c.isExpired);
     
-    // If no time is found in the strings, fallback to default logic
-    if (timeChannels.length === 0) {
+    // === THE FALLBACK LOGIC ===
+    // Agar saare matches expire ho gaye hain ya kisi ka time hi nahi diya, tou index 0 (24/7) return karo.
+    if (validFutureOrLiveChannels.length === 0) {
        const priorityFallback = parsedChannels.find(c => c.hasPriority);
        return priorityFallback ? priorityFallback.videoId : channels[0].videoId;
     }
 
-    // Sort ascending by time
-    timeChannels.sort((a, b) => a.timeInMins - b.timeInMins);
+    // 4. Sort ascending by time (bina time modify kiye)
+    validFutureOrLiveChannels.sort((a, b) => a.timeInMins - b.timeInMins);
 
     let bestCandidate = null;
 
-    // 3. Find the best candidate (Current match OR Upcoming within 10 mins)
-    const timeGroups: { [key: number]: typeof timeChannels } = {};
-    timeChannels.forEach(c => {
+    // Grouping by time to handle multiple matches at the exact same time
+    const timeGroups: { [key: number]: typeof validFutureOrLiveChannels } = {};
+    validFutureOrLiveChannels.forEach(c => {
        if (!timeGroups[c.timeInMins]) timeGroups[c.timeInMins] = [];
        timeGroups[c.timeInMins].push(c);
     });
@@ -108,24 +135,35 @@ export default function HomeClient({ initialData }: HomeProps) {
        const t = uniqueTimes[i];
        const group = timeGroups[t];
        
-       // Priority tie-breaker: Pick the one with "!" if times match, else pick the first
+       // Tie-breaker: ! wala pick karo, otherwise group ka pehla match
        const winnerInGroup = group.find(c => c.hasPriority) || group[0];
 
-       if (currentMinutes >= t) {
-           // Match has started, so it's currently our best candidate
+       // Calculate real delta considering midnight
+       let delta = currentMinutes - t;
+       if (delta < -720) delta += 1440;
+       if (delta > 720) delta -= 1440;
+
+       if (delta >= 0) {
+           // Match start ho chuka hai (aur expired nahi hai kyunke hum filter kar chuke hain)
            bestCandidate = winnerInGroup;
-       } else if (t - currentMinutes <= 10) {
-           // Match is in the future, BUT within 10 minutes (Priority shifts!)
+       } else if (Math.abs(delta) <= 10) {
+           // Match next 10 minutes mein start hone wala hai (Pre-match window)
            bestCandidate = winnerInGroup;
            break; 
+       } else if (bestCandidate === null) {
+           // Agar abhi koi live nahi hai, aur next match 10 mins se bhi door hai, 
+           // tou automatically index 0 (24/7 stream) play rakho tab tak.
+           bestCandidate = parsedChannels[0];
+           break;
        } else {
-           // Match is more than 10 mins in the future, stop looking
-           break; 
+           break;
        }
     }
 
-    return bestCandidate ? bestCandidate.videoId : timeChannels[0].videoId;
+    return bestCandidate ? bestCandidate.videoId : channels[0].videoId;
   };
+
+  
 
   // Jab page load ho ya selectedVideo change ho, smart time calculation run karo
   useEffect(() => {

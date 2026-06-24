@@ -368,7 +368,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                              videoId={activeVideoId} 
                              title={selectedVideo.videoTitle} 
                              thumbnail={getThumbnailImage(selectedVideo)} 
-                             autoPlay={false} 
+                             autoPlay={true} 
                            />
                         )}
                      </div>

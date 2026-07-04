@@ -21,25 +21,26 @@
     "pak_Vs_aus": "https://media.crictracker.com/media/attachments/1780293376738_Pakistan-and-Australia.jpeg",
     "cricket_all": "https://t4.ftcdn.net/jpg/14/73/25/83/360_F_1473258395_ouRUkjIQ5TnRlP2tioWhc3DGAn1NEerY.jpg",
     "fifaFriendlies2": "https://upload.wikimedia.org/wikipedia/en/0/00/FIFA_Series_2026_-_International_Friendlies.webp",
-    "Fifa2026": "https://mir-s3-cdn-cf.behance.net/projects/404/068660250702437.Y3JvcCwxMDA3LDc4OCwxOTcsMA.jpg"
+    "Fifa2026": "https://mir-s3-cdn-cf.behance.net/projects/404/068660250702437.Y3JvcCwxMDA3LDc4OCwxOTcsMA.jpg",
+    "ind-vs-eng": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTncqk4wuqBo2gQG50Tqqi6_XM_meBtPAMRD2upb2vqlXJQLtUuB7nb-m9k&s=10"
   },
   "streams": [
     {
-      "videoTitle": "Fifa - 2026 Matches 12 or 13 June",
+      "videoTitle": "Cricket",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "Fifa2026",
+      "isLive": true,
+      "activeThumbnail": "ind-vs-eng",
       "channels": [
         {
-          "name": "Qatar vs Switzerland - 12:00 AM - Asian Time Standard 🔴",
+          "name": "India vs Eng - 6;00 pm ",
           "videoId": "15254238731883"
         },
         {
-          "name": "Brazil vs Morocco - 3:00 AM - Asian Time Standard 🔴",
+          "name": "",
           "videoId": "15254260751979"
         },
         {
-          "name": "Haiti vs Scotland - 6:00 AM - Asian Time Standard 🔴",
+          "name": "",
           "videoId": "15254285524587"
         }
       ]
@@ -123,15 +124,15 @@
       "activeThumbnail": "Fifa2026",
       "channels": [
         {
-          "name": "Australia vs Egypt - 11:00 pm - [4H]",
+          "name": "Canada vs Morocco - 10:00 pm - [5H]",
           "videoId": "15273689226859"
         },
         {
-          "name": "Argentina vs Cabo Verde - 3:00 am - [4H]",
+          "name": "Paraguay vs France - 2:00 am - [4H]",
           "videoId": "15273713933931"
         },
         {
-          "name": "Colombia vs Ghana - 6:30 am - [4H]",
+          "name": "",
           "videoId": "15273722257003"
         },
         {

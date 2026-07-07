@@ -28,11 +28,11 @@
     {
       "videoTitle": "Cricket",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "ind-vs-eng",
       "channels": [
         {
-          "name": "India vs Eng - 6;00 pm ",
+          "name": "India vs Eng - 9:30 pm ",
           "videoId": "15254238731883"
         },
         {
@@ -124,11 +124,11 @@
       "activeThumbnail": "Fifa2026",
       "channels": [
         {
-          "name": "Portugal vs Spain - 12:00 am - [4H]",
+          "name": "Argentina vs Egypt - 9:00 pm - [5H]",
           "videoId": "15273689226859"
         },
         {
-          "name": "USA vs Belgium - 5:00 am - [4H]",
+          "name": "Switzerland vs Colombia - 1:00 am - [4H]",
           "videoId": "15273713933931"
         },
         {

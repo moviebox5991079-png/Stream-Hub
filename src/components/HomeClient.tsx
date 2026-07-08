@@ -523,7 +523,8 @@ export default function HomeClient({ initialData }: HomeProps) {
                                  setIsChangingChannel(false);
                               }, 1000);
                           }}
- 
+
+                        <div
                            className="group cursor-pointer rounded-2xl overflow-hidden bg-transparent transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex flex-col"
                          >
                             <div className="absolute inset-0 rounded-2xl animate-rainbow opacity-50 group-hover:opacity-100 transition-opacity duration-500 -z-10 p-[2px]">

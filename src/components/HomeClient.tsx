@@ -37,6 +37,8 @@ export default function HomeClient({ initialData }: HomeProps) {
   const [selectedVideo, setSelectedVideo] = useState<StreamData | null>(null);
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   
+  // Fake Thumbnail vs Real Player control
+  const [isPlayerActive, setIsPlayerActive] = useState(false);
   const [isChangingChannel, setIsChangingChannel] = useState(false);
 
   const [isOverlayVisible, setOverlayVisible] = useState(false); 
@@ -199,6 +201,7 @@ export default function HomeClient({ initialData }: HomeProps) {
     
     setIsChangingChannel(true);
     setActiveVideoId(newVideoId);
+    setIsPlayerActive(true);
     
     setTimeout(() => {
       setIsChangingChannel(false);
@@ -314,7 +317,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                 
                 {/* HERO SECTION / PLAYER AREA */}
                 {!selectedVideo ? (
-                  /* === LUXURY CATEGORY SELECTION IN MAIN PAGE === */
+                  /* === MAIN CATEGORY SELECTION === */
                   <div className="mb-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
                     
                     {availableStreams.length === 0 ? (
@@ -326,15 +329,16 @@ export default function HomeClient({ initialData }: HomeProps) {
                          <p className="text-gray-400 max-w-lg z-10">Please check back later when matches are live.</p>
                       </div>
                     ) : (
-                      <div className="bg-[#111111] border border-gray-800 rounded-3xl w-full p-6 sm:p-10 relative shadow-2xl overflow-hidden">
+                      // 🌟 YAHAN BADGE WALA GRADIENT COLOR PARENT ME LAGA DIYA HAI 🌟
+                      <div className="bg-gradient-to-br from-red-800 via-purple-800 to-blue-800 border border-white/20 rounded-3xl w-full p-6 sm:p-10 relative shadow-[0_0_50px_rgba(147,51,234,0.3)] overflow-hidden">
                         
-                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-red-600/10 blur-[100px] rounded-full pointer-events-none"></div>
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-40 bg-white/5 blur-[100px] rounded-full pointer-events-none"></div>
 
                         <div className="text-center mb-10 relative z-10">
-                          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-widest uppercase mb-4">
-                            What do you want to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700">Watch?</span>
+                          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-widest uppercase mb-4 drop-shadow-lg">
+                            What do you want to Watch?
                           </h2>
-                          <p className="text-gray-400 text-base sm:text-lg font-medium">Select a match below to start streaming instantly in HD</p>
+                          <p className="text-white/80 text-base sm:text-lg font-medium drop-shadow-md">Select a match below to start streaming instantly in HD</p>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 relative z-10">
@@ -343,11 +347,10 @@ export default function HomeClient({ initialData }: HomeProps) {
                               key={idx}
                               onClick={() => {
                                 setSelectedVideo(stream);
-                                setIsChangingChannel(true);
-                                setTimeout(() => setIsChangingChannel(false), 1000);
+                                setIsPlayerActive(false); 
                                 window.scrollTo({ top: 0, behavior: 'smooth' });
                               }}
-                              className="group cursor-pointer rounded-2xl overflow-hidden bg-[#1a1a1a] border border-gray-800 hover:border-red-500/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(220,38,38,0.2)]"
+                              className="group cursor-pointer rounded-2xl overflow-hidden bg-[#1a1a1a]/90 backdrop-blur-sm border border-white/10 hover:border-white/40 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(0,0,0,0.5)]"
                             >
                               <div className="aspect-video w-full relative overflow-hidden rounded-t-xl">
                                 
@@ -360,7 +363,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 
                                 {stream.isLive !== false && (
-                                  <div className="absolute top-3 right-3 bg-red-600/90 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-md flex items-center gap-1.5 font-bold shadow-lg shadow-black/50">
+                                  <div className="absolute top-3 right-3 bg-red-600/90 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-md flex items-center gap-1.5 font-bold shadow-lg shadow-black/50 border border-white/20">
                                     <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span> LIVE
                                   </div>
                                 )}
@@ -373,8 +376,8 @@ export default function HomeClient({ initialData }: HomeProps) {
                               </div>
 
                               <div className="p-5 relative">
-                                <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-gray-700 group-hover:via-red-500 to-transparent transition-all duration-500"></div>
-                                <h3 className="text-lg font-bold text-white group-hover:text-red-400 transition-colors line-clamp-2 leading-snug">
+                                <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-gray-400 group-hover:via-white to-transparent transition-all duration-500"></div>
+                                <h3 className="text-lg font-bold text-white transition-colors line-clamp-2 leading-snug">
                                   {stream.videoTitle}
                                </h3>
                               </div>
@@ -397,13 +400,35 @@ export default function HomeClient({ initialData }: HomeProps) {
                            </div>
                         )}
 
-                        {activeVideoId && (
-                          <OkRuPlayer 
-                            videoId={activeVideoId} 
-                            title={selectedVideo.videoTitle} 
-                            thumbnail={getThumbnailImage(selectedVideo)} 
-                            autoPlay={true} 
-                          />
+                        {!isPlayerActive ? (
+                          <div 
+                            className="w-full aspect-[16/9] relative cursor-pointer group flex items-center justify-center bg-black overflow-hidden"
+                            onClick={() => setIsPlayerActive(true)} 
+                          >
+                            <img 
+                              src={getThumbnailImage(selectedVideo)} 
+                              alt="Tap to play" 
+                              className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" 
+                            />
+                            <div className="relative z-10 flex flex-col items-center justify-center pointer-events-none">
+                              <div className="w-20 h-20 bg-[#db1a1a] rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(219,26,26,0.5)] group-hover:scale-110 group-hover:shadow-[0_0_40px_rgba(219,26,26,0.8)] transition-all duration-300 mb-4">
+                                <Play fill="white" size={36} className="text-white ml-2" />
+                              </div>
+                              <div className="bg-black/90 border border-gray-700 text-white text-xs sm:text-sm font-bold tracking-widest px-4 py-2 rounded-full flex items-center gap-2 shadow-lg backdrop-blur-sm">
+                                <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
+                                TAP TO WATCH LIVE
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          activeVideoId && (
+                            <OkRuPlayer 
+                              videoId={activeVideoId} 
+                              title={selectedVideo.videoTitle} 
+                              thumbnail={getThumbnailImage(selectedVideo)} 
+                              autoPlay={true} 
+                            />
+                          )
                         )}
                      </div>
 
@@ -413,7 +438,10 @@ export default function HomeClient({ initialData }: HomeProps) {
                             {selectedVideo.videoTitle} {selectedVideo.isLive && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse">LIVE NOW</span>}
                           </h1>
                           <button 
-                            onClick={() => setSelectedVideo(null)} 
+                            onClick={() => {
+                              setSelectedVideo(null);
+                              setIsPlayerActive(false);
+                            }} 
                             className="bg-gray-800 hover:bg-gray-700 text-white text-sm px-4 py-2 rounded-lg font-bold transition-colors whitespace-nowrap border border-gray-700"
                           >
                             Back to Menu
@@ -440,7 +468,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                             </div>
 
                             <div className="flex flex-wrap gap-3 mt-1 relative z-10">
-                              {/* YAHAN KHALI (EMPTY) BUTTONS KO HIDE KARNE KI LOGIC HAI */}
+                              {/* EMPTY BUTTON HIDE LOGIC INCLUDED */}
                               {selectedVideo.channels
                                 .filter(channel => channel && channel.name && channel.name.trim() !== '')
                                 .map((channel, idx) => {
@@ -504,6 +532,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                             onClick={() => { 
                               setIsChangingChannel(true);
                               setSelectedVideo(video); 
+                              setIsPlayerActive(true); 
                               window.scrollTo({ top: 0, behavior: 'smooth' }); 
                               
                               setTimeout(() => {

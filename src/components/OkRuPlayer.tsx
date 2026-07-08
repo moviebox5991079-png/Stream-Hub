@@ -8,6 +8,8 @@ interface OkRuPlayerProps {
   title?: string;
   thumbnail?: string; 
   autoPlay?: boolean;
+  // 👇 YEH NAYI LINE ADD KARO 👇
+  forcePlayOnLoad?: boolean;
 }
 
 const OkRuPlayer: React.FC<OkRuPlayerProps> = ({ 

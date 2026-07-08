@@ -28,7 +28,7 @@
     {
       "videoTitle": "Cricket",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "ind-vs-eng",
       "channels": [
         {
@@ -48,7 +48,7 @@
     {
       "videoTitle": "sports-2",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "fifaFriendlies",
       "channels": [
         {
@@ -68,7 +68,7 @@
     {
       "videoTitle": "sports-3",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "SerieA",
       "channels": [
         {
@@ -88,7 +88,7 @@
     {
       "videoTitle": "Fifa - 2026 Matches 18 or 19 June (  GMT+5 Time Standard )",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "Fifa2026",
       "channels": [
         {
@@ -118,17 +118,17 @@
       ]
     },
     {
-      "videoTitle": "Fifa - 2026 Matches Today & Tomorrow (  GMT+5 Time Standard )",
+      "videoTitle": "Fifa - 2026 Matches (  GMT+5 Time Standard )",
       "videoId": "",
       "isLive": true,
       "activeThumbnail": "Fifa2026",
       "channels": [
         {
-          "name": "Argentina vs Egypt - 9:00 pm - [5H]",
+          "name": "France vs Morocco - 1:00 am - Fri, 10 Jul",
           "videoId": "15273689226859"
         },
         {
-          "name": "Switzerland vs Colombia - 1:00 am - [4H]",
+          "name": "",
           "videoId": "15273713933931"
         },
         {
@@ -160,7 +160,7 @@
     {
       "videoTitle": "Fifa-Friendly-Part1",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "fifaFriendlies2",
       "channels": [
         {
@@ -208,7 +208,7 @@
     {
       "videoTitle": "Fifa-Friendly-Part2",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "fifaFriendlies",
       "channels": [
         {

@@ -15,7 +15,6 @@
 
 
 'use client';
-
 import React, { useState, useEffect, useRef } from 'react';
 import OkRuPlayer from '@/components/OkRuPlayer'; 
 import { Play, User, Tv, X, ShieldAlert, Radio } from 'lucide-react'; 
@@ -46,7 +45,7 @@ interface HomeProps {
 
 export default function HomeClient({ initialData }: HomeProps) {
   
-  const availableStreams = initialData.streams 
+  const  = initialData.streams 
     ? initialData.streams.filter((stream) => stream.isLive !== false) 
     : [];
 
@@ -505,65 +504,53 @@ export default function HomeClient({ initialData }: HomeProps) {
                    </div>
                    
                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                      {availableStreams.map((video, idx) => (
-                         <div 
-                           key={idx} 
-                           onClick={() => { 
-                              setIsChangingChannel(true);
-                              setSelectedVideo(video); 
-                              
-                              // ✨ Yahan calculate karo aur fauran update karo
-                              const smartId = getSmartActiveChannel(video.channels);
-                              setActiveVideoId(smartId || video.videoId);
-                              
-                              setForceAutoPlay(true);
-                              window.scrollTo({ top: 0, behavior: 'smooth' }); 
-                              
-                              setTimeout(() => {
-                                 setIsChangingChannel(false);
-                              }, 1000);
-                          }}
-
-                           
-                        <div
-                           className="group cursor-pointer rounded-2xl overflow-hidden bg-transparent transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex flex-col"
-                         >
-                            <div className="absolute inset-0 rounded-2xl animate-rainbow opacity-50 group-hover:opacity-100 transition-opacity duration-500 -z-10 p-[2px]">
-                              <div className="bg-[#121212] w-full h-full rounded-[14px]"></div>
-                            </div>
-
-                            <div className={`relative aspect-video w-full overflow-hidden bg-black rounded-t-[14px] transition-all duration-300 z-10 ${selectedVideo?.videoId === video.videoId ? 'border-b-2 border-white shadow-[0_0_20px_rgba(255,255,255,0.2)]' : ''}`}>
-                              
-                               <img 
-                                 src={getThumbnailImage(video)} 
-                                 alt={video.videoTitle} 
-                                 className="w-full h-full object-cover group-hover:scale-110 transition duration-700 ease-out" 
-                                 loading="lazy" 
-                               />
-                               
-                               <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#050505] to-transparent z-20"></div>
-
-                               <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
-                                 <div className="animate-rainbow p-[3px] rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-                                   <div className="bg-black/90 p-3 rounded-full backdrop-blur-sm">
-                                     <Play fill="white" size={24} className="text-white ml-0.5" />
-                                   </div>
-                                 </div>
-                               </div>
-
-                               {video.isLive !== false && <div className="absolute top-2 right-2 bg-red-600/90 text-white text-xs px-2 py-1 rounded flex items-center gap-1.5 font-bold z-30 border border-white/20 shadow-lg"><span className="w-2 h-2 bg-white rounded-full animate-pulse"></span> LIVE</div>}
-                            </div>
-                            
-                            <div className="p-4 relative z-10 bg-gradient-to-b from-[#1f1f1f] to-[#050505] border-t border-white/10 flex-grow flex items-center gap-3 rounded-b-[14px] shadow-[inset_0_1px_10px_rgba(255,255,255,0.02)]">
-                               <div className="w-8 h-8 rounded-full flex-shrink-0 animate-rainbow shadow-[0_0_10px_rgba(255,255,255,0.1)] p-[2px]">
-                                  <div className="w-full h-full bg-black rounded-full"></div>
-                               </div>
-                               <h3 className={`text-sm font-bold line-clamp-2 leading-tight transition-all duration-300 ${selectedVideo?.videoId === video.videoId ? 'text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]' : 'text-gray-300 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]'}`}>
-                                  {video.videoTitle}
-                               </h3>
-                            </div>
-                         </div>
-                      ))}
+                      {availableStreams && availableStreams.length > 0 && (
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8">
+    {availableStreams.map((video, idx) => (
+      <div 
+        key={idx} 
+        onClick={() => { 
+           setIsChangingChannel(true);
+           setSelectedVideo(video); 
+           // Individual Logic per card
+           const smartId = getSmartActiveChannel(video.channels);
+           setActiveVideoId(smartId || video.videoId);
+           setForceAutoPlay(true);
+           window.scrollTo({ top: 0, behavior: 'smooth' }); 
+           setTimeout(() => { setIsChangingChannel(false); }, 1000);
+        }} 
+        className="group cursor-pointer flex flex-col"
+      >
+        <div className={`relative aspect-video rounded-xl overflow-hidden bg-gray-800 mb-3 transition-all duration-300 border ${selectedVideo?.videoId === video.videoId ? 'border-red-600 shadow-[0_0_15px_rgba(220,38,38,0.3)]' : 'border-gray-800'}`}>
+          <img 
+            src={getThumbnailImage(video)} 
+            alt={video.videoTitle} 
+            className="w-full h-full object-cover group-hover:scale-105 transition duration-500" 
+            loading="lazy" 
+          />
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="bg-black/50 p-3 rounded-full backdrop-blur-sm border border-white/20 group-hover:bg-red-600 transition-all duration-300">
+               <Play fill="white" size={24} className="text-white ml-0.5" />
+            </div>
+          </div>
+          {video.isLive !== false && (
+            <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded font-bold z-10">
+              <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse mr-1"></span> LIVE
+            </div>
+          )}
+        </div>
+        <div className="flex gap-3 px-1">
+          <div className="w-9 h-9 bg-gradient-to-br from-red-600 to-blue-600 rounded-full flex-shrink-0 mt-0.5"></div>
+          <div className="flex flex-col">
+            <h3 className={`text-sm font-bold line-clamp-2 leading-tight transition-colors ${selectedVideo?.videoId === video.videoId ? 'text-red-500' : 'text-white'}`}>
+              {video.videoTitle}
+            </h3>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+)}
                    </div>
                  </>
                )}

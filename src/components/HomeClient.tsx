@@ -34,9 +34,8 @@ export default function HomeClient({ initialData }: HomeProps) {
     ? initialData.streams.filter((stream) => stream.isLive !== false) 
     : [];
 
-  const [selectedVideo, setSelectedVideo] = useState<StreamData | null>(
-    availableStreams.length > 0 ? availableStreams[0] : null
-  );
+  // DEFAULT `null` KAR DIYA HAI - TAAKE START MEIN PLAYER HIDE RAHE
+  const [selectedVideo, setSelectedVideo] = useState<StreamData | null>(null);
   
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [isChangingChannel, setIsChangingChannel] = useState(false);
@@ -44,9 +43,8 @@ export default function HomeClient({ initialData }: HomeProps) {
   const [isOverlayVisible, setOverlayVisible] = useState(false); 
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   
-  // Modals State
+  // Sirf ek Welcome Modal bacha hai ab
   const [showWelcomeModal, setShowWelcomeModal] = useState(true);
-  const [showCategoryModal, setShowCategoryModal] = useState(false);
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const navbarRef = useRef<HTMLElement>(null);
@@ -56,19 +54,17 @@ export default function HomeClient({ initialData }: HomeProps) {
   const getSmartActiveChannel = (channels: ChannelData[] | undefined) => {
     if (!channels || channels.length === 0) return null;
 
-    // 1. Current time in PKT (UTC+5)
     const now = new Date();
     const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
     const pktDate = new Date(utc + (3600000 * 5));
     const currentMinutes = pktDate.getHours() * 60 + pktDate.getMinutes();
 
-    // 2. Parse times & durations from channel names
     const parsedChannels = channels.map((ch, index) => {
       const timeMatch = ch.name.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
       const durationMatch = ch.name.match(/\[(\d+)H\]/i) || ch.name.match(/\((\d+)H\)/i);
       
       let timeInMins = -1;
-      let durationMins = 150; // Default 2.5 hours
+      let durationMins = 150;
       
       if (durationMatch) {
         durationMins = parseInt(durationMatch[1], 10) * 60;
@@ -104,16 +100,13 @@ export default function HomeClient({ initialData }: HomeProps) {
       };
     });
 
-    // 3. Filter out expired matches
     const validFutureOrLiveChannels = parsedChannels.filter(c => c.timeInMins !== -1 && !c.isExpired);
     
-    // Fallback Logic
     if (validFutureOrLiveChannels.length === 0) {
        const priorityFallback = parsedChannels.find(c => c.hasPriority);
        return priorityFallback ? priorityFallback.videoId : channels[0].videoId;
     }
 
-    // 4. Sort ascending by time
     validFutureOrLiveChannels.sort((a, b) => a.timeInMins - b.timeInMins);
 
     let bestCandidate = null;
@@ -158,7 +151,7 @@ export default function HomeClient({ initialData }: HomeProps) {
     }
   }, [selectedVideo]);
 
-  // Ads & Modal Effects
+  // Ads Observer
   useEffect(() => {
     const checkForAd = () => {
       const allElements = document.body.getElementsByTagName('*');
@@ -195,15 +188,14 @@ export default function HomeClient({ initialData }: HomeProps) {
     return () => window.removeEventListener('blur', handleBlur);
   }, [isOverlayVisible]);
 
-  // Handle body scrolling for both modals
   useEffect(() => {
-    if (showWelcomeModal || showCategoryModal) {
+    if (showWelcomeModal) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
     }
     return () => { document.body.style.overflow = 'auto'; };
-  }, [showWelcomeModal, showCategoryModal]);
+  }, [showWelcomeModal]);
 
   const handleChannelChange = (newVideoId: string) => {
     if (activeVideoId === newVideoId) return; 
@@ -280,85 +272,11 @@ export default function HomeClient({ initialData }: HomeProps) {
               </div>
               
               <button 
-                onClick={() => {
-                  setShowWelcomeModal(false);
-                  setShowCategoryModal(true);
-                }}
+                onClick={() => setShowWelcomeModal(false)}
                 className="w-full mt-6 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-red-900/40 text-lg hover:scale-[1.02] active:scale-[0.98] relative z-10 tracking-wide"
               >
                 Continue to Website
               </button>
-            </div>
-          </div>
-        )}
-
-        {/* === LUXURY CATEGORY SELECTION MODAL === */}
-        {showCategoryModal && (
-          <div className="fixed inset-0 z-[99998] flex items-center justify-center bg-black/90 backdrop-blur-xl px-4 py-6 transition-all duration-500">
-            <div className="bg-gradient-to-b from-[#151515] to-[#0a0a0a] border border-gray-800/80 rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-10 relative shadow-[0_0_80px_rgba(220,38,38,0.15)] animate-in fade-in slide-in-from-bottom-8 duration-700 scrollbar-hide">
-              
-              <button 
-                onClick={() => setShowCategoryModal(false)}
-                className="absolute top-4 right-4 text-gray-400 hover:text-white bg-gray-800/50 hover:bg-red-600 p-2 rounded-full transition-colors z-[100000]"
-              >
-                <X size={20} />
-              </button>
-
-              {/* Decorative Glow Elements */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-red-600/10 blur-[100px] rounded-full pointer-events-none"></div>
-
-              <div className="text-center mb-10 relative z-10">
-                <h2 className="text-3xl sm:text-4xl font-black text-white tracking-widest uppercase mb-3">
-                  What do you want to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700">Watch?</span>
-                </h2>
-                <p className="text-gray-400 text-sm sm:text-base font-medium">Select a category to start streaming instantly</p>
-              </div>
-
-              {/* Streams Grid in Modal */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 relative z-10">
-                {availableStreams.map((stream, idx) => (
-                  <div
-                    key={idx}
-                    onClick={() => {
-                      setSelectedVideo(stream);
-                      setIsChangingChannel(true);
-                      setTimeout(() => setIsChangingChannel(false), 1000);
-                      setShowCategoryModal(false);
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                    className="group cursor-pointer rounded-2xl overflow-hidden bg-[#1a1a1a] border border-gray-800 hover:border-red-500/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(220,38,38,0.2)]"
-                  >
-                    <div className="aspect-video w-full relative overflow-hidden">
-                      <img 
-                        src={getThumbnailImage(stream)} 
-                        alt={stream.videoTitle} 
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
-                      />
-                      
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      
-                      {stream.isLive !== false && (
-                        <div className="absolute top-3 right-3 bg-red-600/90 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-md flex items-center gap-1.5 font-bold shadow-lg shadow-black/50">
-                          <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span> LIVE
-                        </div>
-                      )}
-
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100">
-                        <div className="bg-red-600/80 p-4 rounded-full backdrop-blur-md shadow-[0_0_20px_rgba(220,38,38,0.6)]">
-                          <Play fill="white" size={32} className="text-white ml-1" />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="p-5 relative">
-                      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-gray-700 group-hover:via-red-500 to-transparent transition-all duration-500"></div>
-                      <h3 className="text-lg font-bold text-white group-hover:text-red-400 transition-colors line-clamp-2 leading-snug">
-                        {stream.videoTitle}
-                      </h3>
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         )}
@@ -400,18 +318,79 @@ export default function HomeClient({ initialData }: HomeProps) {
 
              <div className="p-4 md:p-6 max-w-[1600px] mx-auto">
                 
-                {/* VIDEO PLAYER AREA */}
+                {/* HERO SECTION / PLAYER AREA */}
                 {!selectedVideo ? (
-                  <div className="mb-8 animate-in fade-in zoom-in duration-500">
-                    <div className="w-full aspect-[16/9] md:aspect-[21/9] bg-[#1a1a1a] rounded-xl border-2 border-dashed border-gray-800 flex flex-col items-center justify-center text-center p-6 shadow-inner relative overflow-hidden">
-                       <div className="w-20 h-20 bg-gray-900 rounded-full flex items-center justify-center mb-4 shadow-lg border border-gray-800 z-10">
-                          <Tv className="text-red-600/80" size={36} />
-                       </div>
-                       <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-wide z-10">No Matches Available</h2>
-                       <p className="text-gray-400 max-w-lg z-10">Please check back later when matches are live.</p>
-                    </div>
+                  /* === LUXURY CATEGORY SELECTION IN MAIN PAGE === */
+                  <div className="mb-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+                    
+                    {availableStreams.length === 0 ? (
+                      <div className="w-full aspect-[16/9] md:aspect-[21/9] bg-[#1a1a1a] rounded-xl border-2 border-dashed border-gray-800 flex flex-col items-center justify-center text-center p-6 shadow-inner relative overflow-hidden">
+                         <div className="w-20 h-20 bg-gray-900 rounded-full flex items-center justify-center mb-4 shadow-lg border border-gray-800 z-10">
+                            <Tv className="text-red-600/80" size={36} />
+                         </div>
+                         <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-wide z-10">No Matches Available</h2>
+                         <p className="text-gray-400 max-w-lg z-10">Please check back later when matches are live.</p>
+                      </div>
+                    ) : (
+                      <div className="bg-gradient-to-b from-[#151515] to-[#0a0a0a] border border-gray-800/80 rounded-3xl w-full p-6 sm:p-10 relative shadow-[0_0_80px_rgba(220,38,38,0.15)] overflow-hidden">
+                        
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-red-600/10 blur-[100px] rounded-full pointer-events-none"></div>
+
+                        <div className="text-center mb-10 relative z-10">
+                          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-widest uppercase mb-4">
+                            What do you want to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700">Watch?</span>
+                          </h2>
+                          <p className="text-gray-400 text-base sm:text-lg font-medium">Select a match below to start streaming instantly in HD</p>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 relative z-10">
+                          {availableStreams.map((stream, idx) => (
+                            <div
+                              key={idx}
+                              onClick={() => {
+                                setSelectedVideo(stream);
+                                setIsChangingChannel(true);
+                                setTimeout(() => setIsChangingChannel(false), 1000);
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                              }}
+                              className="group cursor-pointer rounded-2xl overflow-hidden bg-[#1a1a1a] border border-gray-800 hover:border-red-500/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(220,38,38,0.2)]"
+                            >
+                              <div className="aspect-video w-full relative overflow-hidden">
+                                <img 
+                                  src={getThumbnailImage(stream)} 
+                                  alt={stream.videoTitle} 
+                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
+                                />
+                                
+                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                
+                                {stream.isLive !== false && (
+                                  <div className="absolute top-3 right-3 bg-red-600/90 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-md flex items-center gap-1.5 font-bold shadow-lg shadow-black/50">
+                                    <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span> LIVE
+                                  </div>
+                                )}
+
+                                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100">
+                                  <div className="bg-red-600/80 p-4 rounded-full backdrop-blur-md shadow-[0_0_20px_rgba(220,38,38,0.6)]">
+                                    <Play fill="white" size={32} className="text-white ml-1" />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div className="p-5 relative">
+                                <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-gray-700 group-hover:via-red-500 to-transparent transition-all duration-500"></div>
+                                <h3 className="text-lg font-bold text-white group-hover:text-red-400 transition-colors line-clamp-2 leading-snug">
+                                  {stream.videoTitle}
+                               </h3>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ) : (
+                  /* === ACTIVE PLAYER AREA === */
                   <div className="mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
                      
                      <div className="bg-black rounded-xl overflow-hidden shadow-2xl shadow-red-900/10 border border-gray-800 relative">
@@ -419,7 +398,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                         {isChangingChannel && (
                            <div className="absolute inset-0 z-50 bg-black/90 flex flex-col items-center justify-center backdrop-blur-sm transition-all duration-300">
                               <div className="w-12 h-12 border-4 border-gray-800 border-t-red-600 rounded-full animate-spin mb-4"></div>
-                              <p className="text-white text-lg font-bold tracking-widest animate-pulse">Switching Server...</p>
+                              <p className="text-white text-lg font-bold tracking-widest animate-pulse">Starting Stream...</p>
                            </div>
                         )}
 
@@ -434,9 +413,17 @@ export default function HomeClient({ initialData }: HomeProps) {
                      </div>
 
                      <div className="mt-5 px-1">
-                        <h1 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
-                          {selectedVideo.videoTitle} {selectedVideo.isLive && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse">LIVE NOW</span>}
-                        </h1>
+                        <div className="flex justify-between items-start gap-4">
+                          <h1 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
+                            {selectedVideo.videoTitle} {selectedVideo.isLive && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse">LIVE NOW</span>}
+                          </h1>
+                          <button 
+                            onClick={() => setSelectedVideo(null)} 
+                            className="bg-gray-800 hover:bg-gray-700 text-white text-sm px-4 py-2 rounded-lg font-bold transition-colors whitespace-nowrap"
+                          >
+                            Back to Menu
+                          </button>
+                        </div>
 
                         {selectedVideo.channels && selectedVideo.channels.length > 0 && (
                           <div className="mt-4 mb-4 p-5 bg-gradient-to-br from-[#1c1c1c] to-[#0a0a0a] border border-red-900/30 rounded-2xl flex flex-col gap-4 shadow-[0_0_30px_rgba(0,0,0,0.5)] relative overflow-hidden">
@@ -497,8 +484,8 @@ export default function HomeClient({ initialData }: HomeProps) {
                   </div>
                 )}
 
-                {/* MULTIPLE STREAMS GRID */}
-                {availableStreams && availableStreams.length > 0 && (
+                {/* BOTTOM STREAMS GRID (ONLY SHOW IF A VIDEO IS SELECTED) */}
+                {selectedVideo && availableStreams && availableStreams.length > 0 && (
                   <>
                     <div className="flex flex-col mt-8 mb-4 px-1">
                       <div className="flex justify-center my-6 w-full overflow-hidden">

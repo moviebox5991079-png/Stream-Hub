@@ -231,6 +231,17 @@ export default function HomeClient({ initialData }: HomeProps) {
           background-size: 800% 800%;
           animation: rainbowFlow 12s ease infinite;
         }
+
+        /* 🌟 YEH NAYA CLASS SIRF TEXT KO COLOR DENE KE LIYE HAI 🌟 */
+        .animate-rainbow-text {
+          background: linear-gradient(270deg, #ff003c, #ff00d4, #7000ff, #003cff, #00d4ff, #00ff70, #e1ff00, #ff7000, #ff003c);
+          background-size: 800% 800%;
+          animation: rainbowFlow 12s ease infinite;
+          -webkit-background-clip: text !important;
+          -webkit-text-fill-color: transparent !important;
+          background-clip: text !important;
+          color: transparent !important;
+        }
       `}} />
 
       <div className="min-h-screen bg-[#0f0f0f] text-white font-sans relative overflow-x-hidden">
@@ -352,8 +363,8 @@ export default function HomeClient({ initialData }: HomeProps) {
                           <div className="text-center mb-12 relative z-10">
                             <h2 className="text-3xl sm:text-5xl font-black text-white tracking-widest uppercase mb-4 drop-shadow-2xl">
                               What do you want to{' '}
-                              {/* 🌟 FLOWING INFINITE TEXT 🌟 */}
-                              <span className="text-transparent bg-clip-text animate-rainbow">
+                              {/* 🌟 FLOWING INFINITE TEXT FIX 🌟 */}
+                              <span className="animate-rainbow-text">
                                 Watch?
                               </span>
                             </h2>
@@ -369,14 +380,15 @@ export default function HomeClient({ initialData }: HomeProps) {
                                   setIsPlayerActive(false); 
                                   window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
-                                className="group cursor-pointer rounded-2xl overflow-hidden bg-gradient-to-b from-[#1e1e1e] to-[#0a0a0a] border border-gray-600/40 hover:border-white/40 transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_40px_rgba(0,0,0,0.8)] flex flex-col"
+                                /* Card styling updated: No fixed gray border, relies on the constant rainbow background for border effect */
+                                className="group cursor-pointer rounded-2xl overflow-hidden bg-transparent transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_40px_rgba(0,0,0,0.8)] flex flex-col"
                               >
-                                {/* CARD HOVER VIP INFINITE BORDER */}
-                                <div className="absolute inset-0 rounded-2xl animate-rainbow opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 p-[2px]">
+                                {/* CARD VIP INFINITE BORDER (Always visible at opacity-50, fully visible on hover) */}
+                                <div className="absolute inset-0 rounded-2xl animate-rainbow opacity-50 group-hover:opacity-100 transition-opacity duration-500 -z-10 p-[2px]">
                                   <div className="bg-[#121212] w-full h-full rounded-[14px]"></div>
                                 </div>
 
-                                <div className="aspect-video w-full relative overflow-hidden shadow-inner bg-black">
+                                <div className="aspect-video w-full relative overflow-hidden shadow-inner bg-black rounded-t-[14px]">
                                   <img 
                                     src={getThumbnailImage(stream)} 
                                     alt={stream.videoTitle} 
@@ -400,7 +412,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                                   </div>
                                 </div>
 
-                                <div className="p-6 relative z-10 bg-[#0a0a0a] border-t border-white/5 flex-grow flex items-center justify-center text-center">
+                                <div className="p-6 relative z-10 bg-[#0a0a0a] border-t border-white/5 flex-grow flex items-center justify-center text-center rounded-b-[14px]">
                                   <h3 className="text-lg font-bold text-gray-200 group-hover:text-white transition-colors line-clamp-2 leading-relaxed tracking-wide">
                                     {stream.videoTitle}
                                   </h3>
@@ -569,14 +581,14 @@ export default function HomeClient({ initialData }: HomeProps) {
                                 setIsChangingChannel(false);
                               }, 1000);
                             }} 
-                            /* Bottom cards also getting the luxury distinct treatment */
-                            className="group cursor-pointer rounded-2xl overflow-hidden bg-gradient-to-b from-[#1e1e1e] to-[#0a0a0a] border border-gray-600/40 hover:border-white/40 transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex flex-col"
+                            /* Bottom cards also getting the permanent subtle rainbow border */
+                            className="group cursor-pointer rounded-2xl overflow-hidden bg-transparent transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex flex-col"
                           >
-                             <div className="absolute inset-0 rounded-2xl animate-rainbow opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 p-[2px]">
+                             <div className="absolute inset-0 rounded-2xl animate-rainbow opacity-50 group-hover:opacity-100 transition-opacity duration-500 -z-10 p-[2px]">
                                <div className="bg-[#121212] w-full h-full rounded-[14px]"></div>
                              </div>
 
-                             <div className={`relative aspect-video w-full overflow-hidden bg-black transition-all duration-300 z-10 ${selectedVideo?.videoId === video.videoId ? 'border-b-2 border-white shadow-[0_0_20px_rgba(255,255,255,0.2)]' : ''}`}>
+                             <div className={`relative aspect-video w-full overflow-hidden bg-black rounded-t-[14px] transition-all duration-300 z-10 ${selectedVideo?.videoId === video.videoId ? 'border-b-2 border-white shadow-[0_0_20px_rgba(255,255,255,0.2)]' : ''}`}>
                                 
                                 <img 
                                   src={getThumbnailImage(video)} 
@@ -598,7 +610,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                                 {video.isLive !== false && <div className="absolute top-2 right-2 bg-red-600/90 text-white text-xs px-2 py-1 rounded flex items-center gap-1.5 font-bold z-30 border border-white/20 shadow-lg"><span className="w-2 h-2 bg-white rounded-full animate-pulse"></span> LIVE</div>}
                              </div>
                              
-                             <div className="p-4 relative z-10 bg-[#0a0a0a] border-t border-white/5 flex-grow flex items-center gap-3">
+                             <div className="p-4 relative z-10 bg-[#0a0a0a] border-t border-white/5 flex-grow flex items-center gap-3 rounded-b-[14px]">
                                 <div className="w-8 h-8 rounded-full flex-shrink-0 animate-rainbow shadow-[0_0_10px_rgba(255,255,255,0.1)]"></div>
                                 <h3 className={`text-sm font-bold line-clamp-2 leading-tight transition-colors ${selectedVideo?.videoId === video.videoId ? 'text-white drop-shadow-md' : 'text-gray-300 group-hover:text-white'}`}>
                                    {video.videoTitle}

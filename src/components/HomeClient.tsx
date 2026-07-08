@@ -15,6 +15,7 @@
 
 
 'use client';
+
 import React, { useState, useEffect, useRef } from 'react';
 import OkRuPlayer from '@/components/OkRuPlayer'; 
 import { Play, User, Tv, X, ShieldAlert, Radio } from 'lucide-react'; 
@@ -45,7 +46,7 @@ interface HomeProps {
 
 export default function HomeClient({ initialData }: HomeProps) {
   
-  const  = initialData.streams 
+  const availableStreams = initialData.streams 
     ? initialData.streams.filter((stream) => stream.isLive !== false) 
     : [];
 
@@ -56,7 +57,6 @@ export default function HomeClient({ initialData }: HomeProps) {
   // ✨ NEW STATE: Track karna ke kab auto-play karna hai aur kab overlay dikhana hai
   const [forceAutoPlay, setForceAutoPlay] = useState(false);
 
-  
   const [isOverlayVisible, setOverlayVisible] = useState(false); 
   const [showWelcomeModal, setShowWelcomeModal] = useState(true);
 
@@ -64,48 +64,118 @@ export default function HomeClient({ initialData }: HomeProps) {
   const navbarRef = useRef<HTMLElement>(null);
   const welcomeModalRef = useRef<HTMLDivElement>(null);
 
-  // === UPDATE: FULLY FIXED SMART TIME LOGIC (MIDNIGHT SAFE) ===
-  // === UPDATE: FULLY FIXED SMART TIME LOGIC (MIDNIGHT SAFE & TIE-BREAKER) ===
+  // === SMART TIME & EXPIRATION MATCHER LOGIC (From Code 1) ===
   const getSmartActiveChannel = (channels: ChannelData[] | undefined) => {
     if (!channels || channels.length === 0) return null;
 
+    // 1. Current time in PKT (UTC+5)
     const now = new Date();
     const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
     const pktDate = new Date(utc + (3600000 * 5));
     const currentMinutes = pktDate.getHours() * 60 + pktDate.getMinutes();
 
-    const parsedChannels = channels.map((ch) => {
+    // 2. Parse times & durations from channel names
+    const parsedChannels = channels.map((ch, index) => {
+      // Regex for Start Time (10:00 PM)
       const timeMatch = ch.name.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
-      let timeInMins = -1;
       
+      // Regex for Duration flag like [2H], (3h), [8H]
+      const durationMatch = ch.name.match(/\[(\d+)H\]/i) || ch.name.match(/\((\d+)H\)/i);
+      
+      let timeInMins = -1;
+      let durationMins = 150; // Default 2.5 hours (150 mins) agar koi flag na ho
+      
+      if (durationMatch) {
+        durationMins = parseInt(durationMatch[1], 10) * 60; // Convert hours to minutes
+      }
+
       if (timeMatch) {
         let hours = parseInt(timeMatch[1], 10);
         const mins = parseInt(timeMatch[2], 10);
         const period = timeMatch[3].toUpperCase();
+        
         if (hours === 12 && period === 'AM') hours = 0;
         if (hours < 12 && period === 'PM') hours += 12;
         timeInMins = hours * 60 + mins;
       }
 
-      // Diff calculation (Now vs Match Time)
-      let diff = timeInMins - currentMinutes;
-      if (diff < -720) diff += 1440; 
-      if (diff > 720) diff -= 1440;
+      // Check if match is expired
+      let isExpired = false;
+      if (timeInMins !== -1) {
+        let delta = currentMinutes - timeInMins;
+        // Handle midnight crossover (e.g. started 11 PM, now it's 1 AM)
+        if (delta < -720) delta += 1440; 
+        if (delta > 720) delta -= 1440; 
+        
+        // Agar match ko start hue uski duration se zyada time ho gaya hai, tou expired.
+        if (delta > durationMins) {
+          isExpired = true;
+        }
+      }
       
-      return { ...ch, timeInMins, diff, hasPriority: ch.name.includes('!') };
+      return {
+        ...ch,
+        originalIndex: index,
+        timeInMins,
+        hasPriority: ch.name.includes('!'),
+        isExpired
+      };
     });
 
-    // 1. VIP Priority Check (!)
-    const priority = parsedChannels.find(c => c.hasPriority && c.diff <= 10);
-    if (priority) return priority.videoId;
+    // 3. Filter out expired matches and ones without valid time
+    const validFutureOrLiveChannels = parsedChannels.filter(c => c.timeInMins !== -1 && !c.isExpired);
+    
+    // === THE FALLBACK LOGIC ===
+    // Agar saare matches expire ho gaye hain ya kisi ka time hi nahi diya, tou index 0 (24/7) return karo.
+    if (validFutureOrLiveChannels.length === 0) {
+       const priorityFallback = parsedChannels.find(c => c.hasPriority);
+       return priorityFallback ? priorityFallback.videoId : channels[0].videoId;
+    }
 
-    // 2. Active Match Check (Jo match live hai ya next 10 mins mein hai)
-    // Same time ke 3-4 matches mein se first one pick hoga
-    const active = parsedChannels.find(c => c.diff <= 10);
-    if (active) return active.videoId;
+    // 4. Sort ascending by time (bina time modify kiye)
+    validFutureOrLiveChannels.sort((a, b) => a.timeInMins - b.timeInMins);
 
-    // 3. Fallback to first channel (24/7)
-    return channels[0].videoId;
+    let bestCandidate = null;
+
+    // Grouping by time to handle multiple matches at the exact same time
+    const timeGroups: { [key: number]: typeof validFutureOrLiveChannels } = {};
+    validFutureOrLiveChannels.forEach(c => {
+       if (!timeGroups[c.timeInMins]) timeGroups[c.timeInMins] = [];
+       timeGroups[c.timeInMins].push(c);
+    });
+
+    const uniqueTimes = Object.keys(timeGroups).map(Number).sort((a,b) => a-b);
+
+    for (let i = 0; i < uniqueTimes.length; i++) {
+       const t = uniqueTimes[i];
+       const group = timeGroups[t];
+       
+       // Tie-breaker: ! wala pick karo, otherwise group ka pehla match
+       const winnerInGroup = group.find(c => c.hasPriority) || group[0];
+
+       // Calculate real delta considering midnight
+       let delta = currentMinutes - t;
+       if (delta < -720) delta += 1440;
+       if (delta > 720) delta -= 1440;
+
+       if (delta >= 0) {
+           // Match start ho chuka hai (aur expired nahi hai kyunke hum filter kar chuke hain)
+           bestCandidate = winnerInGroup;
+       } else if (Math.abs(delta) <= 10) {
+           // Match next 10 minutes mein start hone wala hai (Pre-match window)
+           bestCandidate = winnerInGroup;
+           break; 
+       } else if (bestCandidate === null) {
+           // Agar abhi koi live nahi hai, aur next match 10 mins se bhi door hai, 
+           // tou automatically index 0 (24/7 stream) play rakho tab tak.
+           bestCandidate = parsedChannels[0];
+           break;
+       } else {
+           break;
+       }
+    }
+
+    return bestCandidate ? bestCandidate.videoId : channels[0].videoId;
   };
 
   useEffect(() => {
@@ -318,7 +388,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                  /* === MAIN CATEGORY SELECTION === */
                  <div className="mb-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
                    
-                   {.length === 0 ? (
+                   {availableStreams.length === 0 ? (
                      <div className="w-full aspect-[16/9] md:aspect-[21/9] bg-[#1a1a1a] rounded-xl border-2 border-dashed border-gray-800 flex flex-col items-center justify-center text-center p-6 shadow-inner relative overflow-hidden">
                         <div className="w-20 h-20 bg-gray-900 rounded-full flex items-center justify-center mb-4 shadow-lg border border-gray-800 z-10">
                            <Tv className="text-red-600/80" size={36} />
@@ -342,7 +412,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                          </div>
 
                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
-                           {.map((stream, idx) => (
+                           {availableStreams.map((stream, idx) => (
                              <div
                                key={idx}
                                onClick={() => {
@@ -489,7 +559,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                )}
 
                {/* BOTTOM STREAMS GRID */}
-               {selectedVideo &&  && .length > 0 && (
+               {selectedVideo && availableStreams && availableStreams.length > 0 && (
                  <>
                    <div className="flex flex-col mt-8 mb-4 px-1">
                      <div className="flex justify-center my-6 w-full overflow-hidden">
@@ -504,53 +574,58 @@ export default function HomeClient({ initialData }: HomeProps) {
                    </div>
                    
                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                      {availableStreams && availableStreams.length > 0 && (
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8">
-    {availableStreams.map((video, idx) => (
-      <div 
-        key={idx} 
-        onClick={() => { 
-           setIsChangingChannel(true);
-           setSelectedVideo(video); 
-           // Individual Logic per card
-           const smartId = getSmartActiveChannel(video.channels);
-           setActiveVideoId(smartId || video.videoId);
-           setForceAutoPlay(true);
-           window.scrollTo({ top: 0, behavior: 'smooth' }); 
-           setTimeout(() => { setIsChangingChannel(false); }, 1000);
-        }} 
-        className="group cursor-pointer flex flex-col"
-      >
-        <div className={`relative aspect-video rounded-xl overflow-hidden bg-gray-800 mb-3 transition-all duration-300 border ${selectedVideo?.videoId === video.videoId ? 'border-red-600 shadow-[0_0_15px_rgba(220,38,38,0.3)]' : 'border-gray-800'}`}>
-          <img 
-            src={getThumbnailImage(video)} 
-            alt={video.videoTitle} 
-            className="w-full h-full object-cover group-hover:scale-105 transition duration-500" 
-            loading="lazy" 
-          />
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="bg-black/50 p-3 rounded-full backdrop-blur-sm border border-white/20 group-hover:bg-red-600 transition-all duration-300">
-               <Play fill="white" size={24} className="text-white ml-0.5" />
-            </div>
-          </div>
-          {video.isLive !== false && (
-            <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded font-bold z-10">
-              <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse mr-1"></span> LIVE
-            </div>
-          )}
-        </div>
-        <div className="flex gap-3 px-1">
-          <div className="w-9 h-9 bg-gradient-to-br from-red-600 to-blue-600 rounded-full flex-shrink-0 mt-0.5"></div>
-          <div className="flex flex-col">
-            <h3 className={`text-sm font-bold line-clamp-2 leading-tight transition-colors ${selectedVideo?.videoId === video.videoId ? 'text-red-500' : 'text-white'}`}>
-              {video.videoTitle}
-            </h3>
-          </div>
-        </div>
-      </div>
-    ))}
-  </div>
-)}
+                      {availableStreams.map((video, idx) => (
+                         <div 
+                           key={idx} 
+                           onClick={() => { 
+                             setIsChangingChannel(true);
+                             setSelectedVideo(video); 
+                             // ✨ Yahan bhi forceAutoPlay TRUE kar diya taake bottom se match badalne par direct chale
+                             setForceAutoPlay(true);
+                             window.scrollTo({ top: 0, behavior: 'smooth' }); 
+                             
+                             setTimeout(() => {
+                               setIsChangingChannel(false);
+                             }, 1000);
+                           }} 
+                           className="group cursor-pointer rounded-2xl overflow-hidden bg-transparent transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex flex-col"
+                         >
+                            <div className="absolute inset-0 rounded-2xl animate-rainbow opacity-50 group-hover:opacity-100 transition-opacity duration-500 -z-10 p-[2px]">
+                              <div className="bg-[#121212] w-full h-full rounded-[14px]"></div>
+                            </div>
+
+                            <div className={`relative aspect-video w-full overflow-hidden bg-black rounded-t-[14px] transition-all duration-300 z-10 ${selectedVideo?.videoId === video.videoId ? 'border-b-2 border-white shadow-[0_0_20px_rgba(255,255,255,0.2)]' : ''}`}>
+                              
+                               <img 
+                                 src={getThumbnailImage(video)} 
+                                 alt={video.videoTitle} 
+                                 className="w-full h-full object-cover group-hover:scale-110 transition duration-700 ease-out" 
+                                 loading="lazy" 
+                               />
+                               
+                               <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#050505] to-transparent z-20"></div>
+
+                               <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
+                                 <div className="animate-rainbow p-[3px] rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                                   <div className="bg-black/90 p-3 rounded-full backdrop-blur-sm">
+                                     <Play fill="white" size={24} className="text-white ml-0.5" />
+                                   </div>
+                                 </div>
+                               </div>
+
+                               {video.isLive !== false && <div className="absolute top-2 right-2 bg-red-600/90 text-white text-xs px-2 py-1 rounded flex items-center gap-1.5 font-bold z-30 border border-white/20 shadow-lg"><span className="w-2 h-2 bg-white rounded-full animate-pulse"></span> LIVE</div>}
+                            </div>
+                            
+                            <div className="p-4 relative z-10 bg-gradient-to-b from-[#1f1f1f] to-[#050505] border-t border-white/10 flex-grow flex items-center gap-3 rounded-b-[14px] shadow-[inset_0_1px_10px_rgba(255,255,255,0.02)]">
+                               <div className="w-8 h-8 rounded-full flex-shrink-0 animate-rainbow shadow-[0_0_10px_rgba(255,255,255,0.1)] p-[2px]">
+                                 <div className="w-full h-full bg-black rounded-full"></div>
+                               </div>
+                               <h3 className={`text-sm font-bold line-clamp-2 leading-tight transition-all duration-300 ${selectedVideo?.videoId === video.videoId ? 'text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]' : 'text-gray-300 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]'}`}>
+                                  {video.videoTitle}
+                               </h3>
+                            </div>
+                         </div>
+                      ))}
                    </div>
                  </>
                )}

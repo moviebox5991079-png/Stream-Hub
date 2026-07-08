@@ -524,6 +524,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                               }, 1000);
                           }}
 
+                           
                         <div
                            className="group cursor-pointer rounded-2xl overflow-hidden bg-transparent transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex flex-col"
                          >

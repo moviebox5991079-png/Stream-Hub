@@ -36,9 +36,9 @@ export default function HomeClient({ initialData }: HomeProps) {
 
   const [selectedVideo, setSelectedVideo] = useState<StreamData | null>(null);
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
-  const [isChangingChannel, setIsChangingChannel] = useState(false);
   
-  // 🌟 NAYA STATE: Server link click karne par player ko force play/reload karne ke liye 🌟
+  const [isPlayerActive, setIsPlayerActive] = useState(false);
+  const [isChangingChannel, setIsChangingChannel] = useState(false);
   const [playerKey, setPlayerKey] = useState<number>(0);
 
   const [isOverlayVisible, setOverlayVisible] = useState(false); 
@@ -145,7 +145,7 @@ export default function HomeClient({ initialData }: HomeProps) {
     if (selectedVideo) {
       const smartChannelId = getSmartActiveChannel(selectedVideo.channels);
       setActiveVideoId(smartChannelId || selectedVideo.videoId);
-      setPlayerKey(Date.now()); // Naya match load hone par bhi key update
+      setPlayerKey(Date.now());
     }
   }, [selectedVideo]);
 
@@ -194,18 +194,19 @@ export default function HomeClient({ initialData }: HomeProps) {
     return () => { document.body.style.overflow = 'auto'; };
   }, [showWelcomeModal]);
 
-  // 🌟 NAYI LOGIC: Server link click hone par Auto-Play force karna 🌟
+  // 🌟 NAYI LOGIC: Server link par click karne se player On/Active hoga! 🌟
   const handleChannelChange = (newVideoId: string) => {
     setIsChangingChannel(true);
     setActiveVideoId(newVideoId);
-    
-    // Date.now() se ek unique key generate hogi, jiski wajah se player completely
-    // reload hoga aur usko pata chal jayega ke user ne click kiya hai, so wo auto-play ho jayega!
+    setIsPlayerActive(true); // <-- Yeh line Fake Overlay ko hata kar player chalu kar degi
     setPlayerKey(Date.now()); 
     
     setTimeout(() => {
       setIsChangingChannel(false);
     }, 1000);
+
+    // Click hone par screen auto-scroll karke upar player par aa jayegi
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const getThumbnailImage = (video: StreamData) => {
@@ -381,6 +382,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                                 key={idx}
                                 onClick={() => {
                                   setSelectedVideo(stream);
+                                  setIsPlayerActive(false); 
                                   window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 className="group cursor-pointer rounded-2xl overflow-hidden bg-transparent transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_40px_rgba(0,0,0,0.8)] flex flex-col"
@@ -441,15 +443,39 @@ export default function HomeClient({ initialData }: HomeProps) {
                              </div>
                           )}
 
-                          {/* 🌟 OKRU PLAYER with Dynamic Key for Auto-Play 🌟 */}
-                          {activeVideoId && (
-                            <OkRuPlayer 
-                              key={`${activeVideoId}-${playerKey}`} // 👈 Is key ki wajah se player force refresh & unpause hoga
-                              videoId={activeVideoId} 
-                              title={selectedVideo.videoTitle} 
-                              thumbnail={getThumbnailImage(selectedVideo)} 
-                              autoPlay={true} 
-                            />
+                          {!isPlayerActive ? (
+                            <div 
+                              className="w-full h-full relative cursor-pointer group flex items-center justify-center bg-black overflow-hidden"
+                              onClick={() => setIsPlayerActive(true)} 
+                            >
+                              <img 
+                                src={getThumbnailImage(selectedVideo)} 
+                                alt="Tap to play" 
+                                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" 
+                              />
+                              
+                              <div className="relative z-10 flex flex-col items-center justify-center pointer-events-none">
+                                <div className="w-20 h-20 p-[3px] rounded-full shadow-[0_0_40px_rgba(255,255,255,0.4)] group-hover:scale-110 transition-all duration-300 mb-4 animate-rainbow">
+                                  <div className="w-full h-full bg-[#db1a1a]/90 flex items-center justify-center rounded-full backdrop-blur-sm">
+                                    <Play fill="white" size={36} className="text-white ml-2" />
+                                  </div>
+                                </div>
+                                <div className="bg-black/80 border border-white/20 text-white text-xs sm:text-sm font-bold tracking-widest px-5 py-2.5 rounded-full flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.1)] backdrop-blur-sm">
+                                  <span className="w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.8)]"></span>
+                                  TAP TO WATCH LIVE
+                                </div>
+                              </div>
+                            </div>
+                          ) : (
+                            activeVideoId && (
+                              <OkRuPlayer 
+                                key={`${activeVideoId}-${playerKey}`} 
+                                videoId={activeVideoId} 
+                                title={selectedVideo.videoTitle} 
+                                thumbnail={getThumbnailImage(selectedVideo)} 
+                                autoPlay={true} 
+                              />
+                            )
                           )}
 
                        </div>
@@ -545,8 +571,14 @@ export default function HomeClient({ initialData }: HomeProps) {
                           <div 
                             key={idx} 
                             onClick={() => { 
+                              setIsChangingChannel(true);
                               setSelectedVideo(video); 
+                              setIsPlayerActive(true); // 🌟 Bottom card click karne par bhi player active ho jayega 🌟
                               window.scrollTo({ top: 0, behavior: 'smooth' }); 
+                              
+                              setTimeout(() => {
+                                setIsChangingChannel(false);
+                              }, 1000);
                             }} 
                             className="group cursor-pointer rounded-2xl overflow-hidden bg-transparent transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex flex-col"
                           >
@@ -576,7 +608,6 @@ export default function HomeClient({ initialData }: HomeProps) {
                                 {video.isLive !== false && <div className="absolute top-2 right-2 bg-red-600/90 text-white text-xs px-2 py-1 rounded flex items-center gap-1.5 font-bold z-30 border border-white/20 shadow-lg"><span className="w-2 h-2 bg-white rounded-full animate-pulse"></span> LIVE</div>}
                              </div>
                              
-                             {/* 🌟 LUXURY TEXT BACKGROUND (BOTTOM GRID) 🌟 */}
                              <div className="p-4 relative z-10 bg-gradient-to-b from-[#1f1f1f] to-[#050505] border-t border-white/10 flex-grow flex items-center gap-3 rounded-b-[14px] shadow-[inset_0_1px_10px_rgba(255,255,255,0.02)]">
                                 <div className="w-8 h-8 rounded-full flex-shrink-0 animate-rainbow shadow-[0_0_10px_rgba(255,255,255,0.1)] p-[2px]">
                                    <div className="w-full h-full bg-black rounded-full"></div>

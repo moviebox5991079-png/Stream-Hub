@@ -313,7 +313,7 @@ export default function HomeClient({ initialData }: HomeProps) {
           </div>
         )}
 
-        {/* 🌟 LUXURY NAVBAR (Menu Button Removed for Mobile Space) 🌟 */}
+        {/* 🌟 LUXURY NAVBAR 🌟 */}
         <nav ref={navbarRef} className="fixed top-0 left-0 right-0 z-[30] flex items-center justify-between px-4 py-3 bg-[#0f0f0f]/90 backdrop-blur-md border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
           <div className="flex items-center gap-3">
             <a href="/" className="flex items-center gap-2 group">
@@ -475,19 +475,12 @@ export default function HomeClient({ initialData }: HomeProps) {
                      </div>
 
                      <div className="mt-5 px-1">
-                        <div className="flex justify-between items-start gap-4">
-                          <h1 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
-                            {selectedVideo.videoTitle} {selectedVideo.isLive && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse">LIVE NOW</span>}
+                        {/* 🌟 TITLE AREA UPDATED (Back to Menu Button Removed for 100% Mobile Width) 🌟 */}
+                        <div className="w-full">
+                          <h1 className="text-xl sm:text-2xl font-bold text-white mb-2 flex flex-wrap items-center gap-2">
+                            {selectedVideo.videoTitle} 
+                            {selectedVideo.isLive && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse whitespace-nowrap">LIVE NOW</span>}
                           </h1>
-                          <button 
-                            onClick={() => {
-                              setSelectedVideo(null);
-                              setIsPlayerActive(false);
-                            }} 
-                            className="bg-[#1a1a1a] hover:bg-[#2a2a2a] text-white text-sm px-4 py-2 rounded-lg font-bold transition-colors whitespace-nowrap border border-white/10 shadow-lg"
-                          >
-                            Back to Menu
-                          </button>
                         </div>
 
                         {selectedVideo.channels && selectedVideo.channels.length > 0 && (
@@ -608,7 +601,6 @@ export default function HomeClient({ initialData }: HomeProps) {
                                 {video.isLive !== false && <div className="absolute top-2 right-2 bg-red-600/90 text-white text-xs px-2 py-1 rounded flex items-center gap-1.5 font-bold z-30 border border-white/20 shadow-lg"><span className="w-2 h-2 bg-white rounded-full animate-pulse"></span> LIVE</div>}
                              </div>
                              
-                             {/* 🌟 LUXURY TEXT BACKGROUND (BOTTOM GRID) 🌟 */}
                              <div className="p-4 relative z-10 bg-gradient-to-b from-[#1f1f1f] to-[#050505] border-t border-white/10 flex-grow flex items-center gap-3 rounded-b-[14px] shadow-[inset_0_1px_10px_rgba(255,255,255,0.02)]">
                                 <div className="w-8 h-8 rounded-full flex-shrink-0 animate-rainbow shadow-[0_0_10px_rgba(255,255,255,0.1)] p-[2px]">
                                    <div className="w-full h-full bg-black rounded-full"></div>
@@ -639,7 +631,6 @@ export default function HomeClient({ initialData }: HomeProps) {
     </>
   );
 }
-
 
 
 

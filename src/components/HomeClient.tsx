@@ -329,60 +329,68 @@ export default function HomeClient({ initialData }: HomeProps) {
                          <p className="text-gray-400 max-w-lg z-10">Please check back later when matches are live.</p>
                       </div>
                     ) : (
-                      // 🌟 YAHAN BADGE WALA GRADIENT COLOR PARENT ME LAGA DIYA HAI 🌟
-                      <div className="bg-gradient-to-br from-red-800 via-purple-800 to-blue-800 border border-white/20 rounded-3xl w-full p-6 sm:p-10 relative shadow-[0_0_50px_rgba(147,51,234,0.3)] overflow-hidden">
+                      // 🌟 LUXURY GRADIENT BORDER WRAPPER 🌟
+                      <div className="relative w-full rounded-3xl p-[2px] bg-gradient-to-br from-red-600 via-purple-600 to-blue-600 shadow-[0_0_60px_rgba(147,51,234,0.25)]">
                         
-                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-40 bg-white/5 blur-[100px] rounded-full pointer-events-none"></div>
+                        {/* 🌟 INNER DARK GLASS CONTAINER 🌟 */}
+                        <div className="bg-[#0a0a0a] rounded-[22px] w-full p-6 sm:p-10 relative overflow-hidden h-full">
+                          
+                          {/* Glowing background orbs inside the dark container for depth */}
+                          <div className="absolute -top-20 -left-20 w-72 h-72 bg-red-600/15 blur-[100px] rounded-full pointer-events-none"></div>
+                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/10 blur-[120px] rounded-full pointer-events-none"></div>
+                          <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-blue-600/15 blur-[100px] rounded-full pointer-events-none"></div>
 
-                        <div className="text-center mb-10 relative z-10">
-                          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-widest uppercase mb-4 drop-shadow-lg">
-                            What do you want to Watch?
-                          </h2>
-                          <p className="text-white/80 text-base sm:text-lg font-medium drop-shadow-md">Select a match below to start streaming instantly in HD</p>
-                        </div>
+                          <div className="text-center mb-10 relative z-10">
+                            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-widest uppercase mb-4 drop-shadow-lg">
+                              What do you want to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-purple-500 to-blue-500">Watch?</span>
+                            </h2>
+                            <p className="text-gray-400 text-base sm:text-lg font-medium">Select a match below to start streaming instantly in HD</p>
+                          </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 relative z-10">
-                          {availableStreams.map((stream, idx) => (
-                            <div
-                              key={idx}
-                              onClick={() => {
-                                setSelectedVideo(stream);
-                                setIsPlayerActive(false); 
-                                window.scrollTo({ top: 0, behavior: 'smooth' });
-                              }}
-                              className="group cursor-pointer rounded-2xl overflow-hidden bg-[#1a1a1a]/90 backdrop-blur-sm border border-white/10 hover:border-white/40 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(0,0,0,0.5)]"
-                            >
-                              <div className="aspect-video w-full relative overflow-hidden rounded-t-xl">
-                                
-                                <img 
-                                  src={getThumbnailImage(stream)} 
-                                  alt={stream.videoTitle} 
-                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
-                                />
-                                
-                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-300"></div>
-                                
-                                {stream.isLive !== false && (
-                                  <div className="absolute top-3 right-3 bg-red-600/90 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-md flex items-center gap-1.5 font-bold shadow-lg shadow-black/50 border border-white/20">
-                                    <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span> LIVE
-                                  </div>
-                                )}
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 relative z-10">
+                            {availableStreams.map((stream, idx) => (
+                              <div
+                                key={idx}
+                                onClick={() => {
+                                  setSelectedVideo(stream);
+                                  setIsPlayerActive(false); 
+                                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                                }}
+                                className="group cursor-pointer rounded-2xl overflow-hidden bg-[#151515] border border-white/5 hover:border-purple-500/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(147,51,234,0.3)] relative"
+                              >
+                                {/* Glowing top border on card hover */}
+                                <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"></div>
 
-                                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100">
-                                  <div className="bg-red-600/80 p-4 rounded-full backdrop-blur-md shadow-[0_0_20px_rgba(220,38,38,0.6)] flex items-center justify-center">
-                                    <Play fill="white" size={32} className="text-white ml-1" />
+                                <div className="aspect-video w-full relative overflow-hidden rounded-t-xl">
+                                  <img 
+                                    src={getThumbnailImage(stream)} 
+                                    alt={stream.videoTitle} 
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
+                                  />
+                                  
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                  
+                                  {stream.isLive !== false && (
+                                    <div className="absolute top-3 right-3 bg-red-600/90 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-md flex items-center gap-1.5 font-bold shadow-lg shadow-black/50 border border-white/10">
+                                      <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span> LIVE
+                                    </div>
+                                  )}
+
+                                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100">
+                                    <div className="bg-red-600/80 p-4 rounded-full backdrop-blur-md shadow-[0_0_20px_rgba(220,38,38,0.6)] flex items-center justify-center border border-white/20">
+                                      <Play fill="white" size={32} className="text-white ml-1" />
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
 
-                              <div className="p-5 relative">
-                                <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-gray-400 group-hover:via-white to-transparent transition-all duration-500"></div>
-                                <h3 className="text-lg font-bold text-white transition-colors line-clamp-2 leading-snug">
-                                  {stream.videoTitle}
-                               </h3>
+                                <div className="p-5 relative">
+                                  <h3 className="text-lg font-bold text-white group-hover:text-purple-400 transition-colors line-clamp-2 leading-snug">
+                                    {stream.videoTitle}
+                                 </h3>
+                                </div>
                               </div>
-                            </div>
-                          ))}
+                            ))}
+                          </div>
                         </div>
                       </div>
                     )}

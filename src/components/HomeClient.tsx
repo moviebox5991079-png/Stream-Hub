@@ -41,6 +41,9 @@ export default function HomeClient({ initialData }: HomeProps) {
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [isChangingChannel, setIsChangingChannel] = useState(false);
 
+  // ✨ NEW STATE: Track karna ke kab auto-play karna hai aur kab overlay dikhana hai
+  const [forceAutoPlay, setForceAutoPlay] = useState(false);
+
   const [isOverlayVisible, setOverlayVisible] = useState(false); 
   const [showWelcomeModal, setShowWelcomeModal] = useState(true);
 
@@ -193,14 +196,16 @@ export default function HomeClient({ initialData }: HomeProps) {
     return () => { document.body.style.overflow = 'auto'; };
   }, [showWelcomeModal]);
 
-  // ✨ UPDATED FUNCTIONALITY: Handle Channel Change and Force Play
+  // Handle Channel Change (Jab user neeche se server change kare)
   const handleChannelChange = (newVideoId: string) => {
     if (activeVideoId === newVideoId) return; 
     
     setIsChangingChannel(true);
     setActiveVideoId(newVideoId);
     
-    // Overlay hata do taake stream ko block na kare
+    // ✨ Yahan forceAutoPlay TRUE kar diya taake direct chalay
+    setForceAutoPlay(true);
+    
     if (isOverlayVisible) {
       setOverlayVisible(false);
     }
@@ -358,10 +363,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                         <p className="text-gray-400 max-w-lg z-10">Please check back later when matches are live.</p>
                      </div>
                    ) : (
-                     /* 🌟 INFINITE FLOWING BORDER WRAPPER 🌟 */
                      <div className="relative w-full rounded-3xl p-[3px] animate-rainbow shadow-[0_0_60px_rgba(255,255,255,0.05)]">
-                       
-                       {/* INNER DARK GLASS CONTAINER */}
                        <div className="bg-[#0f0f0f] rounded-[21px] w-full p-6 sm:p-10 relative overflow-hidden h-full z-10 border border-white/5">
                          
                          <div className="absolute -top-32 -left-32 w-96 h-96 bg-fuchsia-600/10 blur-[120px] rounded-full pointer-events-none animate-pulse"></div>
@@ -370,9 +372,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                          <div className="text-center mb-12 relative z-10">
                            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-widest uppercase mb-4 drop-shadow-2xl">
                              What do you want to{' '}
-                             <span className="animate-rainbow-text">
-                               Watch?
-                             </span>
+                             <span className="animate-rainbow-text">Watch?</span>
                            </h2>
                            <p className="text-gray-400 text-base sm:text-lg font-medium">Select a match below to start streaming instantly in HD</p>
                          </div>
@@ -382,12 +382,13 @@ export default function HomeClient({ initialData }: HomeProps) {
                              <div
                                key={idx}
                                onClick={() => {
+                                 // ✨ Yahan forceAutoPlay FALSE kar diya (Pehli dafa Play Button aayega)
+                                 setForceAutoPlay(false);
                                  setSelectedVideo(stream);
                                  window.scrollTo({ top: 0, behavior: 'smooth' });
                                }}
                                className="group cursor-pointer rounded-2xl overflow-hidden bg-transparent transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_40px_rgba(0,0,0,0.8)] flex flex-col"
                              >
-                               {/* CARD VIP INFINITE BORDER */}
                                <div className="absolute inset-0 rounded-2xl animate-rainbow opacity-50 group-hover:opacity-100 transition-opacity duration-500 -z-10 p-[2px]">
                                  <div className="bg-[#121212] w-full h-full rounded-[14px]"></div>
                                </div>
@@ -398,15 +399,12 @@ export default function HomeClient({ initialData }: HomeProps) {
                                    alt={stream.videoTitle} 
                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out z-10 relative" 
                                  />
-                                 
                                  {stream.isLive !== false && (
                                    <div className="absolute top-3 right-3 bg-red-600/95 backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-md flex items-center gap-2 font-black shadow-[0_0_15px_rgba(220,38,38,0.6)] border border-red-400/30 z-30 tracking-widest">
                                      <span className="w-2 h-2 bg-white rounded-full animate-pulse shadow-[0_0_5px_white]"></span> LIVE
                                    </div>
                                  )}
-
                                  <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#050505] to-transparent z-20"></div>
-
                                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 z-30">
                                    <div className="animate-rainbow p-[3px] rounded-full shadow-[0_0_40px_rgba(255,255,255,0.2)]">
                                      <div className="bg-black/90 p-4 rounded-full backdrop-blur-xl">
@@ -416,7 +414,6 @@ export default function HomeClient({ initialData }: HomeProps) {
                                  </div>
                                </div>
 
-                               {/* 🌟 LUXURY TEXT BACKGROUND 🌟 */}
                                <div className="p-5 sm:p-6 relative z-10 bg-gradient-to-b from-[#1f1f1f] to-[#050505] border-t border-white/10 flex-grow flex items-center justify-center text-center rounded-b-[14px] shadow-[inset_0_1px_10px_rgba(255,255,255,0.02)]">
                                  <h3 className="text-lg font-bold text-gray-300 group-hover:text-white transition-all duration-300 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.4)] line-clamp-2 leading-relaxed tracking-wide">
                                    {stream.videoTitle}
@@ -445,12 +442,13 @@ export default function HomeClient({ initialData }: HomeProps) {
 
                           {activeVideoId && (
                             <OkRuPlayer 
-                              key={activeVideoId} // ✨ CRITICAL: React re-mounts iframe automatically on key change
+                              key={activeVideoId}
                               videoId={activeVideoId} 
                               title={selectedVideo.videoTitle} 
                               thumbnail={getThumbnailImage(selectedVideo)} 
                               autoPlay={true}
-                              forcePlayOnLoad={true} 
+                              // ✨ Dynamic Prop pass kar di
+                              forcePlayOnLoad={forceAutoPlay} 
                             />
                           )}
 
@@ -458,7 +456,6 @@ export default function HomeClient({ initialData }: HomeProps) {
                      </div>
 
                      <div className="mt-5 px-1">
-                       {/* 🌟 TITLE AREA 🌟 */}
                        <div className="w-full">
                          <h1 className="text-xl sm:text-2xl font-bold text-white mb-2 flex flex-wrap items-center gap-2">
                            {selectedVideo.videoTitle} 
@@ -549,6 +546,8 @@ export default function HomeClient({ initialData }: HomeProps) {
                            onClick={() => { 
                              setIsChangingChannel(true);
                              setSelectedVideo(video); 
+                             // ✨ Yahan bhi forceAutoPlay TRUE kar diya taake bottom se match badalne par direct chale
+                             setForceAutoPlay(true);
                              window.scrollTo({ top: 0, behavior: 'smooth' }); 
                              
                              setTimeout(() => {
@@ -583,7 +582,6 @@ export default function HomeClient({ initialData }: HomeProps) {
                                {video.isLive !== false && <div className="absolute top-2 right-2 bg-red-600/90 text-white text-xs px-2 py-1 rounded flex items-center gap-1.5 font-bold z-30 border border-white/20 shadow-lg"><span className="w-2 h-2 bg-white rounded-full animate-pulse"></span> LIVE</div>}
                             </div>
                             
-                            {/* 🌟 LUXURY TEXT BACKGROUND (BOTTOM GRID) 🌟 */}
                             <div className="p-4 relative z-10 bg-gradient-to-b from-[#1f1f1f] to-[#050505] border-t border-white/10 flex-grow flex items-center gap-3 rounded-b-[14px] shadow-[inset_0_1px_10px_rgba(255,255,255,0.02)]">
                                <div className="w-8 h-8 rounded-full flex-shrink-0 animate-rainbow shadow-[0_0_10px_rgba(255,255,255,0.1)] p-[2px]">
                                   <div className="w-full h-full bg-black rounded-full"></div>
@@ -614,7 +612,6 @@ export default function HomeClient({ initialData }: HomeProps) {
     </>
   );
 }
-
 
 
 

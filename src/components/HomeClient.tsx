@@ -37,8 +37,6 @@ export default function HomeClient({ initialData }: HomeProps) {
   const [selectedVideo, setSelectedVideo] = useState<StreamData | null>(null);
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   
-  // NAYI STATE: Control karne ke liye ke fake thumbnail dikhana hai ya real player
-  const [isPlayerActive, setIsPlayerActive] = useState(false);
   const [isChangingChannel, setIsChangingChannel] = useState(false);
 
   const [isOverlayVisible, setOverlayVisible] = useState(false); 
@@ -201,8 +199,6 @@ export default function HomeClient({ initialData }: HomeProps) {
     
     setIsChangingChannel(true);
     setActiveVideoId(newVideoId);
-    // Jab server switch ho toh ensure karein player active hai
-    setIsPlayerActive(true); 
     
     setTimeout(() => {
       setIsChangingChannel(false);
@@ -330,7 +326,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                          <p className="text-gray-400 max-w-lg z-10">Please check back later when matches are live.</p>
                       </div>
                     ) : (
-                      <div className="bg-gradient-to-b from-[#151515] to-[#0a0a0a] border border-gray-800/80 rounded-3xl w-full p-6 sm:p-10 relative shadow-[0_0_80px_rgba(220,38,38,0.15)] overflow-hidden">
+                      <div className="bg-[#111111] border border-gray-800 rounded-3xl w-full p-6 sm:p-10 relative shadow-2xl overflow-hidden">
                         
                         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-red-600/10 blur-[100px] rounded-full pointer-events-none"></div>
 
@@ -347,20 +343,14 @@ export default function HomeClient({ initialData }: HomeProps) {
                               key={idx}
                               onClick={() => {
                                 setSelectedVideo(stream);
-                                // Main menu se select par 'TAP TO WATCH' image aayegi (Player Hide hoga)
-                                setIsPlayerActive(false); 
+                                setIsChangingChannel(true);
+                                setTimeout(() => setIsChangingChannel(false), 1000);
                                 window.scrollTo({ top: 0, behavior: 'smooth' });
                               }}
                               className="group cursor-pointer rounded-2xl overflow-hidden bg-[#1a1a1a] border border-gray-800 hover:border-red-500/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(220,38,38,0.2)]"
                             >
                               <div className="aspect-video w-full relative overflow-hidden rounded-t-xl">
                                 
-                                {/* 66K+ WATCHING BADGE (HCI Fix) */}
-                                <div className="absolute top-0 left-0 bg-gradient-to-r from-red-600 via-purple-600 to-blue-600 text-white text-[10px] sm:text-xs font-black px-3 py-1.5 rounded-br-2xl z-20 shadow-[0_4px_15px_rgba(0,0,0,0.5)] flex items-center gap-1.5 border-b border-r border-white/20">
-                                  <User size={12} className="animate-pulse" />
-                                  <span className="tracking-wider">66K+ WATCHING</span>
-                                </div>
-
                                 <img 
                                   src={getThumbnailImage(stream)} 
                                   alt={stream.videoTitle} 
@@ -407,38 +397,13 @@ export default function HomeClient({ initialData }: HomeProps) {
                            </div>
                         )}
 
-                        {/* FAKE THUMBNAIL YA REAL PLAYER (Image 1 Logic) */}
-                        {!isPlayerActive ? (
-                          <div 
-                            className="w-full aspect-[16/9] relative cursor-pointer group flex items-center justify-center bg-black overflow-hidden"
-                            onClick={() => setIsPlayerActive(true)} // Click karne par actual iframe player chalega
-                          >
-                            <img 
-                              src={getThumbnailImage(selectedVideo)} 
-                              alt="Tap to play" 
-                              className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" 
-                            />
-                            <div className="relative z-10 flex flex-col items-center justify-center pointer-events-none">
-                              {/* Big Red Play Button */}
-                              <div className="w-20 h-20 bg-[#db1a1a] rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(219,26,26,0.5)] group-hover:scale-110 group-hover:shadow-[0_0_40px_rgba(219,26,26,0.8)] transition-all duration-300 mb-4">
-                                <Play fill="white" size={36} className="text-white ml-2" />
-                              </div>
-                              {/* TAP TO WATCH LIVE Badge */}
-                              <div className="bg-black/90 border border-gray-700 text-white text-xs sm:text-sm font-bold tracking-widest px-4 py-2 rounded-full flex items-center gap-2 shadow-lg backdrop-blur-sm">
-                                <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
-                                TAP TO WATCH LIVE
-                              </div>
-                            </div>
-                          </div>
-                        ) : (
-                          activeVideoId && (
-                            <OkRuPlayer 
-                              videoId={activeVideoId} 
-                              title={selectedVideo.videoTitle} 
-                              thumbnail={getThumbnailImage(selectedVideo)} 
-                              autoPlay={true} 
-                            />
-                          )
+                        {activeVideoId && (
+                          <OkRuPlayer 
+                            videoId={activeVideoId} 
+                            title={selectedVideo.videoTitle} 
+                            thumbnail={getThumbnailImage(selectedVideo)} 
+                            autoPlay={true} 
+                          />
                         )}
                      </div>
 
@@ -448,10 +413,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                             {selectedVideo.videoTitle} {selectedVideo.isLive && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse">LIVE NOW</span>}
                           </h1>
                           <button 
-                            onClick={() => {
-                              setSelectedVideo(null);
-                              setIsPlayerActive(false);
-                            }} 
+                            onClick={() => setSelectedVideo(null)} 
                             className="bg-gray-800 hover:bg-gray-700 text-white text-sm px-4 py-2 rounded-lg font-bold transition-colors whitespace-nowrap border border-gray-700"
                           >
                             Back to Menu
@@ -542,8 +504,6 @@ export default function HomeClient({ initialData }: HomeProps) {
                             onClick={() => { 
                               setIsChangingChannel(true);
                               setSelectedVideo(video); 
-                              // Agar user neechay se koi click karta hai, toh Direct Play hoga!
-                              setIsPlayerActive(true); 
                               window.scrollTo({ top: 0, behavior: 'smooth' }); 
                               
                               setTimeout(() => {
@@ -554,12 +514,6 @@ export default function HomeClient({ initialData }: HomeProps) {
                           >
                              <div className={`relative aspect-video rounded-xl overflow-hidden bg-gray-800 mb-3 group-hover:rounded-none transition-all duration-300 border ${selectedVideo?.videoId === video.videoId ? 'border-red-600 shadow-[0_0_15px_rgba(220,38,38,0.3)]' : 'border-gray-800 group-hover:border-red-600/50'}`}>
                                 
-                                {/* 66K+ WATCHING BADGE */}
-                                <div className="absolute top-0 left-0 bg-gradient-to-r from-red-600 via-purple-600 to-blue-600 text-white text-[10px] font-black px-2 py-1 rounded-br-xl z-20 shadow-lg flex items-center gap-1 border-b border-r border-white/20">
-                                  <User size={10} className="animate-pulse" />
-                                  <span className="tracking-wider">66K+ WATCHING</span>
-                                </div>
-
                                 <img 
                                   src={getThumbnailImage(video)} 
                                   alt={video.videoTitle} 
@@ -605,7 +559,6 @@ export default function HomeClient({ initialData }: HomeProps) {
     </>
   );
 }
-
 
 
 

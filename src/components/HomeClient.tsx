@@ -66,113 +66,66 @@ export default function HomeClient({ initialData }: HomeProps) {
 
   // === UPDATE: FULLY FIXED SMART TIME LOGIC (MIDNIGHT SAFE) ===
   // === UPDATE: FULLY FIXED SMART TIME LOGIC (MIDNIGHT SAFE & TIE-BREAKER) ===
-  const getSmartActiveChannel = (channels: ChannelData[] | undefined) => {
+ const getSmartActiveChannel = (channels: ChannelData[] | undefined) => {
     if (!channels || channels.length === 0) return null;
 
-    // 1. Current time in PKT (UTC+5)
+    // 1. Current time in PKT
     const now = new Date();
     const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
     const pktDate = new Date(utc + (3600000 * 5));
     const currentMinutes = pktDate.getHours() * 60 + pktDate.getMinutes();
 
-    // 2. Parse times & durations from channel names
+    // 2. Sirf time aur relative difference calculate karo (Koi filtering nahi)
     const parsedChannels = channels.map((ch, index) => {
       const timeMatch = ch.name.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
-      const durationMatch = ch.name.match(/\[(\d+)H\]/i) || ch.name.match(/\((\d+)H\)/i);
-      
       let timeInMins = -1;
-      let durationMins = 150; // Default 2.5 hours (150 mins) agar koi flag na ho
       
-      if (durationMatch) {
-        durationMins = parseInt(durationMatch[1], 10) * 60; // Convert hours to minutes
-      }
-
       if (timeMatch) {
         let hours = parseInt(timeMatch[1], 10);
         const mins = parseInt(timeMatch[2], 10);
         const period = timeMatch[3].toUpperCase();
-        
         if (hours === 12 && period === 'AM') hours = 0;
         if (hours < 12 && period === 'PM') hours += 12;
         timeInMins = hours * 60 + mins;
       }
 
-      // Check if match is expired
-      let isExpired = false;
-      if (timeInMins !== -1) {
-        let delta = currentMinutes - timeInMins;
-        // Handle midnight crossover (e.g. started 11 PM, now it's 1 AM)
-        if (delta < -720) delta += 1440; 
-        if (delta > 720) delta -= 1440; 
-        
-        // Agar match ko start hue uski duration se zyada time ho gaya hai, tou expired.
-        if (delta > durationMins) {
-          isExpired = true;
-        }
-      }
+      // Logic: 14 ghante se door match ko future, 2 ghante se purane ko past maan lo
+      let diff = timeInMins - currentMinutes;
+      if (diff < -720) diff += 1440; 
+      if (diff > 720) diff -= 1440;
       
       return {
         ...ch,
-        originalIndex: index,
         timeInMins,
-        hasPriority: ch.name.includes('!'),
-        isExpired
+        diff, // Difference from now
+        hasPriority: ch.name.includes('!')
       };
     });
 
-    // 3. Filter out expired matches and ones without valid time
-    const validFutureOrLiveChannels = parsedChannels.filter(c => c.timeInMins !== -1 && !c.isExpired);
-    
-    // === THE EMPTY FALLBACK LOGIC ===
-    if (validFutureOrLiveChannels.length === 0) {
-       const priorityFallback = parsedChannels.find(c => c.hasPriority);
-       return priorityFallback ? priorityFallback.videoId : channels[0].videoId;
-    }
-
-    // ✨ 4. NEW LOGIC: Calculate relative time difference from NOW
-    const getRelativeDiff = (timeMins: number) => {
-      let diff = timeMins - currentMinutes;
-      if (diff < -720) diff += 1440;
-      if (diff > 720) diff -= 1440;
-      return diff; // -ve means match is in past (live), +ve means future
-    };
-
-    // Sort chronologically relative to CURRENT time (not 00:00 midnight)
-    validFutureOrLiveChannels.sort((a, b) => getRelativeDiff(a.timeInMins) - getRelativeDiff(b.timeInMins));
+    // 3. Sort matches by their closeness to CURRENT time
+    // Yeh logic 24/7 loop mein sabse qareeb wale match ko top par layegi
+    parsedChannels.sort((a, b) => Math.abs(a.diff) - Math.abs(b.diff));
 
     let bestCandidate = null;
 
-    // 5. Find the latest live or nearest upcoming match
-    for (const channel of validFutureOrLiveChannels) {
-      let diff = getRelativeDiff(channel.timeInMins);
-      
-      if (diff <= 0) {
-          // Live Match: Agar same time ka match pehle se mil chuka hai, tou usko overwrite mat karo (First ko hi select rakho)
-          if (!bestCandidate || bestCandidate.timeInMins !== channel.timeInMins) {
-              bestCandidate = channel;
-          }
-      } else if (diff > 0 && diff <= 10) {
-          // Pre-Match Window (Next 10 mins): Overwrite rokne ki same logic
-          if (!bestCandidate || bestCandidate.timeInMins !== channel.timeInMins) {
-              bestCandidate = channel;
-          }
-          break; 
-      } else {
-          // Match is in far future. Agar live ya pre-match mil chuka hai tou stop.
-          if (bestCandidate) break;
+    // 4. Selection Logic
+    // Jo match live hai (diff <= 0) ya abhi aane wala hai (diff > 0), usay pick karo
+    for (const channel of parsedChannels) {
+      if (channel.diff <= 10) { // Live match ya next 10 mins wala
+        bestCandidate = channel;
+        break;
       }
     }
 
-    // 6. Fallback: Agar saare matches future mein hain (>10 mins) toh sabse qareeb wala future match play karo
+    // Agar koi match nahi mila (sab bohot door hain), tou jo sabse qareeb hai usay select karo
     if (!bestCandidate) {
-       bestCandidate = validFutureOrLiveChannels[0]; 
+      bestCandidate = parsedChannels[0];
     }
 
-    // ✨ 7. VIP PRIORITY OVERLAY: Agar kisi bhi active/upcoming match par "!" laga hai, tou math ko bypass karo!
-    const priorityWinner = validFutureOrLiveChannels.find(c => c.hasPriority);
-    // Priority tabhi kaam karegi jab match live ho chuka ho ya start hone mein sirf 10 mins baqi hon
-    if (priorityWinner && getRelativeDiff(priorityWinner.timeInMins) <= 10) {
-       bestCandidate = priorityWinner;
+    // 5. VIP Override (!)
+    const priorityWinner = parsedChannels.find(c => c.hasPriority && c.diff <= 10);
+    if (priorityWinner) {
+      bestCandidate = priorityWinner;
     }
 
     return bestCandidate ? bestCandidate.videoId : channels[0].videoId;

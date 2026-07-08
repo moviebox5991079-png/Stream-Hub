@@ -219,16 +219,17 @@ export default function HomeClient({ initialData }: HomeProps) {
         <link rel="dns-prefetch" href="https://ok.ru" />
       </Head>
 
-      {/* 🌟 CUSTOM ANIMATION FOR LUXURY GRADIENT FLOW 🌟 */}
+      {/* 🌟 CUSTOM ANIMATION FOR LUXURY INFINITE SPECTRUM FLOW 🌟 */}
       <style dangerouslySetInnerHTML={{__html: `
-        @keyframes flowGradient {
+        @keyframes rainbowFlow {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
-        .animate-flow {
-          background-size: 200% 200%;
-          animation: flowGradient 4s ease infinite;
+        .animate-rainbow {
+          background: linear-gradient(270deg, #ff003c, #ff00d4, #7000ff, #003cff, #00d4ff, #00ff70, #e1ff00, #ff7000, #ff003c);
+          background-size: 800% 800%;
+          animation: rainbowFlow 12s ease infinite;
         }
       `}} />
 
@@ -339,28 +340,27 @@ export default function HomeClient({ initialData }: HomeProps) {
                          <p className="text-gray-400 max-w-lg z-10">Please check back later when matches are live.</p>
                       </div>
                     ) : (
-                      // 🌟 FLOWING GRADIENT BORDER WRAPPER 🌟
-                      <div className="relative w-full rounded-3xl p-[2px] bg-gradient-to-r from-red-600 via-purple-600 to-blue-600 animate-flow shadow-[0_0_60px_rgba(147,51,234,0.3)]">
+                      /* 🌟 INFINITE FLOWING BORDER WRAPPER 🌟 */
+                      <div className="relative w-full rounded-3xl p-[3px] animate-rainbow shadow-[0_0_60px_rgba(255,255,255,0.05)]">
                         
                         {/* INNER DARK GLASS CONTAINER */}
-                        <div className="bg-[#0a0a0a] rounded-[22px] w-full p-6 sm:p-10 relative overflow-hidden h-full z-10">
+                        <div className="bg-[#0f0f0f] rounded-[21px] w-full p-6 sm:p-10 relative overflow-hidden h-full z-10 border border-white/5">
                           
-                          <div className="absolute -top-20 -left-20 w-72 h-72 bg-red-600/15 blur-[100px] rounded-full pointer-events-none animate-pulse"></div>
-                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/10 blur-[120px] rounded-full pointer-events-none"></div>
-                          <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-blue-600/15 blur-[100px] rounded-full pointer-events-none animate-pulse"></div>
+                          <div className="absolute -top-32 -left-32 w-96 h-96 bg-fuchsia-600/10 blur-[120px] rounded-full pointer-events-none animate-pulse"></div>
+                          <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-cyan-600/10 blur-[120px] rounded-full pointer-events-none animate-pulse"></div>
 
-                          <div className="text-center mb-10 relative z-10">
-                            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-widest uppercase mb-4 drop-shadow-lg">
+                          <div className="text-center mb-12 relative z-10">
+                            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-widest uppercase mb-4 drop-shadow-2xl">
                               What do you want to{' '}
-                              {/* 🌟 FLOWING GRADIENT TEXT 🌟 */}
-                              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 animate-flow">
+                              {/* 🌟 FLOWING INFINITE TEXT 🌟 */}
+                              <span className="text-transparent bg-clip-text animate-rainbow">
                                 Watch?
                               </span>
                             </h2>
                             <p className="text-gray-400 text-base sm:text-lg font-medium">Select a match below to start streaming instantly in HD</p>
                           </div>
 
-                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 relative z-10">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
                             {availableStreams.map((stream, idx) => (
                               <div
                                 key={idx}
@@ -369,43 +369,41 @@ export default function HomeClient({ initialData }: HomeProps) {
                                   setIsPlayerActive(false); 
                                   window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
-                                className="group cursor-pointer rounded-2xl overflow-hidden bg-[#151515] border border-white/5 hover:border-transparent transition-all duration-500 hover:-translate-y-2 relative shadow-lg"
+                                className="group cursor-pointer rounded-2xl overflow-hidden bg-gradient-to-b from-[#1e1e1e] to-[#0a0a0a] border border-gray-600/40 hover:border-white/40 transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_40px_rgba(0,0,0,0.8)] flex flex-col"
                               >
-                                {/* CARD HOVER VIP BORDER */}
-                                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 animate-flow opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 p-[2px]">
-                                  <div className="bg-[#151515] w-full h-full rounded-[14px]"></div>
+                                {/* CARD HOVER VIP INFINITE BORDER */}
+                                <div className="absolute inset-0 rounded-2xl animate-rainbow opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 p-[2px]">
+                                  <div className="bg-[#121212] w-full h-full rounded-[14px]"></div>
                                 </div>
 
-                                <div className="aspect-video w-full relative overflow-hidden rounded-t-[14px]">
-                                  {/* 🌟 IMAGE CLEAR FIX - No dark opacity masks here! 🌟 */}
+                                <div className="aspect-video w-full relative overflow-hidden shadow-inner bg-black">
                                   <img 
                                     src={getThumbnailImage(stream)} 
                                     alt={stream.videoTitle} 
-                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out z-10 relative" 
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out z-10 relative" 
                                   />
                                   
                                   {stream.isLive !== false && (
-                                    <div className="absolute top-3 right-3 bg-red-600/90 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-md flex items-center gap-1.5 font-bold shadow-lg shadow-black/50 border border-white/10 z-30">
-                                      <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span> LIVE
+                                    <div className="absolute top-3 right-3 bg-red-600/95 backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-md flex items-center gap-2 font-black shadow-[0_0_15px_rgba(220,38,38,0.6)] border border-red-400/30 z-30 tracking-widest">
+                                      <span className="w-2 h-2 bg-white rounded-full animate-pulse shadow-[0_0_5px_white]"></span> LIVE
                                     </div>
                                   )}
 
-                                  {/* Just a tiny subtle dark gradient at the very bottom edge for the play button */}
-                                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/50 to-transparent z-20"></div>
+                                  <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0a0a0a] to-transparent z-20"></div>
 
                                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 z-30">
-                                    <div className="bg-gradient-to-r from-red-600 via-purple-600 to-blue-600 p-1 rounded-full shadow-[0_0_30px_rgba(147,51,234,0.6)] animate-flow">
-                                      <div className="bg-black/80 p-3 rounded-full backdrop-blur-md">
+                                    <div className="animate-rainbow p-[3px] rounded-full shadow-[0_0_40px_rgba(255,255,255,0.2)]">
+                                      <div className="bg-black/90 p-4 rounded-full backdrop-blur-xl">
                                         <Play fill="white" size={32} className="text-white ml-1" />
                                       </div>
                                     </div>
                                   </div>
                                 </div>
 
-                                <div className="p-5 relative z-10 bg-[#151515] rounded-b-[14px]">
-                                  <h3 className="text-lg font-bold text-white group-hover:text-purple-400 transition-colors line-clamp-2 leading-snug">
+                                <div className="p-6 relative z-10 bg-[#0a0a0a] border-t border-white/5 flex-grow flex items-center justify-center text-center">
+                                  <h3 className="text-lg font-bold text-gray-200 group-hover:text-white transition-colors line-clamp-2 leading-relaxed tracking-wide">
                                     {stream.videoTitle}
-                                 </h3>
+                                  </h3>
                                 </div>
                               </div>
                             ))}
@@ -419,12 +417,12 @@ export default function HomeClient({ initialData }: HomeProps) {
                   <div className="mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
                      
                      {/* 🌟 VIP FLOWING BORDER AROUND ACTIVE PLAYER 🌟 */}
-                     <div className="relative rounded-2xl p-[2px] bg-gradient-to-r from-red-600/50 via-purple-600/50 to-blue-600/50 animate-flow shadow-[0_0_40px_rgba(147,51,234,0.2)] transition-all duration-700">
-                       <div className="bg-black rounded-xl overflow-hidden relative z-10">
+                     <div className="relative rounded-2xl p-[3px] animate-rainbow shadow-[0_0_40px_rgba(255,255,255,0.1)] transition-all duration-700">
+                       <div className="bg-black rounded-[14px] overflow-hidden relative z-10">
                          
                           {isChangingChannel && (
                              <div className="absolute inset-0 z-50 bg-black/90 flex flex-col items-center justify-center backdrop-blur-sm transition-all duration-300">
-                                <div className="w-12 h-12 border-4 border-gray-800 border-t-purple-500 rounded-full animate-spin mb-4"></div>
+                                <div className="w-12 h-12 border-4 border-gray-800 border-t-white rounded-full animate-spin mb-4"></div>
                                 <p className="text-white text-lg font-bold tracking-widest animate-pulse">Switching Stream...</p>
                              </div>
                           )}
@@ -434,20 +432,19 @@ export default function HomeClient({ initialData }: HomeProps) {
                               className="w-full aspect-[16/9] relative cursor-pointer group flex items-center justify-center bg-black overflow-hidden"
                               onClick={() => setIsPlayerActive(true)} 
                             >
-                              {/* 🌟 IMAGE CLEAR FIX - Removed dark opacity mask here too! 🌟 */}
                               <img 
                                 src={getThumbnailImage(selectedVideo)} 
                                 alt="Tap to play" 
-                                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" 
                               />
                               
                               <div className="relative z-10 flex flex-col items-center justify-center pointer-events-none">
-                                <div className="w-20 h-20 bg-gradient-to-r from-red-600 via-purple-600 to-blue-600 p-1 rounded-full shadow-[0_0_40px_rgba(147,51,234,0.6)] group-hover:scale-110 transition-all duration-300 mb-4 animate-flow">
+                                <div className="w-20 h-20 p-[3px] rounded-full shadow-[0_0_40px_rgba(255,255,255,0.4)] group-hover:scale-110 transition-all duration-300 mb-4 animate-rainbow">
                                   <div className="w-full h-full bg-[#db1a1a]/90 flex items-center justify-center rounded-full backdrop-blur-sm">
                                     <Play fill="white" size={36} className="text-white ml-2" />
                                   </div>
                                 </div>
-                                <div className="bg-black/80 border border-purple-500/50 text-white text-xs sm:text-sm font-bold tracking-widest px-5 py-2.5 rounded-full flex items-center gap-2 shadow-[0_0_20px_rgba(147,51,234,0.3)] backdrop-blur-sm">
+                                <div className="bg-black/80 border border-white/20 text-white text-xs sm:text-sm font-bold tracking-widest px-5 py-2.5 rounded-full flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.1)] backdrop-blur-sm">
                                   <span className="w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.8)]"></span>
                                   TAP TO WATCH LIVE
                                 </div>
@@ -476,27 +473,27 @@ export default function HomeClient({ initialData }: HomeProps) {
                               setSelectedVideo(null);
                               setIsPlayerActive(false);
                             }} 
-                            className="bg-gray-800 hover:bg-gray-700 text-white text-sm px-4 py-2 rounded-lg font-bold transition-colors whitespace-nowrap border border-gray-700"
+                            className="bg-[#1a1a1a] hover:bg-[#2a2a2a] text-white text-sm px-4 py-2 rounded-lg font-bold transition-colors whitespace-nowrap border border-white/10 shadow-lg"
                           >
                             Back to Menu
                           </button>
                         </div>
 
                         {selectedVideo.channels && selectedVideo.channels.length > 0 && (
-                          <div className="mt-4 mb-4 p-5 bg-gradient-to-br from-[#1c1c1c] to-[#0a0a0a] border border-red-900/30 rounded-2xl flex flex-col gap-4 shadow-[0_0_30px_rgba(0,0,0,0.5)] relative overflow-hidden">
+                          <div className="mt-4 mb-4 p-5 bg-[#0f0f0f] border border-white/10 rounded-2xl flex flex-col gap-4 shadow-[0_10px_30px_rgba(0,0,0,0.8)] relative overflow-hidden">
                             
-                            <div className="absolute -top-10 -right-10 w-32 h-32 bg-red-600/10 blur-3xl rounded-full pointer-events-none"></div>
+                            <div className="absolute -top-10 -right-10 w-32 h-32 bg-fuchsia-600/10 blur-3xl rounded-full pointer-events-none"></div>
 
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                               <div className="flex flex-col">
                                 <div className="flex items-center gap-2 text-white">
-                                  <Tv size={22} className="text-red-500 animate-pulse"/>
+                                  <Tv size={22} className="text-white animate-pulse"/>
                                   <span className="text-base sm:text-lg font-extrabold uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">
                                     Available Servers
                                   </span>
                                 </div>
-                                <span className="text-sm text-red-400 font-medium mt-1">
-                                  Stream stuck or not working, they fix in few seconds (server issue)? <span className="text-white font-bold underline decoration-red-500 decoration-2 underline-offset-2">Watch Below More Matches, Current Live or Upcomming (Eastern Time)!</span>
+                                <span className="text-sm text-gray-400 font-medium mt-1">
+                                  Stream stuck or not working, they fix in few seconds (server issue)? <span className="text-white font-bold underline decoration-white decoration-2 underline-offset-2">Watch Below More Matches, Current Live or Upcomming (Eastern Time)!</span>
                                 </span>
                               </div>
                             </div>
@@ -512,16 +509,16 @@ export default function HomeClient({ initialData }: HomeProps) {
                                       onClick={() => handleChannelChange(channel.videoId)}
                                       className={`relative px-6 py-3 rounded-xl text-sm sm:text-base font-black transition-all duration-300 flex items-center gap-3 overflow-hidden group ${
                                         isActive
-                                          ? 'bg-gradient-to-r from-red-600 to-purple-600 text-white shadow-[0_0_20px_rgba(147,51,234,0.6)] border border-purple-400 scale-105 z-10 animate-flow'
-                                          : 'bg-gradient-to-b from-[#2d2d2d] to-[#1a1a1a] text-gray-200 hover:text-white border-2 border-gray-600 hover:border-purple-500 hover:shadow-[0_0_15px_rgba(147,51,234,0.3)] hover:-translate-y-1'
+                                          ? 'text-white shadow-[0_0_20px_rgba(255,255,255,0.2)] border-0 scale-105 z-10 animate-rainbow'
+                                          : 'bg-gradient-to-b from-[#2d2d2d] to-[#1a1a1a] text-gray-200 hover:text-white border-2 border-gray-600 hover:border-white/50 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:-translate-y-1'
                                       }`}
                                     >
-                                      {isActive && <span className="absolute inset-0 bg-white/20 animate-pulse pointer-events-none"></span>}
+                                      {isActive && <span className="absolute inset-0 bg-black/20 pointer-events-none"></span>}
                                       
                                       {isActive ? (
-                                        <Radio size={18} className="animate-pulse text-white" />
+                                        <Radio size={18} className="animate-pulse text-white relative z-10" />
                                       ) : (
-                                        <div className="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)] animate-pulse group-hover:bg-purple-500 group-hover:shadow-[0_0_8px_rgba(147,51,234,0.8)] transition-colors"></div>
+                                        <div className="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)] animate-pulse group-hover:bg-white group-hover:shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-colors"></div>
                                       )}
                                       
                                       <span className="relative z-10 tracking-wide uppercase">{channel.name}</span>
@@ -536,7 +533,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                           </div>
                         )}
 
-                        <p className="text-sm text-gray-400 border-l-2 border-red-600 pl-3 py-1 mt-3 bg-gray-900/50 rounded-r-md">
+                        <p className="text-sm text-gray-400 border-l-2 border-white/50 pl-3 py-1 mt-3 bg-[#1a1a1a] rounded-r-md">
                           {initialData.title}
                         </p>
                      </div>
@@ -552,13 +549,13 @@ export default function HomeClient({ initialData }: HomeProps) {
                       </div>
                       <div className="flex items-center justify-between mt-2">
                         <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                          <span className="w-3 h-3 bg-purple-600 rounded-full animate-pulse"></span> 
+                          <span className="w-3 h-3 bg-white rounded-full animate-pulse shadow-[0_0_10px_white]"></span> 
                           Check Below for More Streams!
                         </h2>
                       </div>
                     </div>
                     
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                        {availableStreams.map((video, idx) => (
                           <div 
                             key={idx} 
@@ -572,42 +569,40 @@ export default function HomeClient({ initialData }: HomeProps) {
                                 setIsChangingChannel(false);
                               }, 1000);
                             }} 
-                            className="group cursor-pointer flex flex-col relative"
+                            /* Bottom cards also getting the luxury distinct treatment */
+                            className="group cursor-pointer rounded-2xl overflow-hidden bg-gradient-to-b from-[#1e1e1e] to-[#0a0a0a] border border-gray-600/40 hover:border-white/40 transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex flex-col"
                           >
-                             {/* Bottom grid item hover glow */}
-                             <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 p-[2px] mb-3 animate-flow">
-                               <div className="bg-[#151515] w-full h-full rounded-xl"></div>
+                             <div className="absolute inset-0 rounded-2xl animate-rainbow opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 p-[2px]">
+                               <div className="bg-[#121212] w-full h-full rounded-[14px]"></div>
                              </div>
 
-                             <div className={`relative aspect-video rounded-xl overflow-hidden bg-gray-800 mb-3 transition-all duration-300 z-10 ${selectedVideo?.videoId === video.videoId ? 'border-2 border-purple-500 shadow-[0_0_20px_rgba(147,51,234,0.4)]' : ''}`}>
+                             <div className={`relative aspect-video w-full overflow-hidden bg-black transition-all duration-300 z-10 ${selectedVideo?.videoId === video.videoId ? 'border-b-2 border-white shadow-[0_0_20px_rgba(255,255,255,0.2)]' : ''}`}>
                                 
                                 <img 
                                   src={getThumbnailImage(video)} 
                                   alt={video.videoTitle} 
-                                  className="w-full h-full object-cover group-hover:scale-105 transition duration-500" 
+                                  className="w-full h-full object-cover group-hover:scale-110 transition duration-700 ease-out" 
                                   loading="lazy" 
                                 />
                                 
-                                {/* Removed dark overlay from bottom grid too! */}
-                                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/50 to-transparent z-20"></div>
+                                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0a0a0a] to-transparent z-20"></div>
 
                                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
-                                  <div className="bg-gradient-to-r from-red-600 via-purple-600 to-blue-600 p-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 animate-flow">
-                                    <div className="bg-black/80 p-3 rounded-full backdrop-blur-sm shadow-lg">
+                                  <div className="animate-rainbow p-[3px] rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                                    <div className="bg-black/90 p-3 rounded-full backdrop-blur-sm">
                                       <Play fill="white" size={24} className="text-white ml-0.5" />
                                     </div>
                                   </div>
                                 </div>
 
-                                {video.isLive !== false && <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded flex items-center gap-1 font-bold z-30 border border-white/10"><span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span> LIVE</div>}
+                                {video.isLive !== false && <div className="absolute top-2 right-2 bg-red-600/90 text-white text-xs px-2 py-1 rounded flex items-center gap-1.5 font-bold z-30 border border-white/20 shadow-lg"><span className="w-2 h-2 bg-white rounded-full animate-pulse"></span> LIVE</div>}
                              </div>
-                             <div className="flex gap-3 px-1">
-                                <div className="w-9 h-9 bg-gradient-to-br from-red-600 to-blue-600 rounded-full flex-shrink-0 mt-0.5 animate-flow"></div>
-                                <div className="flex flex-col">
-                                   <h3 className={`text-sm font-bold line-clamp-2 leading-tight mb-1 transition-colors ${selectedVideo?.videoId === video.videoId ? 'text-purple-400' : 'text-white group-hover:text-purple-400'}`}>
-                                     {video.videoTitle}
-                                   </h3>
-                                </div>
+                             
+                             <div className="p-4 relative z-10 bg-[#0a0a0a] border-t border-white/5 flex-grow flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-full flex-shrink-0 animate-rainbow shadow-[0_0_10px_rgba(255,255,255,0.1)]"></div>
+                                <h3 className={`text-sm font-bold line-clamp-2 leading-tight transition-colors ${selectedVideo?.videoId === video.videoId ? 'text-white drop-shadow-md' : 'text-gray-300 group-hover:text-white'}`}>
+                                   {video.videoTitle}
+                                </h3>
                              </div>
                           </div>
                        ))}

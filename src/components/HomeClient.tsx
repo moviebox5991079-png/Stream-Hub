@@ -64,6 +64,7 @@ export default function HomeClient({ initialData }: HomeProps) {
   const navbarRef = useRef<HTMLElement>(null);
   const welcomeModalRef = useRef<HTMLDivElement>(null);
 
+  // === UPDATE: FULLY FIXED SMART TIME LOGIC (MIDNIGHT SAFE) ===
   const getSmartActiveChannel = (channels: ChannelData[] | undefined) => {
     if (!channels || channels.length === 0) return null;
 
@@ -77,7 +78,7 @@ export default function HomeClient({ initialData }: HomeProps) {
       const durationMatch = ch.name.match(/\[(\d+)H\]/i) || ch.name.match(/\((\d+)H\)/i);
       
       let timeInMins = -1;
-      let durationMins = 150;
+      let durationMins = 150; // Default 2.5 Hours
       
       if (durationMatch) {
         durationMins = parseInt(durationMatch[1], 10) * 60;
@@ -120,38 +121,44 @@ export default function HomeClient({ initialData }: HomeProps) {
        return priorityFallback ? priorityFallback.videoId : channels[0].videoId;
     }
 
-    validFutureOrLiveChannels.sort((a, b) => a.timeInMins - b.timeInMins);
+    // ✨ NEW LOGIC: Calculate relative time difference from NOW
+    const getRelativeDiff = (timeMins: number) => {
+      let diff = timeMins - currentMinutes;
+      if (diff < -720) diff += 1440;
+      if (diff > 720) diff -= 1440;
+      return diff; // -ve means match is in past (live), +ve means future
+    };
+
+    // Sort chronologically relative to CURRENT time (not 00:00 midnight)
+    validFutureOrLiveChannels.sort((a, b) => getRelativeDiff(a.timeInMins) - getRelativeDiff(b.timeInMins));
 
     let bestCandidate = null;
-    const timeGroups: { [key: number]: typeof validFutureOrLiveChannels } = {};
-    
-    validFutureOrLiveChannels.forEach(c => {
-       if (!timeGroups[c.timeInMins]) timeGroups[c.timeInMins] = [];
-       timeGroups[c.timeInMins].push(c);
-    });
 
-    const uniqueTimes = Object.keys(timeGroups).map(Number).sort((a,b) => a-b);
+    for (const channel of validFutureOrLiveChannels) {
+      let diff = getRelativeDiff(channel.timeInMins);
+      
+      if (diff <= 0) {
+          // Match start ho chuka hai (Live). Loop chalega aur sabse latest live match ko overwrite karega.
+          bestCandidate = channel;
+      } else if (diff > 0 && diff <= 10) {
+          // Match next 10 minutes mein start hone wala hai.
+          bestCandidate = channel;
+          break; // Immediate agla match mil gaya, search rok do.
+      } else {
+          // Match bohot future mein hai. Agar koi live match mil chuka hai tou search rok do.
+          if (bestCandidate) break;
+      }
+    }
 
-    for (let i = 0; i < uniqueTimes.length; i++) {
-       const t = uniqueTimes[i];
-       const group = timeGroups[t];
-       const winnerInGroup = group.find(c => c.hasPriority) || group[0];
+    // Fallback: Agar saare matches hi future mein hain (>10 mins) toh sabse qareeb wala future match play karo
+    if (!bestCandidate) {
+       bestCandidate = validFutureOrLiveChannels[0]; 
+    }
 
-       let delta = currentMinutes - t;
-       if (delta < -720) delta += 1440;
-       if (delta > 720) delta -= 1440;
-
-       if (delta >= 0) {
-           bestCandidate = winnerInGroup;
-       } else if (Math.abs(delta) <= 10) {
-           bestCandidate = winnerInGroup;
-           break; 
-       } else if (bestCandidate === null) {
-           bestCandidate = parsedChannels[0];
-           break;
-       } else {
-           break;
-       }
+    // Priority Overlay (! flag)
+    const priorityWinner = validFutureOrLiveChannels.find(c => c.hasPriority);
+    if (priorityWinner && getRelativeDiff(priorityWinner.timeInMins) <= 10) {
+       bestCandidate = priorityWinner;
     }
 
     return bestCandidate ? bestCandidate.videoId : channels[0].videoId;
@@ -3192,7 +3199,7 @@ export default function HomeClient({ initialData }: HomeProps) {
 
 
 
-// srf iss code ko hey update keya hai srf 1 file .
+// Original code : srf iss code ko hey update keya hai srf 1 file .
 // =========== Alhamdullah yeh bilkul teek hai abey taak yaheey use keya hai . srf eek new functionlaity upper add karty hai k user experience good karty hai , eek new container add karty hai welcome message k tarah and ismee user see pochty hai k keya deekna hai cricket,football ya kuch or ====================
 
 

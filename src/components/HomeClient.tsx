@@ -473,7 +473,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                      </div>
 
                      <div className="mt-5 px-1">
-                        <div className="flex justify-between items-start gap-4">
+                        {/* <div className="flex justify-between items-start gap-4">
                           <h1 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
                             {selectedVideo.videoTitle} {selectedVideo.isLive && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse">LIVE NOW</span>}
                           </h1>
@@ -486,7 +486,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                           >
                             Back to Menu
                           </button>
-                        </div>
+                        </div> */}
 
                         {selectedVideo.channels && selectedVideo.channels.length > 0 && (
                           <div className="mt-4 mb-4 p-5 bg-[#0f0f0f] border border-white/10 rounded-2xl flex flex-col gap-4 shadow-[0_10px_30px_rgba(0,0,0,0.8)] relative overflow-hidden">

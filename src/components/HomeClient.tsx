@@ -1,3 +1,6 @@
+
+// iss below code mei joo change keya hai uss k waja see okRuPlayer.tsx file me bey change keya hai ok src/components/OkRuPlayer.tsx
+
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';

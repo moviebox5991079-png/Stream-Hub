@@ -232,7 +232,6 @@ export default function HomeClient({ initialData }: HomeProps) {
           animation: rainbowFlow 12s ease infinite;
         }
 
-        /* 🌟 YEH NAYA CLASS SIRF TEXT KO COLOR DENE KE LIYE HAI 🌟 */
         .animate-rainbow-text {
           background: linear-gradient(270deg, #ff003c, #ff00d4, #7000ff, #003cff, #00d4ff, #00ff70, #e1ff00, #ff7000, #ff003c);
           background-size: 800% 800%;
@@ -363,7 +362,6 @@ export default function HomeClient({ initialData }: HomeProps) {
                           <div className="text-center mb-12 relative z-10">
                             <h2 className="text-3xl sm:text-5xl font-black text-white tracking-widest uppercase mb-4 drop-shadow-2xl">
                               What do you want to{' '}
-                              {/* 🌟 FLOWING INFINITE TEXT FIX 🌟 */}
                               <span className="animate-rainbow-text">
                                 Watch?
                               </span>
@@ -380,10 +378,9 @@ export default function HomeClient({ initialData }: HomeProps) {
                                   setIsPlayerActive(false); 
                                   window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
-                                /* Card styling updated: No fixed gray border, relies on the constant rainbow background for border effect */
                                 className="group cursor-pointer rounded-2xl overflow-hidden bg-transparent transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_40px_rgba(0,0,0,0.8)] flex flex-col"
                               >
-                                {/* CARD VIP INFINITE BORDER (Always visible at opacity-50, fully visible on hover) */}
+                                {/* CARD VIP INFINITE BORDER */}
                                 <div className="absolute inset-0 rounded-2xl animate-rainbow opacity-50 group-hover:opacity-100 transition-opacity duration-500 -z-10 p-[2px]">
                                   <div className="bg-[#121212] w-full h-full rounded-[14px]"></div>
                                 </div>
@@ -401,7 +398,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                                     </div>
                                   )}
 
-                                  <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0a0a0a] to-transparent z-20"></div>
+                                  <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#050505] to-transparent z-20"></div>
 
                                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 z-30">
                                     <div className="animate-rainbow p-[3px] rounded-full shadow-[0_0_40px_rgba(255,255,255,0.2)]">
@@ -412,8 +409,9 @@ export default function HomeClient({ initialData }: HomeProps) {
                                   </div>
                                 </div>
 
-                                <div className="p-6 relative z-10 bg-[#0a0a0a] border-t border-white/5 flex-grow flex items-center justify-center text-center rounded-b-[14px]">
-                                  <h3 className="text-lg font-bold text-gray-200 group-hover:text-white transition-colors line-clamp-2 leading-relaxed tracking-wide">
+                                {/* 🌟 UPDATED LUXURY TEXT BACKGROUND (2026 Style) 🌟 */}
+                                <div className="p-5 sm:p-6 relative z-10 bg-gradient-to-b from-[#1f1f1f] to-[#050505] border-t border-white/10 flex-grow flex items-center justify-center text-center rounded-b-[14px] shadow-[inset_0_1px_10px_rgba(255,255,255,0.02)]">
+                                  <h3 className="text-lg font-bold text-gray-300 group-hover:text-white transition-all duration-300 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.4)] line-clamp-2 leading-relaxed tracking-wide">
                                     {stream.videoTitle}
                                   </h3>
                                 </div>
@@ -428,7 +426,6 @@ export default function HomeClient({ initialData }: HomeProps) {
                   /* === ACTIVE MATCH AREA === */
                   <div className="mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
                      
-                     {/* 🌟 VIP FLOWING BORDER AROUND ACTIVE PLAYER 🌟 */}
                      <div className="relative rounded-2xl p-[3px] animate-rainbow shadow-[0_0_40px_rgba(255,255,255,0.1)] transition-all duration-700">
                        <div className="bg-black rounded-[14px] overflow-hidden relative z-10">
                          
@@ -581,7 +578,6 @@ export default function HomeClient({ initialData }: HomeProps) {
                                 setIsChangingChannel(false);
                               }, 1000);
                             }} 
-                            /* Bottom cards also getting the permanent subtle rainbow border */
                             className="group cursor-pointer rounded-2xl overflow-hidden bg-transparent transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex flex-col"
                           >
                              <div className="absolute inset-0 rounded-2xl animate-rainbow opacity-50 group-hover:opacity-100 transition-opacity duration-500 -z-10 p-[2px]">
@@ -597,7 +593,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                                   loading="lazy" 
                                 />
                                 
-                                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0a0a0a] to-transparent z-20"></div>
+                                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#050505] to-transparent z-20"></div>
 
                                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
                                   <div className="animate-rainbow p-[3px] rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
@@ -610,9 +606,12 @@ export default function HomeClient({ initialData }: HomeProps) {
                                 {video.isLive !== false && <div className="absolute top-2 right-2 bg-red-600/90 text-white text-xs px-2 py-1 rounded flex items-center gap-1.5 font-bold z-30 border border-white/20 shadow-lg"><span className="w-2 h-2 bg-white rounded-full animate-pulse"></span> LIVE</div>}
                              </div>
                              
-                             <div className="p-4 relative z-10 bg-[#0a0a0a] border-t border-white/5 flex-grow flex items-center gap-3 rounded-b-[14px]">
-                                <div className="w-8 h-8 rounded-full flex-shrink-0 animate-rainbow shadow-[0_0_10px_rgba(255,255,255,0.1)]"></div>
-                                <h3 className={`text-sm font-bold line-clamp-2 leading-tight transition-colors ${selectedVideo?.videoId === video.videoId ? 'text-white drop-shadow-md' : 'text-gray-300 group-hover:text-white'}`}>
+                             {/* 🌟 UPDATED LUXURY TEXT BACKGROUND (BOTTOM GRID) 🌟 */}
+                             <div className="p-4 relative z-10 bg-gradient-to-b from-[#1f1f1f] to-[#050505] border-t border-white/10 flex-grow flex items-center gap-3 rounded-b-[14px] shadow-[inset_0_1px_10px_rgba(255,255,255,0.02)]">
+                                <div className="w-8 h-8 rounded-full flex-shrink-0 animate-rainbow shadow-[0_0_10px_rgba(255,255,255,0.1)] p-[2px]">
+                                   <div className="w-full h-full bg-black rounded-full"></div>
+                                </div>
+                                <h3 className={`text-sm font-bold line-clamp-2 leading-tight transition-all duration-300 ${selectedVideo?.videoId === video.videoId ? 'text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]' : 'text-gray-300 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]'}`}>
                                    {video.videoTitle}
                                 </h3>
                              </div>

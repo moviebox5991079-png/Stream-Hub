@@ -57,6 +57,7 @@ export default function HomeClient({ initialData }: HomeProps) {
   // ✨ NEW STATE: Track karna ke kab auto-play karna hai aur kab overlay dikhana hai
   const [forceAutoPlay, setForceAutoPlay] = useState(false);
 
+  
   const [isOverlayVisible, setOverlayVisible] = useState(false); 
   const [showWelcomeModal, setShowWelcomeModal] = useState(true);
 

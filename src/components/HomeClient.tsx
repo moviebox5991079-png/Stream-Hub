@@ -66,17 +66,15 @@ export default function HomeClient({ initialData }: HomeProps) {
 
   // === UPDATE: FULLY FIXED SMART TIME LOGIC (MIDNIGHT SAFE) ===
   // === UPDATE: FULLY FIXED SMART TIME LOGIC (MIDNIGHT SAFE & TIE-BREAKER) ===
- const getSmartActiveChannel = (channels: ChannelData[] | undefined) => {
+  const getSmartActiveChannel = (channels: ChannelData[] | undefined) => {
     if (!channels || channels.length === 0) return null;
 
-    // 1. Current time in PKT
     const now = new Date();
     const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
     const pktDate = new Date(utc + (3600000 * 5));
     const currentMinutes = pktDate.getHours() * 60 + pktDate.getMinutes();
 
-    // 2. Sirf time aur relative difference calculate karo (Koi filtering nahi)
-    const parsedChannels = channels.map((ch, index) => {
+    const parsedChannels = channels.map((ch) => {
       const timeMatch = ch.name.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
       let timeInMins = -1;
       
@@ -89,46 +87,25 @@ export default function HomeClient({ initialData }: HomeProps) {
         timeInMins = hours * 60 + mins;
       }
 
-      // Logic: 14 ghante se door match ko future, 2 ghante se purane ko past maan lo
+      // Diff calculation (Now vs Match Time)
       let diff = timeInMins - currentMinutes;
       if (diff < -720) diff += 1440; 
       if (diff > 720) diff -= 1440;
       
-      return {
-        ...ch,
-        timeInMins,
-        diff, // Difference from now
-        hasPriority: ch.name.includes('!')
-      };
+      return { ...ch, timeInMins, diff, hasPriority: ch.name.includes('!') };
     });
 
-    // 3. Sort matches by their closeness to CURRENT time
-    // Yeh logic 24/7 loop mein sabse qareeb wale match ko top par layegi
-    parsedChannels.sort((a, b) => Math.abs(a.diff) - Math.abs(b.diff));
+    // 1. VIP Priority Check (!)
+    const priority = parsedChannels.find(c => c.hasPriority && c.diff <= 10);
+    if (priority) return priority.videoId;
 
-    let bestCandidate = null;
+    // 2. Active Match Check (Jo match live hai ya next 10 mins mein hai)
+    // Same time ke 3-4 matches mein se first one pick hoga
+    const active = parsedChannels.find(c => c.diff <= 10);
+    if (active) return active.videoId;
 
-    // 4. Selection Logic
-    // Jo match live hai (diff <= 0) ya abhi aane wala hai (diff > 0), usay pick karo
-    for (const channel of parsedChannels) {
-      if (channel.diff <= 10) { // Live match ya next 10 mins wala
-        bestCandidate = channel;
-        break;
-      }
-    }
-
-    // Agar koi match nahi mila (sab bohot door hain), tou jo sabse qareeb hai usay select karo
-    if (!bestCandidate) {
-      bestCandidate = parsedChannels[0];
-    }
-
-    // 5. VIP Override (!)
-    const priorityWinner = parsedChannels.find(c => c.hasPriority && c.diff <= 10);
-    if (priorityWinner) {
-      bestCandidate = priorityWinner;
-    }
-
-    return bestCandidate ? bestCandidate.videoId : channels[0].videoId;
+    // 3. Fallback to first channel (24/7)
+    return channels[0].videoId;
   };
 
   useEffect(() => {
@@ -341,7 +318,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                  /* === MAIN CATEGORY SELECTION === */
                  <div className="mb-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
                    
-                   {availableStreams.length === 0 ? (
+                   {.length === 0 ? (
                      <div className="w-full aspect-[16/9] md:aspect-[21/9] bg-[#1a1a1a] rounded-xl border-2 border-dashed border-gray-800 flex flex-col items-center justify-center text-center p-6 shadow-inner relative overflow-hidden">
                         <div className="w-20 h-20 bg-gray-900 rounded-full flex items-center justify-center mb-4 shadow-lg border border-gray-800 z-10">
                            <Tv className="text-red-600/80" size={36} />
@@ -531,6 +508,21 @@ export default function HomeClient({ initialData }: HomeProps) {
                          <div 
                            key={idx} 
                            onClick={() => { 
+                              setIsChangingChannel(true);
+                              setSelectedVideo(video); 
+                              
+                              // ✨ Yahan calculate karo aur fauran update karo
+                              const smartId = getSmartActiveChannel(video.channels);
+                              setActiveVideoId(smartId || video.videoId);
+                              
+                              setForceAutoPlay(true);
+                              window.scrollTo({ top: 0, behavior: 'smooth' }); 
+                              
+                              setTimeout(() => {
+                                 setIsChangingChannel(false);
+                              }, 1000);
+                          }}
+                           {/* onClick={() => { 
                              setIsChangingChannel(true);
                              setSelectedVideo(video); 
                              // ✨ Yahan bhi forceAutoPlay TRUE kar diya taake bottom se match badalne par direct chale
@@ -540,7 +532,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                              setTimeout(() => {
                                setIsChangingChannel(false);
                              }, 1000);
-                           }} 
+                           }}  */}
                            className="group cursor-pointer rounded-2xl overflow-hidden bg-transparent transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex flex-col"
                          >
                             <div className="absolute inset-0 rounded-2xl animate-rainbow opacity-50 group-hover:opacity-100 transition-opacity duration-500 -z-10 p-[2px]">

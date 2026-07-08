@@ -28,7 +28,7 @@
     {
       "videoTitle": "Cricket",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "ind-vs-eng",
       "channels": [
         {
@@ -48,7 +48,7 @@
     {
       "videoTitle": "sports-2",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "fifaFriendlies",
       "channels": [
         {
@@ -68,7 +68,7 @@
     {
       "videoTitle": "sports-3",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "SerieA",
       "channels": [
         {
@@ -88,7 +88,7 @@
     {
       "videoTitle": "Fifa - 2026 Matches 18 or 19 June (  GMT+5 Time Standard )",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "Fifa2026",
       "channels": [
         {
@@ -160,7 +160,7 @@
     {
       "videoTitle": "Fifa-Friendly-Part1",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "fifaFriendlies2",
       "channels": [
         {
@@ -208,7 +208,7 @@
     {
       "videoTitle": "Fifa-Friendly-Part2",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "fifaFriendlies",
       "channels": [
         {

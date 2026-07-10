@@ -127,6 +127,8 @@ export default function DevToolsShield({ children }: { children: React.ReactNode
       }
     };
 
+    
+
     // ---------- TRIGGER FUNCTION (sets state + sticky flag) ----------
     const triggerDetection = () => {
       sessionStorage.setItem('devtools_detected', 'true');

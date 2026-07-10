@@ -28,7 +28,7 @@
     {
       "videoTitle": "Cricket",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "ind-vs-eng",
       "channels": [
         {
@@ -48,7 +48,7 @@
     {
       "videoTitle": "sports-2",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "fifaFriendlies",
       "channels": [
         {
@@ -124,7 +124,7 @@
       "activeThumbnail": "Fifa2026",
       "channels": [
         {
-          "name": "France vs Morocco - 1:00 am - Fri, 10 Jul",
+          "name": "Spain vs Belgium - 12:00 AM",
           "videoId": "15273689226859"
         },
         {

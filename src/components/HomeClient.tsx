@@ -714,10 +714,10 @@ export default function HomeClient({ initialData }: HomeProps) {
           </main>
         </div>
 
-        {/* <Script 
-          src="https://pl28382929.effectivegatecpm.com/b1/06/0e/b1060e51e3f0ca4c6da303d42b6ea068.js"
-           strategy="afterInteractive"
-        />  */}
+        {/* <Script */}
+          // src="https://pl28382929.effectivegatecpm.com/b1/06/0e/b1060e51e3f0ca4c6da303d42b6ea068.js"
+           // strategy="afterInteractive"
+        // />
       </div>
     </>
   );

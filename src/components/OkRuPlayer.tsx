@@ -171,7 +171,9 @@ const OkRuPlayer: React.FC<OkRuPlayerProps> = ({
           <>
 
             {/* YEH NAYA SHIELD HAI - Sirf Top Title Bar ko block karne ke liye */}
-            <div className="absolute top-0 left-0 w-full h-[12%] md:h-[10%] z-50 bg-transparent" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }} onContextMenu={(e) => e.preventDefault()} />
+            {/* <div className="absolute top-0 left-0 w-full h-[12%] md:h-[10%] z-50 bg-transparent" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }} onContextMenu={(e) => e.preventDefault()} /> */}
+            <div className="absolute top-0 left-0 w-full h-[12%] md:h-[10%] z-50 bg-red-500" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }} onContextMenu={(e) => e.preventDefault()} />
+            
 
             {/* NEECHE AAPKE PURANE SHIELDS HAIN (Inko bilkul nahi chhera) */}
             

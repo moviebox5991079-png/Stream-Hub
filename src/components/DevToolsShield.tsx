@@ -1,218 +1,125 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ShieldAlert } from 'lucide-react';
 
 export default function DevToolsShield({ children }: { children: React.ReactNode }) {
-  const [isCompromised, setIsCompromised] = useState(() => {
-    // Check sessionStorage for sticky flag
-    return sessionStorage.getItem('devtools_detected') === 'true';
-  });
-
-  const checkIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  const debuggerIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  const workerRef = useRef<Worker | null>(null);
+  const [isCompromised, setIsCompromised] = useState(false);
+  const [lockTimeLeft, setLockTimeLeft] = useState(0);
 
   useEffect(() => {
-    if (isCompromised) return; // already blocked
-
-    // ---------- 1. DIMENSION CHECK (with tolerance) ----------
-    const checkDimensions = () => {
-      const wDiff = window.outerWidth - window.innerWidth;
-      const hDiff = window.outerHeight - window.innerHeight;
-      // Some browsers have a built‑in margin; use a threshold of 150px
-      if (wDiff > 150 || hDiff > 150) {
-        triggerDetection();
-      }
-    };
-
-    // ---------- 2. CONSOLE GETTER (survives clear) ----------
-    const consoleTrap = () => {
-      // Use an object with a getter that fires when logged
-      const trapObj = {
-        get _devtools() {
-          triggerDetection();
-          return 'detected';
-        },
-      };
-      // Override console.log to include the trap automatically
-      const originalLog = console.log;
-      console.log = function (...args) {
-        originalLog.apply(console, args);
-        // Access the getter inside the logged arguments (without printing it)
-        try {
-          // Force access by referencing trapObj._devtools inside a no‑op
-          trapObj._devtools;
-        } catch (_) {}
-      };
-      // Also trigger via console.dir, etc.
-    };
-
-    // ---------- 3. DEBUGGER LOOP (with try/catch) ----------
-    const startDebuggerLoop = () => {
-      if (debuggerIntervalRef.current) clearInterval(debuggerIntervalRef.current);
-      debuggerIntervalRef.current = setInterval(() => {
-        try {
-          // This will pause if devtools is open and breakpoints are enabled
-          // but won't crash if "Deactivate breakpoints" is on
-          (function () {}).constructor('debugger')();
-        } catch (_) {
-          // ignore
+    // Check if the user is already serving a 10-second penalty
+    const checkPenalty = () => {
+      const lockTime = localStorage.getItem('dev_penalty');
+      if (lockTime) {
+        const remaining = parseInt(lockTime) - Date.now();
+        if (remaining > 0) {
+          setIsCompromised(true);
+          setLockTimeLeft(Math.ceil(remaining / 1000));
+          return true;
+        } else {
+          // Penalty over, clear it
+          localStorage.removeItem('dev_penalty');
         }
-      }, 100);
+      }
+      return false;
     };
 
-    // ---------- 4. PERFORMANCE TIMING ----------
-    let lastTime = performance.now();
-    const checkPerformance = () => {
-      const now = performance.now();
-      const delta = now - lastTime;
-      lastTime = now;
-      // If delta is unusually high (e.g., > 100ms), devtools might be busy
-      if (delta > 100) {
-        triggerDetection();
+    // If currently penalized, run a timer to update the countdown UI
+    if (checkPenalty()) {
+      const timer = setInterval(() => {
+         const stillLocked = checkPenalty();
+         if (!stillLocked) {
+             setIsCompromised(false);
+             clearInterval(timer);
+         }
+      }, 1000);
+      return () => clearInterval(timer);
+    }
+
+    // Function to trigger the 10-second lock
+    const triggerPenalty = () => {
+      setIsCompromised(true);
+      // Lock for 10 seconds (10,000 milliseconds)
+      localStorage.setItem('dev_penalty', (Date.now() + 10000).toString()); 
+      setLockTimeLeft(10);
+    };
+
+    // 1. DOCKED DETECTOR (Detects if DevTools took up screen space)
+    const checkDimensions = () => {
+      // Increased threshold slightly to prevent false positives from normal zooming
+      const widthDiff = window.outerWidth - window.innerWidth;
+      const heightDiff = window.outerHeight - window.innerHeight;
+      if (widthDiff > 160 || heightDiff > 160) {
+        triggerPenalty();
       }
     };
 
-    // ---------- 5. KEYBOARD SHORTCUTS (with right‑click prevention) ----------
+    // 2. CONSOLE GETTER TRICK (Catches if console is open)
+    const element = new Image();
+    Object.defineProperty(element, 'id', {
+      get: function () {
+        triggerPenalty();
+        return 'detect';
+      }
+    });
+
+    // 3. DEBUGGER TIMING TRAP
+    // If DevTools is open (and breakpoints aren't deactivated), it will pause here.
+    // If it takes more than 100ms to execute, we know DevTools paused it.
+    const checkDebuggerPause = () => {
+      const start = performance.now();
+      // eslint-disable-next-line no-debugger
+      debugger; 
+      if (performance.now() - start > 100) {
+        triggerPenalty();
+      }
+    };
+
+    // 4. KEYBOARD SHORTCUTS BLOCKER
     const blockKeys = (e: KeyboardEvent) => {
-      const ctrl = e.ctrlKey || e.metaKey;
-      const shift = e.shiftKey;
-      const key = e.key.toUpperCase();
       if (
-        e.key === 'F12' ||
-        (ctrl && shift && ['I', 'J', 'C'].includes(key)) ||
-        (ctrl && key === 'U') ||
-        (e.button === 2) // right‑click
+        e.key === 'F12' || 
+        (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key.toUpperCase())) || 
+        (e.ctrlKey && e.key.toUpperCase() === 'U')
       ) {
         e.preventDefault();
-        triggerDetection();
+        triggerPenalty();
       }
     };
 
-    // ---------- 6. WEB WORKER (background monitor) ----------
-    const startWorker = () => {
-      if (window.Worker) {
-        const workerCode = `
-          let lastPing = Date.now();
-          setInterval(() => {
-            const now = Date.now();
-            if (now - lastPing > 200) {
-              // Main thread is frozen → devtools likely paused
-              postMessage('detected');
-            }
-            lastPing = now;
-          }, 100);
-          // Listen for pings from main thread
-          onmessage = (e) => {
-            if (e.data === 'ping') lastPing = Date.now();
-          };
-        `;
-        const blob = new Blob([workerCode], { type: 'application/javascript' });
-        const url = URL.createObjectURL(blob);
-        workerRef.current = new Worker(url);
-        workerRef.current.onmessage = (e) => {
-          if (e.data === 'detected') {
-            triggerDetection();
-          }
-        };
-        // Ping the worker every 50ms
-        const pingInterval = setInterval(() => {
-          if (workerRef.current) {
-            workerRef.current.postMessage('ping');
-          }
-        }, 50);
-        // Store interval to clear later
-        (workerRef.current as any).pingInterval = pingInterval;
+    const monitorId = setInterval(() => {
+      if (!isCompromised) {
+        checkDimensions();
+        console.log('%c', element); // Trigger Getter
+        console.clear(); 
+        checkDebuggerPause();
       }
-    };
+    }, 1000); // Check every 1 second
 
-    
+    window.addEventListener('resize', checkDimensions);
+    window.addEventListener('keydown', blockKeys);
 
-    // ---------- TRIGGER FUNCTION (sets state + sticky flag) ----------
-    const triggerDetection = () => {
-      sessionStorage.setItem('devtools_detected', 'true');
-      setIsCompromised(true);
-      // Stop all monitors to save resources
-      cleanUpMonitors();
-    };
-
-    // ---------- CLEANUP ----------
-    const cleanUpMonitors = () => {
-      if (checkIntervalRef.current) {
-        clearInterval(checkIntervalRef.current);
-        checkIntervalRef.current = null;
-      }
-      if (debuggerIntervalRef.current) {
-        clearInterval(debuggerIntervalRef.current);
-        debuggerIntervalRef.current = null;
-      }
-      if (workerRef.current) {
-        if ((workerRef.current as any).pingInterval) {
-          clearInterval((workerRef.current as any).pingInterval);
-        }
-        workerRef.current.terminate();
-        workerRef.current = null;
-      }
+    return () => {
+      clearInterval(monitorId);
       window.removeEventListener('resize', checkDimensions);
       window.removeEventListener('keydown', blockKeys);
     };
-
-    // ---------- MOUNT SETUP ----------
-    const startMonitors = () => {
-      // Resize listener
-      window.addEventListener('resize', checkDimensions);
-      // Keyboard / right‑click blocker
-      window.addEventListener('keydown', blockKeys);
-      window.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-        triggerDetection();
-      });
-      // Dimension check immediately
-      checkDimensions();
-
-      // Console trap
-      consoleTrap();
-
-      // Debugger loop
-      startDebuggerLoop();
-
-      // Performance monitor (every 200ms)
-      if (checkIntervalRef.current) clearInterval(checkIntervalRef.current);
-      checkIntervalRef.current = setInterval(() => {
-        checkPerformance();
-        // Also re‑run dimension check (sometimes outer/inner changes without resize)
-        checkDimensions();
-      }, 200);
-
-      // Worker
-      startWorker();
-    };
-
-    startMonitors();
-
-    // ---------- CLEANUP ON UNMOUNT ----------
-    return () => {
-      cleanUpMonitors();
-      // Restore original console.log if needed
-      // (You could save a reference to originalLog and restore it)
-    };
   }, [isCompromised]);
 
-  // ---------- RENDER ----------
   if (isCompromised) {
     return (
       <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black border-2 border-red-600 rounded-[14px]">
-        <ShieldAlert size={48} className="text-red-500 mb-4 animate-pulse" />
-        <h2 className="text-xl font-black text-red-500 mb-2 uppercase text-center">
-          Security Protocol Engaged
-        </h2>
-        <p className="text-gray-400 text-center text-sm">
-          Developer tools detected. Please close the inspector.
-        </p>
-        <p className="text-gray-500 text-xs mt-4">
-          Repeated attempts will be logged.
-        </p>
+         <ShieldAlert size={48} className="text-red-500 mb-4 animate-pulse" />
+         <h2 className="text-xl font-black text-red-500 mb-2 uppercase text-center">Security Protocol Engaged</h2>
+         <p className="text-gray-400 text-center text-sm mb-6">Developer tools detected. Access temporarily restricted.</p>
+         
+         {lockTimeLeft > 0 && (
+            <div className="bg-red-950/50 border border-red-500/30 px-6 py-3 rounded-lg text-center">
+              <span className="block text-red-200 text-xs mb-1 uppercase tracking-wider">Cooldown</span>
+              <span className="text-2xl font-mono text-white font-bold">{lockTimeLeft}s</span>
+            </div>
+         )}
       </div>
     );
   }

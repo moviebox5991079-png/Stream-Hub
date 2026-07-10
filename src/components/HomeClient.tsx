@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect, useRef } from 'react';
 import OkRuPlayer from '@/components/OkRuPlayer'; 
 import { Play, User, Tv, X, ShieldAlert, Radio } from 'lucide-react'; 

@@ -1,13 +1,8 @@
-
-
-
-
-
-
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
 import OkRuPlayer from '@/components/OkRuPlayer'; 
+import DevToolsShield from '@/components/DevToolsShield'; // ✨ SECURITY SHIELD IMPORT
 import { Play, User, Tv, X, ShieldAlert, Radio } from 'lucide-react'; 
 import Script from 'next/script'; 
 import Head from 'next/head'; 
@@ -44,98 +39,32 @@ export default function HomeClient({ initialData }: HomeProps) {
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [isChangingChannel, setIsChangingChannel] = useState(false);
 
-  // ✨ NEW STATE: Track karna ke kab auto-play karna hai aur kab overlay dikhana hai
   const [forceAutoPlay, setForceAutoPlay] = useState(false);
-
   const [isOverlayVisible, setOverlayVisible] = useState(false); 
   const [showWelcomeModal, setShowWelcomeModal] = useState(true);
-
-  // 🛡️ SECURITY STATE: DevTools detect karne ke liye
-  const [isCompromised, setIsCompromised] = useState(false);
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const navbarRef = useRef<HTMLElement>(null);
   const welcomeModalRef = useRef<HTMLDivElement>(null);
 
-  // === 🛡️ DEVTOOLS DETECTION LOGIC (SAME TAB) ===
-  // === 🛡️ DEVTOOLS DETECTION LOGIC (SAME TAB) ===
-  useEffect(() => {
-    // 1. DOCKED DETECTOR (Screen Size Difference)
-    const checkDimensions = () => {
-      const widthDiff = window.outerWidth - window.innerWidth > 160;
-      const heightDiff = window.outerHeight - window.innerHeight > 160;
-      if (widthDiff || heightDiff) {
-        setIsCompromised(true);
-      }
-    };
-
-    // 2. FLOATING DETECTOR (Debugger Time Delay Trick)
-    const checkDebuggerTime = () => {
-      const start = Date.now();
-      (function() { debugger; })();
-      const end = Date.now();
-      if (end - start > 100) {
-        setIsCompromised(true);
-      }
-    };
-
-    // 3. 🚫 KEYBOARD SHORTCUTS BLOCKER
-    const blockKeys = (e: KeyboardEvent) => {
-      if (
-        e.key === 'F12' || 
-        (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key.toUpperCase())) || // Ctrl+Shift+I/J/C
-        (e.ctrlKey && e.key.toUpperCase() === 'U') || // Ctrl+U (View Source)
-        (e.ctrlKey && e.key.toUpperCase() === 'S') || // Ctrl+S (Save Page)
-        (e.ctrlKey && e.key.toUpperCase() === 'P')    // Ctrl+P (Print Page)
-      ) {
-        e.preventDefault(); // Shortcut dabane par kuch na khule
-        setIsCompromised(true); // Fauran security alert trigger kar do
-      }
-    };
-
-    // Continuous Monitoring Loop
-    const monitorId = setInterval(() => {
-      if (!isCompromised) {
-        checkDimensions();
-        checkDebuggerTime();
-      }
-    }, 1000);
-
-    // Event Listeners lagayen
-    checkDimensions();
-    window.addEventListener('resize', checkDimensions);
-    window.addEventListener('keydown', blockKeys); // Keyboard listener add ho gaya
-
-    return () => {
-      clearInterval(monitorId);
-      window.removeEventListener('resize', checkDimensions);
-      window.removeEventListener('keydown', blockKeys);
-    };
-  }, [isCompromised]);
-
-  // === SMART TIME & EXPIRATION MATCHER LOGIC (From Code 1) ===
+  // === SMART TIME & EXPIRATION MATCHER LOGIC ===
   const getSmartActiveChannel = (channels: ChannelData[] | undefined) => {
     if (!channels || channels.length === 0) return null;
 
-    // 1. Current time in PKT (UTC+5)
     const now = new Date();
     const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
     const pktDate = new Date(utc + (3600000 * 5));
     const currentMinutes = pktDate.getHours() * 60 + pktDate.getMinutes();
 
-    // 2. Parse times & durations from channel names
     const parsedChannels = channels.map((ch, index) => {
-      // Regex for Start Time (10:00 PM)
       const timeMatch = ch.name.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
-      
-      // Regex for Duration flag like [2H], (3h), [8H]
       const durationMatch = ch.name.match(/\[(\d+)H\]/i) || ch.name.match(/\((\d+)H\)/i);
       
       let timeInMins = -1;
-      let durationMins = 150; // Default 2.5 hours (150 mins) agar koi flag na ho
+      let durationMins = 150; 
       
       if (durationMatch) {
-        durationMins = parseInt(durationMatch[1], 10) * 60; // Convert hours to minutes
+        durationMins = parseInt(durationMatch[1], 10) * 60; 
       }
 
       if (timeMatch) {
@@ -148,15 +77,12 @@ export default function HomeClient({ initialData }: HomeProps) {
         timeInMins = hours * 60 + mins;
       }
 
-      // Check if match is expired
       let isExpired = false;
       if (timeInMins !== -1) {
         let delta = currentMinutes - timeInMins;
-        // Handle midnight crossover (e.g. started 11 PM, now it's 1 AM)
         if (delta < -720) delta += 1440; 
         if (delta > 720) delta -= 1440; 
         
-        // Agar match ko start hue uski duration se zyada time ho gaya hai, tou expired.
         if (delta > durationMins) {
           isExpired = true;
         }
@@ -171,22 +97,17 @@ export default function HomeClient({ initialData }: HomeProps) {
       };
     });
 
-    // 3. Filter out expired matches and ones without valid time
     const validFutureOrLiveChannels = parsedChannels.filter(c => c.timeInMins !== -1 && !c.isExpired);
     
-    // === THE FALLBACK LOGIC ===
-    // Agar saare matches expire ho gaye hain ya kisi ka time hi nahi diya, tou index 0 (24/7) return karo.
     if (validFutureOrLiveChannels.length === 0) {
        const priorityFallback = parsedChannels.find(c => c.hasPriority);
        return priorityFallback ? priorityFallback.videoId : channels[0].videoId;
     }
 
-    // 4. Sort ascending by time (bina time modify kiye)
     validFutureOrLiveChannels.sort((a, b) => a.timeInMins - b.timeInMins);
 
     let bestCandidate = null;
 
-    // Grouping by time to handle multiple matches at the exact same time
     const timeGroups: { [key: number]: typeof validFutureOrLiveChannels } = {};
     validFutureOrLiveChannels.forEach(c => {
        if (!timeGroups[c.timeInMins]) timeGroups[c.timeInMins] = [];
@@ -199,24 +120,18 @@ export default function HomeClient({ initialData }: HomeProps) {
        const t = uniqueTimes[i];
        const group = timeGroups[t];
        
-       // Tie-breaker: ! wala pick karo, otherwise group ka pehla match
        const winnerInGroup = group.find(c => c.hasPriority) || group[0];
 
-       // Calculate real delta considering midnight
        let delta = currentMinutes - t;
        if (delta < -720) delta += 1440;
        if (delta > 720) delta -= 1440;
 
        if (delta >= 0) {
-           // Match start ho chuka hai (aur expired nahi hai kyunke hum filter kar chuke hain)
            bestCandidate = winnerInGroup;
        } else if (Math.abs(delta) <= 10) {
-           // Match next 10 minutes mein start hone wala hai (Pre-match window)
            bestCandidate = winnerInGroup;
            break; 
        } else if (bestCandidate === null) {
-           // Agar abhi koi live nahi hai, aur next match 10 mins se bhi door hai, 
-           // tou automatically index 0 (24/7 stream) play rakho tab tak.
            bestCandidate = parsedChannels[0];
            break;
        } else {
@@ -279,23 +194,13 @@ export default function HomeClient({ initialData }: HomeProps) {
     return () => { document.body.style.overflow = 'auto'; };
   }, [showWelcomeModal]);
 
-  // Handle Channel Change (Jab user neeche se server change kare)
   const handleChannelChange = (newVideoId: string) => {
     if (activeVideoId === newVideoId) return; 
-    
     setIsChangingChannel(true);
     setActiveVideoId(newVideoId);
-    
-    // ✨ Yahan forceAutoPlay TRUE kar diya taake direct chalay
     setForceAutoPlay(true);
-    
-    if (isOverlayVisible) {
-      setOverlayVisible(false);
-    }
-    
-    setTimeout(() => {
-      setIsChangingChannel(false);
-    }, 1000);
+    if (isOverlayVisible) setOverlayVisible(false);
+    setTimeout(() => { setIsChangingChannel(false); }, 1000);
   };
 
   const getThumbnailImage = (video: StreamData) => {
@@ -465,7 +370,6 @@ export default function HomeClient({ initialData }: HomeProps) {
                              <div
                                key={idx}
                                onClick={() => {
-                                 // ✨ Yahan forceAutoPlay FALSE kar diya (Pehli dafa Play Button aayega)
                                  setForceAutoPlay(false);
                                  setSelectedVideo(stream);
                                  window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -516,38 +420,25 @@ export default function HomeClient({ initialData }: HomeProps) {
                      <div className="relative rounded-2xl p-[3px] animate-rainbow shadow-[0_0_40px_rgba(255,255,255,0.1)] transition-all duration-700">
                         <div className="bg-black rounded-[14px] overflow-hidden relative z-10 w-full aspect-[16/9] flex items-center justify-center">
                          
-                          {/* 🛡️ SECURITY CHECK: Agar F12 khula hai, toh player gayab, alert hazir */}
-                          {isCompromised ? (
-                             <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black border-2 border-red-600 rounded-[14px]">
-                                <ShieldAlert size={48} className="text-red-500 mb-4 animate-pulse" />
-                                <h2 className="text-xl sm:text-2xl font-black text-red-500 mb-2 tracking-widest uppercase text-center px-4">
-                                  Security Protocol Engaged
-                                </h2>
-                                <p className="text-gray-400 text-center px-6 text-sm sm:text-base">
-                                  Developer tools detected. The stream has been locked. <br/> Please close the inspector and refresh the page.
-                                </p>
+                          {isChangingChannel && (
+                             <div className="absolute inset-0 z-50 bg-black/90 flex flex-col items-center justify-center backdrop-blur-sm transition-all duration-300">
+                                <div className="w-12 h-12 border-4 border-gray-800 border-t-white rounded-full animate-spin mb-4"></div>
+                                <p className="text-white text-lg font-bold tracking-widest animate-pulse">Loading Stream...</p>
                              </div>
-                          ) : (
-                             /* Original Player UI */
-                             <>
-                               {isChangingChannel && (
-                                  <div className="absolute inset-0 z-50 bg-black/90 flex flex-col items-center justify-center backdrop-blur-sm transition-all duration-300">
-                                     <div className="w-12 h-12 border-4 border-gray-800 border-t-white rounded-full animate-spin mb-4"></div>
-                                     <p className="text-white text-lg font-bold tracking-widest animate-pulse">Loading Stream...</p>
-                                  </div>
-                               )}
+                          )}
 
-                               {activeVideoId && (
-                                 <OkRuPlayer 
-                                   key={activeVideoId}
-                                   videoId={activeVideoId} 
-                                   title={selectedVideo.videoTitle} 
-                                   thumbnail={getThumbnailImage(selectedVideo)} 
-                                   autoPlay={true}
-                                   forcePlayOnLoad={forceAutoPlay} 
-                                 />
-                               )}
-                             </>
+                          {activeVideoId && (
+                            /* ✨ YAHAN SHIELD LAGI HAI ✨ */
+                            <DevToolsShield>
+                              <OkRuPlayer 
+                                key={activeVideoId}
+                                videoId={activeVideoId} 
+                                title={selectedVideo.videoTitle} 
+                                thumbnail={getThumbnailImage(selectedVideo)} 
+                                autoPlay={true}
+                                forcePlayOnLoad={forceAutoPlay} 
+                              />
+                            </DevToolsShield>
                           )}
 
                         </div>
@@ -644,7 +535,6 @@ export default function HomeClient({ initialData }: HomeProps) {
                            onClick={() => { 
                              setIsChangingChannel(true);
                              setSelectedVideo(video); 
-                             // ✨ Yahan bhi forceAutoPlay TRUE kar diya taake bottom se match badalne par direct chale
                              setForceAutoPlay(true);
                              window.scrollTo({ top: 0, behavior: 'smooth' }); 
                              
@@ -710,6 +600,11 @@ export default function HomeClient({ initialData }: HomeProps) {
     </>
   );
 }
+
+
+
+
+
 
 
 

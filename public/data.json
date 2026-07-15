@@ -28,7 +28,7 @@
     {
       "videoTitle": "Cricket",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "ind-vs-eng",
       "channels": [
         {
@@ -48,7 +48,7 @@
     {
       "videoTitle": "sports-2",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "fifaFriendlies",
       "channels": [
         {

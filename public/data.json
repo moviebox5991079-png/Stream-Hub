@@ -32,15 +32,15 @@
       "activeThumbnail": "ind-vs-eng",
       "channels": [
         {
-          "name": "India vs Eng - 9:30 pm ",
+          "name": "India vs Eng - 5:00 pm -  2nd odi ",
           "videoId": "15254238731883"
         },
         {
-          "name": "aa",
+          "name": "",
           "videoId": "15254260751979"
         },
         {
-          "name": "acaca",
+          "name": "",
           "videoId": "15254285524587"
         }
       ]
@@ -48,7 +48,7 @@
     {
       "videoTitle": "sports-2",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "fifaFriendlies",
       "channels": [
         {
@@ -120,7 +120,7 @@
     {
       "videoTitle": "Football - 2026 (  GMT+5 Time Standard )",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "Fifa2026",
       "channels": [
         {

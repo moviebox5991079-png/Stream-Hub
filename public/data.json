@@ -28,7 +28,7 @@
     {
       "videoTitle": "Cricket",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "ind-vs-eng",
       "channels": [
         {
@@ -48,7 +48,7 @@
     {
       "videoTitle": "sports-2",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "fifaFriendlies",
       "channels": [
         {
@@ -128,19 +128,19 @@
           "videoId": "15273689226859"
         },
         {
-          "name": "",
+          "name": "a",
           "videoId": "15273713933931"
         },
         {
-          "name": "",
+          "name": "b",
           "videoId": "15273722257003"
         },
         {
-          "name": "",
+          "name": "c",
           "videoId": "15273739624043"
         },
         {
-          "name": "",
+          "name": "d",
           "videoId": "15273750175339"
         },
         {

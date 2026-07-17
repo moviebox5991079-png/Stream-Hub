@@ -28,7 +28,7 @@
     {
       "videoTitle": "Cricket",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "ind-vs-eng",
       "channels": [
         {
@@ -120,27 +120,27 @@
     {
       "videoTitle": "Football - 2026 (  GMT+5 Time Standard )",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "Fifa2026",
       "channels": [
         {
-          "name": "England vs Argentina - 12:00 am ",
+          "name": "England vs France - Bronze Final - Sunday 2:00 am ",
           "videoId": "15273689226859"
         },
         {
-          "name": "a",
+          "name": "",
           "videoId": "15273713933931"
         },
         {
-          "name": "b",
+          "name": "",
           "videoId": "15273722257003"
         },
         {
-          "name": "c",
+          "name": "",
           "videoId": "15273739624043"
         },
         {
-          "name": "d",
+          "name": "",
           "videoId": "15273750175339"
         },
         {

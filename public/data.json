@@ -22,25 +22,26 @@
     "cricket_all": "https://t4.ftcdn.net/jpg/14/73/25/83/360_F_1473258395_ouRUkjIQ5TnRlP2tioWhc3DGAn1NEerY.jpg",
     "fifaFriendlies2": "https://upload.wikimedia.org/wikipedia/en/0/00/FIFA_Series_2026_-_International_Friendlies.webp",
     "Fifa2026": "https://mir-s3-cdn-cf.behance.net/projects/404/638043234035959.Y3JvcCwxOTIwLDE1MDEsMCwyMDk.jpg",
-    "ind-vs-eng": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTncqk4wuqBo2gQG50Tqqi6_XM_meBtPAMRD2upb2vqlXJQLtUuB7nb-m9k&s=10"
+    "ind-vs-eng": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTncqk4wuqBo2gQG50Tqqi6_XM_meBtPAMRD2upb2vqlXJQLtUuB7nb-m9k&s=10",
+    "The-hundred-mens-cricket-2026": "https://img.cricketworld.com/images/e-166328/the-hundred-mens-2026-1920x1080.jpg"
   },
   "streams": [
     {
       "videoTitle": "Cricket",
       "videoId": "",
       "isLive": true,
-      "activeThumbnail": "ind-vs-eng",
+      "activeThumbnail": "The-hundred-mens-cricket-2026",
       "channels": [
         {
-          "name": "India vs Eng - 3:00 pm -  3rd odi ",
+          "name": "Manchester Super Giants  VS   London Spirit - The Hundred Men's - Cricket 23 july 9:30 PM",
           "videoId": "15254238731883"
         },
         {
-          "name": "a",
+          "name": "",
           "videoId": "15254260751979"
         },
         {
-          "name": "b",
+          "name": "",
           "videoId": "15254285524587"
         }
       ]
@@ -120,7 +121,7 @@
     {
       "videoTitle": "Football - 2026 (  GMT+5 Time Standard )",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "Fifa2026",
       "channels": [
         {

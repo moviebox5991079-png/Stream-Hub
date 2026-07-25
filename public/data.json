@@ -49,21 +49,21 @@
       ]
     },
     {
-      "videoTitle": "sports-2",
+      "videoTitle": "Ind vs Zimbabwe T20 ",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "fifaFriendlies",
       "channels": [
         {
-          "name": "Germany vs Finland - Today 31 May 🔴 - Match 1",
+          "name": "Ind vs zimb -2nd T20 - 4:00 pm today",
           "videoId": "15254299352683"
         },
         {
-          "name": "USA Vs Senegal - 1 June 🔴 -  Match 2",
+          "name": "",
           "videoId": "15254308986475"
         },
         {
-          "name": "Brazil Vs Panama - 1 June 🔴  - Match 3",
+          "name": "",
           "videoId": "15254328122987"
         }
       ]
@@ -91,7 +91,7 @@
     {
       "videoTitle": "Baseball 2026 ",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "Mlb-2026",
       "channels": [
         {

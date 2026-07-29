@@ -27,7 +27,8 @@
     "UEFA Super Cup": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4aXLPDb1qc35Is04YipVsOzJ5iJH7XfJ7CXRxM4amp1J_lH4RtoHd-ygA&s=10",
     "Mlb-2026": "https://img.mlbstatic.com/mlb-images/image/upload/t_16x9/t_w1024/mlb/nl6kkskbbdmlrdcw4ais",
     "Indvszimbq-t20": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_iC7AKmKBsZNsvmw66ek1_iGQ8yLyzkfQ4AbH2Ax6B9lP0EzJaemUSno&s=10",
-    "Pak-vs-West-test": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSes36QHAjxnDt1Nrh6pu9zjTef40598PIa0YwKWn0s-R9-CNWHXXidzck&s=10"
+    "Pak-vs-West-test": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSes36QHAjxnDt1Nrh6pu9zjTef40598PIa0YwKWn0s-R9-CNWHXXidzck&s=10",
+    "Clubfriendly": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ8mCNHLv86nWMywMZLgoUSTm0N_rDDZ0Baky9mPPkK9pEzSmfufVpgxM&s=10"
   },
   "streams": [
     {
@@ -53,7 +54,7 @@
     {
       "videoTitle": "Pak vs West Test Series 2026",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "Pak-vs-West-test",
       "channels": [
         {
@@ -91,13 +92,13 @@
       ]
     },
     {
-      "videoTitle": "Baseball 2026 ",
+      "videoTitle": "Club friendlies 2026",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "Mlb-2026",
+      "isLive": true,
+      "activeThumbnail": "Clubfriendly",
       "channels": [
         {
-          "name": "san francisco vs los angeles - Live ",
+          "name": "Sydney fc vs Tottenham 2:45 pm",
           "videoId": "15255022345835"
         },
         {

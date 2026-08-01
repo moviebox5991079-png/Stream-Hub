@@ -54,11 +54,11 @@
     {
       "videoTitle": "Pak vs West Test Series 2026",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "Pak-vs-West-test",
       "channels": [
         {
-          "name": "Pak vs West - Test Live 🔴 ",
+          "name": "Pak vs West - Test Live 🔴 - 7:00 pm",
           "videoId": "15254299352683"
         },
         {
@@ -98,11 +98,11 @@
       "activeThumbnail": "Clubfriendly",
       "channels": [
         {
-          "name": "Juventus vs Nice  - 31 July 9:00 pm - Live🔴 ",
+          "name": "",
           "videoId": "15255022345835"
         },
         {
-          "name": "Barcelona vs Birmingham - 31 July 11:45 pm - Live 🔴 ",
+          "name": "Chelsea vs Tottenham - 1 Aug 2026 - 2:45 pm Live 🔴 ",
           "videoId": "15255038074475"
         },
         {

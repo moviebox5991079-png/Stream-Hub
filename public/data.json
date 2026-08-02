@@ -94,7 +94,7 @@
     {
       "videoTitle": "Club friendlies 2026",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "Clubfriendly",
       "channels": [
         {
@@ -164,49 +164,49 @@
       ]
     },
     {
-      "videoTitle": "Fifa-Friendly-Part1",
+      "videoTitle": "Club Friendlies 2026",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "fifaFriendlies2",
+      "isLive": true,
+      "activeThumbnail": "Clubfriendly",
       "channels": [
         {
-          "name": "Belgium vs Tunisia - 6:00 PM - - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "name": "Burnley vs Torino - 7:00 PM",
           "videoId": "14204232736303"
         },
         {
-          "name": "Armenia vs Kazakhstan - 7:00 PM - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "name": "Trabzonspor vs Udinese - 7:30 PM",
           "videoId": "14204288179759"
         },
         {
-          "name": "Estonia vs Faroe Islands - 8:00 PM - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "name": "Sunderland vs Wrexham - 9:00 PM",
           "videoId": "14204319768111"
         },
         {
-          "name": "Gibraltar vs Cayman Islands - 10:00 PM - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "name": "Galatasaray vs Rennes - 11:00 PM",
           "videoId": "14204331957807"
         },
         {
-          "name": "Portugal vs Chile - 10:45 PM - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "name": "Ascoli vs Lazio - 11:45 PM",
           "videoId": "14204346572335"
         },
         {
-          "name": "Romania vs Wales - 10:45 PM - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "name": "Liverpool vs Leeds - 1:00 AM - Tomorrow",
           "videoId": "14204361252399"
         },
         {
-          "name": "Albania vs Luxembourg - 11:00 PM - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "name": "",
           "videoId": "14204370492975"
         },
         {
-          "name": "USA vs Germany - 11:30 PM - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "name": "",
           "videoId": "14204395527727"
         },
         {
-          "name": "Panama vs Bosnia and Herzegovina - 12:00 AM - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "name": "",
           "videoId": "14204411387439"
         },
         {
-          "name": "Switzerland vs Australia - 12:00 AM - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "name": "",
           "videoId": "14204424691247"
         }
       ]

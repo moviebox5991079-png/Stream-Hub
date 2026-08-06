@@ -1,76 +1,9 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
 import OkRuPlayer from '@/components/OkRuPlayer'; 
-import { Play, User, Tv, X, ShieldAlert, Radio, Info } from 'lucide-react'; 
+import { Play, User, Tv, X, ShieldAlert, Radio, Info, Clock, Zap } from 'lucide-react'; 
 import Script from 'next/script'; 
 import Head from 'next/head'; 
 
@@ -106,9 +39,7 @@ export default function HomeClient({ initialData }: HomeProps) {
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [isChangingChannel, setIsChangingChannel] = useState(false);
 
-  // ✨ Track karna ke kab auto-play karna hai aur kab overlay dikhana hai
   const [forceAutoPlay, setForceAutoPlay] = useState(false);
-
   const [isOverlayVisible, setOverlayVisible] = useState(false); 
   const [showWelcomeModal, setShowWelcomeModal] = useState(true);
 
@@ -116,18 +47,16 @@ export default function HomeClient({ initialData }: HomeProps) {
   const navbarRef = useRef<HTMLElement>(null);
   const welcomeModalRef = useRef<HTMLDivElement>(null);
 
-  // === SMART TIME & EXPIRATION MATCHER LOGIC (UPDATED WITH FILTER) ===
+  // === SMART TIME & EXPIRATION MATCHER LOGIC ===
   const getSmartActiveChannel = (channels: ChannelData[] | undefined) => {
     if (!channels || channels.length === 0) return null;
 
-    // 1. Faltoo / Empty / Whitespace-only names ko hamesha ke liye filter out kar do
     const cleanedChannels = channels.filter(
       (ch) => ch && ch.name && ch.name.trim() !== ''
     );
 
     if (cleanedChannels.length === 0) return channels[0]?.videoId || null;
 
-    // 2. Current time in PKT (Asia/Karachi)
     const now = new Date();
     const pktString = now.toLocaleString("en-US", { timeZone: "Asia/Karachi" });
     const pktDate = new Date(pktString);
@@ -138,7 +67,7 @@ export default function HomeClient({ initialData }: HomeProps) {
       const durationMatch = ch.name.match(/\[(\d+)H\]/i) || ch.name.match(/\((\d+)H\)/i);
       
       let timeInMins = -1;
-      let durationMins = 150; // Default 2.5 hours
+      let durationMins = 150; 
       
       if (durationMatch) {
         durationMins = parseInt(durationMatch[1], 10) * 60;
@@ -159,10 +88,9 @@ export default function HomeClient({ initialData }: HomeProps) {
 
       if (timeInMins !== -1) {
         delta = currentMinutes - timeInMins;
-        if (delta < -720) delta += 1440; // Midnight crossover fix
+        if (delta < -720) delta += 1440; 
         if (delta > 720) delta -= 1440;
         
-        // 150 mins se zyada guzar gaye tou match dead hai
         if (delta > durationMins) {
           isExpired = true; 
         }
@@ -171,29 +99,25 @@ export default function HomeClient({ initialData }: HomeProps) {
       return { ...ch, timeInMins, delta, hasPriority: ch.name.includes('!'), isExpired };
     });
 
-    // Sirf valid aur non-expired channels ko aage le kar jao
     const validChannels = parsedChannels.filter(c => c.timeInMins !== -1 && !c.isExpired);
 
     if (validChannels.length === 0) {
-      return cleanedChannels[0].videoId; // Fallback agar sab dead hain
+      return cleanedChannels[0].videoId;
     }
 
     const upcoming = validChannels.filter(c => c.delta < 0).sort((a, b) => Math.abs(a.delta) - Math.abs(b.delta));
     const live = validChannels.filter(c => c.delta >= 0).sort((a, b) => a.delta - b.delta);
 
-    // CASE 1: 10-Minute Pre-Match Override
     if (upcoming.length > 0 && Math.abs(upcoming[0].delta) <= 10) {
       const priorityUpcoming = upcoming.find(c => Math.abs(c.delta) <= 10 && c.hasPriority);
       return priorityUpcoming ? priorityUpcoming.videoId : upcoming[0].videoId;
     }
 
-    // CASE 2: Active Live Match
     if (live.length > 0) {
       const priorityLive = live.find(c => c.hasPriority);
       return priorityLive ? priorityLive.videoId : live[0].videoId;
     }
 
-    // CASE 3: The Waiting Room (Sab se qareebi aane wala match)
     if (upcoming.length > 0) {
       return upcoming[0].videoId;
     }
@@ -202,7 +126,6 @@ export default function HomeClient({ initialData }: HomeProps) {
   };
 
   useEffect(() => {
-    // Sirf page load ya match select hone par calculation hogi (No SetInterval!)
     const updateChannelBasedOnTime = () => {
       if (selectedVideo) {
         const smartChannelId = getSmartActiveChannel(selectedVideo.channels);
@@ -276,13 +199,42 @@ export default function HomeClient({ initialData }: HomeProps) {
     return 'https://via.placeholder.com/800x450.png?text=No+Thumbnail'; 
   };
 
-  // Helper to find currently selected channel's name for the Luxury Info Bar
-  const getActiveChannelInfo = () => {
+  // ✨ NEW: Helper function to determine dynamic state of the active channel ✨
+  const getActiveChannelStatus = () => {
     if (!selectedVideo || !selectedVideo.channels) return null;
-    return selectedVideo.channels.find(c => c.videoId === activeVideoId);
+    const channel = selectedVideo.channels.find(c => c.videoId === activeVideoId);
+    if (!channel || !channel.name) return null;
+
+    let status = 'WAITING'; // Default
+    const timeMatch = channel.name.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+    
+    if (timeMatch) {
+      const now = new Date();
+      const pktString = now.toLocaleString("en-US", { timeZone: "Asia/Karachi" });
+      const pktDate = new Date(pktString);
+      const currentMinutes = pktDate.getHours() * 60 + pktDate.getMinutes();
+
+      let hours = parseInt(timeMatch[1], 10);
+      const mins = parseInt(timeMatch[2], 10);
+      const period = timeMatch[3].toUpperCase();
+      if (hours === 12 && period === 'AM') hours = 0;
+      if (hours < 12 && period === 'PM') hours += 12;
+      let timeInMins = hours * 60 + mins;
+
+      let delta = currentMinutes - timeInMins;
+      if (delta < -720) delta += 1440;
+      if (delta > 720) delta -= 1440;
+
+      if (delta >= 0) {
+        status = 'LIVE';
+      } else if (delta >= -10) {
+        status = 'SOON';
+      }
+    }
+    return { channel, status };
   };
 
-  const activeChannelData = getActiveChannelInfo();
+  const activeChannelData = getActiveChannelStatus();
 
   return (
     <>
@@ -488,16 +440,44 @@ export default function HomeClient({ initialData }: HomeProps) {
                ) : (
                  <div className="mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
                      
-                     {/* ✨ LUXURY STATUS BAR (NEW) ✨ */}
-                     {activeChannelData && activeChannelData.name && (
-                       <div className="bg-gradient-to-r from-red-900/30 via-[#1a0505] to-black border border-red-500/20 p-3 sm:p-4 rounded-2xl mb-4 flex items-center gap-3 md:gap-4 shadow-[0_0_20px_rgba(220,38,38,0.15)] animate-in slide-in-from-top-4 duration-500">
-                          <div className="bg-red-500/10 p-2 rounded-full border border-red-500/30 shadow-[0_0_10px_rgba(220,38,38,0.2)]">
-                             <Info className="text-red-500 flex-shrink-0 animate-pulse" size={20} />
+                     {/* ✨ BEAUTIFUL DYNAMIC LUXURY STATUS BAR (NEW) ✨ */}
+                     {activeChannelData && activeChannelData.status === 'LIVE' && (
+                       <div className="bg-gradient-to-r from-red-900/40 via-[#1a0505] to-black border border-red-500/40 p-3 sm:p-4 rounded-2xl mb-4 flex items-center gap-3 md:gap-4 shadow-[0_0_30px_rgba(220,38,38,0.2)] animate-in slide-in-from-top-4 duration-500 backdrop-blur-md relative overflow-hidden">
+                          <div className="absolute top-0 left-0 w-1 h-full bg-red-500 animate-pulse"></div>
+                          <div className="bg-red-500/20 p-2.5 rounded-full border border-red-500/40 shadow-[0_0_15px_rgba(220,38,38,0.4)]">
+                             <Radio className="text-red-500 flex-shrink-0 animate-pulse" size={22} />
                           </div>
-                          <p className="text-gray-300 text-xs sm:text-sm md:text-base font-medium leading-snug">
-                            <strong className="text-white tracking-wide uppercase mr-1">System Connected:</strong> 
-                            You are in the waiting room for <span className="text-red-400 font-bold uppercase tracking-wider bg-red-950/50 px-2 py-0.5 rounded ml-1">{activeChannelData.name}</span>. 
-                            <br className="hidden md:block" /> The stream will automatically start broadcasting at the exact scheduled match time.
+                          <p className="text-gray-200 text-sm md:text-base font-medium leading-snug">
+                            <strong className="text-white tracking-widest uppercase mr-2 flex items-center inline-flex gap-2">
+                              <span className="w-2 h-2 bg-red-500 rounded-full animate-ping"></span> MATCH IS LIVE:
+                            </strong>
+                            Broadcasting <span className="text-red-400 font-black uppercase tracking-wider bg-red-950/60 px-2.5 py-0.5 rounded border border-red-500/20 ml-1">{activeChannelData.channel.name}</span>
+                          </p>
+                       </div>
+                     )}
+
+                     {activeChannelData && activeChannelData.status === 'SOON' && (
+                       <div className="bg-gradient-to-r from-orange-900/40 via-[#1a0a05] to-black border border-orange-500/40 p-3 sm:p-4 rounded-2xl mb-4 flex items-center gap-3 md:gap-4 shadow-[0_0_30px_rgba(249,115,22,0.2)] animate-in slide-in-from-top-4 duration-500 backdrop-blur-md relative overflow-hidden">
+                          <div className="absolute top-0 left-0 w-1 h-full bg-orange-500 animate-pulse"></div>
+                          <div className="bg-orange-500/20 p-2.5 rounded-full border border-orange-500/40 shadow-[0_0_15px_rgba(249,115,22,0.4)]">
+                             <Zap className="text-orange-500 flex-shrink-0 animate-bounce" size={22} />
+                          </div>
+                          <p className="text-gray-200 text-sm md:text-base font-medium leading-snug">
+                            <strong className="text-white tracking-widest uppercase mr-2 text-orange-400">STARTING SHORTLY:</strong>
+                            Players are ready for <span className="text-orange-300 font-black uppercase tracking-wider bg-orange-950/60 px-2.5 py-0.5 rounded border border-orange-500/20 ml-1">{activeChannelData.channel.name}</span>. The stream will begin in just a few minutes!
+                          </p>
+                       </div>
+                     )}
+
+                     {activeChannelData && activeChannelData.status === 'WAITING' && (
+                       <div className="bg-gradient-to-r from-blue-900/30 via-[#050a1a] to-black border border-blue-500/30 p-3 sm:p-4 rounded-2xl mb-4 flex items-center gap-3 md:gap-4 shadow-[0_0_30px_rgba(59,130,246,0.15)] animate-in slide-in-from-top-4 duration-500 backdrop-blur-md relative overflow-hidden">
+                          <div className="absolute top-0 left-0 w-1 h-full bg-blue-500 opacity-50"></div>
+                          <div className="bg-blue-500/10 p-2.5 rounded-full border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+                             <Clock className="text-blue-400 flex-shrink-0 animate-pulse" size={22} />
+                          </div>
+                          <p className="text-gray-300 text-sm md:text-base font-medium leading-snug">
+                            <strong className="text-blue-300 tracking-widest uppercase mr-2">WAITING ROOM:</strong>
+                            System connected for <span className="text-blue-200 font-bold uppercase tracking-wider bg-blue-950/40 px-2.5 py-0.5 rounded border border-blue-500/20 ml-1">{activeChannelData.channel.name}</span>. Stream will auto-start at the scheduled time.
                           </p>
                        </div>
                      )}
@@ -696,14 +676,63 @@ export default function HomeClient({ initialData }: HomeProps) {
 
 
 
-// iss below code ko delte kar dena jaaab iss comment ko deekoo 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // 'use client';
 
 // import React, { useState, useEffect, useRef } from 'react';
 // import OkRuPlayer from '@/components/OkRuPlayer'; 
-// import { Play, User, Tv, X, ShieldAlert, Radio } from 'lucide-react'; 
+// import { Play, User, Tv, X, ShieldAlert, Radio, Info } from 'lucide-react'; 
 // import Script from 'next/script'; 
 // import Head from 'next/head'; 
 
@@ -739,7 +768,7 @@ export default function HomeClient({ initialData }: HomeProps) {
 //   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
 //   const [isChangingChannel, setIsChangingChannel] = useState(false);
 
-//   // ✨ NEW STATE: Track karna ke kab auto-play karna hai aur kab overlay dikhana hai
+//   // ✨ Track karna ke kab auto-play karna hai aur kab overlay dikhana hai
 //   const [forceAutoPlay, setForceAutoPlay] = useState(false);
 
 //   const [isOverlayVisible, setOverlayVisible] = useState(false); 
@@ -749,29 +778,32 @@ export default function HomeClient({ initialData }: HomeProps) {
 //   const navbarRef = useRef<HTMLElement>(null);
 //   const welcomeModalRef = useRef<HTMLDivElement>(null);
 
-//   // === SMART TIME & EXPIRATION MATCHER LOGIC (From Code 1) ===
+//   // === SMART TIME & EXPIRATION MATCHER LOGIC (UPDATED WITH FILTER) ===
 //   const getSmartActiveChannel = (channels: ChannelData[] | undefined) => {
 //     if (!channels || channels.length === 0) return null;
 
-//     // 1. Current time in PKT (UTC+5)
+//     // 1. Faltoo / Empty / Whitespace-only names ko hamesha ke liye filter out kar do
+//     const cleanedChannels = channels.filter(
+//       (ch) => ch && ch.name && ch.name.trim() !== ''
+//     );
+
+//     if (cleanedChannels.length === 0) return channels[0]?.videoId || null;
+
+//     // 2. Current time in PKT (Asia/Karachi)
 //     const now = new Date();
-//     const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-//     const pktDate = new Date(utc + (3600000 * 5));
+//     const pktString = now.toLocaleString("en-US", { timeZone: "Asia/Karachi" });
+//     const pktDate = new Date(pktString);
 //     const currentMinutes = pktDate.getHours() * 60 + pktDate.getMinutes();
 
-//     // 2. Parse times & durations from channel names
-//     const parsedChannels = channels.map((ch, index) => {
-//       // Regex for Start Time (10:00 PM)
+//     const parsedChannels = cleanedChannels.map((ch, index) => {
 //       const timeMatch = ch.name.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
-      
-//       // Regex for Duration flag like [2H], (3h), [8H]
 //       const durationMatch = ch.name.match(/\[(\d+)H\]/i) || ch.name.match(/\((\d+)H\)/i);
       
 //       let timeInMins = -1;
-//       let durationMins = 150; // Default 2.5 hours (150 mins) agar koi flag na ho
+//       let durationMins = 150; // Default 2.5 hours
       
 //       if (durationMatch) {
-//         durationMins = parseInt(durationMatch[1], 10) * 60; // Convert hours to minutes
+//         durationMins = parseInt(durationMatch[1], 10) * 60;
 //       }
 
 //       if (timeMatch) {
@@ -784,105 +816,62 @@ export default function HomeClient({ initialData }: HomeProps) {
 //         timeInMins = hours * 60 + mins;
 //       }
 
-//       // Check if match is expired
+//       let delta = -9999;
 //       let isExpired = false;
+
 //       if (timeInMins !== -1) {
-//         let delta = currentMinutes - timeInMins;
-//         // Handle midnight crossover (e.g. started 11 PM, now it's 1 AM)
-//         if (delta < -720) delta += 1440; 
-//         if (delta > 720) delta -= 1440; 
+//         delta = currentMinutes - timeInMins;
+//         if (delta < -720) delta += 1440; // Midnight crossover fix
+//         if (delta > 720) delta -= 1440;
         
-//         // Agar match ko start hue uski duration se zyada time ho gaya hai, tou expired.
+//         // 150 mins se zyada guzar gaye tou match dead hai
 //         if (delta > durationMins) {
-//           isExpired = true;
+//           isExpired = true; 
 //         }
 //       }
       
-//       return {
-//         ...ch,
-//         originalIndex: index,
-//         timeInMins,
-//         hasPriority: ch.name.includes('!'),
-//         isExpired
-//       };
+//       return { ...ch, timeInMins, delta, hasPriority: ch.name.includes('!'), isExpired };
 //     });
 
-//     // 3. Filter out expired matches and ones without valid time
-//     const validFutureOrLiveChannels = parsedChannels.filter(c => c.timeInMins !== -1 && !c.isExpired);
-    
-//     // === THE FALLBACK LOGIC ===
-//     // Agar saare matches expire ho gaye hain ya kisi ka time hi nahi diya, tou index 0 (24/7) return karo.
-//     if (validFutureOrLiveChannels.length === 0) {
-//        const priorityFallback = parsedChannels.find(c => c.hasPriority);
-//        return priorityFallback ? priorityFallback.videoId : channels[0].videoId;
+//     // Sirf valid aur non-expired channels ko aage le kar jao
+//     const validChannels = parsedChannels.filter(c => c.timeInMins !== -1 && !c.isExpired);
+
+//     if (validChannels.length === 0) {
+//       return cleanedChannels[0].videoId; // Fallback agar sab dead hain
 //     }
 
-//     // 4. Sort ascending by time (bina time modify kiye)
-//     validFutureOrLiveChannels.sort((a, b) => a.timeInMins - b.timeInMins);
+//     const upcoming = validChannels.filter(c => c.delta < 0).sort((a, b) => Math.abs(a.delta) - Math.abs(b.delta));
+//     const live = validChannels.filter(c => c.delta >= 0).sort((a, b) => a.delta - b.delta);
 
-//     let bestCandidate = null;
-
-//     // Grouping by time to handle multiple matches at the exact same time
-//     const timeGroups: { [key: number]: typeof validFutureOrLiveChannels } = {};
-//     validFutureOrLiveChannels.forEach(c => {
-//        if (!timeGroups[c.timeInMins]) timeGroups[c.timeInMins] = [];
-//        timeGroups[c.timeInMins].push(c);
-//     });
-
-//     const uniqueTimes = Object.keys(timeGroups).map(Number).sort((a,b) => a-b);
-
-//     for (let i = 0; i < uniqueTimes.length; i++) {
-//        const t = uniqueTimes[i];
-//        const group = timeGroups[t];
-       
-//        // Tie-breaker: ! wala pick karo, otherwise group ka pehla match
-//        const winnerInGroup = group.find(c => c.hasPriority) || group[0];
-
-//        // Calculate real delta considering midnight
-//        let delta = currentMinutes - t;
-//        if (delta < -720) delta += 1440;
-//        if (delta > 720) delta -= 1440;
-
-//        if (delta >= 0) {
-//            // Match start ho chuka hai (aur expired nahi hai kyunke hum filter kar chuke hain)
-//            bestCandidate = winnerInGroup;
-//        } else if (Math.abs(delta) <= 10) {
-//            // Match next 10 minutes mein start hone wala hai (Pre-match window)
-//            bestCandidate = winnerInGroup;
-//            break; 
-//        } else if (bestCandidate === null) {
-//            // Agar abhi koi live nahi hai, aur next match 10 mins se bhi door hai, 
-//            // tou automatically index 0 (24/7 stream) play rakho tab tak.
-//            bestCandidate = parsedChannels[0];
-//            break;
-//        } else {
-//            break;
-//        }
+//     // CASE 1: 10-Minute Pre-Match Override
+//     if (upcoming.length > 0 && Math.abs(upcoming[0].delta) <= 10) {
+//       const priorityUpcoming = upcoming.find(c => Math.abs(c.delta) <= 10 && c.hasPriority);
+//       return priorityUpcoming ? priorityUpcoming.videoId : upcoming[0].videoId;
 //     }
 
-//     return bestCandidate ? bestCandidate.videoId : channels[0].videoId;
+//     // CASE 2: Active Live Match
+//     if (live.length > 0) {
+//       const priorityLive = live.find(c => c.hasPriority);
+//       return priorityLive ? priorityLive.videoId : live[0].videoId;
+//     }
+
+//     // CASE 3: The Waiting Room (Sab se qareebi aane wala match)
+//     if (upcoming.length > 0) {
+//       return upcoming[0].videoId;
+//     }
+
+//     return cleanedChannels[0].videoId;
 //   };
 
 //   useEffect(() => {
-//     // Helper function jo PKT time ke hisaab se active channel set karega
+//     // Sirf page load ya match select hone par calculation hogi (No SetInterval!)
 //     const updateChannelBasedOnTime = () => {
 //       if (selectedVideo) {
 //         const smartChannelId = getSmartActiveChannel(selectedVideo.channels);
 //         setActiveVideoId(smartChannelId || selectedVideo.videoId);
 //       }
 //     };
-
-//     // Jaise hi user click kare, pehli dafa foran check karo
 //     updateChannelBasedOnTime();
-
-//     // Background Clock: Har 60 seconds baad (60000ms) khud check karo
-//     const intervalId = setInterval(() => {
-//       updateChannelBasedOnTime();
-//     }, 60000); 
-
-//     // Cleanup function: Doosre match par click karne se purana timer clear ho jaye
-//     return () => clearInterval(intervalId);
-    
 //   }, [selectedVideo]);
 
 //   useEffect(() => {
@@ -930,23 +919,16 @@ export default function HomeClient({ initialData }: HomeProps) {
 //     return () => { document.body.style.overflow = 'auto'; };
 //   }, [showWelcomeModal]);
 
-//   // Handle Channel Change (Jab user neeche se server change kare)
 //   const handleChannelChange = (newVideoId: string) => {
 //     if (activeVideoId === newVideoId) return; 
     
 //     setIsChangingChannel(true);
 //     setActiveVideoId(newVideoId);
-    
-//     // ✨ Yahan forceAutoPlay TRUE kar diya taake direct chalay
 //     setForceAutoPlay(true);
     
-//     if (isOverlayVisible) {
-//       setOverlayVisible(false);
-//     }
+//     if (isOverlayVisible) setOverlayVisible(false);
     
-//     setTimeout(() => {
-//       setIsChangingChannel(false);
-//     }, 1000);
+//     setTimeout(() => { setIsChangingChannel(false); }, 1000);
 //   };
 
 //   const getThumbnailImage = (video: StreamData) => {
@@ -956,6 +938,14 @@ export default function HomeClient({ initialData }: HomeProps) {
 //     return 'https://via.placeholder.com/800x450.png?text=No+Thumbnail'; 
 //   };
 
+//   // Helper to find currently selected channel's name for the Luxury Info Bar
+//   const getActiveChannelInfo = () => {
+//     if (!selectedVideo || !selectedVideo.channels) return null;
+//     return selectedVideo.channels.find(c => c.videoId === activeVideoId);
+//   };
+
+//   const activeChannelData = getActiveChannelInfo();
+
 //   return (
 //     <>
 //       <Head>
@@ -963,7 +953,6 @@ export default function HomeClient({ initialData }: HomeProps) {
 //         <link rel="dns-prefetch" href="https://ok.ru" />
 //       </Head>
 
-//       {/* 🌟 CUSTOM ANIMATION FOR LUXURY INFINITE SPECTRUM FLOW 🌟 */}
 //       <style dangerouslySetInnerHTML={{__html: `
 //         @keyframes rainbowFlow {
 //           0% { background-position: 0% 50%; }
@@ -1085,7 +1074,6 @@ export default function HomeClient({ initialData }: HomeProps) {
                
 //                {/* HERO SECTION / PLAYER AREA */}
 //                {!selectedVideo ? (
-//                  /* === MAIN CATEGORY SELECTION === */
 //                  <div className="mb-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
                    
 //                    {availableStreams.length === 0 ? (
@@ -1116,7 +1104,6 @@ export default function HomeClient({ initialData }: HomeProps) {
 //                              <div
 //                                key={idx}
 //                                onClick={() => {
-//                                  // ✨ Yahan forceAutoPlay FALSE kar diya (Pehli dafa Play Button aayega)
 //                                  setForceAutoPlay(false);
 //                                  setSelectedVideo(stream);
 //                                  window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1161,12 +1148,23 @@ export default function HomeClient({ initialData }: HomeProps) {
 //                    )}
 //                  </div>
 //                ) : (
-//                  /* === ACTIVE MATCH AREA === */
-//                   /* === ACTIVE MATCH AREA === */
 //                  <div className="mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
                      
+//                      {/* ✨ LUXURY STATUS BAR (NEW) ✨ */}
+//                      {activeChannelData && activeChannelData.name && (
+//                        <div className="bg-gradient-to-r from-red-900/30 via-[#1a0505] to-black border border-red-500/20 p-3 sm:p-4 rounded-2xl mb-4 flex items-center gap-3 md:gap-4 shadow-[0_0_20px_rgba(220,38,38,0.15)] animate-in slide-in-from-top-4 duration-500">
+//                           <div className="bg-red-500/10 p-2 rounded-full border border-red-500/30 shadow-[0_0_10px_rgba(220,38,38,0.2)]">
+//                              <Info className="text-red-500 flex-shrink-0 animate-pulse" size={20} />
+//                           </div>
+//                           <p className="text-gray-300 text-xs sm:text-sm md:text-base font-medium leading-snug">
+//                             <strong className="text-white tracking-wide uppercase mr-1">System Connected:</strong> 
+//                             You are in the waiting room for <span className="text-red-400 font-bold uppercase tracking-wider bg-red-950/50 px-2 py-0.5 rounded ml-1">{activeChannelData.name}</span>. 
+//                             <br className="hidden md:block" /> The stream will automatically start broadcasting at the exact scheduled match time.
+//                           </p>
+//                        </div>
+//                      )}
+
 //                      <div className="relative rounded-2xl p-[3px] animate-rainbow shadow-[0_0_40px_rgba(255,255,255,0.1)] transition-all duration-700">
-//                         {/* YAHAN CHANGES KI HAIN 👇 */}
 //                         <div className="bg-black rounded-[14px] overflow-hidden relative z-10 w-full aspect-[16/9] flex items-center justify-center">
                          
 //                           {isChangingChannel && (
@@ -1183,19 +1181,18 @@ export default function HomeClient({ initialData }: HomeProps) {
 //                               title={selectedVideo.videoTitle} 
 //                               thumbnail={getThumbnailImage(selectedVideo)} 
 //                               autoPlay={true}
-//                               // ✨ Dynamic Prop pass kar di
 //                               forcePlayOnLoad={forceAutoPlay} 
 //                             />
 //                           )}
 
-//                        </div>
+//                         </div>
 //                      </div>
 
 //                      <div className="mt-5 px-1">
 //                        <div className="w-full">
 //                          <h1 className="text-xl sm:text-2xl font-bold text-white mb-2 flex flex-wrap items-center gap-2">
 //                            {selectedVideo.videoTitle} 
-//                            {selectedVideo.isLive && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse whitespace-nowrap">LIVE NOW</span>}
+//                            {selectedVideo.isLive && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse whitespace-nowrap shadow-[0_0_10px_rgba(220,38,38,0.5)]">LIVE NOW</span>}
 //                          </h1>
 //                        </div>
 
@@ -1213,7 +1210,7 @@ export default function HomeClient({ initialData }: HomeProps) {
 //                                  </span>
 //                                </div>
 //                                <span className="text-sm text-gray-400 font-medium mt-1">
-//                                  Stream stuck or not working, they fix in few seconds (server issue)? <span className="text-white font-bold underline decoration-white decoration-2 underline-offset-2">Watch Below More Matches, Current Live or Upcomming (Eastern Time)!</span>
+//                                  Stream stuck or not working? <span className="text-white font-bold underline decoration-white decoration-2 underline-offset-2">Watch Below More Matches, Current Live or Upcomming (Eastern Time)!</span>
 //                                </span>
 //                              </div>
 //                            </div>
@@ -1282,7 +1279,6 @@ export default function HomeClient({ initialData }: HomeProps) {
 //                            onClick={() => { 
 //                              setIsChangingChannel(true);
 //                              setSelectedVideo(video); 
-//                              // ✨ Yahan bhi forceAutoPlay TRUE kar diya taake bottom se match badalne par direct chale
 //                              setForceAutoPlay(true);
 //                              window.scrollTo({ top: 0, behavior: 'smooth' }); 
                              
@@ -1348,6 +1344,13 @@ export default function HomeClient({ initialData }: HomeProps) {
 //     </>
 //   );
 // }
+
+
+
+
+
+
+
 
 
 

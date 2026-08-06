@@ -41,7 +41,7 @@ export default function HomeClient({ initialData }: HomeProps) {
   const [isOverlayVisible, setOverlayVisible] = useState(false); 
   const [showWelcomeModal, setShowWelcomeModal] = useState(true);
 
-  // ✨ NEW: Unified State Machine Data
+  // ✨ Unified State Machine Data
   const [evaluatedChannels, setEvaluatedChannels] = useState<any[]>([]);
   const [isManualOverride, setIsManualOverride] = useState(false);
 
@@ -50,7 +50,8 @@ export default function HomeClient({ initialData }: HomeProps) {
   const welcomeModalRef = useRef<HTMLDivElement>(null);
 
   // =========================================================
-  // 🚀 THE UNIFIED SCHEDULER ENGINE (DATE-AWARE)
+  // 🚀 ISO-8601 UNIFIED SCHEDULER ENGINE
+  // Format: !Match Name||S=2026-08-06T23:30:00+05:00||E=2026-08-07T02:15:00+05:00
   // =========================================================
   useEffect(() => {
     if (!selectedVideo || !selectedVideo.channels) return;
@@ -61,57 +62,59 @@ export default function HomeClient({ initialData }: HomeProps) {
         (ch) => ch && ch.name && ch.name.trim() !== ''
       );
 
-      const now = new Date();
-      // Force PKT Timezone
-      const pktString = now.toLocaleString("en-US", { timeZone: "Asia/Karachi" });
-      const nowPkt = new Date(pktString);
+      const nowMs = Date.now(); // Current precise time in milliseconds
 
       const evaluated = cleanedChannels.map((channel) => {
-        const timeMatch = channel.name.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
-        const durationMatch = channel.name.match(/\[(\d+)H\]/i) || channel.name.match(/\((\d+)H\)/i);
-        
-        let durationMins = 150; // Default 2.5 hours
-        if (durationMatch) durationMins = parseInt(durationMatch[1], 10) * 60;
+        // Parse the new syntax
+        const parts = channel.name.split('||');
+        let rawName = parts[0].trim();
+        const hasPriority = rawName.startsWith('!');
+        let cleanName = hasPriority ? rawName.substring(1).trim() : rawName;
+
+        const startPart = parts.find(p => p.trim().startsWith('S='));
+        const endPart = parts.find(p => p.trim().startsWith('E='));
 
         let state = 'UNKNOWN';
         let minutesRemaining = 0;
         let minutesSinceStart = 0;
+        let displayName = cleanName; // Default fallback
 
-        if (timeMatch) {
-          let hours = parseInt(timeMatch[1], 10);
-          const mins = parseInt(timeMatch[2], 10);
-          const period = timeMatch[3].toUpperCase();
+        if (startPart && endPart) {
+          const startStr = startPart.replace('S=', '').trim();
+          const endStr = endPart.replace('E=', '').trim();
+
+          const startDate = new Date(startStr);
+          const endDate = new Date(endStr);
           
-          if (hours === 12 && period === 'AM') hours = 0;
-          if (hours < 12 && period === 'PM') hours += 12;
+          const startMs = startDate.getTime();
+          const endMs = endDate.getTime();
 
-          // Build exact Match DateTime for TODAY
-          let matchDate = new Date(nowPkt.getTime());
-          matchDate.setHours(hours, mins, 0, 0);
+          // 🎨 UI Magic: Extract time (e.g., 11:30 PM) for frontend display
+          const timeOptions: Intl.DateTimeFormatOptions = { 
+            hour: 'numeric', 
+            minute: '2-digit', 
+            hour12: true, 
+            timeZone: 'Asia/Karachi' 
+          };
+          const formattedTime = startDate.toLocaleTimeString('en-US', timeOptions);
+          displayName = `${cleanName} - ${formattedTime}`;
 
-          // 🐛 MIDNIGHT BUG FIX: DATE-AWARE LOGIC
-          // Agar match 12:00 AM ka hai aur current time 11:00 AM hai, 
-          // tou difference -11 hours hoga. If diff is < -12 hours, it means match NEXT DAY ka hai!
-          let diffMs = matchDate.getTime() - nowPkt.getTime();
-          if (diffMs < -12 * 60 * 60 * 1000) {
-            matchDate.setDate(matchDate.getDate() + 1); // +1 Day
-            diffMs = matchDate.getTime() - nowPkt.getTime();
-          }
+          // Precise minute differences
+          const diffMinsStart = Math.round((startMs - nowMs) / 60000); 
+          const diffMinsEnd = Math.round((endMs - nowMs) / 60000);   
 
-          // Exact minute difference
-          const diffMins = Math.round(diffMs / 60000);
-
-          if (diffMins > 10) {
-            state = 'WAITING';
-            minutesRemaining = diffMins;
-          } else if (diffMins > 0 && diffMins <= 10) {
-            state = 'SOON';
-            minutesRemaining = diffMins;
-          } else if (diffMins <= 0 && diffMins >= -durationMins) {
+          // 🧠 Status State Machine
+          if (nowMs > endMs) {
+            state = 'EXPIRED';
+          } else if (nowMs >= startMs && nowMs <= endMs) {
             state = 'LIVE';
-            minutesSinceStart = Math.abs(diffMins);
-          } else {
-            state = 'EXPIRED'; // Over 150 mins
+            minutesSinceStart = Math.abs(diffMinsStart);
+          } else if (diffMinsStart <= 10 && diffMinsStart > 0) {
+            state = 'SOON';
+            minutesRemaining = diffMinsStart;
+          } else if (diffMinsStart > 10) {
+            state = 'WAITING';
+            minutesRemaining = diffMinsStart;
           }
         }
 
@@ -120,14 +123,15 @@ export default function HomeClient({ initialData }: HomeProps) {
           state, 
           minutesRemaining, 
           minutesSinceStart, 
-          hasPriority: channel.name.includes('!') 
+          hasPriority,
+          displayName 
         };
       });
 
       setEvaluatedChannels(evaluated);
     };
 
-    // Run immediately, then run in a cycle every 60 seconds
+    // Run immediately, then check every 60 seconds
     resolveChannels();
     const intervalId = setInterval(resolveChannels, 60000);
     return () => clearInterval(intervalId);
@@ -139,38 +143,37 @@ export default function HomeClient({ initialData }: HomeProps) {
   useEffect(() => {
     if (evaluatedChannels.length === 0) return;
 
-    // Check current active channel
     const currentActive = evaluatedChannels.find(c => c.channel.videoId === activeVideoId);
 
-    // Agar user ne manually click kiya hai aur match EXPIRED nahi hua, tou stream switch na karo.
+    // Manual selection protection (unless expired)
     if (isManualOverride && currentActive && currentActive.state !== 'EXPIRED') {
       return; 
     }
 
     // Filter out EXPIRED
     const valid = evaluatedChannels.filter(c => c.state !== 'EXPIRED' && c.state !== 'UNKNOWN');
-    if (valid.length === 0) return; // All dead
+    if (valid.length === 0) return; 
 
-    // Separate by state
+    // Priority Queues
     const soon = valid.filter(c => c.state === 'SOON').sort((a, b) => a.minutesRemaining - b.minutesRemaining);
     const live = valid.filter(c => c.state === 'LIVE').sort((a, b) => a.minutesSinceStart - b.minutesSinceStart);
     const waiting = valid.filter(c => c.state === 'WAITING').sort((a, b) => a.minutesRemaining - b.minutesRemaining);
 
-    // Apply Priority Rules (SOON > LIVE > WAITING)
+    // Apply strict priority
     let best;
     if (soon.length > 0) best = soon.find(c => c.hasPriority) || soon[0];
     else if (live.length > 0) best = live.find(c => c.hasPriority) || live[0];
     else if (waiting.length > 0) best = waiting[0];
     else best = valid[0];
 
-    // Auto Switch if needed
+    // Auto Switch Engine
     if (best && best.channel.videoId !== activeVideoId) {
       setActiveVideoId(best.channel.videoId);
-      setIsManualOverride(false); // Reset override on system auto-select
+      setIsManualOverride(false); 
     }
   }, [evaluatedChannels, activeVideoId, isManualOverride]);
 
-  // Helper to format time remaining (e.g. 12h 34m)
+  // Format Helper
   const formatTime = (mins: number) => {
     const h = Math.floor(mins / 60);
     const m = mins % 60;
@@ -178,9 +181,7 @@ export default function HomeClient({ initialData }: HomeProps) {
     return `${m}m`;
   };
 
-  // Get active channel unified object for Luxury Bar
   const activeChannelData = evaluatedChannels.find(c => c.channel.videoId === activeVideoId);
-
 
   // =========================================================
   // UI EVENT HANDLERS & OBSERVERS
@@ -233,7 +234,7 @@ export default function HomeClient({ initialData }: HomeProps) {
     setIsChangingChannel(true);
     setActiveVideoId(newVideoId);
     setForceAutoPlay(true);
-    setIsManualOverride(true); // Tell algorithm user chose this manually
+    setIsManualOverride(true); 
     
     if (isOverlayVisible) setOverlayVisible(false);
     setTimeout(() => { setIsChangingChannel(false); }, 1000);
@@ -463,7 +464,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                             <strong className="text-white tracking-widest uppercase mr-2 flex items-center inline-flex gap-2">
                               <span className="w-2 h-2 bg-red-500 rounded-full animate-ping"></span> MATCH IS LIVE:
                             </strong>
-                            <span className="text-red-400 font-black uppercase tracking-wider bg-red-950/60 px-2.5 py-0.5 rounded border border-red-500/20 ml-1">{activeChannelData.channel.name}</span>
+                            <span className="text-red-400 font-black uppercase tracking-wider bg-red-950/60 px-2.5 py-0.5 rounded border border-red-500/20 ml-1">{activeChannelData.displayName}</span>
                             <span className="ml-2 text-gray-400">| Started {activeChannelData.minutesSinceStart} min ago.</span>
                           </p>
                        </div>
@@ -476,8 +477,8 @@ export default function HomeClient({ initialData }: HomeProps) {
                              <Zap className="text-orange-500 flex-shrink-0 animate-bounce" size={22} />
                           </div>
                           <p className="text-gray-200 text-sm md:text-base font-medium leading-snug">
-                            <strong className="text-white tracking-widest uppercase mr-2 text-orange-400">MATCH IS STARTING!</strong>
-                            Players are on the ground for <span className="text-orange-300 font-black uppercase tracking-wider bg-orange-950/60 px-2.5 py-0.5 rounded border border-orange-500/20 mx-1">{activeChannelData.channel.name}</span>. Broadcasting begins in exactly <span className="text-white font-bold">{activeChannelData.minutesRemaining} minutes!</span>
+                            <strong className="text-white tracking-widest uppercase mr-2 text-orange-400">PLAYERS ON THE PITCH!</strong>
+                            The pre-match action has started! Players are on the ground warming up for <span className="text-orange-300 font-black uppercase tracking-wider bg-orange-950/60 px-2.5 py-0.5 rounded border border-orange-500/20 mx-1">{activeChannelData.displayName}</span>. Official kickoff is in exactly <span className="text-white font-bold">{activeChannelData.minutesRemaining} minutes!</span>
                           </p>
                        </div>
                      )}
@@ -490,7 +491,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                           </div>
                           <p className="text-gray-300 text-sm md:text-base font-medium leading-snug">
                             <strong className="text-blue-300 tracking-widest uppercase mr-2">NEXT MATCH:</strong>
-                            <span className="text-blue-200 font-bold uppercase tracking-wider bg-blue-950/40 px-2.5 py-0.5 rounded border border-blue-500/20 mr-2">{activeChannelData.channel.name}</span>
+                            <span className="text-blue-200 font-bold uppercase tracking-wider bg-blue-950/40 px-2.5 py-0.5 rounded border border-blue-500/20 mr-2">{activeChannelData.displayName}</span>
                             | Starts in <span className="text-white font-bold ml-1">{formatTime(activeChannelData.minutesRemaining)}</span>. You are in the waiting room.
                           </p>
                        </div>
@@ -549,6 +550,9 @@ export default function HomeClient({ initialData }: HomeProps) {
 
                            <div className="flex flex-wrap gap-3 mt-1 relative z-10">
                              {evaluatedChannels.map((evalData, idx) => {
+                                 // HIDE EXPIRED MATCHES FROM THE SERVER LIST
+                                 if (evalData.state === 'EXPIRED') return null;
+
                                  const isActive = activeVideoId === evalData.channel.videoId;
                                  return (
                                    <button
@@ -565,10 +569,11 @@ export default function HomeClient({ initialData }: HomeProps) {
                                      {isActive ? (
                                        <Radio size={18} className="animate-pulse text-white relative z-10" />
                                      ) : (
-                                       <div className={`w-2.5 h-2.5 rounded-full ${evalData.state === 'LIVE' ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]' : evalData.state === 'SOON' ? 'bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.8)]' : 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]'} animate-pulse group-hover:bg-white group-hover:shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-colors`}></div>
+                                       <div className={`w-2.5 h-2.5 rounded-full ${evalData.state === 'LIVE' ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]' : evalData.state === 'SOON' ? 'bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.8)]' : 'bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]'} animate-pulse group-hover:bg-white group-hover:shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-colors`}></div>
                                      )}
                                      
-                                     <span className="relative z-10 tracking-wide uppercase">{evalData.channel.name}</span>
+                                     {/* 🎨 UI displays clean name + formatted time */}
+                                     <span className="relative z-10 tracking-wide uppercase">{evalData.displayName}</span>
                                      
                                      {!isActive && (
                                        <span className="absolute inset-0 border border-white/5 rounded-xl pointer-events-none"></span>
@@ -674,7 +679,6 @@ export default function HomeClient({ initialData }: HomeProps) {
     </>
   );
 }
-
 
 
 

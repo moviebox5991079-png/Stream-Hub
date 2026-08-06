@@ -1,9 +1,8 @@
-
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
 import OkRuPlayer from '@/components/OkRuPlayer'; 
-import { Play, User, Tv, X, ShieldAlert, Radio, Info, Clock, Zap } from 'lucide-react'; 
+import { Play, User, Tv, X, ShieldAlert, Radio, Clock, Zap, Timer } from 'lucide-react'; 
 import Script from 'next/script'; 
 import Head from 'next/head'; 
 
@@ -38,103 +37,154 @@ export default function HomeClient({ initialData }: HomeProps) {
   const [selectedVideo, setSelectedVideo] = useState<StreamData | null>(null);
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [isChangingChannel, setIsChangingChannel] = useState(false);
-
   const [forceAutoPlay, setForceAutoPlay] = useState(false);
   const [isOverlayVisible, setOverlayVisible] = useState(false); 
   const [showWelcomeModal, setShowWelcomeModal] = useState(true);
+
+  // ✨ NEW: Unified State Machine Data
+  const [evaluatedChannels, setEvaluatedChannels] = useState<any[]>([]);
+  const [isManualOverride, setIsManualOverride] = useState(false);
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const navbarRef = useRef<HTMLElement>(null);
   const welcomeModalRef = useRef<HTMLDivElement>(null);
 
-  // === SMART TIME & EXPIRATION MATCHER LOGIC ===
-  const getSmartActiveChannel = (channels: ChannelData[] | undefined) => {
-    if (!channels || channels.length === 0) return null;
-
-    const cleanedChannels = channels.filter(
-      (ch) => ch && ch.name && ch.name.trim() !== ''
-    );
-
-    if (cleanedChannels.length === 0) return channels[0]?.videoId || null;
-
-    const now = new Date();
-    const pktString = now.toLocaleString("en-US", { timeZone: "Asia/Karachi" });
-    const pktDate = new Date(pktString);
-    const currentMinutes = pktDate.getHours() * 60 + pktDate.getMinutes();
-
-    const parsedChannels = cleanedChannels.map((ch, index) => {
-      const timeMatch = ch.name.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
-      const durationMatch = ch.name.match(/\[(\d+)H\]/i) || ch.name.match(/\((\d+)H\)/i);
-      
-      let timeInMins = -1;
-      let durationMins = 150; 
-      
-      if (durationMatch) {
-        durationMins = parseInt(durationMatch[1], 10) * 60;
-      }
-
-      if (timeMatch) {
-        let hours = parseInt(timeMatch[1], 10);
-        const mins = parseInt(timeMatch[2], 10);
-        const period = timeMatch[3].toUpperCase();
-        
-        if (hours === 12 && period === 'AM') hours = 0;
-        if (hours < 12 && period === 'PM') hours += 12;
-        timeInMins = hours * 60 + mins;
-      }
-
-      let delta = -9999;
-      let isExpired = false;
-
-      if (timeInMins !== -1) {
-        delta = currentMinutes - timeInMins;
-        if (delta < -720) delta += 1440; 
-        if (delta > 720) delta -= 1440;
-        
-        if (delta > durationMins) {
-          isExpired = true; 
-        }
-      }
-      
-      return { ...ch, timeInMins, delta, hasPriority: ch.name.includes('!'), isExpired };
-    });
-
-    const validChannels = parsedChannels.filter(c => c.timeInMins !== -1 && !c.isExpired);
-
-    if (validChannels.length === 0) {
-      return cleanedChannels[0].videoId;
-    }
-
-    const upcoming = validChannels.filter(c => c.delta < 0).sort((a, b) => Math.abs(a.delta) - Math.abs(b.delta));
-    const live = validChannels.filter(c => c.delta >= 0).sort((a, b) => a.delta - b.delta);
-
-    if (upcoming.length > 0 && Math.abs(upcoming[0].delta) <= 10) {
-      const priorityUpcoming = upcoming.find(c => Math.abs(c.delta) <= 10 && c.hasPriority);
-      return priorityUpcoming ? priorityUpcoming.videoId : upcoming[0].videoId;
-    }
-
-    if (live.length > 0) {
-      const priorityLive = live.find(c => c.hasPriority);
-      return priorityLive ? priorityLive.videoId : live[0].videoId;
-    }
-
-    if (upcoming.length > 0) {
-      return upcoming[0].videoId;
-    }
-
-    return cleanedChannels[0].videoId;
-  };
-
+  // =========================================================
+  // 🚀 THE UNIFIED SCHEDULER ENGINE (DATE-AWARE)
+  // =========================================================
   useEffect(() => {
-    const updateChannelBasedOnTime = () => {
-      if (selectedVideo) {
-        const smartChannelId = getSmartActiveChannel(selectedVideo.channels);
-        setActiveVideoId(smartChannelId || selectedVideo.videoId);
-      }
+    if (!selectedVideo || !selectedVideo.channels) return;
+
+    const resolveChannels = () => {
+      // Step 1: Remove empty / invalid channels
+      const cleanedChannels = selectedVideo.channels!.filter(
+        (ch) => ch && ch.name && ch.name.trim() !== ''
+      );
+
+      const now = new Date();
+      // Force PKT Timezone
+      const pktString = now.toLocaleString("en-US", { timeZone: "Asia/Karachi" });
+      const nowPkt = new Date(pktString);
+
+      const evaluated = cleanedChannels.map((channel) => {
+        const timeMatch = channel.name.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+        const durationMatch = channel.name.match(/\[(\d+)H\]/i) || channel.name.match(/\((\d+)H\)/i);
+        
+        let durationMins = 150; // Default 2.5 hours
+        if (durationMatch) durationMins = parseInt(durationMatch[1], 10) * 60;
+
+        let state = 'UNKNOWN';
+        let minutesRemaining = 0;
+        let minutesSinceStart = 0;
+
+        if (timeMatch) {
+          let hours = parseInt(timeMatch[1], 10);
+          const mins = parseInt(timeMatch[2], 10);
+          const period = timeMatch[3].toUpperCase();
+          
+          if (hours === 12 && period === 'AM') hours = 0;
+          if (hours < 12 && period === 'PM') hours += 12;
+
+          // Build exact Match DateTime for TODAY
+          let matchDate = new Date(nowPkt.getTime());
+          matchDate.setHours(hours, mins, 0, 0);
+
+          // 🐛 MIDNIGHT BUG FIX: DATE-AWARE LOGIC
+          // Agar match 12:00 AM ka hai aur current time 11:00 AM hai, 
+          // tou difference -11 hours hoga. If diff is < -12 hours, it means match NEXT DAY ka hai!
+          let diffMs = matchDate.getTime() - nowPkt.getTime();
+          if (diffMs < -12 * 60 * 60 * 1000) {
+            matchDate.setDate(matchDate.getDate() + 1); // +1 Day
+            diffMs = matchDate.getTime() - nowPkt.getTime();
+          }
+
+          // Exact minute difference
+          const diffMins = Math.round(diffMs / 60000);
+
+          if (diffMins > 10) {
+            state = 'WAITING';
+            minutesRemaining = diffMins;
+          } else if (diffMins > 0 && diffMins <= 10) {
+            state = 'SOON';
+            minutesRemaining = diffMins;
+          } else if (diffMins <= 0 && diffMins >= -durationMins) {
+            state = 'LIVE';
+            minutesSinceStart = Math.abs(diffMins);
+          } else {
+            state = 'EXPIRED'; // Over 150 mins
+          }
+        }
+
+        return { 
+          channel, 
+          state, 
+          minutesRemaining, 
+          minutesSinceStart, 
+          hasPriority: channel.name.includes('!') 
+        };
+      });
+
+      setEvaluatedChannels(evaluated);
     };
-    updateChannelBasedOnTime();
+
+    // Run immediately, then run in a cycle every 60 seconds
+    resolveChannels();
+    const intervalId = setInterval(resolveChannels, 60000);
+    return () => clearInterval(intervalId);
   }, [selectedVideo]);
 
+  // =========================================================
+  // 🎯 THE AUTO-SELECTION ALGORITHM
+  // =========================================================
+  useEffect(() => {
+    if (evaluatedChannels.length === 0) return;
+
+    // Check current active channel
+    const currentActive = evaluatedChannels.find(c => c.channel.videoId === activeVideoId);
+
+    // Agar user ne manually click kiya hai aur match EXPIRED nahi hua, tou stream switch na karo.
+    if (isManualOverride && currentActive && currentActive.state !== 'EXPIRED') {
+      return; 
+    }
+
+    // Filter out EXPIRED
+    const valid = evaluatedChannels.filter(c => c.state !== 'EXPIRED' && c.state !== 'UNKNOWN');
+    if (valid.length === 0) return; // All dead
+
+    // Separate by state
+    const soon = valid.filter(c => c.state === 'SOON').sort((a, b) => a.minutesRemaining - b.minutesRemaining);
+    const live = valid.filter(c => c.state === 'LIVE').sort((a, b) => a.minutesSinceStart - b.minutesSinceStart);
+    const waiting = valid.filter(c => c.state === 'WAITING').sort((a, b) => a.minutesRemaining - b.minutesRemaining);
+
+    // Apply Priority Rules (SOON > LIVE > WAITING)
+    let best;
+    if (soon.length > 0) best = soon.find(c => c.hasPriority) || soon[0];
+    else if (live.length > 0) best = live.find(c => c.hasPriority) || live[0];
+    else if (waiting.length > 0) best = waiting[0];
+    else best = valid[0];
+
+    // Auto Switch if needed
+    if (best && best.channel.videoId !== activeVideoId) {
+      setActiveVideoId(best.channel.videoId);
+      setIsManualOverride(false); // Reset override on system auto-select
+    }
+  }, [evaluatedChannels, activeVideoId, isManualOverride]);
+
+  // Helper to format time remaining (e.g. 12h 34m)
+  const formatTime = (mins: number) => {
+    const h = Math.floor(mins / 60);
+    const m = mins % 60;
+    if (h > 0) return `${h}h ${m}m`;
+    return `${m}m`;
+  };
+
+  // Get active channel unified object for Luxury Bar
+  const activeChannelData = evaluatedChannels.find(c => c.channel.videoId === activeVideoId);
+
+
+  // =========================================================
+  // UI EVENT HANDLERS & OBSERVERS
+  // =========================================================
   useEffect(() => {
     const checkForAd = () => {
       const allElements = document.body.getElementsByTagName('*');
@@ -172,11 +222,8 @@ export default function HomeClient({ initialData }: HomeProps) {
   }, [isOverlayVisible]);
 
   useEffect(() => {
-    if (showWelcomeModal) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
+    if (showWelcomeModal) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = 'auto';
     return () => { document.body.style.overflow = 'auto'; };
   }, [showWelcomeModal]);
 
@@ -186,9 +233,9 @@ export default function HomeClient({ initialData }: HomeProps) {
     setIsChangingChannel(true);
     setActiveVideoId(newVideoId);
     setForceAutoPlay(true);
+    setIsManualOverride(true); // Tell algorithm user chose this manually
     
     if (isOverlayVisible) setOverlayVisible(false);
-    
     setTimeout(() => { setIsChangingChannel(false); }, 1000);
   };
 
@@ -198,43 +245,6 @@ export default function HomeClient({ initialData }: HomeProps) {
     }
     return 'https://via.placeholder.com/800x450.png?text=No+Thumbnail'; 
   };
-
-  // ✨ NEW: Helper function to determine dynamic state of the active channel ✨
-  const getActiveChannelStatus = () => {
-    if (!selectedVideo || !selectedVideo.channels) return null;
-    const channel = selectedVideo.channels.find(c => c.videoId === activeVideoId);
-    if (!channel || !channel.name) return null;
-
-    let status = 'WAITING'; // Default
-    const timeMatch = channel.name.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
-    
-    if (timeMatch) {
-      const now = new Date();
-      const pktString = now.toLocaleString("en-US", { timeZone: "Asia/Karachi" });
-      const pktDate = new Date(pktString);
-      const currentMinutes = pktDate.getHours() * 60 + pktDate.getMinutes();
-
-      let hours = parseInt(timeMatch[1], 10);
-      const mins = parseInt(timeMatch[2], 10);
-      const period = timeMatch[3].toUpperCase();
-      if (hours === 12 && period === 'AM') hours = 0;
-      if (hours < 12 && period === 'PM') hours += 12;
-      let timeInMins = hours * 60 + mins;
-
-      let delta = currentMinutes - timeInMins;
-      if (delta < -720) delta += 1440;
-      if (delta > 720) delta -= 1440;
-
-      if (delta >= 0) {
-        status = 'LIVE';
-      } else if (delta >= -10) {
-        status = 'SOON';
-      }
-    }
-    return { channel, status };
-  };
-
-  const activeChannelData = getActiveChannelStatus();
 
   return (
     <>
@@ -440,8 +450,10 @@ export default function HomeClient({ initialData }: HomeProps) {
                ) : (
                  <div className="mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
                      
-                     {/* ✨ BEAUTIFUL DYNAMIC LUXURY STATUS BAR (NEW) ✨ */}
-                     {activeChannelData && activeChannelData.status === 'LIVE' && (
+                     {/* =========================================================
+                         ✨ UNIFIED DYNAMIC LUXURY STATUS BAR ✨ 
+                         ========================================================= */}
+                     {activeChannelData && activeChannelData.state === 'LIVE' && (
                        <div className="bg-gradient-to-r from-red-900/40 via-[#1a0505] to-black border border-red-500/40 p-3 sm:p-4 rounded-2xl mb-4 flex items-center gap-3 md:gap-4 shadow-[0_0_30px_rgba(220,38,38,0.2)] animate-in slide-in-from-top-4 duration-500 backdrop-blur-md relative overflow-hidden">
                           <div className="absolute top-0 left-0 w-1 h-full bg-red-500 animate-pulse"></div>
                           <div className="bg-red-500/20 p-2.5 rounded-full border border-red-500/40 shadow-[0_0_15px_rgba(220,38,38,0.4)]">
@@ -451,33 +463,35 @@ export default function HomeClient({ initialData }: HomeProps) {
                             <strong className="text-white tracking-widest uppercase mr-2 flex items-center inline-flex gap-2">
                               <span className="w-2 h-2 bg-red-500 rounded-full animate-ping"></span> MATCH IS LIVE:
                             </strong>
-                            Broadcasting <span className="text-red-400 font-black uppercase tracking-wider bg-red-950/60 px-2.5 py-0.5 rounded border border-red-500/20 ml-1">{activeChannelData.channel.name}</span>
+                            <span className="text-red-400 font-black uppercase tracking-wider bg-red-950/60 px-2.5 py-0.5 rounded border border-red-500/20 ml-1">{activeChannelData.channel.name}</span>
+                            <span className="ml-2 text-gray-400">| Started {activeChannelData.minutesSinceStart} min ago.</span>
                           </p>
                        </div>
                      )}
 
-                     {activeChannelData && activeChannelData.status === 'SOON' && (
+                     {activeChannelData && activeChannelData.state === 'SOON' && (
                        <div className="bg-gradient-to-r from-orange-900/40 via-[#1a0a05] to-black border border-orange-500/40 p-3 sm:p-4 rounded-2xl mb-4 flex items-center gap-3 md:gap-4 shadow-[0_0_30px_rgba(249,115,22,0.2)] animate-in slide-in-from-top-4 duration-500 backdrop-blur-md relative overflow-hidden">
                           <div className="absolute top-0 left-0 w-1 h-full bg-orange-500 animate-pulse"></div>
                           <div className="bg-orange-500/20 p-2.5 rounded-full border border-orange-500/40 shadow-[0_0_15px_rgba(249,115,22,0.4)]">
                              <Zap className="text-orange-500 flex-shrink-0 animate-bounce" size={22} />
                           </div>
                           <p className="text-gray-200 text-sm md:text-base font-medium leading-snug">
-                            <strong className="text-white tracking-widest uppercase mr-2 text-orange-400">STARTING SHORTLY:</strong>
-                            Players are ready for <span className="text-orange-300 font-black uppercase tracking-wider bg-orange-950/60 px-2.5 py-0.5 rounded border border-orange-500/20 ml-1">{activeChannelData.channel.name}</span>. The stream will begin in just a few minutes!
+                            <strong className="text-white tracking-widest uppercase mr-2 text-orange-400">MATCH IS STARTING!</strong>
+                            Players are on the ground for <span className="text-orange-300 font-black uppercase tracking-wider bg-orange-950/60 px-2.5 py-0.5 rounded border border-orange-500/20 mx-1">{activeChannelData.channel.name}</span>. Broadcasting begins in exactly <span className="text-white font-bold">{activeChannelData.minutesRemaining} minutes!</span>
                           </p>
                        </div>
                      )}
 
-                     {activeChannelData && activeChannelData.status === 'WAITING' && (
+                     {activeChannelData && activeChannelData.state === 'WAITING' && (
                        <div className="bg-gradient-to-r from-blue-900/30 via-[#050a1a] to-black border border-blue-500/30 p-3 sm:p-4 rounded-2xl mb-4 flex items-center gap-3 md:gap-4 shadow-[0_0_30px_rgba(59,130,246,0.15)] animate-in slide-in-from-top-4 duration-500 backdrop-blur-md relative overflow-hidden">
                           <div className="absolute top-0 left-0 w-1 h-full bg-blue-500 opacity-50"></div>
                           <div className="bg-blue-500/10 p-2.5 rounded-full border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
-                             <Clock className="text-blue-400 flex-shrink-0 animate-pulse" size={22} />
+                             <Timer className="text-blue-400 flex-shrink-0 animate-pulse" size={22} />
                           </div>
                           <p className="text-gray-300 text-sm md:text-base font-medium leading-snug">
-                            <strong className="text-blue-300 tracking-widest uppercase mr-2">WAITING ROOM:</strong>
-                            System connected for <span className="text-blue-200 font-bold uppercase tracking-wider bg-blue-950/40 px-2.5 py-0.5 rounded border border-blue-500/20 ml-1">{activeChannelData.channel.name}</span>. Stream will auto-start at the scheduled time.
+                            <strong className="text-blue-300 tracking-widest uppercase mr-2">NEXT MATCH:</strong>
+                            <span className="text-blue-200 font-bold uppercase tracking-wider bg-blue-950/40 px-2.5 py-0.5 rounded border border-blue-500/20 mr-2">{activeChannelData.channel.name}</span>
+                            | Starts in <span className="text-white font-bold ml-1">{formatTime(activeChannelData.minutesRemaining)}</span>. You are in the waiting room.
                           </p>
                        </div>
                      )}
@@ -514,7 +528,7 @@ export default function HomeClient({ initialData }: HomeProps) {
                          </h1>
                        </div>
 
-                       {selectedVideo.channels && selectedVideo.channels.length > 0 && (
+                       {evaluatedChannels.length > 0 && (
                          <div className="mt-4 mb-4 p-5 bg-[#0f0f0f] border border-white/10 rounded-2xl flex flex-col gap-4 shadow-[0_10px_30px_rgba(0,0,0,0.8)] relative overflow-hidden">
                            
                            <div className="absolute -top-10 -right-10 w-32 h-32 bg-fuchsia-600/10 blur-3xl rounded-full pointer-events-none"></div>
@@ -534,14 +548,12 @@ export default function HomeClient({ initialData }: HomeProps) {
                            </div>
 
                            <div className="flex flex-wrap gap-3 mt-1 relative z-10">
-                             {selectedVideo.channels
-                               .filter(channel => channel && channel.name && channel.name.trim() !== '')
-                               .map((channel, idx) => {
-                                 const isActive = activeVideoId === channel.videoId;
+                             {evaluatedChannels.map((evalData, idx) => {
+                                 const isActive = activeVideoId === evalData.channel.videoId;
                                  return (
                                    <button
                                      key={idx}
-                                     onClick={() => handleChannelChange(channel.videoId)}
+                                     onClick={() => handleChannelChange(evalData.channel.videoId)}
                                      className={`relative px-6 py-3 rounded-xl text-sm sm:text-base font-black transition-all duration-300 flex items-center gap-3 overflow-hidden group ${
                                        isActive
                                          ? 'text-white shadow-[0_0_20px_rgba(255,255,255,0.2)] border-0 scale-105 z-10 animate-rainbow'
@@ -553,10 +565,10 @@ export default function HomeClient({ initialData }: HomeProps) {
                                      {isActive ? (
                                        <Radio size={18} className="animate-pulse text-white relative z-10" />
                                      ) : (
-                                       <div className="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)] animate-pulse group-hover:bg-white group-hover:shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-colors"></div>
+                                       <div className={`w-2.5 h-2.5 rounded-full ${evalData.state === 'LIVE' ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]' : evalData.state === 'SOON' ? 'bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.8)]' : 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]'} animate-pulse group-hover:bg-white group-hover:shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-colors`}></div>
                                      )}
                                      
-                                     <span className="relative z-10 tracking-wide uppercase">{channel.name}</span>
+                                     <span className="relative z-10 tracking-wide uppercase">{evalData.channel.name}</span>
                                      
                                      {!isActive && (
                                        <span className="absolute inset-0 border border-white/5 rounded-xl pointer-events-none"></span>
@@ -662,7 +674,6 @@ export default function HomeClient({ initialData }: HomeProps) {
     </>
   );
 }
-
 
 
 

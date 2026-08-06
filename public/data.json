@@ -54,7 +54,7 @@
     {
       "videoTitle": "Pak vs West Test Series 2026",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "Pak-vs-West-test",
       "channels": [
         {
@@ -94,19 +94,19 @@
     {
       "videoTitle": "Club friendlies 2026",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "Clubfriendly",
       "channels": [
         {
-          "name": "Manchester United vs Atlético Madrid - Live 🔴 - 1 Aug 2026 6:00 pm",
+          "name": "Fiorentina vs Deportivo A Coruña - 11:00 PM||S=2026-08-06T23:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": " Real Madrid vs Fiorentina - Live 🔴 - 1 Aug 2026 9:00 pm",
+          "name": "Monaco vs Getafe - 11:00 PM||S=2026-08-06T23:00:00+05:00||E=3h",
           "videoId": "15255038074475"
         },
         {
-          "name": "Girona vs Arsenal - Live 🔴 - 1 Aug 2026 11:00 pm",
+          "name": "",
           "videoId": "15255045480043"
         },
         {
@@ -166,15 +166,15 @@
     {
       "videoTitle": "Club Friendlies 2026",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "Clubfriendly",
       "channels": [
         {
-          "name": "",
+          "name": "Wolves vs Port Vale - 11:45 PM||S=2026-08-06T23:45:00+05:00||E=3h",
           "videoId": "14204232736303"
         },
         {
-          "name": "",
+          "name": "Wycombe vs Stevenage - 11:45 PM||S=2026-08-06T23:45:00+05:00||E=3h",
           "videoId": "14204288179759"
         },
         {

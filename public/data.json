@@ -94,19 +94,19 @@
     {
       "videoTitle": "Club friendlies 2026",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "Clubfriendly",
       "channels": [
         {
-          "name": "Fiorentina vs Deportivo A Coruña - 11:00 PM||S=2026-08-06T23:00:00+05:00||E=3h",
+          "name": "Aston Villa vs Bayern - 5:00 pm - Today||S=2026-08-07T17:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": "Monaco vs Getafe - 11:00 PM||S=2026-08-06T23:00:00+05:00||E=3h",
+          "name": "Fulham vs Palace - 10:00 pm - Today||S=2026-08-07T22:00:00+05:00||E=3h",
           "videoId": "15255038074475"
         },
         {
-          "name": "",
+          "name": "Ceuta vs Málaga - 10:00 pm - Today||S=2026-08-07T22:00:00+05:00||E=3h",
           "videoId": "15255045480043"
         },
         {

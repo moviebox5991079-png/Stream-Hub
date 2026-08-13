@@ -28,17 +28,18 @@
     "Mlb-2026": "https://img.mlbstatic.com/mlb-images/image/upload/t_16x9/t_w1024/mlb/nl6kkskbbdmlrdcw4ais",
     "Indvszimbq-t20": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_iC7AKmKBsZNsvmw66ek1_iGQ8yLyzkfQ4AbH2Ax6B9lP0EzJaemUSno&s=10",
     "Pak-vs-West-test": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSes36QHAjxnDt1Nrh6pu9zjTef40598PIa0YwKWn0s-R9-CNWHXXidzck&s=10",
-    "Clubfriendly": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ8mCNHLv86nWMywMZLgoUSTm0N_rDDZ0Baky9mPPkK9pEzSmfufVpgxM&s=10"
+    "Clubfriendly": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ8mCNHLv86nWMywMZLgoUSTm0N_rDDZ0Baky9mPPkK9pEzSmfufVpgxM&s=10",
+    "Pakistan-national-champions-cup": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAWhy0iHRlEE21iuB8V_V6wrPuTw2ijXbcjbgypMMEew&s=10"
   },
   "streams": [
     {
-      "videoTitle": "The Hundred Men's & Women's",
+      "videoTitle": "Pakistan National Champions Cup 2026",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "The-hundred-mens-and-women-cricket-2026",
+      "isLive": true,
+      "activeThumbnail": "Pakistan-national-champions-cup",
       "channels": [
         {
-          "name": "Southern Brave  vs MI London 🔴 - Today - (Women 7:00 pm) and ( Men 10:30 pm)",
+          "name": "Pak-Blues vs PAK-Whites - Live ||S=2026-08-13T15:00:00+05:00||E=10h",
           "videoId": "15254238731883"
         },
         {
@@ -94,7 +95,7 @@
     {
       "videoTitle": "Club friendlies 2026",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "Clubfriendly",
       "channels": [
         {
@@ -126,7 +127,7 @@
     {
       "videoTitle": "UEFA Super Cup - Final - Upcoming 13 Aug 2026",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "UEFA Super Cup",
       "channels": [
         {

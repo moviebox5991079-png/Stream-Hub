@@ -127,21 +127,21 @@
       ]
     },
     {
-      "videoTitle": "UEFA Super Cup - Final - Upcoming 13 Aug 2026",
+      "videoTitle": "Club Friendly",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "UEFA Super Cup",
+      "isLive": true,
+      "activeThumbnail": "Clubfriendly",
       "channels": [
         {
-          "name": "PSG vs Aston Villa - 12:00 AM||S=2026-08-13T00:00:00+05:00||E=5h",
+          "name": "Marseille vs Atletico Madrid - 8:30 PM||S=2026-08-14T20:30:00+05:00||E=3h",
           "videoId": "15273689226859"
         },
         {
-          "name": "",
+          "name": "Coventry vs Monaco - 11:30 PM||S=2026-08-14T23:30:00+05:00||E=3h",
           "videoId": "15273713933931"
         },
         {
-          "name": "",
+          "name": "Atalanta vs Athletic Club - 11:45 PM||S=2026-08-14T23:45:00+05:00||E=3h",
           "videoId": "15273722257003"
         },
         {

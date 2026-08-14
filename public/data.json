@@ -30,7 +30,8 @@
     "Pak-vs-West-test": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSes36QHAjxnDt1Nrh6pu9zjTef40598PIa0YwKWn0s-R9-CNWHXXidzck&s=10",
     "Clubfriendly": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ8mCNHLv86nWMywMZLgoUSTm0N_rDDZ0Baky9mPPkK9pEzSmfufVpgxM&s=10",
     "Pakistan-national-champions-cup": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAWhy0iHRlEE21iuB8V_V6wrPuTw2ijXbcjbgypMMEew&s=10",
-    "Aus vs bang - test": "https://img1.hscicdn.com/image/upload/f_auto,t_ds_w_800,q_50/lsci/db/PICTURES/CMS/421000/421004.4.jpg"
+    "Aus vs bang - test": "https://img1.hscicdn.com/image/upload/f_auto,t_ds_w_800,q_50/lsci/db/PICTURES/CMS/421000/421004.4.jpg",
+    "italy-coppa italia": "https://www.tln.ca/wp-content/uploads/show-thumbnails/Soccer/Coppa_italia_featured_1200x800.webp"
   },
   "streams": [
     {
@@ -94,33 +95,33 @@
       ]
     },
     {
-      "videoTitle": "Club friendlies 2026",
+      "videoTitle": "Italy - Coppa Italia",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "Clubfriendly",
+      "isLive": true,
+      "activeThumbnail": "italy-coppa italia",
       "channels": [
         {
-          "name": "Everton vs Newcastle - 9:15 PM||S=2026-08-12T21:15:00+05:00||E=3h",
+          "name": "Parma vs Catania - 9:00pm||S=2026-08-14T21:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": "Arsenal vs Como - 11:30 PM||S=2026-08-12T23:30:00+05:00||E=3h",
+          "name": "Cagliari vs Arezzo - 9:30pm||S=2026-08-14T21:30:00+05:00||E=3h",
           "videoId": "15255038074475"
         },
         {
-          "name": "Man United vs Leeds - 11:30 PM||S=2026-08-12T23:30:00+05:00||E=3h",
+          "name": "Monza vs Avellino - 11:45pm||S=2026-08-14T23:45:00+05:00||E=3h",
           "videoId": "15255045480043"
         },
         {
-          "name": "Nottm Forest vs Leverkusen - 11:45 PM||S=2026-08-12T23:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255208599147"
         },
         {
-          "name": "Deportivo A Coruña vs Real Madrid - 12:00 AM ||S=2026-08-13T00:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255217708651"
         },
         {
-          "name": "Napoli vs Aris Thessaloniki - 12:00 AM ||S=2026-08-13T00:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255227670123"
         }
       ]

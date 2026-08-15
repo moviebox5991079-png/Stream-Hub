@@ -33,17 +33,18 @@
     "Aus vs bang - test": "https://img1.hscicdn.com/image/upload/f_auto,t_ds_w_800,q_50/lsci/db/PICTURES/CMS/421000/421004.4.jpg",
     "italy-coppa italia": "https://www.tln.ca/wp-content/uploads/show-thumbnails/Soccer/Coppa_italia_featured_1200x800.webp",
     "ind vs srilanka test": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2bj3S6Oecp3kKRs2x-0zUtTGGqPTDQZyH23XsbGao8g&s=10",
-    "laliag-2026 to 2027": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0fOIw94hyiKKF8WxLpTHMy2A7eXTlM9rBlmr8mEcOZA&s"
+    "laliag-2026 to 2027": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0fOIw94hyiKKF8WxLpTHMy2A7eXTlM9rBlmr8mEcOZA&s",
+    "ufc-islam": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR_aii--b8Qas-gNVJM1dA78OG7H0MIMVfnLFcu-5kwg&s"
   },
   "streams": [
     {
-      "videoTitle": "Pakistan National Champions Cup 2026",
+      "videoTitle": "UFC",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "Pakistan-national-champions-cup",
+      "isLive": true,
+      "activeThumbnail": "ufc-islam",
       "channels": [
         {
-          "name": "Pakistan Gold vs Pakistan Greens - 03:00 PM - Today||S=2026-08-14T15:00:00+05:00||E=10h",
+          "name": "Islam Makhachev vs Ian Machado Garry - 6:00 am ||S=2026-08-16T06:00:00+05:00||E=6h",
           "videoId": "15254238731883"
         },
         {
@@ -79,7 +80,7 @@
     {
       "videoTitle": "india vs sri lanka",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "ind vs srilanka test",
       "channels": [
         {

@@ -32,7 +32,8 @@
     "Pakistan-national-champions-cup": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAWhy0iHRlEE21iuB8V_V6wrPuTw2ijXbcjbgypMMEew&s=10",
     "Aus vs bang - test": "https://img1.hscicdn.com/image/upload/f_auto,t_ds_w_800,q_50/lsci/db/PICTURES/CMS/421000/421004.4.jpg",
     "italy-coppa italia": "https://www.tln.ca/wp-content/uploads/show-thumbnails/Soccer/Coppa_italia_featured_1200x800.webp",
-    "ind vs srilanka test": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2bj3S6Oecp3kKRs2x-0zUtTGGqPTDQZyH23XsbGao8g&s=10"
+    "ind vs srilanka test": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2bj3S6Oecp3kKRs2x-0zUtTGGqPTDQZyH23XsbGao8g&s=10",
+    "laliag-2026 to 2027": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0fOIw94hyiKKF8WxLpTHMy2A7eXTlM9rBlmr8mEcOZA&s"
   },
   "streams": [
     {
@@ -96,21 +97,21 @@
       ]
     },
     {
-      "videoTitle": "Italy - Coppa Italia",
+      "videoTitle": " LaLiga",
       "videoId": "",
       "isLive": false,
-      "activeThumbnail": "italy-coppa italia",
+      "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Parma vs Catania - 9:00pm||S=2026-08-14T21:00:00+05:00||E=3h",
+          "name": "Deportivo Alaves vs Getafe - 22:30||S=2026-08-15T19:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": "Monza vs Avellino - 11:45pm||S=2026-08-14T23:45:00+05:00||E=3h",
+          "name": "Sevilla vs Rayo Vallecano ||S=2026-08-16T19:00:00+05:00||E=3h",
           "videoId": "15255038074475"
         },
         {
-          "name": "Fiorentina vs Benevento - 12:15 AM ||S=2026-08-15T00:15:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255045480043"
         },
         {

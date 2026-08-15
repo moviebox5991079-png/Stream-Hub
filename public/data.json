@@ -170,7 +170,7 @@
     {
       "videoTitle": "Club Friendlies - Today Matches Part 2",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "Clubfriendly",
       "channels": [
         {
@@ -216,33 +216,33 @@
       ]
     },
     {
-      "videoTitle": "Fifa-Friendly-Part2",
+      "videoTitle": "Italy-Coppa Italia",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "fifaFriendlies",
+      "isLive": true,
+      "activeThumbnail": "italy-coppa italia",
       "channels": [
         {
-          "name": "Bolivia vs Scotland - 1:00 AM - - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "name": "Catanzaro vs Südtirol - 9:00pm||S=2026-08-15T21:00:00+05:00||E=3h",
           "videoId": "14204490948143"
         },
         {
-          "name": "England vs New Zealand - 1:00 AM - - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "name": "Udinese vs Calcio Padova - 9:30pm||S=2026-08-15T21:30:00+05:00||E=3h",
           "videoId": "14204506742319"
         },
         {
-          "name": "Qatar vs El Salvador - 1:00 AM - - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "name": "Venezia vs Modena - 11:45pm||S=2026-08-15T23:45:00+05:00||E=3h",
           "videoId": "14204523322927"
         },
         {
-          "name": "Brazil vs Egypt - 3:00 AM - - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "name": "Torino vs Carrarese ||S=2026-08-16T19:00:00+05:00||E=3h",
           "videoId": "14204540034607"
         },
         {
-          "name": "Turkiye vs Venezuela - 3:00 AM - - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "name": "",
           "videoId": "14204555304495"
         },
         {
-          "name": "Argentina vs Honduras - 5:00 AM - - 🔴 - 6 or 7 June Matches - Asian Time Standard",
+          "name": "",
           "videoId": "14204565200431"
         },
         {
@@ -258,7 +258,7 @@
           "videoId": "14204602621487"
         },
         {
-          "name": "Match-10",
+          "name": "",
           "videoId": "14206184136239"
         }
       ]

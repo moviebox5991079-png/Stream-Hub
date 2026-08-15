@@ -98,7 +98,7 @@
     {
       "videoTitle": "Italy - Coppa Italia",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "italy-coppa italia",
       "channels": [
         {
@@ -168,37 +168,37 @@
       ]
     },
     {
-      "videoTitle": "Club Friendlies 2026",
+      "videoTitle": "Club Friendlies - Today Matches Part 2",
       "videoId": "",
       "isLive": false,
       "activeThumbnail": "Clubfriendly",
       "channels": [
         {
-          "name": "Wolves vs Port Vale - 11:45 PM||S=2026-08-06T23:45:00+05:00||E=3h",
+          "name": "Werder Bremen vs Auxerre - 5:30pm||S=2026-08-15T17:30:00+05:00||E=3h",
           "videoId": "14204232736303"
         },
         {
-          "name": "Wycombe vs Stevenage - 11:45 PM||S=2026-08-06T23:45:00+05:00||E=3h",
+          "name": "Elversberg vs Lorient - 6:30pm||S=2026-08-15T18:30:00+05:00||E=3h",
           "videoId": "14204288179759"
         },
         {
-          "name": "",
+          "name": "Borussia M'gladbach vs Aston Villa - 6:30pm||S=2026-08-15T18:30:00+05:00||E=3h",
           "videoId": "14204319768111"
         },
         {
-          "name": "",
+          "name": "Brentford vs Eintracht Frankfurt - 7:00pm||S=2026-08-15T19:00:00+05:00||E=3h",
           "videoId": "14204331957807"
         },
         {
-          "name": "",
+          "name": "Newcastle United vs Bayer Leverkusen - 7:00pm||S=2026-08-15T19:00:00+05:00||E=3h",
           "videoId": "14204346572335"
         },
         {
-          "name": "",
+          "name": "Fulham vs Stuttgart - 8:00pm||S=2026-08-15T20:00:00+05:00||E=3h",
           "videoId": "14204361252399"
         },
         {
-          "name": "",
+          "name": "Borussia Dortmund vs Roma - 8:30pm||S=2026-08-15T20:30:00+05:00||E=3h",
           "videoId": "14204370492975"
         },
         {
@@ -206,11 +206,11 @@
           "videoId": "14204395527727"
         },
         {
-          "name": "Match 1||S=2026-08-06T12:40:00+05:00||E=3h",
+          "name": "",
           "videoId": "14204411387439"
         },
         {
-          "name": "Match 2||S=2026-08-06T01:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "14204424691247"
         }
       ]

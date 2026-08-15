@@ -31,13 +31,14 @@
     "Clubfriendly": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ8mCNHLv86nWMywMZLgoUSTm0N_rDDZ0Baky9mPPkK9pEzSmfufVpgxM&s=10",
     "Pakistan-national-champions-cup": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAWhy0iHRlEE21iuB8V_V6wrPuTw2ijXbcjbgypMMEew&s=10",
     "Aus vs bang - test": "https://img1.hscicdn.com/image/upload/f_auto,t_ds_w_800,q_50/lsci/db/PICTURES/CMS/421000/421004.4.jpg",
-    "italy-coppa italia": "https://www.tln.ca/wp-content/uploads/show-thumbnails/Soccer/Coppa_italia_featured_1200x800.webp"
+    "italy-coppa italia": "https://www.tln.ca/wp-content/uploads/show-thumbnails/Soccer/Coppa_italia_featured_1200x800.webp",
+    "ind vs srilanka test": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2bj3S6Oecp3kKRs2x-0zUtTGGqPTDQZyH23XsbGao8g&s=10"
   },
   "streams": [
     {
       "videoTitle": "Pakistan National Champions Cup 2026",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "Pakistan-national-champions-cup",
       "channels": [
         {
@@ -57,7 +58,7 @@
     {
       "videoTitle": "Aus vs Bangladesh - Cricket ",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "Aus vs bang - test",
       "channels": [
         {
@@ -75,21 +76,21 @@
       ]
     },
     {
-      "videoTitle": "sports-3",
+      "videoTitle": "india vs sri lanka",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "SerieA",
+      "isLive": true,
+      "activeThumbnail": "ind vs srilanka test",
       "channels": [
         {
-          "name": "Bologna vs Inter - 9:00 PM - 23/05/2026",
+          "name": "India vs Sri Lanka Test match - 9:30 AM||S=2026-08-15T09:30:00+05:00||E=10h",
           "videoId": "15254341885547"
         },
         {
-          "name": "Lazio vs Pisa - 11:45 PM - 23/05/2026",
+          "name": "",
           "videoId": "15254357089899"
         },
         {
-          "name": "Channel-3",
+          "name": "",
           "videoId": "15254367510123"
         }
       ]

@@ -99,7 +99,7 @@
     {
       "videoTitle": " LaLiga",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {

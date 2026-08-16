@@ -34,7 +34,9 @@
     "italy-coppa italia": "https://www.tln.ca/wp-content/uploads/show-thumbnails/Soccer/Coppa_italia_featured_1200x800.webp",
     "ind vs srilanka test": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2bj3S6Oecp3kKRs2x-0zUtTGGqPTDQZyH23XsbGao8g&s=10",
     "laliag-2026 to 2027": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0fOIw94hyiKKF8WxLpTHMy2A7eXTlM9rBlmr8mEcOZA&s",
-    "ufc-islam": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR_aii--b8Qas-gNVJM1dA78OG7H0MIMVfnLFcu-5kwg&s"
+    "ufc-islam": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR_aii--b8Qas-gNVJM1dA78OG7H0MIMVfnLFcu-5kwg&s",
+    "arsenal vs man city": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJCf578ZKxFkHOsD29ZuaoNJ6YdprDeJhehCL68h5fCQ&s=10",
+    "psg vs lens": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0TMy0_j3iA_afU0Mzhyr9Y8jO6D0J93lfZrrwTGamzg&s=10"
   },
   "streams": [
     {
@@ -58,13 +60,13 @@
       ]
     },
     {
-      "videoTitle": "Aus vs Bangladesh - Cricket ",
+      "videoTitle": "Arsenal vs Man City",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "Aus vs bang - test",
+      "isLive": true,
+      "activeThumbnail": "arsenal vs man city",
       "channels": [
         {
-          "name": "Australia vs Bangladesh - Day 2 ||S=2026-08-14T05:00:00+05:00||E=8h",
+          "name": "Arsenal vs Man City - 7:00 pm ||S=2026-08-16T19:00:00+05:00||E=5h",
           "videoId": "15254299352683"
         },
         {
@@ -78,13 +80,13 @@
       ]
     },
     {
-      "videoTitle": "india vs sri lanka",
+      "videoTitle": "PSG vs Lens - Final",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "ind vs srilanka test",
+      "isLive": true,
+      "activeThumbnail": "psg vs lens",
       "channels": [
         {
-          "name": "India vs Sri Lanka Test match - 9:30 AM||S=2026-08-15T09:30:00+05:00||E=10h",
+          "name": "Lens vs PSG - 11:45 pm ||S=2026-08-16T23:45:00+05:00||E=5h",
           "videoId": "15254341885547"
         },
         {
@@ -104,11 +106,11 @@
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Alavés vs Getafe - 10:30 pm ||S=2026-08-15T22:30:00+05:00||E=3h",
+          "name": "Racing Santander vs Villarreal - 8:00 pm||S=2026-08-16T20:00:00+05:00||E=4h",
           "videoId": "15255022345835"
         },
         {
-          "name": "Sevilla vs Rayo Vallecano - 12:30 am||S=2026-08-16T00:30:00+05:00||E=3h",
+          "name": "Espanyol vs Levante - 10:00 pm||S=2026-08-16T22:00:00+05:00||E=4h",
           "videoId": "15255038074475"
         },
         {
@@ -130,29 +132,29 @@
       ]
     },
     {
-      "videoTitle": "Club Friendly - Today Macthes Part 1",
+      "videoTitle": "Club Friendly",
       "videoId": "",
       "isLive": true,
       "activeThumbnail": "Clubfriendly",
       "channels": [
         {
-          "name": "Chelsea vs Real Sociedad - 6:00pm||S=2026-08-15T18:00:00+05:00||E=3h",
+          "name": "Nottingham Forest vs Brest - 6:00pm||S=2026-08-16T18:00:00+05:00||E=4h",
           "videoId": "15273689226859"
         },
         {
-          "name": "Bayern München vs RB Leipzig - 6:30pm||S=2026-08-15T18:30:00+05:00||E=3h",
+          "name": "Basel vs Barcelona - 7:30pm||S=2026-08-16T19:30:00+05:00||E=4h",
           "videoId": "15273713933931"
         },
         {
-          "name": "Tottenham Hotspur vs Hoffenheim - 7:00pm||S=2026-08-15T19:00:00+05:00||E=3h",
+          "name": "Newcastle United vs Strasbourg - 8:00pm||S=2026-08-16T20:00:00+05:00||E=4h",
           "videoId": "15273722257003"
         },
         {
-          "name": "Manchester United vs Milan - 7:45pm||S=2026-08-15T19:45:00+05:00||E=3h",
+          "name": "Real Madrid vs Schalke - 8:00pm||S=2026-08-16T20:00:00+05:00||E=4h",
           "videoId": "15273739624043"
         },
         {
-          "name": "Internazionale vs Real Betis - 10:30pm||S=2026-08-15T22:30:00+05:00||E=3h",
+          "name": "Liverpool vs Como - 10:00pm||S=2026-08-16T22:00:00+05:00||E=4h",
           "videoId": "15273750175339"
         },
         {
@@ -172,7 +174,7 @@
     {
       "videoTitle": "Club Friendlies - Today Matches Part 2",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "Clubfriendly",
       "channels": [
         {
@@ -224,19 +226,19 @@
       "activeThumbnail": "italy-coppa italia",
       "channels": [
         {
-          "name": "Catanzaro vs Südtirol - 9:00pm||S=2026-08-15T21:00:00+05:00||E=3h",
+          "name": "Genoa vs Ascoli - 9:30 PM||S=2026-08-16T21:30:00+05:00||E=4h",
           "videoId": "14204490948143"
         },
         {
-          "name": "Udinese vs Calcio Padova - 9:30pm||S=2026-08-15T21:30:00+05:00||E=3h",
+          "name": "Hellas Verona vs Virtus Entella - 11:45 PM||S=2026-08-16T23:45:00+05:00||E=4h",
           "videoId": "14204506742319"
         },
         {
-          "name": "Venezia vs Modena - 11:45pm||S=2026-08-15T23:45:00+05:00||E=3h",
+          "name": "Lazio vs Mantova - 12:15 AM ||S=2026-08-17T00:15:00+05:00||E=4h",
           "videoId": "14204523322927"
         },
         {
-          "name": "Torino vs Carrarese ||S=2026-08-16T19:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "14204540034607"
         },
         {

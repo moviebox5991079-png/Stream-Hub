@@ -42,7 +42,7 @@
     {
       "videoTitle": "UFC",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "ufc-islam",
       "channels": [
         {
@@ -62,7 +62,7 @@
     {
       "videoTitle": "Arsenal vs Man City",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "arsenal vs man city",
       "channels": [
         {
@@ -82,7 +82,7 @@
     {
       "videoTitle": "PSG vs Lens - Final",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "psg vs lens",
       "channels": [
         {
@@ -100,25 +100,25 @@
       ]
     },
     {
-      "videoTitle": " LaLiga",
+      "videoTitle": "Italy - Coppa Italai",
       "videoId": "",
       "isLive": true,
-      "activeThumbnail": "laliag-2026 to 2027",
+      "activeThumbnail": "italy-coppa italia",
       "channels": [
         {
-          "name": "Racing Santander vs Villarreal - 8:00 pm||S=2026-08-16T20:00:00+05:00||E=4h",
+          "name": "Pisa vs Empoli - 9:00 PM||S=2026-08-17T21:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": "Espanyol vs Levante - 10:00 pm||S=2026-08-16T22:00:00+05:00||E=4h",
+          "name": "Sassuolo vs Cesena - 9:30 PM||S=2026-08-17T21:30:00+05:00||E=3h",
           "videoId": "15255038074475"
         },
         {
-          "name": "",
+          "name": "Cremonese vs Sampdoria - 11:45 PM||S=2026-08-17T23:45:00+05:00||E=3h",
           "videoId": "15255045480043"
         },
         {
-          "name": "",
+          "name": "Palermo vs Lecce - 12:15 AM ||S=2026-08-18T00:15:00+05:00||E=3h",
           "videoId": "15255208599147"
         },
         {
@@ -132,29 +132,29 @@
       ]
     },
     {
-      "videoTitle": "Club Friendly",
+      "videoTitle": "Laliga",
       "videoId": "",
       "isLive": true,
-      "activeThumbnail": "Clubfriendly",
+      "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Nottingham Forest vs Brest - 6:00pm||S=2026-08-16T18:00:00+05:00||E=4h",
+          "name": "Deportivo A Coruña vs Elche - 12:00 AM ||S=2026-08-18T00:00:00+05:00||E=4h",
           "videoId": "15273689226859"
         },
         {
-          "name": "Basel vs Barcelona - 7:30pm||S=2026-08-16T19:30:00+05:00||E=4h",
+          "name": "",
           "videoId": "15273713933931"
         },
         {
-          "name": "Newcastle United vs Strasbourg - 8:00pm||S=2026-08-16T20:00:00+05:00||E=4h",
+          "name": "",
           "videoId": "15273722257003"
         },
         {
-          "name": "Real Madrid vs Schalke - 8:00pm||S=2026-08-16T20:00:00+05:00||E=4h",
+          "name": "",
           "videoId": "15273739624043"
         },
         {
-          "name": "Liverpool vs Como - 10:00pm||S=2026-08-16T22:00:00+05:00||E=4h",
+          "name": "",
           "videoId": "15273750175339"
         },
         {
@@ -222,7 +222,7 @@
     {
       "videoTitle": "Italy-Coppa Italia",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "italy-coppa italia",
       "channels": [
         {

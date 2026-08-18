@@ -36,17 +36,18 @@
     "laliag-2026 to 2027": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0fOIw94hyiKKF8WxLpTHMy2A7eXTlM9rBlmr8mEcOZA&s",
     "ufc-islam": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR_aii--b8Qas-gNVJM1dA78OG7H0MIMVfnLFcu-5kwg&s",
     "arsenal vs man city": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJCf578ZKxFkHOsD29ZuaoNJ6YdprDeJhehCL68h5fCQ&s=10",
-    "psg vs lens": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0TMy0_j3iA_afU0Mzhyr9Y8jO6D0J93lfZrrwTGamzg&s=10"
+    "psg vs lens": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0TMy0_j3iA_afU0Mzhyr9Y8jO6D0J93lfZrrwTGamzg&s=10",
+    "uefc champion league": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT33FMnW5gSA1LcTIR42OLexFlz3YrW8g9HgEt1k4gNPw&s=10"
   },
   "streams": [
     {
-      "videoTitle": "UFC",
+      "videoTitle": "Champion League Qualification Final",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "ufc-islam",
+      "isLive": true,
+      "activeThumbnail": "uefc champion league",
       "channels": [
         {
-          "name": "Islam Makhachev vs Ian Machado Garry - 6:00 am ||S=2026-08-16T06:00:00+05:00||E=5h",
+          "name": "Fenerbahçe vs Lyon - 12:00 AM||S=2026-08-19T00:00:00+05:00||E=4h",
           "videoId": "15254238731883"
         },
         {
@@ -80,13 +81,13 @@
       ]
     },
     {
-      "videoTitle": "PSG vs Lens - Final",
+      "videoTitle": "Club Friendly",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "psg vs lens",
+      "isLive": true,
+      "activeThumbnail": "Clubfriendly",
       "channels": [
         {
-          "name": "Lens vs PSG - 11:45 pm ||S=2026-08-16T23:45:00+05:00||E=5h",
+          "name": "Bayern vs FC Heidenheim - 9:00 PM||S=2026-08-18T21:00:00+05:00||E=4h",
           "videoId": "15254341885547"
         },
         {
@@ -102,7 +103,7 @@
     {
       "videoTitle": "Italy - Coppa Italai",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "italy-coppa italia",
       "channels": [
         {
@@ -134,7 +135,7 @@
     {
       "videoTitle": "Laliga",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {

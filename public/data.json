@@ -44,7 +44,7 @@
     {
       "videoTitle": "Major League Soccer",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "MLS(Major league soccer)",
       "channels": [
         {
@@ -68,7 +68,7 @@
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Atletico Madrid vs Malaga ||S=2026-08-20T00:00:00+05:00||E=4h",
+          "name": "Rayo Vallecano vs Deportivo Alaves - 12:00 AM||S=2026-08-21T00:00:00+05:00||E=4h",
           "videoId": "15254299352683"
         },
         {
@@ -84,7 +84,7 @@
     {
       "videoTitle": "Club Friendly",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "Clubfriendly",
       "channels": [
         {

@@ -85,7 +85,7 @@
     {
       "videoTitle": "Club Friendly",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "Clubfriendly",
       "channels": [
         {

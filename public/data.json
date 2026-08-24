@@ -11,7 +11,7 @@
     "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s",
     "pakvsbang": "https://www.shutterstock.com/image-vector/pakistan-vs-bangladesh-match-cricket-260nw-2566876727.jpg",
     "saudiProLeague": "https://perpetualgroup.com/wp-content/uploads/2024/08/spl-1.webp",
-    "epl1": "https://w0.peakpx.com/wallpaper/22/114/HD-wallpaper-premier-league-football-england-logo-premier-league-emblem-blue-silk-texture-thumbnail.jpg",
+    "epl1": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLmv_Q_SL9cmZjcv5mZcPsEsR6o9wk9Mv_C59v2fTnrQ&s=10",
     "epl2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNYhQXJavwkR9qk-rTiuBV6l-KzmK1wAJKOA&s",
     "epl3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNwBQarZ2CuGTLMf20yXBZen_galjvuVaIw&s",
     "dfbPokal": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgwpOxKXj0TNphgEKvoaTSJdrOhfEqHtJFTA&s",
@@ -44,17 +44,17 @@
   },
   "streams": [
     {
-      "videoTitle": "Germany Super Cup Final",
+      "videoTitle": "Italy Serie A",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "Dortmud vs bayern",
+      "isLive": true,
+      "activeThumbnail": "SerieA",
       "channels": [
         {
-          "name": "Dortmund vs Bayern München - 11:30 PM||S=2026-08-22T23:30:00+05:00||E=3h",
+          "name": "Bologna vs Lazio - 9:30 PM||S=2026-08-24T21:30:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
-          "name": "",
+          "name": "Roma vs Fiorentina - 11:45 PM||S=2026-08-24T23:45:00+05:00||E=3h",
           "videoId": "15254260751979"
         },
         {
@@ -178,7 +178,7 @@
     {
       "videoTitle": "Italy Serie A",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "SerieA",
       "channels": [
         {

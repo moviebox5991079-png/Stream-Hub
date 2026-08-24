@@ -70,15 +70,15 @@
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Atletico Madrid vs Villarreal - 8:00 PM||S=2026-08-23T20:00:00+05:00||E=3h",
+          "name": "Osasuna vs Levante - 10:30 PM||S=2026-08-24T22:30:00+05:00||E=3h",
           "videoId": "15254299352683"
         },
         {
-          "name": "Getafe vs Racing Santander - 10:30 PM||S=2026-08-23T22:30:00+05:00||E=3h",
+          "name": "Malaga vs Deportivo A Coruña - 12:30 AM||S=2026-08-25T00:30:00+05:00||E=3h",
           "videoId": "15254308986475"
         },
         {
-          "name": "Elche vs Barcelona - 12:30 AM||S=2026-08-24T00:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254328122987"
         }
       ]
@@ -106,7 +106,7 @@
     {
       "videoTitle": "France Ligue 1",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "france_league_1",
       "channels": [
         {
@@ -142,15 +142,15 @@
       "activeThumbnail": "epl1",
       "channels": [
         {
-          "name": "Brighton vs Aston Villa - 6:00 PM||S=2026-08-23T18:00:00+05:00||E=3h",
+          "name": "Fulham vs Chelsea - 12:00 AM ||S=2026-08-25T00:00:00+05:00||E=3h",
           "videoId": "15273689226859"
         },
         {
-          "name": "Man City vs Bournemouth - 6:00 PM||S=2026-08-23T18:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15273713933931"
         },
         {
-          "name": "Newcastle vs Liverpool - 8:30 PM||S=2026-08-23T20:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15273722257003"
         },
         {
@@ -182,19 +182,19 @@
       "activeThumbnail": "SerieA",
       "channels": [
         {
-          "name": "Frosinone vs Juventus - 9:30 PM||S=2026-08-23T21:30:00+05:00||E=3h",
+          "name": "Bologna vs Lazio - 9:30 PM||S=2026-08-24T21:30:00+05:00||E=3h",
           "videoId": "14204232736303"
         },
         {
-          "name": "Venezia vs Lecce - 9:30 PM||S=2026-08-23T21:30:00+05:00||E=3h",
+          "name": "Roma vs Fiorentina - 11:45 PM||S=2026-08-24T23:45:00+05:00||E=3h",
           "videoId": "14204288179759"
         },
         {
-          "name": "Atalanta vs Sassuolo - 11:45 PM||S=2026-08-23T23:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "14204319768111"
         },
         {
-          "name": "Torino vs Milan - 11:45 PM||S=2026-08-23T23:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "14204331957807"
         },
         {

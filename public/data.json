@@ -70,7 +70,7 @@
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Valencia vs Real Betis - 12:00 AM||S=2026-08-26T00:00:00+05:00||E=3h",
+          "name": "Real Madrid vs Real Sociedad - 12:00 AM||S=2026-08-27T00:00:00+05:00||E=3h",
           "videoId": "15254299352683"
         },
         {
@@ -138,23 +138,23 @@
     {
       "videoTitle": "England Premier League",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "epl1",
       "channels": [
         {
-          "name": "Fulham vs Chelsea - 12:00 AM ||S=2026-08-25T00:00:00+05:00||E=3h",
+          "name": "Bradford vs Burnley - 11:45 PM||S=2026-08-26T23:45:00+05:00||E=3h",
           "videoId": "15273689226859"
         },
         {
-          "name": "",
+          "name": "Newcastle vs West Brom - 11:45 PM||S=2026-08-26T23:45:00+05:00||E=3h",
           "videoId": "15273713933931"
         },
         {
-          "name": "",
+          "name": "Tottenham vs Charlton - 11:45 PM||S=2026-08-26T23:45:00+05:00||E=3h",
           "videoId": "15273722257003"
         },
         {
-          "name": "",
+          "name": "Preston vs Everton - 12:00 AM ||S=2026-08-27T00:00:00+05:00||E=3h",
           "videoId": "15273739624043"
         },
         {
@@ -178,7 +178,7 @@
     {
       "videoTitle": "England Premier League - Today Matches 1",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "epl1",
       "channels": [
         {
@@ -226,7 +226,7 @@
     {
       "videoTitle": "England Premier League - Today Matches 2",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "epl1",
       "channels": [
         {

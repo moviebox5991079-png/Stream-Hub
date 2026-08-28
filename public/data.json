@@ -46,15 +46,15 @@
     {
       "videoTitle": "Italy Serie A",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "SerieA",
       "channels": [
         {
-          "name": "Bologna vs Lazio - 9:30 PM||S=2026-08-24T21:30:00+05:00||E=3h",
+          "name": "Milan vs Venezia - 11:45 PM||S=2026-08-28T23:45:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
-          "name": "Roma vs Fiorentina - 11:45 PM||S=2026-08-24T23:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254260751979"
         },
         {
@@ -70,11 +70,11 @@
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Celta Vigo vs Osasuna - 11:30 PM||S=2026-08-27T23:30:00+05:00||E=3h",
+          "name": "Racing Santander vs Elche - 10:00 PM||S=2026-08-28T22:00:00+05:00||E=3h",
           "videoId": "15254299352683"
         },
         {
-          "name": "Barcelona vs Athletic Club - 12:00 AM ||S=2026-08-28T00:00:00+05:00||E=3h",
+          "name": "Deportivo Alavés vs Villarreal - 12:30 AM ||S=2026-08-29T00:30:00+05:00||E=3h",
           "videoId": "15254308986475"
         },
         {
@@ -84,13 +84,13 @@
       ]
     },
     {
-      "videoTitle": "Club Friendly",
+      "videoTitle": "Germany - Bundesliga",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "Clubfriendly",
       "channels": [
         {
-          "name": "Real Zaragoza vs Athletic Club - 10:30 PM||S=2026-08-21T22:30:00+05:00||E=4h",
+          "name": "Bayern München vs VfB Stuttgart - 11:30 PM||S=2026-08-28T23:30:00+05:00||E=3h",
           "videoId": "15254341885547"
         },
         {
@@ -106,19 +106,19 @@
     {
       "videoTitle": "France Ligue 1",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "france_league_1",
       "channels": [
         {
-          "name": "Angers vs Lille - 6:00 PM||S=2026-08-23T18:00:00+05:00||E=3h",
+          "name": "Lille vs PSG - 11:45 PM||S=2026-08-28T23:45:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": "Le Havre vs Monaco - 8:15 PM||S=2026-08-23T20:15:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255038074475"
         },
         {
-          "name": "Rennes vs PSG - 11:45 PM||S=2026-08-23T23:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255045480043"
         },
         {
@@ -142,11 +142,11 @@
       "activeThumbnail": "epl1",
       "channels": [
         {
-          "name": "Chelsea vs Luton - 11:30 PM||S=2026-08-27T23:30:00+05:00||E=3h",
+          "name": "Crystal Palace vs Man City - 12:00 AM ||S=2026-08-29T00:00:00+05:00||E=3h",
           "videoId": "15273689226859"
         },
         {
-          "name": "Fulham vs Wimbledon - 12:00 AM||S=2026-08-28T00:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15273713933931"
         },
         {

@@ -47,19 +47,19 @@
     {
       "videoTitle": "Italy-serie A",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "SerieA",
       "channels": [
         {
-          "name": "Milan vs Venezia - 11:45 PM||S=2026-08-28T23:45:00+05:00||E=3h",
+          "name": "Napoli vs Como - 9:30 PM||S=2026-08-30T21:30:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
-          "name": "",
+          "name": "Cagliari vs Inter - 11:45 PM||S=2026-08-30T23:45:00+05:00||E=3h",
           "videoId": "15254260751979"
         },
         {
-          "name": "",
+          "name": "Lazio vs Genoa - 11:45 PM||S=2026-08-30T23:45:00+05:00||E=3h",
           "videoId": "15254285524587"
         }
       ]
@@ -71,15 +71,15 @@
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Levante vs Real Betis - 8:00 PM||S=2026-08-29T20:00:00+05:00||E=3h",
+          "name": "Real Madrid vs Málaga - 8:00 PM||S=2026-08-30T20:00:00+05:00||E=3h",
           "videoId": "15254299352683"
         },
         {
-          "name": "Real Sociedad vs Espanyol - 10:00 PM||S=2026-08-29T22:00:00+05:00||E=3h",
+          "name": "Deportivo A Coruña vs Valencia - 10:30 PM||S=2026-08-30T22:30:00+05:00||E=3h",
           "videoId": "15254308986475"
         },
         {
-          "name": "Sevilla vs Atlético Madrid - 12:30 AM ||S=2026-08-30T00:30:00+05:00||E=3h",
+          "name": "Celta Vigo vs Athletic Club - 12:30 AM ||S=2026-08-31T00:30:00+05:00||E=3h",
           "videoId": "15254328122987"
         }
       ]
@@ -87,15 +87,15 @@
     {
       "videoTitle": "Germany - Bundesliga",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "germanyLeague",
       "channels": [
         {
-          "name": "Bayern München vs VfB Stuttgart - 11:30 PM||S=2026-08-28T23:30:00+05:00||E=3h",
+          "name": "Freiburg vs Werder Bremen - 6:30 PM||S=2026-08-30T18:30:00+05:00||E=3h",
           "videoId": "15254341885547"
         },
         {
-          "name": "",
+          "name": "Augsburg vs Schalke 04 - 8:30 PM||S=2026-08-30T20:30:00+05:00||E=3h",
           "videoId": "15254357089899"
         },
         {
@@ -107,27 +107,27 @@
     {
       "videoTitle": "France Ligue 1",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "france_league_1",
       "channels": [
         {
-          "name": "Strasbourg vs Lens - 8:15 PM||S=2026-08-29T20:15:00+05:00||E=3h",
+          "name": "Paris FC vs Nice - 6:00 PM||S=2026-08-30T18:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": "Auxerre vs Angers - 11:45 PM||S=2026-08-29T23:45:00+05:00||E=3h",
+          "name": "Rennes vs Le Mans - 8:15 PM||S=2026-08-30T20:15:00+05:00||E=3h",
           "videoId": "15255038074475"
         },
         {
-          "name": "Brest vs Toulouse - 11:45 PM||S=2026-08-29T23:45:00+05:00||E=3h",
+          "name": "Monaco vs Marseille - 11:45 PM||S=2026-08-30T23:45:00+05:00||E=3h",
           "videoId": "15255045480043"
         },
         {
-          "name": "Lorient vs Troyes - 11:45 PM||S=2026-08-29T23:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255208599147"
         },
         {
-          "name": "Lyon vs Le Havre - 11:45 PM||S=2026-08-29T23:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255217708651"
         },
         {
@@ -143,19 +143,19 @@
       "activeThumbnail": "epl1",
       "channels": [
         {
-          "name": "Liverpool vs Nottm Forest - 4:30 PM||S=2026-08-29T16:30:00+05:00||E=3h",
+          "name": "Chelsea vs Brighton - 6:00 PM||S=2026-08-30T18:00:00+05:00||E=3h",
           "videoId": "15273689226859"
         },
         {
-          "name": "Bournemouth vs Everton - 7:00 PM||S=2026-08-29T19:00:00+05:00||E=3h",
+          "name": "Leeds vs Brentford - 6:00 PM||S=2026-08-30T18:00:00+05:00||E=3h",
           "videoId": "15273713933931"
         },
         {
-          "name": "Coventry vs Hull - 7:00 PM||S=2026-08-29T19:00:00+05:00||E=3h",
+          "name": "Sunderland vs Fulham - 6:00 PM||S=2026-08-30T18:00:00+05:00||E=3h",
           "videoId": "15273722257003"
         },
         {
-          "name": "Tottenham vs Newcastle - 9:30 PM||S=2026-08-29T21:30:00+05:00||E=3h",
+          "name": "Man United vs Ipswich - 8:30 PM||S=2026-08-30T20:30:00+05:00||E=3h",
           "videoId": "15273739624043"
         },
         {
@@ -179,7 +179,7 @@
     {
       "videoTitle": "Italy - Serie A",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "SerieA",
       "channels": [
         {
@@ -227,7 +227,7 @@
     {
       "videoTitle": "Germany - Bundesliga",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "germanyLeague",
       "channels": [
         {

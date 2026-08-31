@@ -51,15 +51,15 @@
       "activeThumbnail": "SerieA",
       "channels": [
         {
-          "name": "Napoli vs Como - 9:30 PM||S=2026-08-30T21:30:00+05:00||E=3h",
+          "name": "Lecce vs Roma - 9:30 PM||S=2026-08-31T21:30:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
-          "name": "Cagliari vs Inter - 11:45 PM||S=2026-08-30T23:45:00+05:00||E=3h",
+          "name": "Atalanta vs Bologna - 11:45 PM||S=2026-08-31T23:45:00+05:00||E=3h",
           "videoId": "15254260751979"
         },
         {
-          "name": "Lazio vs Genoa - 11:45 PM||S=2026-08-30T23:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254285524587"
         }
       ]
@@ -71,15 +71,15 @@
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Real Madrid vs Málaga - 8:00 PM||S=2026-08-30T20:00:00+05:00||E=3h",
+          "name": "Osasuna vs Getafe - 10:30 PM||S=2026-08-31T22:30:00+05:00||E=3h",
           "videoId": "15254299352683"
         },
         {
-          "name": "Deportivo A Coruña vs Valencia - 10:30 PM||S=2026-08-30T22:30:00+05:00||E=3h",
+          "name": "Barcelona vs Rayo Vallecano - 12:30 AM||S=2026-09-01T00:30:00+05:00||E=3h",
           "videoId": "15254308986475"
         },
         {
-          "name": "Celta Vigo vs Athletic Club - 12:30 AM ||S=2026-08-31T00:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254328122987"
         }
       ]
@@ -87,7 +87,7 @@
     {
       "videoTitle": "Germany - Bundesliga",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "germanyLeague",
       "channels": [
         {
@@ -107,7 +107,7 @@
     {
       "videoTitle": "France Ligue 1",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "france_league_1",
       "channels": [
         {
@@ -143,19 +143,19 @@
       "activeThumbnail": "epl1",
       "channels": [
         {
-          "name": "Chelsea vs Brighton - 6:00 PM||S=2026-08-30T18:00:00+05:00||E=3h",
+          "name": "Aston Villa vs Arsenal - 12:00 AM ||S=2026-09-01T00:00:00+05:00||E=3h",
           "videoId": "15273689226859"
         },
         {
-          "name": "Leeds vs Brentford - 6:00 PM||S=2026-08-30T18:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15273713933931"
         },
         {
-          "name": "Sunderland vs Fulham - 6:00 PM||S=2026-08-30T18:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15273722257003"
         },
         {
-          "name": "Man United vs Ipswich - 8:30 PM||S=2026-08-30T20:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15273739624043"
         },
         {

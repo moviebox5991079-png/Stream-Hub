@@ -42,21 +42,22 @@
     "france_league_1": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGRm8r3akeSP_CINjJrWp3YhqIfHa5FJSZ5vyfGDmxlA&s",
     "Dortmud vs bayern": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-gkK0OJPH4wVCayt-L2RvdVsFFeA4npm5XJrctg-YjQ&s=10",
     "pak_vs_eng_test": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJobGOYI3bDfxw82eU8DL1qAFi-3oCGYPc46Il3AK5Nw&s",
-    "italy - coppa italia": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlQImPIaTNtAuc1v5vhKwLT-jI0m8P_vaK-hmtke1X9w&s=10"
+    "italy - coppa italia": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlQImPIaTNtAuc1v5vhKwLT-jI0m8P_vaK-hmtke1X9w&s=10",
+    "women-asia-cup": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMfnjkWiHBzG_orgZrW2n1dUNRJQAWoN3PJoV4csIeWA&s"
   },
   "streams": [
     {
-      "videoTitle": "Italy-serie A",
+      "videoTitle": "Women Aisa Cup - Cricket",
       "videoId": "",
       "isLive": false,
-      "activeThumbnail": "SerieA",
+      "activeThumbnail": "women-asia-cup",
       "channels": [
         {
-          "name": "Lecce vs Roma - 9:30 PM||S=2026-08-31T21:30:00+05:00||E=3h",
+          "name": "India vs Hong Kong - 7:30 pm - Today||S=2026-09-03T19:30:00+05:00||E=8h",
           "videoId": "15254238731883"
         },
         {
-          "name": "Atalanta vs Bologna - 11:45 PM||S=2026-08-31T23:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254260751979"
         },
         {

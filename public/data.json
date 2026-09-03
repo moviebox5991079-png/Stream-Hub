@@ -68,15 +68,15 @@
     {
       "videoTitle": "Spain Laliga",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Osasuna vs Getafe - 10:30 PM||S=2026-08-31T22:30:00+05:00||E=3h",
+          "name": "Real Sociedad vs Celta Vigo - 12:00 AM ||S=2026-09-04T00:00:00+05:00||E=3h",
           "videoId": "15254299352683"
         },
         {
-          "name": "Barcelona vs Rayo Vallecano - 12:30 AM||S=2026-09-01T00:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254308986475"
         },
         {
@@ -108,19 +108,19 @@
     {
       "videoTitle": "France Ligue 1",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "france_league_1",
       "channels": [
         {
-          "name": "Paris FC vs Nice - 6:00 PM||S=2026-08-30T18:00:00+05:00||E=3h",
+          "name": "Toulouse vs Lille - 11:45 PM||S=2026-09-03T23:45:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": "Rennes vs Le Mans - 8:15 PM||S=2026-08-30T20:15:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255038074475"
         },
         {
-          "name": "Monaco vs Marseille - 11:45 PM||S=2026-08-30T23:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255045480043"
         },
         {
@@ -184,11 +184,11 @@
       "activeThumbnail": "italy - coppa italia",
       "channels": [
         {
-          "name": "Sassuolo vs Frosinone - 6:00 PM||S=2026-09-02T18:00:00+05:00||E=4h",
+          "name": "Palermo vs Mantova - 9:00 PM||S=2026-09-03T21:00:00+05:00||E=4h",
           "videoId": "14204232736303"
         },
         {
-          "name": "Udinese vs Venezia - 9:00 PM||S=2026-09-02T21:00:00+05:00||E=4h",
+          "name": "Cagliari vs Hellas Verona - 12:00 AM ||S=2026-09-04T00:00:00+05:00||E=4h",
           "videoId": "14204288179759"
         },
         {
@@ -228,7 +228,7 @@
     {
       "videoTitle": "Germnay - DFB Pokal",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "dfbPokal",
       "channels": [
         {

@@ -47,13 +47,13 @@
   },
   "streams": [
     {
-      "videoTitle": "Women Aisa Cup - Cricket",
+      "videoTitle": "Italy Serie A",
       "videoId": "",
       "isLive": true,
-      "activeThumbnail": "women-asia-cup",
+      "activeThumbnail": "SerieA",
       "channels": [
         {
-          "name": "India vs Hong Kong - 7:30 pm - Today||S=2026-09-03T19:30:00+05:00||E=8h",
+          "name": "Genoa vs Como - 11:45 PM||S=2026-09-04T23:45:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
@@ -73,7 +73,7 @@
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Real Sociedad vs Celta Vigo - 12:00 AM ||S=2026-09-04T00:00:00+05:00||E=3h",
+          "name": "Real Betis vs Real Madrid - 12:00 AM ||S=2026-09-05T00:00:00+05:00||E=3h",
           "videoId": "15254299352683"
         },
         {
@@ -89,15 +89,15 @@
     {
       "videoTitle": "Germany - Bundesliga",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "germanyLeague",
       "channels": [
         {
-          "name": "Freiburg vs Werder Bremen - 6:30 PM||S=2026-08-30T18:30:00+05:00||E=3h",
+          "name": "VfB Stuttgart vs Köln - 11:30 PM||S=2026-09-04T23:30:00+05:00||E=3h",
           "videoId": "15254341885547"
         },
         {
-          "name": "Augsburg vs Schalke 04 - 8:30 PM||S=2026-08-30T20:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254357089899"
         },
         {
@@ -113,11 +113,11 @@
       "activeThumbnail": "france_league_1",
       "channels": [
         {
-          "name": "Toulouse vs Lille - 11:45 PM||S=2026-09-03T23:45:00+05:00||E=3h",
+          "name": "Lyon vs Auxerre - 10:00 PM||S=2026-09-04T22:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": "",
+          "name": "PSG vs Monaco - 12:05 AM - ||S=2026-09-05T00:05:00+05:00||E=3h",
           "videoId": "15255038074475"
         },
         {
@@ -141,11 +141,11 @@
     {
       "videoTitle": "England Premier League",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "epl1",
       "channels": [
         {
-          "name": "Aston Villa vs Arsenal - 12:00 AM ||S=2026-09-01T00:00:00+05:00||E=3h",
+          "name": "Ipswich vs Liverpool - 12:00 AM ||S=2026-09-05T00:00:00+05:00||E=3h",
           "videoId": "15273689226859"
         },
         {
@@ -181,7 +181,7 @@
     {
       "videoTitle": "Italy - Coppa Italia 2026",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "italy - coppa italia",
       "channels": [
         {

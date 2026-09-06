@@ -109,15 +109,15 @@
       "activeThumbnail": "germanyLeague",
       "channels": [
         {
-          "name": "Athletic Club vs Atlético Madrid - 7:15 PM||S=2026-09-05T19:15:00+05:00||E=3h",
+          "name": "Hamburger SV vs Mainz - 6:30 PM||S=2026-09-06T18:30:00+05:00||E=3h",
           "videoId": "15254299352683"
         },
         {
-          "name": "Rayo Vallecano vs Racing Santander - 9:30 PM||S=2026-09-05T21:30:00+05:00||E=3h",
+          "name": "Frankfurt vs Augsburg - 8:30 PM||S=2026-09-06T20:30:00+05:00||E=3h",
           "videoId": "15254308986475"
         },
         {
-          "name": "Villarreal vs Deportivo A Coruña - 12:00 AM ||S=2026-09-06T00:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254328122987"
         }
       ]

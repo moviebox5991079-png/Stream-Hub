@@ -53,19 +53,19 @@
       "activeThumbnail": "SerieA",
       "channels": [
         {
-          "name": "Frosinone vs Venezia - 6:00 PM||S=2026-09-06T18:00:00+05:00||E=3h",
+          "name": "Cagliari vs Lecce - 9:30 PM||S=2026-09-07T21:30:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
-          "name": "Parma vs Monza - 6:00 PM||S=2026-09-06T18:00:00+05:00||E=3h",
+          "name": "Udinese vs Lazio - 11:45 PM||S=2026-09-07T23:45:00+05:00||E=3h",
           "videoId": "15254260751979"
         },
         {
-          "name": "Bologna vs Sassuolo - 9:00 PM||S=2026-09-06T21:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254285524587"
         },
         {
-          "name": "Juventus vs Milan - 11:45 PM||S=2026-09-06T23:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983200374379"
         },
         {
@@ -105,7 +105,7 @@
     {
       "videoTitle": "Germany Bundesliga",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "germanyLeague",
       "channels": [
         {
@@ -125,7 +125,7 @@
     {
       "videoTitle": "France - Ligue 1",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "france_league_1",
       "channels": [
         {
@@ -149,19 +149,19 @@
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Valencia vs Barcelona - 7:15 PM||S=2026-09-06T19:15:00+05:00||E=3h",
+          "name": "Getafe vs Celta Vigo - 10:00 PM||S=2026-09-07T22:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": "Deportivo Alavés vs Osasuna - 9:30 PM||S=2026-09-06T21:30:00+05:00||E=3h",
+          "name": "Elche vs Real Sociedad - 12:30 AM ||S=2026-09-08T00:30:00+05:00||E=3h",
           "videoId": "15255038074475"
         },
         {
-          "name": "Málaga vs Levante - 9:30 PM||S=2026-09-06T21:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255045480043"
         },
         {
-          "name": "Espanyol vs Sevilla - 12:00 AM ||S=2026-09-07T00:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255208599147"
         },
         {
@@ -177,7 +177,7 @@
     {
       "videoTitle": "England Premier League",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "epl1",
       "channels": [
         {

@@ -43,37 +43,38 @@
     "Dortmud vs bayern": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-gkK0OJPH4wVCayt-L2RvdVsFFeA4npm5XJrctg-YjQ&s=10",
     "pak_vs_eng_test": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJobGOYI3bDfxw82eU8DL1qAFi-3oCGYPc46Il3AK5Nw&s",
     "italy - coppa italia": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlQImPIaTNtAuc1v5vhKwLT-jI0m8P_vaK-hmtke1X9w&s=10",
-    "women-asia-cup": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMfnjkWiHBzG_orgZrW2n1dUNRJQAWoN3PJoV4csIeWA&s"
+    "women-asia-cup": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMfnjkWiHBzG_orgZrW2n1dUNRJQAWoN3PJoV4csIeWA&s",
+    "uefa_champion_league": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSst0rgnznzlTKsfMwD_GzHE6BKaBYSbyLICVCAD6WX189V-ggAfuIQSE&s=10"
   },
   "streams": [
     {
-      "videoTitle": "Italy Serie A",
+      "videoTitle": "UEFA - Champion League",
       "videoId": "",
       "isLive": true,
-      "activeThumbnail": "SerieA",
+      "activeThumbnail": "uefa_champion_league",
       "channels": [
         {
-          "name": "Cagliari vs Lecce - 9:30 PM||S=2026-09-07T21:30:00+05:00||E=3h",
+          "name": "AEK Athens vs LASK - 9:45 PM||S=2026-09-08T21:45:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
-          "name": "Udinese vs Lazio - 11:45 PM||S=2026-09-07T23:45:00+05:00||E=3h",
+          "name": "Club Brugge vs Aston Villa - 9:45 PM||S=2026-09-08T21:45:00+05:00||E=3h",
           "videoId": "15254260751979"
         },
         {
-          "name": "",
+          "name": "Dortmund vs Villarreal - 12:00 AM ||S=2026-09-09T00:00:00+05:00||E=3h",
           "videoId": "15254285524587"
         },
         {
-          "name": "",
+          "name": "FC Porto vs Man City - 12:00 AM ||S=2026-09-09T00:00:00+05:00||E=3h",
           "videoId": "16983200374379"
         },
         {
-          "name": "",
+          "name": "Lille vs Real Betis - 12:00 AM ||S=2026-09-09T00:00:00+05:00||E=3h",
           "videoId": "16983242579563"
         },
         {
-          "name": "",
+          "name": "Real Madrid vs Inter - 12:00 AM ||S=2026-09-09T00:00:00+05:00||E=3h",
           "videoId": "16983247822443"
         },
         {
@@ -145,7 +146,7 @@
     {
       "videoTitle": "Spain - Laliga",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
@@ -177,27 +178,27 @@
     {
       "videoTitle": "England Premier League",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "epl1",
       "channels": [
         {
-          "name": "Everton vs Man United - 6:00 PM||S=2026-09-06T18:00:00+05:00||E=3h",
+          "name": "Bournemouth vs Lincoln - 11:45 PM||S=2026-09-08T23:45:00+05:00||E=3h",
           "videoId": "15273689226859"
         },
         {
-          "name": "Arsenal vs Chelsea - 8:30 PM||S=2026-09-06T20:30:00+05:00||E=3h",
+          "name": "Crystal Palace vs Middlesbrough - 11:45 PM||S=2026-09-08T23:45:00+05:00||E=3h",
           "videoId": "15273713933931"
         },
         {
-          "name": "",
+          "name": "Leyton Orient vs Bradford - 11:45 PM||S=2026-09-08T23:45:00+05:00||E=3h",
           "videoId": "15273722257003"
         },
         {
-          "name": "",
+          "name": "Sunderland vs Hull - 11:45 PM||S=2026-09-08T23:45:00+05:00||E=3h",
           "videoId": "15273739624043"
         },
         {
-          "name": "",
+          "name": "Millwall vs Newcastle - 12:00 AM ||S=2026-09-09T00:00:00+05:00||E=3h",
           "videoId": "15273750175339"
         },
         {

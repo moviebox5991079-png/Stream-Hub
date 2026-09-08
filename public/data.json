@@ -314,11 +314,7 @@
       ]
     }
   ],
-
-
-
-  
-"mode2Categories": [
+  "mode2Categories": [
     {
       "categoryId": "football",
       "categoryName": "Football",
@@ -330,8 +326,14 @@
           "thumbnail": "laliga1",
           "isLive": true,
           "servers": [
-            { "serverName": "Server 1 (HD)", "iframeUrl": "https://dlive.sx/stream/stream-598.php" },
-            { "serverName": "Server 2 (SD)", "iframeUrl": "https://w6.sportsonliine.click/channels/hd/hd1.php" }
+            {
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://embed.st/embed/admin/ppv-crystal-palace-vs-middlesbrough/1"
+            },
+            {
+              "serverName": "Server 2 (SD)",
+              "iframeUrl": "https://w6.sportsonliine.click/channels/hd/hd1.php"
+            }
           ]
         },
         {
@@ -340,7 +342,10 @@
           "thumbnail": "psg vs lens",
           "isLive": false,
           "servers": [
-            { "serverName": "Main Server", "iframeUrl": "https://example.com/embed3" }
+            {
+              "serverName": "Main Server",
+              "iframeUrl": "https://example.com/embed3"
+            }
           ]
         }
       ]
@@ -354,16 +359,19 @@
           "matchId": "c1",
           "matchTitle": "Pakistan vs England - Test||S=2026-09-08T10:00:00+05:00||E=8h",
           "thumbnail": "pak_vs_eng_test",
-          "isLive": true,
+          "isLive": false,
           "servers": [
-            { "serverName": "PTV Sports Server", "iframeUrl": "https://example.com/embed4" },
-            { "serverName": "Ten Sports Server", "iframeUrl": "https://example.com/embed5" }
+            {
+              "serverName": "PTV Sports Server",
+              "iframeUrl": "https://example.com/embed4"
+            },
+            {
+              "serverName": "Ten Sports Server",
+              "iframeUrl": "https://example.com/embed5"
+            }
           ]
         }
       ]
     }
   ]
-
-
-  
 }

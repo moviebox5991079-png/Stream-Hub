@@ -178,7 +178,7 @@
     {
       "videoTitle": "England Premier League",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "epl1",
       "channels": [
         {

@@ -948,19 +948,14 @@ const [selectedVideo, setSelectedVideo] = useState<StreamData | null>(null);
                      </>
                    )}
                  </>
-               )}const [evaluatedChannels, setEvaluatedChannels] = useState<any[]>([]);
-               
-             </div>
+            
              
-             {/* BANNER 2 */}
+{/* BANNER 2 */}
              <div className="flex justify-center my-6 w-full overflow-hidden">
                  <iframe src="/banner" width="300" height="250" style={{ border: 'none', overflow: 'hidden', maxWidth: '100%' }} title="Sponsor Ad" />
              </div>
           </main>
         </div>
-               
-               
-              
 
         <Script 
           src="https://pl28382929.effectivegatecpm.com/b1/06/0e/b1060e51e3f0ca4c6da303d42b6ea068.js"

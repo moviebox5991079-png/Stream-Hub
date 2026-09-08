@@ -1,6 +1,3 @@
-
-
-
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -73,8 +70,13 @@ const [selectedVideo, setSelectedVideo] = useState<StreamData | null>(null);
   const [showWelcomeModal, setShowWelcomeModal] = useState(true);
 
   // ✨ Unified State Machine Data
+// ✨ Unified State Machine Data
   const [evaluatedChannels, setEvaluatedChannels] = useState<any[]>([]);
   const [isManualOverride, setIsManualOverride] = useState(false);
+
+  // ✨ Mode 2 Scheduler States
+  const [evaluatedMode2Matches, setEvaluatedMode2Matches] = useState<any[]>([]);
+  const [activeMatchId, setActiveMatchId] = useState<string | null>(null);
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const navbarRef = useRef<HTMLElement>(null);
@@ -179,11 +181,101 @@ const [selectedVideo, setSelectedVideo] = useState<StreamData | null>(null);
       setEvaluatedChannels(evaluated);
     };
 
-    // Run immediately, then check every 60 seconds
+// Run immediately, then check every 60 seconds
     resolveChannels();
     const intervalId = setInterval(resolveChannels, 60000);
     return () => clearInterval(intervalId);
   }, [selectedVideo]);
+
+  // =========================================================
+  // 🚀 MODE 2 SCHEDULER ENGINE
+  // =========================================================
+  useEffect(() => {
+    if (initialData.activeMode !== 2 || !selectedCategory || !selectedCategory.matches) return;
+
+    const resolveMatches = () => {
+      const nowMs = Date.now();
+      const evaluated = selectedCategory.matches.map((match) => {
+        const parts = match.matchTitle.split('||');
+        let rawName = parts[0].trim();
+        const hasPriority = rawName.startsWith('!');
+        let cleanName = hasPriority ? rawName.substring(1).trim() : rawName;
+
+        const startPart = parts.find(p => p.trim().startsWith('S='));
+        const endPart = parts.find(p => p.trim().startsWith('E='));
+
+        let state = 'UNKNOWN';
+        let minutesRemaining = 0;
+        let minutesSinceStart = 0;
+        let displayName = cleanName;
+
+        if (startPart && endPart) {
+          const startStr = startPart.replace('S=', '').trim();
+          const endStr = endPart.replace('E=', '').trim();
+          const startDate = new Date(startStr);
+          const startMs = startDate.getTime();
+          let endMs = 0;
+
+          const durationRegex = /^(\d+)\s*(h|hour|hours|d|day|days|m|min|mins|minute|minutes)$/i;
+          const durationMatch = endStr.match(durationRegex);
+
+          if (durationMatch) {
+            const value = parseInt(durationMatch[1], 10);
+            const unit = durationMatch[2].toLowerCase();
+            let multiplier = 0;
+            if (unit.startsWith('h')) multiplier = 60 * 60 * 1000;
+            else if (unit.startsWith('d')) multiplier = 24 * 60 * 60 * 1000;
+            else if (unit.startsWith('m')) multiplier = 60 * 1000;
+            endMs = startMs + (value * multiplier);
+          } else { endMs = new Date(endStr).getTime(); }
+
+          const timeOptions: Intl.DateTimeFormatOptions = { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'Asia/Karachi' };
+          displayName = `${cleanName} - ${startDate.toLocaleTimeString('en-US', timeOptions)}`;
+
+          const diffMinsStart = Math.round((startMs - nowMs) / 60000);
+
+          if (nowMs > endMs) state = 'EXPIRED';
+          else if (nowMs >= startMs && nowMs <= endMs) { state = 'LIVE'; minutesSinceStart = Math.abs(diffMinsStart); }
+          else if (diffMinsStart <= 10 && diffMinsStart > 0) { state = 'SOON'; minutesRemaining = diffMinsStart; }
+          else if (diffMinsStart > 10) { state = 'WAITING'; minutesRemaining = diffMinsStart; }
+        }
+        return { entityObj: match, state, minutesRemaining, minutesSinceStart, hasPriority, displayName };
+      });
+      setEvaluatedMode2Matches(evaluated);
+    };
+
+    resolveMatches();
+    const intervalId = setInterval(resolveMatches, 60000);
+    return () => clearInterval(intervalId);
+  }, [selectedCategory, initialData.activeMode]);
+
+  // ✨ Mode 2 Auto-Switch Algorithm
+  useEffect(() => {
+    if (evaluatedMode2Matches.length === 0) return;
+    const currentActive = evaluatedMode2Matches.find(c => c.entityObj.matchId === activeMatchId);
+    if (isManualOverride && currentActive && currentActive.state !== 'EXPIRED') return;
+
+    const valid = evaluatedMode2Matches.filter(c => c.state !== 'EXPIRED' && c.state !== 'UNKNOWN');
+    if (valid.length === 0) return;
+
+    const soon = valid.filter(c => c.state === 'SOON').sort((a, b) => a.minutesRemaining - b.minutesRemaining);
+    const live = valid.filter(c => c.state === 'LIVE').sort((a, b) => a.minutesSinceStart - b.minutesSinceStart);
+    const waiting = valid.filter(c => c.state === 'WAITING').sort((a, b) => a.minutesRemaining - b.minutesRemaining);
+
+    let best = soon.length > 0 ? (soon.find(c => c.hasPriority) || soon[0]) : live.length > 0 ? (live.find(c => c.hasPriority) || live[0]) : waiting.length > 0 ? waiting[0] : valid[0];
+
+    if (best && best.entityObj.matchId !== activeMatchId) {
+      setActiveMatchId(best.entityObj.matchId);
+      setIsManualOverride(false);
+      if (best.entityObj.servers && best.entityObj.servers.length > 0) setActiveIframeUrl(best.entityObj.servers[0].iframeUrl);
+    }
+  }, [evaluatedMode2Matches, activeMatchId, isManualOverride]);
+
+  const activeMode2Data = evaluatedMode2Matches.find(c => c.entityObj.matchId === activeMatchId);
+
+  // =========================================================
+  // 🎯 THE AUTO-SELECTION ALGORITHM (Mode 1)
+  // =========================================================
 
   // =========================================================
   // 🎯 THE AUTO-SELECTION ALGORITHM
@@ -426,130 +518,129 @@ const [selectedVideo, setSelectedVideo] = useState<StreamData | null>(null);
                  /* =========================================
                     ✨ MODE 2: CATEGORIES -> MATCHES -> IFRAME ✨
                     ========================================= */
-                 <div className="mb-8 animate-in fade-in duration-500">
-                   
-                   {/* 1. Show Categories */}
-                   {!selectedCategory && !selectedMatchMode2 && (
-                     <div className="text-center mb-12">
-                       <h2 className="text-3xl sm:text-5xl font-black text-white tracking-widest uppercase mb-8">
-                         What do you want to <span className="animate-rainbow-text">Watch?</span>
-                       </h2>
-                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                         {initialData.mode2Categories?.map((cat) => (
-                           <div 
-                             key={cat.categoryId} 
-                             onClick={() => setSelectedCategory(cat)}
-                             className="cursor-pointer group relative rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.8)]"
-                           >
-                             <div className="aspect-video bg-black relative">
-                               <img src={initialData.thumbnails[cat.categoryThumbnail] || 'https://via.placeholder.com/800'} alt={cat.categoryName} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors"></div>
-                               <div className="absolute bottom-4 left-0 right-0 text-center">
-                                 <h3 className="text-2xl font-black text-white uppercase drop-shadow-lg">{cat.categoryName}</h3>
+                 /* =========================================
+                    ✨ MODE 2: PREMIUM DESIGN (LIKE MODE 1) ✨
+                    ========================================= */
+                 <>
+                   {!selectedCategory ? (
+                     <div className="mb-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+                       <div className="relative w-full rounded-3xl p-[3px] animate-rainbow shadow-[0_0_60px_rgba(255,255,255,0.05)]">
+                         <div className="bg-[#0f0f0f] rounded-[21px] w-full p-6 sm:p-10 relative overflow-hidden h-full z-10 border border-white/5">
+                           <div className="absolute -top-32 -left-32 w-96 h-96 bg-fuchsia-600/10 blur-[120px] rounded-full pointer-events-none animate-pulse"></div>
+                           <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-cyan-600/10 blur-[120px] rounded-full pointer-events-none animate-pulse"></div>
+                           <div className="text-center mb-12 relative z-10">
+                             <h2 className="text-3xl sm:text-5xl font-black text-white tracking-widest uppercase mb-4 drop-shadow-2xl">What do you want to <span className="animate-rainbow-text">Watch?</span></h2>
+                             <p className="text-gray-400 text-base sm:text-lg font-medium">Select a category below to view matches</p>
+                           </div>
+                           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+                             {initialData.mode2Categories?.map((cat) => (
+                               <div key={cat.categoryId} onClick={() => { setSelectedCategory(cat); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="group cursor-pointer rounded-2xl overflow-hidden bg-transparent transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_40px_rgba(0,0,0,0.8)] flex flex-col">
+                                 <div className="absolute inset-0 rounded-2xl animate-rainbow opacity-50 group-hover:opacity-100 transition-opacity duration-500 -z-10 p-[2px]"><div className="bg-[#121212] w-full h-full rounded-[14px]"></div></div>
+                                 <div className="aspect-video w-full relative overflow-hidden shadow-inner bg-black rounded-t-[14px]">
+                                   <img src={getThumbnailImage({ activeThumbnail: cat.categoryThumbnail } as any)} alt={cat.categoryName} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out z-10 relative" />
+                                   <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#050505] to-transparent z-20"></div>
+                                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 z-30"><div className="animate-rainbow p-[3px] rounded-full shadow-[0_0_40px_rgba(255,255,255,0.2)]"><div className="bg-black/90 p-4 rounded-full backdrop-blur-xl"><Play fill="white" size={32} className="text-white ml-1" /></div></div></div>
+                                 </div>
+                                 <div className="p-5 sm:p-6 relative z-10 bg-gradient-to-b from-[#1f1f1f] to-[#050505] border-t border-white/10 flex-grow flex items-center justify-center text-center rounded-b-[14px] shadow-[inset_0_1px_10px_rgba(255,255,255,0.02)]">
+                                   <h3 className="text-lg font-bold text-gray-300 group-hover:text-white transition-all duration-300 tracking-wide uppercase">{cat.categoryName}</h3>
+                                 </div>
                                </div>
-                             </div>
+                             ))}
                            </div>
-                         ))}
-                       </div>
-                     </div>
-                   )}
-
-                   {/* 2. Show Matches inside Category */}
-                   {selectedCategory && !selectedMatchMode2 && (
-                     <div>
-                       <button onClick={() => setSelectedCategory(null)} className="mb-6 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition">
-                         ← Back to Categories
-                       </button>
-                       <h2 className="text-2xl font-bold text-white mb-6">Live {selectedCategory.categoryName} Matches</h2>
-                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                         {selectedCategory.matches.map((match) => (
-                           <div 
-                             key={match.matchId}
-                             onClick={() => {
-                               setSelectedMatchMode2(match);
-                               if(match.servers.length > 0) setActiveIframeUrl(match.servers[0].iframeUrl);
-                             }}
-                             className="cursor-pointer group rounded-2xl overflow-hidden bg-[#1f1f1f] border border-white/5 hover:border-white/20 transition-all shadow-lg"
-                           >
-                             <div className="aspect-video relative">
-                               <img src={initialData.thumbnails[match.thumbnail] || 'https://via.placeholder.com/800'} alt={match.matchTitle} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                               {match.isLive && <div className="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold animate-pulse shadow-md"><span className="w-2 h-2 bg-white rounded-full inline-block mr-1"></span>LIVE</div>}
-                             </div>
-                             <div className="p-4 text-center">
-                               <h3 className="text-lg font-bold text-white">{match.matchTitle}</h3>
-                             </div>
-                           </div>
-                         ))}
-                       </div>
-                     </div>
-                   )}
-
-                   {/* 3. Show Match Iframe Player & Servers */}
-                   {selectedMatchMode2 && (
-                     <div>
-                       <button onClick={() => { setSelectedMatchMode2(null); setActiveIframeUrl(null); }} className="mb-6 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition">
-                         ← Back to Matches
-                       </button>
-                       
-                       {/* IFRAME PLAYER */}
-                       <div className="w-full aspect-[16/9] bg-black rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(255,255,255,0.1)] border border-white/10 mb-6 relative">
-                         {isChangingChannel ? (
-                           <div className="absolute inset-0 z-50 bg-black/90 flex flex-col items-center justify-center">
-                             <div className="w-12 h-12 border-4 border-gray-800 border-t-white rounded-full animate-spin mb-4"></div>
-                             <p className="text-white font-bold tracking-widest animate-pulse">Loading Server...</p>
-                           </div>
-                         ) : activeIframeUrl ? (
-                           <iframe 
-                             src={activeIframeUrl} 
-                             width="100%" 
-                             height="100%" 
-                             allowFullScreen 
-                             className="border-none w-full h-full"
-                           ></iframe>
-                         ) : (
-                           <div className="text-white flex items-center justify-center h-full">No Server Selected</div>
-                         )}
-                       </div>
-
-                       <h1 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                         {selectedMatchMode2.matchTitle}
-                         {selectedMatchMode2.isLive && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse whitespace-nowrap shadow-[0_0_10px_rgba(220,38,38,0.5)]">LIVE NOW</span>}
-                       </h1>
-                       
-                       {/* SERVERS LIST */}
-                       <div className="bg-[#1a1a1a] p-5 rounded-2xl border border-white/10 shadow-lg">
-                         <h3 className="text-lg font-bold text-gray-300 mb-4 uppercase tracking-widest flex items-center gap-2">
-                           <Tv size={20} className="text-white animate-pulse" /> Available Servers
-                         </h3>
-                         <div className="flex flex-wrap gap-3">
-                           {selectedMatchMode2.servers.map((server, idx) => {
-                             const isActive = activeIframeUrl === server.iframeUrl;
-                             return (
-                               <button 
-                                 key={idx}
-                                 onClick={() => {
-                                   if(!isActive) {
-                                     setIsChangingChannel(true);
-                                     setActiveIframeUrl(server.iframeUrl);
-                                     setTimeout(() => setIsChangingChannel(false), 1000);
-                                   }
-                                 }}
-                                 className={`px-6 py-3 rounded-xl text-sm font-bold transition-all flex items-center gap-2 ${
-                                   isActive 
-                                   ? 'bg-gradient-to-r from-red-600 to-red-800 text-white shadow-[0_0_15px_rgba(220,38,38,0.5)] border-0 scale-105' 
-                                   : 'bg-[#2d2d2d] text-gray-300 hover:text-white hover:bg-[#3d3d3d] border border-gray-600'
-                                 }`}
-                               >
-                                 {isActive ? <Radio size={16} className="animate-pulse" /> : <Play size={16} />}
-                                 {server.serverName}
-                               </button>
-                             );
-                           })}
                          </div>
                        </div>
                      </div>
+                   ) : (
+                     <div className="mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
+                         {/* TIMER BANNERS FOR MODE 2 */}
+                         {activeMode2Data && activeMode2Data.state === 'LIVE' && (
+                           <div className="bg-gradient-to-r from-red-900/40 via-[#1a0505] to-black border border-red-500/40 p-3 sm:p-4 rounded-2xl mb-4 flex items-center gap-3 md:gap-4 shadow-[0_0_30px_rgba(220,38,38,0.2)] animate-in slide-in-from-top-4 duration-500 backdrop-blur-md relative overflow-hidden">
+                              <div className="absolute top-0 left-0 w-1 h-full bg-red-500 animate-pulse"></div>
+                              <div className="bg-red-500/20 p-2.5 rounded-full border border-red-500/40"><Radio className="text-red-500 flex-shrink-0 animate-pulse" size={22} /></div>
+                              <p className="text-gray-200 text-sm md:text-base font-medium leading-snug">
+                                <strong className="text-white tracking-widest uppercase mr-2"><span className="w-2 h-2 bg-red-500 rounded-full animate-ping inline-block mr-2"></span> MATCH IS LIVE:</strong>
+                                <span className="text-red-400 font-black uppercase tracking-wider bg-red-950/60 px-2.5 py-0.5 rounded border border-red-500/20">{activeMode2Data.displayName}</span>
+                              </p>
+                           </div>
+                         )}
+
+                         {activeMode2Data && activeMode2Data.state === 'WAITING' && (
+                           <div className="bg-gradient-to-r from-blue-900/30 via-[#050a1a] to-black border border-blue-500/30 p-3 sm:p-4 rounded-2xl mb-4 flex items-center gap-3 md:gap-4 shadow-[0_0_30px_rgba(59,130,246,0.15)] animate-in slide-in-from-top-4 duration-500 backdrop-blur-md relative overflow-hidden">
+                              <div className="absolute top-0 left-0 w-1 h-full bg-blue-500 opacity-50"></div>
+                              <div className="bg-blue-500/10 p-2.5 rounded-full border border-blue-500/30"><Timer className="text-blue-400 flex-shrink-0 animate-pulse" size={22} /></div>
+                              <p className="text-gray-300 text-sm md:text-base font-medium leading-snug">
+                                <strong className="text-blue-300 tracking-widest uppercase mr-2">NEXT MATCH:</strong>
+                                <span className="text-blue-200 font-bold uppercase tracking-wider bg-blue-950/40 px-2.5 py-0.5 rounded border border-blue-500/20 mr-2">{activeMode2Data.displayName}</span>
+                                | Starts in <span className="text-white font-bold ml-1">{formatTime(activeMode2Data.minutesRemaining)}</span>.
+                              </p>
+                           </div>
+                         )}
+
+                         <div className="relative rounded-2xl p-[3px] animate-rainbow shadow-[0_0_40px_rgba(255,255,255,0.1)] transition-all duration-700">
+                            <div className="bg-black rounded-[14px] overflow-hidden relative z-10 w-full aspect-[16/9] flex items-center justify-center">
+                              {isChangingChannel && (
+                                 <div className="absolute inset-0 z-50 bg-black/90 flex flex-col items-center justify-center backdrop-blur-sm transition-all duration-300">
+                                   <div className="w-12 h-12 border-4 border-gray-800 border-t-white rounded-full animate-spin mb-4"></div>
+                                   <p className="text-white text-lg font-bold tracking-widest animate-pulse">Loading Server...</p>
+                                 </div>
+                              )}
+                              {activeIframeUrl ? (
+                                <iframe src={activeIframeUrl} width="100%" height="100%" allowFullScreen className="border-none w-full h-full"></iframe>
+                              ) : (<div className="text-white font-bold">No Server Available</div>)}
+                            </div>
+                         </div>
+        
+                         <div className="mt-5 px-1">
+                           <div className="w-full">
+                             <h1 className="text-xl sm:text-2xl font-bold text-white mb-2">
+                               {selectedCategory.categoryName} - {activeMode2Data?.displayName || 'Match'}
+                             </h1>
+                             <button onClick={() => { setSelectedCategory(null); setActiveIframeUrl(null); }} className="text-sm bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg mb-4 mt-2">
+                               ← View Categories
+                             </button>
+                           </div>
+
+                           {/* 🔴 SERVERS BUTTONS ROW 🔴 */}
+                           {activeMode2Data?.entityObj.servers?.length > 0 && (
+                             <div className="mt-2 mb-4 flex flex-wrap gap-3">
+                               {activeMode2Data.entityObj.servers.map((srv: any, i: number) => {
+                                 const isSrvActive = activeIframeUrl === srv.iframeUrl;
+                                 return (
+                                   <button key={i} onClick={() => { setIsChangingChannel(true); setActiveIframeUrl(srv.iframeUrl); setTimeout(() => setIsChangingChannel(false), 800); }} className={`px-5 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 border ${isSrvActive ? 'bg-red-600 border-red-500 text-white shadow-[0_0_15px_rgba(220,38,38,0.4)]' : 'bg-[#1a1a1a] border-gray-700 text-gray-300 hover:text-white hover:border-gray-500'}`}>
+                                     {isSrvActive ? <Radio size={16} className="animate-pulse" /> : <Play size={16} />} {srv.serverName}
+                                   </button>
+                                 )
+                               })}
+                             </div>
+                           )}
+        
+                           {/* ⚽ MATCHES LIST GRID ⚽ */}
+                           {evaluatedMode2Matches.length > 0 && (
+                             <div className="mt-6 mb-4 p-5 bg-[#0f0f0f] border border-white/10 rounded-2xl flex flex-col gap-4 shadow-[0_10px_30px_rgba(0,0,0,0.8)] relative overflow-hidden">
+                               <div className="absolute -top-10 -right-10 w-32 h-32 bg-fuchsia-600/10 blur-3xl rounded-full pointer-events-none"></div>
+                               <div className="flex items-center gap-2 text-white">
+                                 <Tv size={22} className="text-white animate-pulse"/>
+                                 <span className="text-base sm:text-lg font-extrabold uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Available Matches</span>
+                               </div>
+                               <div className="flex flex-wrap gap-3 mt-1 relative z-10">
+                                 {evaluatedMode2Matches.map((evalData, idx) => {
+                                     const isExpired = evalData.state === 'EXPIRED';
+                                     const isActive = activeMatchId === evalData.entityObj.matchId;
+                                     return (
+                                       <button key={idx} onClick={() => { if(!isExpired) { setIsManualOverride(true); setActiveMatchId(evalData.entityObj.matchId); if(evalData.entityObj.servers?.length > 0) setActiveIframeUrl(evalData.entityObj.servers[0].iframeUrl); } }} disabled={isExpired} className={`relative px-6 py-3 rounded-xl text-sm sm:text-base font-black transition-all duration-300 flex items-center gap-3 overflow-hidden group ${isExpired ? 'bg-black/60 border-2 border-red-900/30 text-gray-600 cursor-not-allowed opacity-80' : isActive ? 'text-white shadow-[0_0_20px_rgba(255,255,255,0.2)] border-0 scale-105 z-10 animate-rainbow' : 'bg-gradient-to-b from-[#2d2d2d] to-[#1a1a1a] text-gray-200 hover:text-white border-2 border-gray-600 hover:border-white/50'}`}>
+                                         {isActive && !isExpired && <span className="absolute inset-0 bg-black/20 pointer-events-none"></span>}
+                                         {isExpired ? (<div className="bg-red-950/80 p-1.5 rounded-full border border-red-900/50 shadow-[0_0_8px_rgba(220,38,38,0.4)]"><X size={16} className="text-red-600" /></div>) : isActive ? (<Radio size={18} className="animate-pulse text-white relative z-10" />) : (<div className={`w-2.5 h-2.5 rounded-full ${evalData.state === 'LIVE' ? 'bg-red-500' : evalData.state === 'SOON' ? 'bg-orange-500' : 'bg-blue-500'} animate-pulse group-hover:bg-white transition-colors`}></div>)}
+                                         <span className={`relative z-10 tracking-wide uppercase ${isExpired ? 'line-through decoration-red-800/80 decoration-2' : ''}`}>{evalData.displayName}</span>
+                                       </button>
+                                     );
+                                 })}
+                               </div>
+                             </div>
+                           )}
+                         </div>
+                     </div>
                    )}
-                 </div>
+                 </>
 
                ) : (
                  /* =========================================
@@ -857,7 +948,7 @@ const [selectedVideo, setSelectedVideo] = useState<StreamData | null>(null);
                      </>
                    )}
                  </>
-               )}
+               )}const [evaluatedChannels, setEvaluatedChannels] = useState<any[]>([]);
                
              </div>
              
@@ -879,6 +970,894 @@ const [selectedVideo, setSelectedVideo] = useState<StreamData | null>(null);
     </>
   );
 }
+
+
+
+
+
+
+
+// 1
+
+
+// 'use client';
+
+// import React, { useState, useEffect, useRef } from 'react';
+// import OkRuPlayer from '@/components/OkRuPlayer'; 
+// import { Play, User, Tv, X, ShieldAlert, Radio, Clock, Zap, Timer } from 'lucide-react'; 
+// import Script from 'next/script'; 
+// import Head from 'next/head'; 
+
+// interface ChannelData {
+//   name: string;
+//   videoId: string;
+// }
+
+// interface StreamData {
+//   videoTitle: string;
+//   videoId: string;
+//   activeThumbnail: string; 
+//   channels?: ChannelData[]; 
+//   isLive?: boolean;
+// }
+
+// interface ServerData {
+//   serverName: string;
+//   iframeUrl: string;
+// }
+
+// interface MatchData {
+//   matchId: string;
+//   matchTitle: string;
+//   thumbnail: string;
+//   isLive: boolean;
+//   servers: ServerData[];
+// }
+
+// interface CategoryData {
+//   categoryId: string;
+//   categoryName: string;
+//   categoryThumbnail: string;
+//   matches: MatchData[];
+// }
+
+// interface HomeProps {
+//   initialData: {
+//     activeMode?: number; // 1 for old, 2 for new
+//     isLive: boolean; 
+//     title: string; 
+//     thumbnails: { [key: string]: string }; 
+//     streams: StreamData[]; 
+//     mode2Categories?: CategoryData[];
+//   };
+// }
+
+// export default function HomeClient({ initialData }: HomeProps) {
+  
+//   const availableStreams = initialData.streams 
+//     ? initialData.streams.filter((stream) => stream.isLive !== false) 
+//     : [];
+
+// const [selectedVideo, setSelectedVideo] = useState<StreamData | null>(null);
+//   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
+//   const [isChangingChannel, setIsChangingChannel] = useState(false);
+  
+//   // ✨ Mode 2 States
+//   const [selectedCategory, setSelectedCategory] = useState<CategoryData | null>(null);
+//   const [selectedMatchMode2, setSelectedMatchMode2] = useState<MatchData | null>(null);
+//   const [activeIframeUrl, setActiveIframeUrl] = useState<string | null>(null);
+  
+//   const [forceAutoPlay, setForceAutoPlay] = useState(false);
+//   const [isOverlayVisible, setOverlayVisible] = useState(false); 
+//   const [showWelcomeModal, setShowWelcomeModal] = useState(true);
+
+//   // ✨ Unified State Machine Data
+//   const [evaluatedChannels, setEvaluatedChannels] = useState<any[]>([]);
+//   const [isManualOverride, setIsManualOverride] = useState(false);
+
+//   const overlayRef = useRef<HTMLDivElement>(null);
+//   const navbarRef = useRef<HTMLElement>(null);
+//   const welcomeModalRef = useRef<HTMLDivElement>(null);
+
+//   // =========================================================
+//   // 🚀 ISO-8601 UNIFIED SCHEDULER ENGINE
+//   // Format: !Match Name||S=2026-08-06T23:30:00+05:00||E=3h (or E=2026-08-07T02:15:00)
+//   // =========================================================
+//   useEffect(() => {
+//     if (!selectedVideo || !selectedVideo.channels) return;
+
+//     const resolveChannels = () => {
+//       // Step 1: Remove empty / invalid channels
+//       const cleanedChannels = selectedVideo.channels!.filter(
+//         (ch) => ch && ch.name && ch.name.trim() !== ''
+//       );
+
+//       const nowMs = Date.now(); // Current precise time in milliseconds
+
+//       const evaluated = cleanedChannels.map((channel) => {
+//         // Parse the new syntax
+//         const parts = channel.name.split('||');
+//         let rawName = parts[0].trim();
+//         const hasPriority = rawName.startsWith('!');
+//         let cleanName = hasPriority ? rawName.substring(1).trim() : rawName;
+
+//         const startPart = parts.find(p => p.trim().startsWith('S='));
+//         const endPart = parts.find(p => p.trim().startsWith('E='));
+
+//         let state = 'UNKNOWN';
+//         let minutesRemaining = 0;
+//         let minutesSinceStart = 0;
+//         let displayName = cleanName; // Default fallback
+
+//         if (startPart && endPart) {
+//           const startStr = startPart.replace('S=', '').trim();
+//           const endStr = endPart.replace('E=', '').trim();
+
+//           const startDate = new Date(startStr);
+//           const startMs = startDate.getTime();
+//           let endMs = 0;
+
+//           // 🚀 Smart Duration Parser (Checks for h, hour, d, day etc.)
+//           const durationRegex = /^(\d+)\s*(h|hour|hours|d|day|days|m|min|mins|minute|minutes)$/i;
+//           const durationMatch = endStr.match(durationRegex);
+
+//           if (durationMatch) {
+//             const value = parseInt(durationMatch[1], 10);
+//             const unit = durationMatch[2].toLowerCase();
+//             let multiplier = 0;
+            
+//             if (unit.startsWith('h')) multiplier = 60 * 60 * 1000; // Hours
+//             else if (unit.startsWith('d')) multiplier = 24 * 60 * 60 * 1000; // Days
+//             else if (unit.startsWith('m')) multiplier = 60 * 1000; // Minutes
+
+//             endMs = startMs + (value * multiplier); // Start Time + Duration
+//           } else {
+//             // Fallback agar ghalti se poori date/ISO format aa jaye
+//             endMs = new Date(endStr).getTime();
+//           }
+
+//           // 🎨 UI Magic: Extract time (e.g., 11:30 PM) for frontend display
+//           const timeOptions: Intl.DateTimeFormatOptions = { 
+//             hour: 'numeric', 
+//             minute: '2-digit', 
+//             hour12: true, 
+//             timeZone: 'Asia/Karachi' 
+//           };
+//           const formattedTime = startDate.toLocaleTimeString('en-US', timeOptions);
+//           displayName = `${cleanName} - ${formattedTime}`;
+
+//           // Precise minute differences
+//           const diffMinsStart = Math.round((startMs - nowMs) / 60000); 
+//           const diffMinsEnd = Math.round((endMs - nowMs) / 60000);   
+
+//           // 🧠 Status State Machine
+//           if (nowMs > endMs) {
+//             state = 'EXPIRED';
+//           } else if (nowMs >= startMs && nowMs <= endMs) {
+//             state = 'LIVE';
+//             minutesSinceStart = Math.abs(diffMinsStart);
+//           } else if (diffMinsStart <= 10 && diffMinsStart > 0) {
+//             state = 'SOON';
+//             minutesRemaining = diffMinsStart;
+//           } else if (diffMinsStart > 10) {
+//             state = 'WAITING';
+//             minutesRemaining = diffMinsStart;
+//           }
+//         }
+
+//         return { 
+//           channel, 
+//           state, 
+//           minutesRemaining, 
+//           minutesSinceStart, 
+//           hasPriority,
+//           displayName 
+//         };
+//       });
+
+//       setEvaluatedChannels(evaluated);
+//     };
+
+//     // Run immediately, then check every 60 seconds
+//     resolveChannels();
+//     const intervalId = setInterval(resolveChannels, 60000);
+//     return () => clearInterval(intervalId);
+//   }, [selectedVideo]);
+
+//   // =========================================================
+//   // 🎯 THE AUTO-SELECTION ALGORITHM
+//   // =========================================================
+//   useEffect(() => {
+//     if (evaluatedChannels.length === 0) return;
+
+//     const currentActive = evaluatedChannels.find(c => c.channel.videoId === activeVideoId);
+
+//     // Manual selection protection (unless expired)
+//     if (isManualOverride && currentActive && currentActive.state !== 'EXPIRED') {
+//       return; 
+//     }
+
+//     // Filter out EXPIRED
+//     const valid = evaluatedChannels.filter(c => c.state !== 'EXPIRED' && c.state !== 'UNKNOWN');
+//     if (valid.length === 0) return; 
+
+//     // Priority Queues
+//     const soon = valid.filter(c => c.state === 'SOON').sort((a, b) => a.minutesRemaining - b.minutesRemaining);
+//     const live = valid.filter(c => c.state === 'LIVE').sort((a, b) => a.minutesSinceStart - b.minutesSinceStart);
+//     const waiting = valid.filter(c => c.state === 'WAITING').sort((a, b) => a.minutesRemaining - b.minutesRemaining);
+
+//     // Apply strict priority
+//     let best;
+//     if (soon.length > 0) best = soon.find(c => c.hasPriority) || soon[0];
+//     else if (live.length > 0) best = live.find(c => c.hasPriority) || live[0];
+//     else if (waiting.length > 0) best = waiting[0];
+//     else best = valid[0];
+
+//     // Auto Switch Engine
+//     if (best && best.channel.videoId !== activeVideoId) {
+//       setActiveVideoId(best.channel.videoId);
+//       setIsManualOverride(false); 
+//     }
+//   }, [evaluatedChannels, activeVideoId, isManualOverride]);
+
+//   // Format Helper
+//   const formatTime = (mins: number) => {
+//     const h = Math.floor(mins / 60);
+//     const m = mins % 60;
+//     if (h > 0) return `${h}h ${m}m`;
+//     return `${m}m`;
+//   };
+
+//   const activeChannelData = evaluatedChannels.find(c => c.channel.videoId === activeVideoId);
+
+//   // =========================================================
+//   // UI EVENT HANDLERS & OBSERVERS
+//   // =========================================================
+//   useEffect(() => {
+//     const checkForAd = () => {
+//       const allElements = document.body.getElementsByTagName('*');
+//       for (let i = 0; i < allElements.length; i++) {
+//         const el = allElements[i] as HTMLElement;
+//         if (overlayRef.current && overlayRef.current.contains(el)) continue;
+//         if (navbarRef.current && navbarRef.current.contains(el)) continue;
+//         if (welcomeModalRef.current && welcomeModalRef.current.contains(el)) continue;
+//         if (el.tagName === 'SCRIPT' || el.tagName === 'STYLE' || el.tagName === 'LINK') continue;
+
+//         const style = window.getComputedStyle(el);
+//         const zIndex = parseInt(style.zIndex, 10);
+
+//         if (
+//           (style.position === 'fixed' || style.position === 'absolute') && 
+//           !isNaN(zIndex) && zIndex > 100 && 
+//           style.display !== 'none' && style.visibility !== 'hidden' &&
+//           el.offsetHeight > 10
+//         ) {
+//              if (!isOverlayVisible) setOverlayVisible(true);
+//              return;
+//         }
+//       }
+//     };
+
+//     const observer = new MutationObserver(checkForAd);
+//     observer.observe(document.body, { childList: true, subtree: true, attributes: true });
+//     return () => observer.disconnect();
+//   }, [isOverlayVisible]);
+
+//   useEffect(() => {
+//     const handleBlur = () => { if (isOverlayVisible) setOverlayVisible(false); };
+//     window.addEventListener('blur', handleBlur);
+//     return () => window.removeEventListener('blur', handleBlur);
+//   }, [isOverlayVisible]);
+
+//   useEffect(() => {
+//     if (showWelcomeModal) document.body.style.overflow = 'hidden';
+//     else document.body.style.overflow = 'auto';
+//     return () => { document.body.style.overflow = 'auto'; };
+//   }, [showWelcomeModal]);
+
+//   const handleChannelChange = (newVideoId: string) => {
+//     if (activeVideoId === newVideoId) return; 
+    
+//     setIsChangingChannel(true);
+//     setActiveVideoId(newVideoId);
+//     setForceAutoPlay(true);
+//     setIsManualOverride(true); 
+    
+//     if (isOverlayVisible) setOverlayVisible(false);
+//     setTimeout(() => { setIsChangingChannel(false); }, 1000);
+//   };
+
+//   const getThumbnailImage = (video: StreamData) => {
+//     if (video && video.activeThumbnail && initialData.thumbnails && initialData.thumbnails[video.activeThumbnail]) {
+//       return initialData.thumbnails[video.activeThumbnail];
+//     }
+//     return 'https://via.placeholder.com/800x450.png?text=No+Thumbnail'; 
+//   };
+
+//   return (
+//     <>
+//       <Head>
+//         <link rel="preconnect" href="https://ok.ru" crossOrigin="anonymous" />
+//         <link rel="dns-prefetch" href="https://ok.ru" />
+//       </Head>
+
+//       <style dangerouslySetInnerHTML={{__html: `
+//         @keyframes rainbowFlow {
+//           0% { background-position: 0% 50%; }
+//           50% { background-position: 100% 50%; }
+//           100% { background-position: 0% 50%; }
+//         }
+//         .animate-rainbow {
+//           background: linear-gradient(270deg, #ff003c, #ff00d4, #7000ff, #003cff, #00d4ff, #00ff70, #e1ff00, #ff7000, #ff003c);
+//           background-size: 800% 800%;
+//           animation: rainbowFlow 12s ease infinite;
+//         }
+
+//         .animate-rainbow-text {
+//           background: linear-gradient(270deg, #ff003c, #ff00d4, #7000ff, #003cff, #00d4ff, #00ff70, #e1ff00, #ff7000, #ff003c);
+//           background-size: 800% 800%;
+//           animation: rainbowFlow 12s ease infinite;
+//           -webkit-background-clip: text !important;
+//           -webkit-text-fill-color: transparent !important;
+//           background-clip: text !important;
+//           color: transparent !important;
+//         }
+//       `}} />
+
+//       <div className="min-h-screen bg-[#0f0f0f] text-white font-sans relative overflow-x-hidden">
+        
+//         {/* === WELCOME MODAL === */}
+//         {showWelcomeModal && (
+//           <div 
+//             ref={welcomeModalRef}
+//             className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/80 backdrop-blur-md px-4 py-4 transition-all duration-300"
+//           >
+//             <div className="bg-gradient-to-b from-[#1a1a1a] to-[#0f0f0f] border border-gray-800 rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto p-5 sm:p-8 relative shadow-[0_0_50px_rgba(220,38,38,0.15)] animate-in fade-in zoom-in duration-500 scrollbar-hide">
+//               <div className="absolute -top-20 -right-20 w-40 h-40 bg-red-600/20 blur-3xl rounded-full pointer-events-none"></div>
+              
+//               <button 
+//                 onClick={() => setShowWelcomeModal(false)}
+//                 className="absolute top-4 right-4 text-gray-400 hover:text-white bg-gray-800/50 hover:bg-red-600 p-2 rounded-full transition-colors z-[100000]"
+//               >
+//                 <X size={20} />
+//               </button>
+              
+//               <div className="text-center mb-6 relative z-10">
+//                  <div className="mx-auto w-16 h-16 bg-red-600/10 border border-red-500/20 rounded-full flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(220,38,38,0.2)]">
+//                    <ShieldAlert className="text-red-500" size={32} />
+//                  </div>
+//                  <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-wide mb-2">
+//                    Welcome to <span className="text-red-600">SPORTS</span>HUB
+//                  </h2>
+//                  <p className="text-gray-300 text-sm sm:text-base px-2">
+//                    Please read these important instructions before streaming.
+//                  </p>
+//               </div>
+
+//               <div className="space-y-4 relative z-10">
+//                  <div className="flex items-start gap-3 bg-black/40 p-4 rounded-2xl border border-gray-800/50">
+//                     <div className="mt-1.5 w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)] flex-shrink-0 animate-pulse"></div>
+//                     <p className="text-gray-200 text-sm sm:text-base leading-relaxed">
+//                        <strong className="text-white font-bold text-base sm:text-lg block mb-0.5">Note 1:</strong> 
+//                        The live stream will only start when the match officially begins. It will not play before the scheduled time.
+//                     </p>
+//                  </div>
+                 
+//                  <div className="flex items-start gap-3 bg-black/40 p-4 rounded-2xl border border-gray-800/50">
+//                     <div className="mt-1.5 w-2.5 h-2.5 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.8)] flex-shrink-0"></div>
+//                     <p className="text-gray-200 text-sm sm:text-base leading-relaxed">
+//                        <strong className="text-white font-bold text-base sm:text-lg block mb-0.5">Note 2:</strong> 
+//                        If the stream doesn't play even after the match has started, it is a <span className="text-red-400 font-semibold">server issue</span>. It will resolve itself automatically. Meanwhile, you can check other servers below. Our team is actively working to fix this.
+//                     </p>
+//                  </div>
+//               </div>
+              
+//               <button 
+//                 onClick={() => setShowWelcomeModal(false)}
+//                 className="w-full mt-6 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-red-900/40 text-lg hover:scale-[1.02] active:scale-[0.98] relative z-10 tracking-wide"
+//               >
+//                 Continue to Website
+//               </button>
+//             </div>
+//           </div>
+//         )}
+
+//         {/* BLACK OVERLAY FOR ADS */}
+//         {isOverlayVisible && (
+//           <div 
+//             ref={overlayRef} 
+//             className="fixed inset-0 bg-black/85 z-[40] transition-opacity duration-300 flex flex-col items-center justify-center text-center cursor-pointer"
+//             onClick={() => setOverlayVisible(false)} 
+//           >
+//             <div className="text-white/60 text-sm mt-96 animate-pulse font-mono tracking-widest">
+//               Tap anywhere to Start Stream...
+//             </div>
+//           </div>
+//         )}
+
+//         {/* 🌟 LUXURY NAVBAR 🌟 */}
+//         <nav ref={navbarRef} className="fixed top-0 left-0 right-0 z-[30] flex items-center justify-between px-4 py-3 bg-[#0f0f0f]/90 backdrop-blur-md border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+//           <div className="flex items-center gap-3">
+//             <a href="/" className="flex items-center gap-2 group">
+//                <div className="bg-gradient-to-br from-red-500 to-red-800 p-1.5 rounded-lg shadow-[0_0_15px_rgba(220,38,38,0.4)] group-hover:shadow-[0_0_20px_rgba(220,38,38,0.6)] transition-all duration-300">
+//                  <Play fill="white" size={16} className="text-white"/>
+//                </div>
+//                <span className="text-xl sm:text-2xl font-black tracking-tight drop-shadow-md">SPORTS<span className="text-red-600">HUB</span></span>
+//             </a>
+//           </div>
+//           <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border border-white/10 bg-white/5">
+//              <span className="text-green-500 animate-pulse">LIVE SERVER</span>
+//           </div>
+//           <div className="flex items-center gap-3">
+//              <div className="w-8 h-8 bg-gradient-to-tr from-purple-600 to-blue-600 rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(147,51,234,0.4)]">
+//                <User className="text-white" size={16} />
+//              </div>
+//           </div>
+//         </nav>
+
+//         {/* Main Content */}
+// {/* Main Content */}
+//         <div className="flex pt-16 h-screen">
+//           <main className="flex-1 overflow-y-auto overflow-x-hidden bg-[#0f0f0f] w-full transition-all duration-300">
+//              <div className="p-4 md:p-6 max-w-[1600px] mx-auto">
+               
+//                {initialData.activeMode === 2 ? (
+//                  /* =========================================
+//                     ✨ MODE 2: CATEGORIES -> MATCHES -> IFRAME ✨
+//                     ========================================= */
+//                  <div className="mb-8 animate-in fade-in duration-500">
+                   
+//                    {/* 1. Show Categories */}
+//                    {!selectedCategory && !selectedMatchMode2 && (
+//                      <div className="text-center mb-12">
+//                        <h2 className="text-3xl sm:text-5xl font-black text-white tracking-widest uppercase mb-8">
+//                          What do you want to <span className="animate-rainbow-text">Watch?</span>
+//                        </h2>
+//                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+//                          {initialData.mode2Categories?.map((cat) => (
+//                            <div 
+//                              key={cat.categoryId} 
+//                              onClick={() => setSelectedCategory(cat)}
+//                              className="cursor-pointer group relative rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.8)]"
+//                            >
+//                              <div className="aspect-video bg-black relative">
+//                                <img src={initialData.thumbnails[cat.categoryThumbnail] || 'https://via.placeholder.com/800'} alt={cat.categoryName} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+//                                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors"></div>
+//                                <div className="absolute bottom-4 left-0 right-0 text-center">
+//                                  <h3 className="text-2xl font-black text-white uppercase drop-shadow-lg">{cat.categoryName}</h3>
+//                                </div>
+//                              </div>
+//                            </div>
+//                          ))}
+//                        </div>
+//                      </div>
+//                    )}
+
+//                    {/* 2. Show Matches inside Category */}
+//                    {selectedCategory && !selectedMatchMode2 && (
+//                      <div>
+//                        <button onClick={() => setSelectedCategory(null)} className="mb-6 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition">
+//                          ← Back to Categories
+//                        </button>
+//                        <h2 className="text-2xl font-bold text-white mb-6">Live {selectedCategory.categoryName} Matches</h2>
+//                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+//                          {selectedCategory.matches.map((match) => (
+//                            <div 
+//                              key={match.matchId}
+//                              onClick={() => {
+//                                setSelectedMatchMode2(match);
+//                                if(match.servers.length > 0) setActiveIframeUrl(match.servers[0].iframeUrl);
+//                              }}
+//                              className="cursor-pointer group rounded-2xl overflow-hidden bg-[#1f1f1f] border border-white/5 hover:border-white/20 transition-all shadow-lg"
+//                            >
+//                              <div className="aspect-video relative">
+//                                <img src={initialData.thumbnails[match.thumbnail] || 'https://via.placeholder.com/800'} alt={match.matchTitle} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+//                                {match.isLive && <div className="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold animate-pulse shadow-md"><span className="w-2 h-2 bg-white rounded-full inline-block mr-1"></span>LIVE</div>}
+//                              </div>
+//                              <div className="p-4 text-center">
+//                                <h3 className="text-lg font-bold text-white">{match.matchTitle}</h3>
+//                              </div>
+//                            </div>
+//                          ))}
+//                        </div>
+//                      </div>
+//                    )}
+
+//                    {/* 3. Show Match Iframe Player & Servers */}
+//                    {selectedMatchMode2 && (
+//                      <div>
+//                        <button onClick={() => { setSelectedMatchMode2(null); setActiveIframeUrl(null); }} className="mb-6 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition">
+//                          ← Back to Matches
+//                        </button>
+                       
+//                        {/* IFRAME PLAYER */}
+//                        <div className="w-full aspect-[16/9] bg-black rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(255,255,255,0.1)] border border-white/10 mb-6 relative">
+//                          {isChangingChannel ? (
+//                            <div className="absolute inset-0 z-50 bg-black/90 flex flex-col items-center justify-center">
+//                              <div className="w-12 h-12 border-4 border-gray-800 border-t-white rounded-full animate-spin mb-4"></div>
+//                              <p className="text-white font-bold tracking-widest animate-pulse">Loading Server...</p>
+//                            </div>
+//                          ) : activeIframeUrl ? (
+//                            <iframe 
+//                              src={activeIframeUrl} 
+//                              width="100%" 
+//                              height="100%" 
+//                              allowFullScreen 
+//                              className="border-none w-full h-full"
+//                            ></iframe>
+//                          ) : (
+//                            <div className="text-white flex items-center justify-center h-full">No Server Selected</div>
+//                          )}
+//                        </div>
+
+//                        <h1 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+//                          {selectedMatchMode2.matchTitle}
+//                          {selectedMatchMode2.isLive && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse whitespace-nowrap shadow-[0_0_10px_rgba(220,38,38,0.5)]">LIVE NOW</span>}
+//                        </h1>
+                       
+//                        {/* SERVERS LIST */}
+//                        <div className="bg-[#1a1a1a] p-5 rounded-2xl border border-white/10 shadow-lg">
+//                          <h3 className="text-lg font-bold text-gray-300 mb-4 uppercase tracking-widest flex items-center gap-2">
+//                            <Tv size={20} className="text-white animate-pulse" /> Available Servers
+//                          </h3>
+//                          <div className="flex flex-wrap gap-3">
+//                            {selectedMatchMode2.servers.map((server, idx) => {
+//                              const isActive = activeIframeUrl === server.iframeUrl;
+//                              return (
+//                                <button 
+//                                  key={idx}
+//                                  onClick={() => {
+//                                    if(!isActive) {
+//                                      setIsChangingChannel(true);
+//                                      setActiveIframeUrl(server.iframeUrl);
+//                                      setTimeout(() => setIsChangingChannel(false), 1000);
+//                                    }
+//                                  }}
+//                                  className={`px-6 py-3 rounded-xl text-sm font-bold transition-all flex items-center gap-2 ${
+//                                    isActive 
+//                                    ? 'bg-gradient-to-r from-red-600 to-red-800 text-white shadow-[0_0_15px_rgba(220,38,38,0.5)] border-0 scale-105' 
+//                                    : 'bg-[#2d2d2d] text-gray-300 hover:text-white hover:bg-[#3d3d3d] border border-gray-600'
+//                                  }`}
+//                                >
+//                                  {isActive ? <Radio size={16} className="animate-pulse" /> : <Play size={16} />}
+//                                  {server.serverName}
+//                                </button>
+//                              );
+//                            })}
+//                          </div>
+//                        </div>
+//                      </div>
+//                    )}
+//                  </div>
+
+//                ) : (
+//                  /* =========================================
+//                     ✨ MODE 1: YOUR EXACT OLD CODE ✨
+//                     ========================================= */
+//                  <>
+//                    {/* HERO SECTION / PLAYER AREA */}
+//                    {!selectedVideo ? (
+//                      <div className="mb-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+                       
+//                        {availableStreams.length === 0 ? (
+//                          <div className="w-full aspect-[16/9] md:aspect-[21/9] bg-[#1a1a1a] rounded-xl border-2 border-dashed border-gray-800 flex flex-col items-center justify-center text-center p-6 shadow-inner relative overflow-hidden">
+//                             <div className="w-20 h-20 bg-gray-900 rounded-full flex items-center justify-center mb-4 shadow-lg border border-gray-800 z-10">
+//                                <Tv className="text-red-600/80" size={36} />
+//                             </div>
+//                             <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-wide z-10">No Matches Available</h2>
+//                             <p className="text-gray-400 max-w-lg z-10">Please check back later when matches are live.</p>
+//                          </div>
+//                        ) : (
+//                          <div className="relative w-full rounded-3xl p-[3px] animate-rainbow shadow-[0_0_60px_rgba(255,255,255,0.05)]">
+//                            <div className="bg-[#0f0f0f] rounded-[21px] w-full p-6 sm:p-10 relative overflow-hidden h-full z-10 border border-white/5">
+                             
+//                              <div className="absolute -top-32 -left-32 w-96 h-96 bg-fuchsia-600/10 blur-[120px] rounded-full pointer-events-none animate-pulse"></div>
+//                              <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-cyan-600/10 blur-[120px] rounded-full pointer-events-none animate-pulse"></div>
+        
+//                              <div className="text-center mb-12 relative z-10">
+//                                <h2 className="text-3xl sm:text-5xl font-black text-white tracking-widest uppercase mb-4 drop-shadow-2xl">
+//                                  What do you want to{' '}
+//                                  <span className="animate-rainbow-text">Watch?</span>
+//                                </h2>
+//                                <p className="text-gray-400 text-base sm:text-lg font-medium">Select a match below to start streaming instantly in HD</p>
+//                              </div>
+        
+//                              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+//                                {availableStreams.map((stream, idx) => (
+//                                  <div
+//                                    key={idx}
+//                                    onClick={() => {
+//                                      setForceAutoPlay(false);
+//                                      setSelectedVideo(stream);
+//                                      window.scrollTo({ top: 0, behavior: 'smooth' });
+//                                    }}
+//                                    className="group cursor-pointer rounded-2xl overflow-hidden bg-transparent transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_40px_rgba(0,0,0,0.8)] flex flex-col"
+//                                  >
+//                                    <div className="absolute inset-0 rounded-2xl animate-rainbow opacity-50 group-hover:opacity-100 transition-opacity duration-500 -z-10 p-[2px]">
+//                                      <div className="bg-[#121212] w-full h-full rounded-[14px]"></div>
+//                                    </div>
+        
+//                                    <div className="aspect-video w-full relative overflow-hidden shadow-inner bg-black rounded-t-[14px]">
+//                                      <img 
+//                                        src={getThumbnailImage(stream)} 
+//                                        alt={stream.videoTitle} 
+//                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out z-10 relative" 
+//                                      />
+//                                      {stream.isLive !== false && (
+//                                        <div className="absolute top-3 right-3 bg-red-600/95 backdrop-blur-md text-white text-xs px-3 py-1.5 rounded-md flex items-center gap-2 font-black shadow-[0_0_15px_rgba(220,38,38,0.6)] border border-red-400/30 z-30 tracking-widest">
+//                                          <span className="w-2 h-2 bg-white rounded-full animate-pulse shadow-[0_0_5px_white]"></span> LIVE
+//                                        </div>
+//                                      )}
+//                                      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#050505] to-transparent z-20"></div>
+//                                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 z-30">
+//                                        <div className="animate-rainbow p-[3px] rounded-full shadow-[0_0_40px_rgba(255,255,255,0.2)]">
+//                                          <div className="bg-black/90 p-4 rounded-full backdrop-blur-xl">
+//                                            <Play fill="white" size={32} className="text-white ml-1" />
+//                                          </div>
+//                                        </div>
+//                                      </div>
+//                                    </div>
+        
+//                                    <div className="p-5 sm:p-6 relative z-10 bg-gradient-to-b from-[#1f1f1f] to-[#050505] border-t border-white/10 flex-grow flex items-center justify-center text-center rounded-b-[14px] shadow-[inset_0_1px_10px_rgba(255,255,255,0.02)]">
+//                                      <h3 className="text-lg font-bold text-gray-300 group-hover:text-white transition-all duration-300 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.4)] line-clamp-2 leading-relaxed tracking-wide">
+//                                        {stream.videoTitle}
+//                                      </h3>
+//                                    </div>
+//                                  </div>
+//                                ))}
+//                              </div>
+//                            </div>
+//                          </div>
+//                        )}
+//                      </div>
+//                    ) : (
+//                      <div className="mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
+                         
+//                          {/* =========================================================
+//                              ✨ UNIFIED DYNAMIC LUXURY STATUS BAR ✨ 
+//                              ========================================================= */}
+//                          {activeChannelData && activeChannelData.state === 'LIVE' && (
+//                            <div className="bg-gradient-to-r from-red-900/40 via-[#1a0505] to-black border border-red-500/40 p-3 sm:p-4 rounded-2xl mb-4 flex items-center gap-3 md:gap-4 shadow-[0_0_30px_rgba(220,38,38,0.2)] animate-in slide-in-from-top-4 duration-500 backdrop-blur-md relative overflow-hidden">
+//                               <div className="absolute top-0 left-0 w-1 h-full bg-red-500 animate-pulse"></div>
+//                               <div className="bg-red-500/20 p-2.5 rounded-full border border-red-500/40 shadow-[0_0_15px_rgba(220,38,38,0.4)]">
+//                                  <Radio className="text-red-500 flex-shrink-0 animate-pulse" size={22} />
+//                               </div>
+//                               <p className="text-gray-200 text-sm md:text-base font-medium leading-snug">
+//                                 <strong className="text-white tracking-widest uppercase mr-2 flex items-center inline-flex gap-2">
+//                                   <span className="w-2 h-2 bg-red-500 rounded-full animate-ping"></span> MATCH IS LIVE:
+//                                 </strong>
+//                                 <span className="text-red-400 font-black uppercase tracking-wider bg-red-950/60 px-2.5 py-0.5 rounded border border-red-500/20 ml-1">{activeChannelData.displayName}</span>
+//                                 <span className="ml-2 text-gray-400">| Started {activeChannelData.minutesSinceStart} min ago.</span>
+//                               </p>
+//                            </div>
+//                          )}
+        
+//                          {activeChannelData && activeChannelData.state === 'SOON' && (
+//                            <div className="bg-gradient-to-r from-orange-900/40 via-[#1a0a05] to-black border border-orange-500/40 p-3 sm:p-4 rounded-2xl mb-4 flex items-center gap-3 md:gap-4 shadow-[0_0_30px_rgba(249,115,22,0.2)] animate-in slide-in-from-top-4 duration-500 backdrop-blur-md relative overflow-hidden">
+//                               <div className="absolute top-0 left-0 w-1 h-full bg-orange-500 animate-pulse"></div>
+//                               <div className="bg-orange-500/20 p-2.5 rounded-full border border-orange-500/40 shadow-[0_0_15px_rgba(249,115,22,0.4)]">
+//                                  <Zap className="text-orange-500 flex-shrink-0 animate-bounce" size={22} />
+//                               </div>
+//                               <p className="text-gray-200 text-sm md:text-base font-medium leading-snug">
+//                                 <strong className="text-white tracking-widest uppercase mr-2 text-orange-400">PLAYERS ON THE PITCH!</strong>
+//                                 The pre-match action has started! Players are on the ground warming up for <span className="text-orange-300 font-black uppercase tracking-wider bg-orange-950/60 px-2.5 py-0.5 rounded border border-orange-500/20 mx-1">{activeChannelData.displayName}</span>. Official kickoff is in exactly <span className="text-white font-bold">{activeChannelData.minutesRemaining} minutes!</span>
+//                               </p>
+//                            </div>
+//                          )}
+        
+//                          {activeChannelData && activeChannelData.state === 'WAITING' && (
+//                            <div className="bg-gradient-to-r from-blue-900/30 via-[#050a1a] to-black border border-blue-500/30 p-3 sm:p-4 rounded-2xl mb-4 flex items-center gap-3 md:gap-4 shadow-[0_0_30px_rgba(59,130,246,0.15)] animate-in slide-in-from-top-4 duration-500 backdrop-blur-md relative overflow-hidden">
+//                               <div className="absolute top-0 left-0 w-1 h-full bg-blue-500 opacity-50"></div>
+//                               <div className="bg-blue-500/10 p-2.5 rounded-full border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+//                                  <Timer className="text-blue-400 flex-shrink-0 animate-pulse" size={22} />
+//                               </div>
+//                               <p className="text-gray-300 text-sm md:text-base font-medium leading-snug">
+//                                 <strong className="text-blue-300 tracking-widest uppercase mr-2">NEXT MATCH:</strong>
+//                                 <span className="text-blue-200 font-bold uppercase tracking-wider bg-blue-950/40 px-2.5 py-0.5 rounded border border-blue-500/20 mr-2">{activeChannelData.displayName}</span>
+//                                 | Starts in <span className="text-white font-bold ml-1">{formatTime(activeChannelData.minutesRemaining)}</span>. You are in the waiting room.
+//                               </p>
+//                            </div>
+//                          )}
+        
+//                          <div className="relative rounded-2xl p-[3px] animate-rainbow shadow-[0_0_40px_rgba(255,255,255,0.1)] transition-all duration-700">
+//                             <div className="bg-black rounded-[14px] overflow-hidden relative z-10 w-full aspect-[16/9] flex items-center justify-center">
+                              
+//                               {isChangingChannel && (
+//                                  <div className="absolute inset-0 z-50 bg-black/90 flex flex-col items-center justify-center backdrop-blur-sm transition-all duration-300">
+//                                    <div className="w-12 h-12 border-4 border-gray-800 border-t-white rounded-full animate-spin mb-4"></div>
+//                                    <p className="text-white text-lg font-bold tracking-widest animate-pulse">Loading Stream...</p>
+//                                  </div>
+//                               )}
+        
+//                               {activeVideoId && (
+//                                 <OkRuPlayer 
+//                                   key={activeVideoId}
+//                                   videoId={activeVideoId} 
+//                                   title={selectedVideo.videoTitle} 
+//                                   thumbnail={getThumbnailImage(selectedVideo)} 
+//                                   autoPlay={true}
+//                                   forcePlayOnLoad={forceAutoPlay} 
+//                                 />
+//                               )}
+        
+//                             </div>
+//                          </div>
+        
+//                          <div className="mt-5 px-1">
+//                            <div className="w-full">
+//                              <h1 className="text-xl sm:text-2xl font-bold text-white mb-2 flex flex-wrap items-center gap-2">
+//                                {selectedVideo.videoTitle} 
+//                                {selectedVideo.isLive && <span className="text-xs bg-red-600 px-2 py-0.5 rounded text-white animate-pulse whitespace-nowrap shadow-[0_0_10px_rgba(220,38,38,0.5)]">LIVE NOW</span>}
+//                              </h1>
+//                            </div>
+        
+//                            {evaluatedChannels.length > 0 && (
+//                              <div className="mt-4 mb-4 p-5 bg-[#0f0f0f] border border-white/10 rounded-2xl flex flex-col gap-4 shadow-[0_10px_30px_rgba(0,0,0,0.8)] relative overflow-hidden">
+                               
+//                                <div className="absolute -top-10 -right-10 w-32 h-32 bg-fuchsia-600/10 blur-3xl rounded-full pointer-events-none"></div>
+        
+//                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+//                                  <div className="flex flex-col">
+//                                    <div className="flex items-center gap-2 text-white">
+//                                      <Tv size={22} className="text-white animate-pulse"/>
+//                                      <span className="text-base sm:text-lg font-extrabold uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">
+//                                        Available Servers
+//                                      </span>
+//                                    </div>
+//                                    <span className="text-sm text-gray-400 font-medium mt-1">
+//                                      Stream stuck or not working? <span className="text-white font-bold underline decoration-white decoration-2 underline-offset-2">Watch Below More Matches, Current Live or Upcomming (Eastern Time)!</span>
+//                                    </span>
+//                                  </div>
+//                                </div>
+        
+//                                <div className="flex flex-wrap gap-3 mt-1 relative z-10">
+//                                  {evaluatedChannels.map((evalData, idx) => {
+//                                      const isExpired = evalData.state === 'EXPIRED';
+//                                      const isActive = activeVideoId === evalData.channel.videoId;
+                                     
+//                                      return (
+//                                        <button
+//                                          key={idx}
+//                                          onClick={() => !isExpired && handleChannelChange(evalData.channel.videoId)}
+//                                          disabled={isExpired}
+//                                          className={`relative px-6 py-3 rounded-xl text-sm sm:text-base font-black transition-all duration-300 flex items-center gap-3 overflow-hidden group ${
+//                                            isExpired 
+//                                              ? 'bg-black/60 border-2 border-red-900/30 text-gray-600 cursor-not-allowed opacity-80'
+//                                              : isActive
+//                                              ? 'text-white shadow-[0_0_20px_rgba(255,255,255,0.2)] border-0 scale-105 z-10 animate-rainbow'
+//                                              : 'bg-gradient-to-b from-[#2d2d2d] to-[#1a1a1a] text-gray-200 hover:text-white border-2 border-gray-600 hover:border-white/50 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:-translate-y-1'
+//                                          }`}
+//                                        >
+//                                          {isActive && !isExpired && <span className="absolute inset-0 bg-black/20 pointer-events-none"></span>}
+                                         
+//                                          {isExpired ? (
+//                                            <div className="bg-red-950/80 p-1.5 rounded-full border border-red-900/50 shadow-[0_0_8px_rgba(220,38,38,0.4)]">
+//                                              <X size={16} className="text-red-600" />
+//                                            </div>
+//                                          ) : isActive ? (
+//                                            <Radio size={18} className="animate-pulse text-white relative z-10" />
+//                                          ) : (
+//                                            <div className={`w-2.5 h-2.5 rounded-full ${evalData.state === 'LIVE' ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.8)]' : evalData.state === 'SOON' ? 'bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.8)]' : 'bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]'} animate-pulse group-hover:bg-white group-hover:shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-colors`}></div>
+//                                          )}
+                                         
+//                                          <span className={`relative z-10 tracking-wide uppercase flex flex-col sm:flex-row sm:items-center sm:gap-2 ${isExpired ? 'line-through decoration-red-800/80 decoration-2' : ''}`}>
+//                                             {evalData.displayName}
+//                                          </span>
+                                         
+//                                          {isExpired && (
+//                                             <span className="relative z-10 text-[10px] sm:text-xs text-red-500 font-bold tracking-widest bg-red-950/50 px-2 py-0.5 rounded border border-red-900/30 ml-2">MATCH ENDED</span>
+//                                          )}
+                                         
+//                                          {!isActive && !isExpired && (
+//                                            <span className="absolute inset-0 border border-white/5 rounded-xl pointer-events-none"></span>
+//                                          )}
+//                                        </button>
+//                                      );
+//                                  })}
+//                                </div>
+//                              </div>
+//                            )}
+        
+//                            <p className="text-sm text-gray-400 border-l-2 border-white/50 pl-3 py-1 mt-3 bg-[#1a1a1a] rounded-r-md">
+//                              {initialData.title}
+//                            </p>
+//                          </div>
+//                      </div>
+//                    )}
+        
+//                    {/* BOTTOM STREAMS GRID */}
+//                    {selectedVideo && availableStreams && availableStreams.length > 0 && (
+//                      <>
+//                        <div className="flex flex-col mt-8 mb-4 px-1">
+//                          <div className="flex justify-center my-6 w-full overflow-hidden">
+//                            <iframe src="/banner" width="300" height="250" style={{ border: 'none', overflow: 'hidden', maxWidth: '100%' }} title="Sponsor Ad" />
+//                          </div>
+//                          <div className="flex items-center justify-between mt-2">
+//                            <h2 className="text-xl font-bold text-white flex items-center gap-2">
+//                              <span className="w-3 h-3 bg-white rounded-full animate-pulse shadow-[0_0_10px_white]"></span> 
+//                              Check Below for More Streams!
+//                            </h2>
+//                          </div>
+//                        </div>
+                       
+//                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+//                           {availableStreams.map((video, idx) => (
+//                              <div 
+//                                key={idx} 
+//                                onClick={() => { 
+//                                  setIsChangingChannel(true);
+//                                  setSelectedVideo(video); 
+//                                  setForceAutoPlay(true);
+//                                  window.scrollTo({ top: 0, behavior: 'smooth' }); 
+                                 
+//                                  setTimeout(() => {
+//                                    setIsChangingChannel(false);
+//                                  }, 1000);
+//                                }} 
+//                                className="group cursor-pointer rounded-2xl overflow-hidden bg-transparent transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex flex-col"
+//                              >
+//                                 <div className="absolute inset-0 rounded-2xl animate-rainbow opacity-50 group-hover:opacity-100 transition-opacity duration-500 -z-10 p-[2px]">
+//                                   <div className="bg-[#121212] w-full h-full rounded-[14px]"></div>
+//                                 </div>
+        
+//                                 <div className={`relative aspect-video w-full overflow-hidden bg-black rounded-t-[14px] transition-all duration-300 z-10 ${selectedVideo?.videoId === video.videoId ? 'border-b-2 border-white shadow-[0_0_20px_rgba(255,255,255,0.2)]' : ''}`}>
+                                  
+//                                    <img 
+//                                      src={getThumbnailImage(video)} 
+//                                      alt={video.videoTitle} 
+//                                      className="w-full h-full object-cover group-hover:scale-110 transition duration-700 ease-out" 
+//                                      loading="lazy" 
+//                                    />
+                                   
+//                                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#050505] to-transparent z-20"></div>
+        
+//                                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
+//                                      <div className="animate-rainbow p-[3px] rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+//                                        <div className="bg-black/90 p-3 rounded-full backdrop-blur-sm">
+//                                          <Play fill="white" size={24} className="text-white ml-0.5" />
+//                                        </div>
+//                                      </div>
+//                                    </div>
+        
+//                                    {video.isLive !== false && <div className="absolute top-2 right-2 bg-red-600/90 text-white text-xs px-2 py-1 rounded flex items-center gap-1.5 font-bold z-30 border border-white/20 shadow-lg"><span className="w-2 h-2 bg-white rounded-full animate-pulse"></span> LIVE</div>}
+//                                 </div>
+                                
+//                                 <div className="p-4 relative z-10 bg-gradient-to-b from-[#1f1f1f] to-[#050505] border-t border-white/10 flex-grow flex items-center gap-3 rounded-b-[14px] shadow-[inset_0_1px_10px_rgba(255,255,255,0.02)]">
+//                                    <div className="w-8 h-8 rounded-full flex-shrink-0 animate-rainbow shadow-[0_0_10px_rgba(255,255,255,0.1)] p-[2px]">
+//                                      <div className="w-full h-full bg-black rounded-full"></div>
+//                                    </div>
+//                                    <h3 className={`text-sm font-bold line-clamp-2 leading-tight transition-all duration-300 ${selectedVideo?.videoId === video.videoId ? 'text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]' : 'text-gray-300 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]'}`}>
+//                                       {video.videoTitle}
+//                                    </h3>
+//                                 </div>
+//                              </div>
+//                           ))}
+//                        </div>
+//                      </>
+//                    )}
+//                  </>
+//                )}
+               
+//              </div>
+             
+//              {/* BANNER 2 */}
+//              <div className="flex justify-center my-6 w-full overflow-hidden">
+//                  <iframe src="/banner" width="300" height="250" style={{ border: 'none', overflow: 'hidden', maxWidth: '100%' }} title="Sponsor Ad" />
+//              </div>
+//           </main>
+//         </div>
+               
+               
+              
+
+//         <Script 
+//           src="https://pl28382929.effectivegatecpm.com/b1/06/0e/b1060e51e3f0ca4c6da303d42b6ea068.js"
+//           strategy="afterInteractive"
+//         />
+//       </div>
+//     </>
+//   );
+// }
 
 
 

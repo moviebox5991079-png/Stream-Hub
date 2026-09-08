@@ -314,7 +314,10 @@
     }
   ],
 
-  "mode2Categories": [
+
+
+  
+"mode2Categories": [
     {
       "categoryId": "football",
       "categoryName": "Football",
@@ -322,12 +325,21 @@
       "matches": [
         {
           "matchId": "f1",
-          "matchTitle": "Hamburger SV vs Mainz - 6:30 PM||S=2026-09-06T18:30:00+05:00||E=3h",
+          "matchTitle": "Real Madrid vs Barcelona - 10:00 PM||S=2026-09-08T22:00:00+05:00||E=3h",
           "thumbnail": "laliga1",
           "isLive": true,
           "servers": [
             { "serverName": "Server 1 (HD)", "iframeUrl": "https://example.com/embed1" },
             { "serverName": "Server 2 (SD)", "iframeUrl": "https://example.com/embed2" }
+          ]
+        },
+        {
+          "matchId": "f2",
+          "matchTitle": "PSG vs Lens - 1:00 AM||S=2026-09-09T01:00:00+05:00||E=3h",
+          "thumbnail": "psg vs lens",
+          "isLive": false,
+          "servers": [
+            { "serverName": "Main Server", "iframeUrl": "https://example.com/embed3" }
           ]
         }
       ]
@@ -339,11 +351,12 @@
       "matches": [
         {
           "matchId": "c1",
-          "matchTitle": "Pakistan vs England - Test",
+          "matchTitle": "Pakistan vs England - Test||S=2026-09-08T10:00:00+05:00||E=8h",
           "thumbnail": "pak_vs_eng_test",
           "isLive": true,
           "servers": [
-            { "serverName": "Main Server", "iframeUrl": "https://example.com/embed3" }
+            { "serverName": "PTV Sports Server", "iframeUrl": "https://example.com/embed4" },
+            { "serverName": "Ten Sports Server", "iframeUrl": "https://example.com/embed5" }
           ]
         }
       ]

@@ -311,5 +311,44 @@
         }
       ]
     }
+  ],
+
+  "mode2Categories": [
+    {
+      "categoryId": "football",
+      "categoryName": "Football",
+      "categoryThumbnail": "epl1",
+      "matches": [
+        {
+          "matchId": "f1",
+          "matchTitle": "Real Madrid vs Barcelona",
+          "thumbnail": "laliga1",
+          "isLive": true,
+          "servers": [
+            { "serverName": "Server 1 (HD)", "iframeUrl": "https://example.com/embed1" },
+            { "serverName": "Server 2 (SD)", "iframeUrl": "https://example.com/embed2" }
+          ]
+        }
+      ]
+    },
+    {
+      "categoryId": "cricket",
+      "categoryName": "Cricket",
+      "categoryThumbnail": "cricket_all",
+      "matches": [
+        {
+          "matchId": "c1",
+          "matchTitle": "Pakistan vs England - Test",
+          "thumbnail": "pak_vs_eng_test",
+          "isLive": true,
+          "servers": [
+            { "serverName": "Main Server", "iframeUrl": "https://example.com/embed3" }
+          ]
+        }
+      ]
+    }
   ]
+
+
+  
 }

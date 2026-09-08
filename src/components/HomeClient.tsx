@@ -624,6 +624,13 @@ const [selectedVideo, setSelectedVideo] = useState<StreamData | null>(null);
                                })}
                              </div>
                            )}
+
+                           {/* ✨ MODE 2 NOTE (Player Page) ✨ */}
+                           {initialData.mode2Note && (
+                             <p className="text-sm text-gray-300 border-l-4 border-red-600 pl-3 py-2 mt-2 mb-6 bg-[#1a1a1a] rounded-r-md shadow-[0_0_10px_rgba(220,38,38,0.1)]">
+                               {initialData.mode2Note}
+                             </p>
+                           )}
         
                            {/* ⚽ MATCHES LIST GRID ⚽ */}
                            {evaluatedMode2Matches.length > 0 && (

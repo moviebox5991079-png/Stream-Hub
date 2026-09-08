@@ -329,8 +329,8 @@
           "thumbnail": "laliga1",
           "isLive": true,
           "servers": [
-            { "serverName": "Server 1 (HD)", "iframeUrl": "https://example.com/embed1" },
-            { "serverName": "Server 2 (SD)", "iframeUrl": "https://example.com/embed2" }
+            { "serverName": "Server 1 (HD)", "iframeUrl": "https://dlive.sx/stream/stream-598.php" },
+            { "serverName": "Server 2 (SD)", "iframeUrl": "https://w6.sportsonliine.click/channels/hd/hd1.php" }
           ]
         },
         {

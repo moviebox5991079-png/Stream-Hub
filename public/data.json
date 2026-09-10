@@ -56,27 +56,27 @@
       "activeThumbnail": "uefa_champion_league",
       "channels": [
         {
-          "name": "Barcelona vs Feyenoord - 9:45 PM||S=2026-09-09T21:45:00+05:00||E=4h",
+          "name": "Fenerbahçe vs Roma - 9:45 PM||S=2026-09-10T21:45:00+05:00||E=4h",
           "videoId": "15254238731883"
         },
         {
-          "name": "VfB Stuttgart vs Viking - 9:45 PM||S=2026-09-09T21:45:00+05:00||E=4h",
+          "name": "PSV Eindhoven vs Shakhtar Donetsk - 9:45 PM||S=2026-09-10T21:45:00+05:00||E=4h",
           "videoId": "15254260751979"
         },
         {
-          "name": "Liverpool vs Atlético Madrid - 12:00 AM ||S=2026-09-019T00:00:00+05:00||E=4h",
+          "name": "Bayern München vs Bodø/Glimt - 12:00 AM ||S=2026-09-11T00:00:00+05:00||E=4h",
           "videoId": "15254285524587"
         },
         {
-          "name": "PSG vs Slovan Bratislava - 12:00 AM ||S=2026-09-10T00:00:00+05:00||E=4h",
+          "name": "Como vs RB Leipzig - 12:00 AM ||S=2026-09-11T00:00:00+05:00||E=4h",
           "videoId": "16983200374379"
         },
         {
-          "name": "Sporting CP vs Galatasaray - 12:00 AM ||S=2026-09-10T00:00:00+05:00||E=4h",
+          "name": "Man United vs Sabah FK - 12:00 AM ||S=2026-09-11T00:00:00+05:00||E=4h",
           "videoId": "16983242579563"
         },
         {
-          "name": "Napoli vs Arsenal - 12:00 AM ||S=2026-09-10T00:00:00+05:00||E=4h",
+          "name": "Slavia Prague vs Lens - 12:00 AM ||S=2026-09-11T00:00:00+05:00||E=4h",
           "videoId": "16983247822443"
         },
         {
@@ -180,7 +180,7 @@
     {
       "videoTitle": "England Premier League",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "epl1",
       "channels": [
         {

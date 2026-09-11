@@ -52,7 +52,7 @@
     {
       "videoTitle": "UEFA - Champion League",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "uefa_champion_league",
       "channels": [
         {
@@ -108,15 +108,15 @@
     {
       "videoTitle": "Germany Bundesliga",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "germanyLeague",
       "channels": [
         {
-          "name": "Hamburger SV vs Mainz - 6:30 PM||S=2026-09-06T18:30:00+05:00||E=3h",
+          "name": "Union Berlin vs Schalke 04 - 11:30 PM||S=2026-09-11T23:30:00+05:00||E=3h",
           "videoId": "15254299352683"
         },
         {
-          "name": "Frankfurt vs Augsburg - 8:30 PM||S=2026-09-06T20:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254308986475"
         },
         {
@@ -128,19 +128,19 @@
     {
       "videoTitle": "France - Ligue 1",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "france_league_1",
       "channels": [
         {
-          "name": "Troyes vs Strasbourg - 6:00 PM||S=2026-09-06T18:00:00+05:00||E=3h",
+          "name": "Rennes vs Marseille - 11:45 PM||S=2026-09-11T23:45:00+05:00||E=3h",
           "videoId": "15254341885547"
         },
         {
-          "name": "Angers vs Rennes - 8:15 PM||S=2026-09-06T20:15:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254357089899"
         },
         {
-          "name": "Marseille vs Paris FC - 11:45 PM||S=2026-09-06T23:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254367510123"
         }
       ]
@@ -148,15 +148,15 @@
     {
       "videoTitle": "Spain - Laliga",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Getafe vs Celta Vigo - 10:00 PM||S=2026-09-07T22:00:00+05:00||E=3h",
+          "name": "Sevilla vs Valencia - 12:00 AM ||S=2026-09-12T00:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": "Elche vs Real Sociedad - 12:30 AM ||S=2026-09-08T00:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255038074475"
         },
         {
@@ -218,17 +218,17 @@
       ]
     },
     {
-      "videoTitle": "Italy - Coppa Italia 2026",
+      "videoTitle": "Italy Serie A",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "italy - coppa italia",
+      "isLive": true,
+      "activeThumbnail": "SerieA",
       "channels": [
         {
-          "name": "Palermo vs Mantova - 9:00 PM||S=2026-09-03T21:00:00+05:00||E=4h",
+          "name": "Venezia vs Fiorentina - 11:45 PM||S=2026-09-11T23:45:00+05:00||E=3h",
           "videoId": "14204232736303"
         },
         {
-          "name": "Cagliari vs Hellas Verona - 12:00 AM ||S=2026-09-04T00:00:00+05:00||E=4h",
+          "name": "",
           "videoId": "14204288179759"
         },
         {

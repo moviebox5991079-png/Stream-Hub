@@ -108,7 +108,7 @@
     {
       "videoTitle": "Pak vs Eng",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "pak_vs_eng_test",
       "channels": [
         {
@@ -152,19 +152,19 @@
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Racing Santander vs Deportivo Alavés - 5:00 PM||S=2026-09-12T17:00:00+05:00||E=3h",
+          "name": "Celta Vigo vs Málaga - 5:00 PM||S=2026-09-13T17:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": "Osasuna vs Espanyol - 7:15 PM||S=2026-09-12T19:15:00+05:00||E=3h",
+          "name": "Levante vs Barcelona - 7:15 PM||S=2026-09-13T19:15:00+05:00||E=3h",
           "videoId": "15255038074475"
         },
         {
-          "name": "Athletic Club vs Elche - 9:30 PM||S=2026-09-12T21:30:00+05:00||E=3h",
+          "name": "Getafe vs Deportivo A Coruña - 9:30 PM||S=2026-09-13T21:30:00+05:00||E=3h",
           "videoId": "15255045480043"
         },
         {
-          "name": "Real Madrid vs Rayo Vallecano - 12:00 AM ||S=2026-09-13T00:00:00+05:00||E=3h",
+          "name": "Real Sociedad vs Atlético Madrid - 12:00 AM ||S=2026-09-14T00:00:00+05:00||E=3h",
           "videoId": "15255208599147"
         },
         {
@@ -184,31 +184,31 @@
       "activeThumbnail": "epl1",
       "channels": [
         {
-          "name": "Bournemouth vs Brentford - 7:00 PM||S=2026-09-12T19:00:00+05:00||E=3h",
+          "name": "Coventry vs Brighton - 6:00 PM||S=2026-09-13T18:00:00+05:00||E=3h",
           "videoId": "15273689226859"
         },
         {
-          "name": "Aston Villa vs Nottm Forest - 7:00 PM||S=2026-09-12T19:00:00+05:00||E=3h",
+          "name": "Man United vs Man City - 8:30 PM||S=2026-09-13T20:30:00+05:00||E=3h",
           "videoId": "15273713933931"
         },
         {
-          "name": "Chelsea vs Hull - 7:00 PM||S=2026-09-12T19:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15273722257003"
         },
         {
-          "name": "Crystal Palace vs Ipswich - 7:00 PM||S=2026-09-12T19:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15273739624043"
         },
         {
-          "name": "Liverpool vs Fulham - 7:00 PM||S=2026-09-12T19:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15273750175339"
         },
         {
-          "name": "Tottenham vs Everton - 9:30 PM||S=2026-09-12T21:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15273760071275"
         },
         {
-          "name": "Sunderland vs Arsenal - 12:00 AM ||S=2026-09-13T00:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15273767935595"
         },
         {

@@ -46,7 +46,8 @@
     "pak_vs_eng_test": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJobGOYI3bDfxw82eU8DL1qAFi-3oCGYPc46Il3AK5Nw&s",
     "italy - coppa italia": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlQImPIaTNtAuc1v5vhKwLT-jI0m8P_vaK-hmtke1X9w&s=10",
     "women-asia-cup": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMfnjkWiHBzG_orgZrW2n1dUNRJQAWoN3PJoV4csIeWA&s",
-    "uefa_champion_league": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSst0rgnznzlTKsfMwD_GzHE6BKaBYSbyLICVCAD6WX189V-ggAfuIQSE&s=10"
+    "uefa_champion_league": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSst0rgnznzlTKsfMwD_GzHE6BKaBYSbyLICVCAD6WX189V-ggAfuIQSE&s=10",
+    "EFL CUP": "https://www.manunited.uk/wp-content/uploads/2016/12/english-football-league-cup.jpg"
   },
   "streams": [
     {
@@ -152,15 +153,15 @@
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Villarreal vs Real Betis - 12:00 AM ||S=2026-09-15T00:00:00+05:00||E=3h",
+          "name": "Rayo Vallecano vs Espanyol - 10:00 PM||S=2026-09-15T22:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": "",
+          "name": "Deportivo Alavés vs Valencia - 11:00 PM||S=2026-09-15T23:00:00+05:00||E=3h",
           "videoId": "15255038074475"
         },
         {
-          "name": "",
+          "name": "Elche vs Real Madrid - 12:30 AM ||S=2026-09-16T00:30:00+05:00||E=3h",
           "videoId": "15255045480043"
         },
         {
@@ -180,7 +181,7 @@
     {
       "videoTitle": "England Premier League",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "epl1",
       "channels": [
         {
@@ -218,29 +219,29 @@
       ]
     },
     {
-      "videoTitle": "Italy Serie A",
+      "videoTitle": "EFL Cup",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "SerieA",
+      "isLive": true,
+      "activeThumbnail": "EFL CUP",
       "channels": [
         {
-          "name": "Venezia vs Fiorentina - 11:45 PM||S=2026-09-11T23:45:00+05:00||E=3h",
+          "name": "Peterborough vs Barnsley - 11:30 PM||S=2026-09-15T23:30:00+05:00||E=3h",
           "videoId": "14204232736303"
         },
         {
-          "name": "",
+          "name": "West Ham vs Fulham - 11:45 PM||S=2026-09-15T23:45:00+05:00||E=3h",
           "videoId": "14204288179759"
         },
         {
-          "name": "",
+          "name": "Ipswich vs Arsenal - 12:00 AM ||S=2026-09-16T00:00:00+05:00||E=3h",
           "videoId": "14204319768111"
         },
         {
-          "name": "",
+          "name": "Liverpool vs Tottenham - 12:00 AM ||S=2026-09-16T00:00:00+05:00||E=3h",
           "videoId": "14204331957807"
         },
         {
-          "name": "",
+          "name": "Reading vs Brentford - 12:00 AM ||S=2026-09-16T00:00:00+05:00||E=3h",
           "videoId": "14204346572335"
         },
         {

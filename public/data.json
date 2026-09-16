@@ -51,33 +51,33 @@
   },
   "streams": [
     {
-      "videoTitle": "UEFA - Champion League",
+      "videoTitle": "EFL Cup ",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "uefa_champion_league",
+      "isLive": true,
+      "activeThumbnail": "EFL CUP",
       "channels": [
         {
-          "name": "Fenerbahçe vs Roma - 9:45 PM||S=2026-09-10T21:45:00+05:00||E=4h",
+          "name": "Everton vs Wolves - 11:45 PM||S=2026-09-16T23:45:00+05:00||E=4h",
           "videoId": "15254238731883"
         },
         {
-          "name": "PSV Eindhoven vs Shakhtar Donetsk - 9:45 PM||S=2026-09-10T21:45:00+05:00||E=4h",
+          "name": "Fleetwood vs Sheff Utd - 11:45 PM||S=2026-09-16T23:45:00+05:00||E=4h",
           "videoId": "15254260751979"
         },
         {
-          "name": "Bayern München vs Bodø/Glimt - 12:00 AM ||S=2026-09-11T00:00:00+05:00||E=4h",
+          "name": "Coventry vs Aston Villa - 12:00 AM ||S=2026-09-17T00:00:00+05:00||E=4h",
           "videoId": "15254285524587"
         },
         {
-          "name": "Como vs RB Leipzig - 12:00 AM ||S=2026-09-11T00:00:00+05:00||E=4h",
+          "name": "Man United vs Brighton - 12:00 AM ||S=2026-09-17T00:00:00+05:00||E=4h",
           "videoId": "16983200374379"
         },
         {
-          "name": "Man United vs Sabah FK - 12:00 AM ||S=2026-09-11T00:00:00+05:00||E=4h",
+          "name": "",
           "videoId": "16983242579563"
         },
         {
-          "name": "Slavia Prague vs Lens - 12:00 AM ||S=2026-09-11T00:00:00+05:00||E=4h",
+          "name": "",
           "videoId": "16983247822443"
         },
         {
@@ -153,19 +153,19 @@
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Rayo Vallecano vs Espanyol - 10:00 PM||S=2026-09-15T22:00:00+05:00||E=3h",
+          "name": "Atlético Madrid vs Osasuna - 10:00 PM||S=2026-09-16T22:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": "Deportivo Alavés vs Valencia - 11:00 PM||S=2026-09-15T23:00:00+05:00||E=3h",
+          "name": "Deportivo A Coruña vs Sevilla - 10:00 PM||S=2026-09-16T22:00:00+05:00||E=3h",
           "videoId": "15255038074475"
         },
         {
-          "name": "Elche vs Real Madrid - 12:30 AM ||S=2026-09-16T00:30:00+05:00||E=3h",
+          "name": "Barcelona vs Racing Santander - 12:30 AM ||S=2026-09-17T00:30:00+05:00||E=3h",
           "videoId": "15255045480043"
         },
         {
-          "name": "",
+          "name": "Levante vs Athletic Club - 12:30 AM ||S=2026-09-17T00:30:00+05:00||E=3h",
           "videoId": "15255208599147"
         },
         {
@@ -221,7 +221,7 @@
     {
       "videoTitle": "EFL Cup",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "EFL CUP",
       "channels": [
         {

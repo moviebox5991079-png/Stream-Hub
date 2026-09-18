@@ -51,13 +51,13 @@
   },
   "streams": [
     {
-      "videoTitle": "EFL Cup ",
+      "videoTitle": "Germay - Bundesliga ",
       "videoId": "",
       "isLive": true,
-      "activeThumbnail": "EFL CUP",
+      "activeThumbnail": "germanyLeague",
       "channels": [
         {
-          "name": "Man City vs Norwich - 11:30 PM||S=2026-09-17T23:30:00+05:00||E=4h",
+          "name": "Bayern München vs Union Berlin - 11:30 PM||S=2026-09-18T23:30:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
@@ -107,13 +107,13 @@
       ]
     },
     {
-      "videoTitle": "Pak vs Eng",
+      "videoTitle": "Italy-Serie A",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "pak_vs_eng_test",
+      "isLive": true,
+      "activeThumbnail": "SerieA",
       "channels": [
         {
-          "name": "Pak vs Eng - 3:00 PM||S=2026-09-12T15:00:00+05:00||E=8h",
+          "name": "Monza vs Sassuolo - 11:45 PM||S=2026-09-18T23:45:00+05:00||E=3h",
           "videoId": "15254299352683"
         },
         {
@@ -129,11 +129,11 @@
     {
       "videoTitle": "France - Ligue 1",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "france_league_1",
       "channels": [
         {
-          "name": "Rennes vs Marseille - 11:45 PM||S=2026-09-11T23:45:00+05:00||E=3h",
+          "name": "Monaco vs Lens - 11:45 PM||S=2026-09-18T23:45:00+05:00||E=3h",
           "videoId": "15254341885547"
         },
         {
@@ -153,11 +153,11 @@
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Real Betis vs Getafe - 10:00 PM||S=2026-09-17T22:00:00+05:00||E=3h",
+          "name": "Espanyol vs Elche - 12:00 AM ||S=2026-09-19T00:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": "Málaga vs Villarreal - 12:30 AM ||S=2026-09-18T00:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255038074475"
         },
         {
@@ -181,11 +181,11 @@
     {
       "videoTitle": "England Premier League",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "epl1",
       "channels": [
         {
-          "name": "Leeds vs Newcastle - 12:00 AM||S=2026-09-15T00:00:00+05:00||E=3h",
+          "name": "Brentford vs Chelsea - 12:00 AM ||S=2026-09-19T00:00:00+05:00||E=3h",
           "videoId": "15273689226859"
         },
         {

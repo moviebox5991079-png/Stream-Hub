@@ -53,7 +53,7 @@
     {
       "videoTitle": "Germay - Bundesliga ",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "germanyLeague",
       "channels": [
         {
@@ -113,15 +113,15 @@
       "activeThumbnail": "SerieA",
       "channels": [
         {
-          "name": "Roma vs Inter - 9:00 PM||S=2026-09-19T21:00:00+05:00||E=3h",
+          "name": "Fiorentina vs Napoli - 3:30 PM||S=2026-09-20T15:30:00+05:00||E=3h",
           "videoId": "15254299352683"
         },
         {
-          "name": "",
+          "name": "Juventus vs Atalanta - 9:00 PM||S=2026-09-20T21:00:00+05:00||E=3h",
           "videoId": "15254308986475"
         },
         {
-          "name": "",
+          "name": "Milan vs Lecce - 11:45 PM||S=2026-09-20T23:45:00+05:00||E=3h",
           "videoId": "15254328122987"
         }
       ]
@@ -129,11 +129,11 @@
     {
       "videoTitle": "France - Ligue 1",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "france_league_1",
       "channels": [
         {
-          "name": "Monaco vs Lens - 11:45 PM||S=2026-09-18T23:45:00+05:00||E=3h",
+          "name": "Marseille vs PSG - 11:45 PM||S=2026-09-20T23:45:00+05:00||E=3h",
           "videoId": "15254341885547"
         },
         {
@@ -153,23 +153,23 @@
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Osasuna vs Rayo Vallecano - 5:00 PM||S=2026-09-19T17:00:00+05:00||E=3h",
+          "name": "Getafe vs Málaga - 5:00 PM||S=2026-09-20T17:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": "Athletic Club vs Deportivo Alavés - 7:15 PM||S=2026-09-19T19:15:00+05:00||E=3h",
+          "name": "Atlético Madrid vs Real Madrid - 7:15 PM||S=2026-09-20T19:15:00+05:00||E=3h",
           "videoId": "15255038074475"
         },
         {
-          "name": "Celta Vigo vs Racing Santander - 9:30 PM||S=2026-09-19T21:30:00+05:00||E=3h",
+          "name": "Deportivo A Coruña vs Real Betis - 9:30 PM||S=2026-09-20T21:30:00+05:00||E=3h",
           "videoId": "15255045480043"
         },
         {
-          "name": "Sevilla vs Barcelona - 12:00 AM ||S=2026-09-20T00:00:00+05:00||E=3h",
+          "name": "Villarreal vs Levante - 9:30 PM||S=2026-09-20T21:30:00+05:00||E=3h",
           "videoId": "15255208599147"
         },
         {
-          "name": "",
+          "name": "Valencia vs Real Sociedad - 12:00 AM ||S=2026-09-21T00:00:00+05:00||E=3h",
           "videoId": "15255217708651"
         },
         {
@@ -185,23 +185,23 @@
       "activeThumbnail": "epl1",
       "channels": [
         {
-          "name": "Tottenham vs Aston Villa - 4:30 PM||S=2026-09-19T16:30:00+05:00||E=3h",
+          "name": "Bournemouth vs Liverpool - 6:00 PM||S=2026-09-20T18:00:00+05:00||E=3h",
           "videoId": "17135767461483"
         },
         {
-          "name": "Brighton vs Arsenal - 7:00 PM||S=2026-09-19T19:00:00+05:00||E=3h",
+          "name": "Leeds vs Crystal Palace - 6:00 PM||S=2026-09-20T18:00:00+05:00||E=3h",
           "videoId": "15273713933931"
         },
         {
-          "name": "Everton vs Ipswich - 7:00 PM||S=2026-09-19T19:00:00+05:00||E=3h",
+          "name": "Man City vs Sunderland - 6:00 PM||S=2026-09-20T18:00:00+05:00||E=3h",
           "videoId": "15273722257003"
         },
         {
-          "name": "Newcastle vs Hull - 7:00 PM||S=2026-09-19T19:00:00+05:00||E=3h",
+          "name": "Fulham vs Man United - 8:30 PM||S=2026-09-20T20:30:00+05:00||E=3h",
           "videoId": "15273739624043"
         },
         {
-          "name": "Nottm Forest vs Coventry - 9:30 PM||S=2026-09-19T21:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15273750175339"
         },
         {

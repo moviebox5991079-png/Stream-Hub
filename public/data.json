@@ -108,21 +108,21 @@
       ]
     },
     {
-      "videoTitle": "Italy-Serie A",
+      "videoTitle": "Cricket",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "SerieA",
+      "isLive": true,
+      "activeThumbnail": "cricket_all",
       "channels": [
         {
-          "name": "Fiorentina vs Napoli - 3:30 PM||S=2026-09-20T15:30:00+05:00||E=3h",
+          "name": "Australia vs South Africa - 1:00 PM||S=2026-09-27T13:00:00+05:00||E=8h",
           "videoId": "15254299352683"
         },
         {
-          "name": "Juventus vs Atalanta - 9:00 PM||S=2026-09-20T21:00:00+05:00||E=3h",
+          "name": "India vs West Indies - 1:30 PM||S=2026-09-27T13:30:00+05:00||E=8h",
           "videoId": "15254308986475"
         },
         {
-          "name": "Milan vs Lecce - 11:45 PM||S=2026-09-20T23:45:00+05:00||E=3h",
+          "name": "England vs Sri Lanka - 2:30 PM||S=2026-09-27T14:30:00+05:00||E=8h",
           "videoId": "15254328122987"
         }
       ]

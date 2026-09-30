@@ -58,43 +58,43 @@
       "activeThumbnail": "uefa_nation_league",
       "channels": [
         {
-          "name": "Czechia vs England - 11:45 PM||S=2026-09-29T23:45:00+05:00||E=3h",
+          "name": "Azerbaijan vs Liechtenstein - 9:00 PM||S=2026-10-1T21:00:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
-          "name": "Spain vs Croatia - 11:45 PM||S=2026-09-29T23:45:00+05:00||E=3h",
+          "name": "Germany vs Serbia - 11:45 PM||S=2026-10-1T23:45:00+05:00||E=3h",
           "videoId": "15254260751979"
         },
         {
-          "name": "Scotland vs Switzerland - 11:45 PM||S=2026-09-29T23:45:00+05:00||E=3h",
+          "name": "Greece vs Netherlands - 11:45 PM||S=2026-10-1T23:45:00+05:00||E=3h",
           "videoId": "15254285524587"
         },
         {
-          "name": "Slovenia vs North Macedonia - 11:45 PM||S=2026-09-29T23:45:00+05:00||E=3h",
+          "name": "Denmark vs Portugal - 11:45 PM||S=2026-10-1T23:45:00+05:00||E=3h",
           "videoId": "16983200374379"
         },
         {
-          "name": "Finland vs Belarus - 9:00 PM||S=2026-09-29T21:00:00+05:00||E=3h",
+          "name": "Wales vs Norway - 11:45 PM||S=2026-10-1T23:45:00+05:00||E=3h",
           "videoId": "16983242579563"
         },
         {
-          "name": "San Marino vs Albania - 11:45 PM||S=2026-09-29T23:45:00+05:00||E=3h",
+          "name": "Ireland vs Austria - 11:45 PM||S=2026-10-1T23:45:00+05:00||E=3h",
           "videoId": "16983247822443"
         },
         {
-          "name": "Moldova vs Faroe Islands - 9:00 PM||S=2026-09-29T21:00:00+05:00||E=3h",
+          "name": "Israel vs Kosovo - 11:45 PM||S=2026-10-1T23:45:00+05:00||E=3h",
           "videoId": "16983254834795"
         },
         {
-          "name": "Slovakia vs Kazakhstan - 11:45 PM||S=2026-09-29T23:45:00+05:00||E=3h",
+          "name": "Malta vs Gibraltar - 11:45 PM||S=2026-10-1T23:45:00+05:00||E=3h",
           "videoId": "16983259553387"
         },
         {
-          "name": "Bulgaria vs Estonia - 11:45 PM||S=2026-09-29T23:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983264468587"
         },
         {
-          "name": "Luxembourg vs Iceland - 11:45 PM||S=2026-09-29T23:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983269514859"
         },
         {
@@ -110,19 +110,19 @@
     {
       "videoTitle": "Cricket",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "cricket_all",
       "channels": [
         {
-          "name": "Australia vs South Africa - 1:00 PM||S=2026-09-27T13:00:00+05:00||E=8h",
+          "name": "India vs West Indies, 2nd ODI - 1:30 PM - Today||S=2026-09-30T13:30:00+05:00||E=10h",
           "videoId": "15254299352683"
         },
         {
-          "name": "India vs West Indies - 1:30 PM||S=2026-09-27T13:30:00+05:00||E=8h",
+          "name": "South Africa vs Australia, 3rd ODI - 4:30 PM - Today||S=2026-09-30T16:30:00+05:00||E=10h",
           "videoId": "15254308986475"
         },
         {
-          "name": "England vs Sri Lanka - 2:30 PM||S=2026-09-27T14:30:00+05:00||E=8h",
+          "name": "",
           "videoId": "15254328122987"
         }
       ]

@@ -58,35 +58,35 @@
       "activeThumbnail": "uefa_nation_league",
       "channels": [
         {
-          "name": "Finland vs Albania - 6:00 PM||S=2026-10-03T18:00:00+05:00||E=3h",
+          "name": "Azerbaijan vs Lithuania - 6:00 PM||S=2026-10-04T18:00:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
-          "name": "Croatia vs England - 9:00 PM||S=2026-10-03T21:00:00+05:00||E=3h",
+          "name": "Kosovo vs Austria - 9:00 PM||S=2026-10-04T21:00:00+05:00||E=3h",
           "videoId": "15254260751979"
         },
         {
-          "name": "Belarus vs San Marino - 9:00 PM||S=2026-10-03T21:00:00+05:00||E=3h",
+          "name": "Malta vs Andorra - 9:00 PM||S=2026-10-04T21:00:00+05:00||E=3h",
           "videoId": "15254285524587"
         },
         {
-          "name": "Estonia vs Luxembourg - 9:00 PM||S=2026-10-03T21:00:00+05:00||E=3h",
+          "name": "Greece vs Germany - 11:45 PM||S=2026-10-04T23:45:00+05:00||E=3h",
           "videoId": "16983200374379"
         },
         {
-          "name": "Iceland vs Bulgaria - 9:00 PM||S=2026-10-03T21:00:00+05:00||E=3h",
+          "name": "Netherlands vs Serbia - 11:45 PM||S=2026-10-04T23:45:00+05:00||E=3h",
           "videoId": "16983242579563"
         },
         {
-          "name": "Spain vs Czechia - 11:45 PM||S=2026-10-03T23:45:00+05:00||E=3h",
+          "name": "Portugal vs Norway - 11:45 PM||S=2026-10-04T23:45:00+05:00||E=3h",
           "videoId": "16983247822443"
         },
         {
-          "name": "North Macedonia vs Scotland - 11:45 PM||S=2026-10-03T23:45:00+05:00||E=3h",
+          "name": "Wales vs Denmark - 11:45 PM||S=2026-10-04T23:45:00+05:00||E=3h",
           "videoId": "16983254834795"
         },
         {
-          "name": "Switzerland vs Slovenia - 11:45 PM||S=2026-10-03T23:45:00+05:00||E=3h",
+          "name": "Ireland vs Israel - 11:45 PM||S=2026-10-04T23:45:00+05:00||E=3h",
           "videoId": "16983259553387"
         },
         {
@@ -110,7 +110,7 @@
     {
       "videoTitle": "Cricket",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "cricket_all",
       "channels": [
         {

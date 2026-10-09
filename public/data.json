@@ -17,7 +17,7 @@
     "epl2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNYhQXJavwkR9qk-rTiuBV6l-KzmK1wAJKOA&s",
     "epl3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyNwBQarZ2CuGTLMf20yXBZen_galjvuVaIw&s",
     "dfbPokal": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgwpOxKXj0TNphgEKvoaTSJdrOhfEqHtJFTA&s",
-    "germanyLeague": "https://media.dfl.de/sites/3/2018/02/BL_Teaser_BL-Logo_Pitch_HD-1200x675.jpg",
+    "germany_bundesliga": "https://media.dfl.de/sites/3/2018/02/BL_Teaser_BL-Logo_Pitch_HD-1200x675.jpg",
     "Uefa_europa_conference_league": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNBzGKMmjI22aDrQfDI9BdrDZPm4MzsKGfRd3XJQ5zAw&s=10",
     "fifaFriendlies": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf4xk98bGa7elzuRj3bIYfXvTSzN-Bvrp24CSveBK69_kQRQbA13XLxFow&s=10",
     "pak_Vs_aus": "https://media.crictracker.com/media/attachments/1780293376738_Pakistan-and-Australia.jpeg",
@@ -54,7 +54,7 @@
     {
       "videoTitle": "UEFA Nation League",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "uefa_nation_league",
       "channels": [
         {
@@ -114,11 +114,11 @@
       "activeThumbnail": "cricket_all",
       "channels": [
         {
-          "name": "India vs West Indies, 1st T20 - 6:30 PM - Today||S=2026-10-06T18:30:00+05:00||E=5h",
+          "name": "Pakistan vs Sri Lanka, 1st T20I - 6:00 PM||S=2026-10-09T18:00:00+05:00||E=5h",
           "videoId": "15254299352683"
         },
         {
-          "name": "",
+          "name": "India vs West Indies, 2nd T20I - 6:30 PM||S=2026-10-09T18:30:00+05:00||E=5h",
           "videoId": "15254308986475"
         },
         {
@@ -130,11 +130,11 @@
     {
       "videoTitle": "France - Ligue 1",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "france_league_1",
       "channels": [
         {
-          "name": "Marseille vs PSG - 11:45 PM||S=2026-09-20T23:45:00+05:00||E=3h",
+          "name": "Lens vs Lyon - 11:45 PM||S=2026-10-09T23:45:00+05:00||E=3h",
           "videoId": "15254341885547"
         },
         {
@@ -150,27 +150,27 @@
     {
       "videoTitle": "Spain - Laliga",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Getafe vs Málaga - 5:00 PM||S=2026-09-20T17:00:00+05:00||E=3h",
+          "name": "Málaga vs Espanyol - 12:00 AM ||S=2026-10-10T00:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": "Atlético Madrid vs Real Madrid - 7:15 PM||S=2026-09-20T19:15:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255038074475"
         },
         {
-          "name": "Deportivo A Coruña vs Real Betis - 9:30 PM||S=2026-09-20T21:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255045480043"
         },
         {
-          "name": "Villarreal vs Levante - 9:30 PM||S=2026-09-20T21:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255208599147"
         },
         {
-          "name": "Valencia vs Real Sociedad - 12:00 AM ||S=2026-09-21T00:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255217708651"
         },
         {
@@ -268,13 +268,13 @@
       ]
     },
     {
-      "videoTitle": "Germnay - DFB Pokal",
+      "videoTitle": "Germany - Bundesliga",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "dfbPokal",
+      "isLive": true,
+      "activeThumbnail": "germany_bundesliga",
       "channels": [
         {
-          "name": "VfL Osnabrück vs Bayern München - 11:45 PM||S=2026-09-02T23:45:00+05:00||E=4h",
+          "name": "Dortmund vs Werder Bremen - 11:30 PM||S=2026-10-09T23:30:00+05:00||E=3h",
           "videoId": "14204490948143"
         },
         {

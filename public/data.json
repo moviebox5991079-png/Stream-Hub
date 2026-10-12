@@ -58,23 +58,23 @@
       "activeThumbnail": "SerieA",
       "channels": [
         {
-          "name": "Como vs Roma - 3:30 PM||S=2026-10-11T15:30:00+05:00||E=3h",
+          "name": "Atalanta vs Venezia - 9:30 PM||S=2026-10-12T21:30:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
-          "name": "Lazio vs Monza - 6:00 PM||S=2026-10-11T18:00:00+05:00||E=3h",
+          "name": "Torino vs Udinese - 11:45 PM||S=2026-10-12T23:45:00+05:00||E=3h",
           "videoId": "15254260751979"
         },
         {
-          "name": "Lecce vs Bologna - 6:00 PM||S=2026-10-11T18:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254285524587"
         },
         {
-          "name": "Sassuolo vs Milan - 9:00 PM||S=2026-10-11T21:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983200374379"
         },
         {
-          "name": "Cagliari vs Juventus - 11:45 PM||S=2026-10-11T23:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983242579563"
         },
         {
@@ -130,7 +130,7 @@
     {
       "videoTitle": "France Ligue 1",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "france_league_1",
       "channels": [
         {
@@ -154,19 +154,19 @@
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Elche vs Celta Vigo - 5:00 PM||S=2026-10-11T17:00:00+05:00||E=3h",
+          "name": "Levante vs Sevilla - 12:00 AM||S=2026-10-13T00:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": "Real Sociedad vs Deportivo A Coruña - 7:15 PM||S=2026-10-11T19:15:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255038074475"
         },
         {
-          "name": "Real Betis vs Osasuna - 9:30 PM||S=2026-10-11T21:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255045480043"
         },
         {
-          "name": "Racing Santander vs Valencia - 12:00 AM||S=2026-10-12T00:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255208599147"
         },
         {
@@ -186,15 +186,15 @@
       "activeThumbnail": "epl1",
       "channels": [
         {
-          "name": "Crystal Palace vs Nottm Forest - 6:00 PM||S=2026-10-11T18:00:00+05:00||E=3h",
+          "name": "Coventry vs Newcastle - 12:00 AM ||S=2026-10-13T00:00:00+05:00||E=3h",
           "videoId": "17135767461483"
         },
         {
-          "name": "Hull vs Everton - 6:00 PM||S=2026-10-11T18:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15273713933931"
         },
         {
-          "name": "Liverpool vs Man City - 8:30 PM||S=2026-10-11T20:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15273722257003"
         },
         {
@@ -270,7 +270,7 @@
     {
       "videoTitle": "Germany - Bundesliga",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "germany_bundesliga",
       "channels": [
         {

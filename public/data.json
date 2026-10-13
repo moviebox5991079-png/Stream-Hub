@@ -52,45 +52,45 @@
   },
   "streams": [
     {
-      "videoTitle": "Italy Serie A",
+      "videoTitle": "Champion League",
       "videoId": "",
       "isLive": true,
-      "activeThumbnail": "SerieA",
+      "activeThumbnail": "uefa_champion_league",
       "channels": [
         {
-          "name": "Atalanta vs Venezia - 9:30 PM||S=2026-10-12T21:30:00+05:00||E=3h",
+          "name": "Lens vs Sporting CP - 9:45 PM||S=2026-10-13T21:45:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
-          "name": "Torino vs Udinese - 11:45 PM||S=2026-10-12T23:45:00+05:00||E=3h",
+          "name": "Sabah FK vs Slavia Prague - 9:45 PM||S=2026-10-13T21:45:00+05:00||E=3h",
           "videoId": "15254260751979"
         },
         {
-          "name": "",
+          "name": "Arsenal vs Lille - 12:00 AM ||S=2026-10-14T00:00:00+05:00||E=3h",
           "videoId": "15254285524587"
         },
         {
-          "name": "",
+          "name": "Atlético Madrid vs Man United - 12:00 AM ||S=2026-10-14T00:00:00+05:00||E=3h",
           "videoId": "16983200374379"
         },
         {
-          "name": "",
+          "name": "Galatasaray vs Barcelona - 12:00 AM ||S=2026-10-14T00:00:00+05:00||E=3h",
           "videoId": "16983242579563"
         },
         {
-          "name": "",
+          "name": "Inter vs Club Brugge - 12:00 AM ||S=2026-10-14T00:00:00+05:00||E=3h",
           "videoId": "16983247822443"
         },
         {
-          "name": "",
+          "name": "RB Leipzig vs PSV Eindhoven - 12:00 AM ||S=2026-10-14T00:00:00+05:00||E=3h",
           "videoId": "16983254834795"
         },
         {
-          "name": "",
+          "name": "Viking vs Bayern München - 12:00 AM ||S=2026-10-14T00:00:00+05:00||E=3h",
           "videoId": "16983259553387"
         },
         {
-          "name": "",
+          "name": "Villarreal vs Napoli - 12:00 AM ||S=2026-10-14T00:00:00+05:00||E=3h",
           "videoId": "16983264468587"
         },
         {
@@ -114,11 +114,11 @@
       "activeThumbnail": "cricket_all",
       "channels": [
         {
-          "name": "Afghanistan vs Bangladesh Test, Day 4 - 11:00 AM - Today||S=2026-10-12T11:00:00+05:00||E=8h",
+          "name": "Pakistan vs Sri Lanka, 3rd T20I - 6:00 PM - Today||S=2026-10-13T18:00:00+05:00||E=5h",
           "videoId": "15254299352683"
         },
         {
-          "name": "South Africa vs Australia, 1st Test, Day 4 - 12:30 PM - Today||S=2026-10-12T12:30:00+05:00||E=8h",
+          "name": "",
           "videoId": "15254308986475"
         },
         {
@@ -150,7 +150,7 @@
     {
       "videoTitle": "Spain - Laliga",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
@@ -182,7 +182,7 @@
     {
       "videoTitle": "England Premier League",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "epl1",
       "channels": [
         {

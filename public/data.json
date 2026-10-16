@@ -52,57 +52,57 @@
   },
   "streams": [
     {
-      "videoTitle": "UEFA Europe League Today Matches List 1",
+      "videoTitle": "Germany Bundesliga",
       "videoId": "",
       "isLive": true,
-      "activeThumbnail": "UEFA_Europe_League",
+      "activeThumbnail": "germany_bundesliga",
       "channels": [
         {
-          "name": "AZ Alkmaar vs Hapoel Beer Sheva - 9:45 PM||S=2026-10-15T21:45:00+05:00||E=3h",
+          "name": "Frankfurt vs Köln - 11:30 PM||S=2026-10-16T23:30:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
-          "name": "Lech Poznan vs Leverkusen - 9:45 PM||S=2026-10-15T21:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254260751979"
         },
         {
-          "name": "Lyon vs Crystal Palace - 9:45 PM||S=2026-10-15T21:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254285524587"
         },
         {
-          "name": "NK Celje vs Omonia Nicosia - 9:45 PM||S=2026-10-15T21:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983200374379"
         },
         {
-          "name": "Salzburg vs Milan - 9:45 PM||S=2026-10-15T21:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983242579563"
         },
         {
-          "name": "Sparta Prague vs Lillestrøm - 9:45 PM||S=2026-10-15T21:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983247822443"
         },
         {
-          "name": "Torreense vs Sunderland - 9:45 PM||S=2026-10-15T21:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983254834795"
         },
         {
-          "name": "Union St.Gilloise vs Real Sociedad - 9:45 PM||S=2026-10-15T21:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983259553387"
         },
         {
-          "name": "Bournemouth vs Sturm Graz - 12:00 AM ||S=2026-10-16T00:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983264468587"
         },
         {
-          "name": "Benfica vs Celtic - 12:00 AM ||S=2026-10-16T00:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983269514859"
         },
         {
-          "name": "Celta Vigo vs Juventus - 12:00 AM ||S=2026-10-16T00:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983277641323"
         },
         {
-          "name": "Dinamo Zagreb vs Anderlecht - 12:00 AM ||S=2026-10-16T00:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983286554219"
         }
       ]
@@ -130,19 +130,19 @@
     {
       "videoTitle": "France Ligue 1",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "france_league_1",
       "channels": [
         {
-          "name": "Nice vs Strasbourg - 6:00 PM||S=2026-10-11T18:00:00+05:00||E=3h",
+          "name": "Le Mans vs Toulouse - 11:45 PM||S=2026-10-16T23:45:00+05:00||E=3h",
           "videoId": "15254341885547"
         },
         {
-          "name": "Rennes vs Auxerre - 8:15 PM||S=2026-10-11T20:15:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254357089899"
         },
         {
-          "name": "Troyes vs Marseille - 11:45 PM||S=2026-10-11T23:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254367510123"
         }
       ]
@@ -150,11 +150,11 @@
     {
       "videoTitle": "Spain - Laliga",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Levante vs Sevilla - 12:00 AM||S=2026-10-13T00:00:00+05:00||E=3h",
+          "name": "Deportivo A Coruña vs Levante - 12:00 AM ||S=2026-10-17T00:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
@@ -180,10 +180,10 @@
       ]
     },
     {
-      "videoTitle": "UEFA Europe League Today Matches List 2",
+      "videoTitle": "England Premier League",
       "videoId": "",
-      "isLive": true,
-      "activeThumbnail": "UEFA_Europe_League",
+      "isLive": false,
+      "activeThumbnail": "epl1",
       "channels": [
         {
           "name": "Ferencváros vs Viktoria Plzeň - 12:00 AM ||S=2026-10-16T00:00:00+05:00||E=3h",
@@ -220,29 +220,29 @@
       ]
     },
     {
-      "videoTitle": "EFL Cup",
+      "videoTitle": "Italy Serie A",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "EFL CUP",
+      "isLive": true,
+      "activeThumbnail": "SerieA",
       "channels": [
         {
-          "name": "Peterborough vs Barnsley - 11:30 PM||S=2026-09-15T23:30:00+05:00||E=3h",
+          "name": "Frosinone vs Sassuolo - 11:45 PM||S=2026-10-16T23:45:00+05:00||E=3h",
           "videoId": "14204232736303"
         },
         {
-          "name": "West Ham vs Fulham - 11:45 PM||S=2026-09-15T23:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "14204288179759"
         },
         {
-          "name": "Ipswich vs Arsenal - 12:00 AM ||S=2026-09-16T00:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "14204319768111"
         },
         {
-          "name": "Liverpool vs Tottenham - 12:00 AM ||S=2026-09-16T00:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "14204331957807"
         },
         {
-          "name": "Reading vs Brentford - 12:00 AM ||S=2026-09-16T00:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "14204346572335"
         },
         {

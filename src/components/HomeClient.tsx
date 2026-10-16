@@ -976,8 +976,7 @@ const [selectedVideo, setSelectedVideo] = useState<StreamData | null>(null);
              </div>
           </main>
         </div>
-
-        <Script src="https://pl28382929.effectivegatecpm.com/b1/06/0e/b1060e51e3f0ca4c6da303d42b6ea068.js" strategy="afterInteractive"/>
+      
       </div>
     </>
   );

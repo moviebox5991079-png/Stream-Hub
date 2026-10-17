@@ -58,27 +58,27 @@
       "activeThumbnail": "germany_bundesliga",
       "channels": [
         {
-          "name": "Frankfurt vs Köln - 11:30 PM||S=2026-10-16T23:30:00+05:00||E=3h",
+          "name": "Elversberg vs Augsburg - 6:30 PM||S=2026-10-17T18:30:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
-          "name": "",
+          "name": "Hamburger SV vs VfB Stuttgart - 6:30 PM||S=2026-10-17T18:30:00+05:00||E=3h",
           "videoId": "15254260751979"
         },
         {
-          "name": "",
+          "name": "Schalke 04 vs Mainz - 6:30 PM||S=2026-10-17T18:30:00+05:00||E=3h",
           "videoId": "15254285524587"
         },
         {
-          "name": "",
+          "name": "Union Berlin vs Dortmund - 6:30 PM||S=2026-10-17T18:30:00+05:00||E=3h",
           "videoId": "16983200374379"
         },
         {
-          "name": "",
+          "name": "Werder Bremen vs Paderborn - 6:30 PM||S=2026-10-17T18:30:00+05:00||E=3h",
           "videoId": "16983242579563"
         },
         {
-          "name": "",
+          "name": "Bayern München vs RB Leipzig - 9:30 PM||S=2026-10-17T21:30:00+05:00||E=3h",
           "videoId": "16983247822443"
         },
         {
@@ -110,15 +110,15 @@
     {
       "videoTitle": "Cricket",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "cricket_all",
       "channels": [
         {
-          "name": "India vs West Indies, 4th T20I - 6:30 PM - Today||S=2026-10-14T18:30:00+05:00||E=6h",
+          "name": "Bangladesh vs Zimbabwe - 4:30 PM - Today||S=2026-10-17T16:30:00+05:00||E=8h",
           "videoId": "15254299352683"
         },
         {
-          "name": "",
+          "name": "India vs West Indies - 6:30 PM - Today||S=2026-10-17T18:30:00+05:00||E=6h",
           "videoId": "15254308986475"
         },
         {
@@ -134,15 +134,15 @@
       "activeThumbnail": "france_league_1",
       "channels": [
         {
-          "name": "Le Mans vs Toulouse - 11:45 PM||S=2026-10-16T23:45:00+05:00||E=3h",
+          "name": "Strasbourg vs PSG - 8:15 PM||S=2026-10-17T20:15:00+05:00||E=3h",
           "videoId": "15254341885547"
         },
         {
-          "name": "",
+          "name": "Lille vs Brest - 11:45 PM||S=2026-10-17T23:45:00+05:00||E=3h",
           "videoId": "15254357089899"
         },
         {
-          "name": "",
+          "name": "Troyes vs Lens - 11:45 PM||S=2026-10-17T23:45:00+05:00||E=3h",
           "videoId": "15254367510123"
         }
       ]
@@ -154,19 +154,19 @@
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Deportivo A Coruña vs Levante - 12:00 AM ||S=2026-10-17T00:00:00+05:00||E=3h",
+          "name": "Espanyol vs Atlético Madrid - 5:00 PM||S=2026-10-17T17:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": "",
+          "name": "Villarreal vs Elche - 7:15 PM||S=2026-10-17T19:15:00+05:00||E=3h",
           "videoId": "15255038074475"
         },
         {
-          "name": "",
+          "name": "Real Betis vs Barcelona - 9:30 PM||S=2026-10-17T21:30:00+05:00||E=3h",
           "videoId": "15255045480043"
         },
         {
-          "name": "",
+          "name": "Valencia vs Athletic Club - 12:00 AM ||S=2026-10-18T00:00:00+05:00||E=3h",
           "videoId": "15255208599147"
         },
         {
@@ -182,31 +182,31 @@
     {
       "videoTitle": "England Premier League",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "epl1",
       "channels": [
         {
-          "name": "Ferencváros vs Viktoria Plzeň - 12:00 AM ||S=2026-10-16T00:00:00+05:00||E=3h",
+          "name": "Everton vs Chelsea - 4:30 PM||S=2026-10-17T16:30:00+05:00||E=3h",
           "videoId": "17135767461483"
         },
         {
-          "name": "Hoffenheim vs Beşiktaş - 12:00 AM ||S=2026-10-16T00:00:00+05:00||E=3h",
+          "name": "Brentford vs Liverpool - 7:00 PM||S=2026-10-17T19:00:00+05:00||E=3h",
           "videoId": "15273713933931"
         },
         {
-          "name": "Jagiellonia Białystok vs Ararat Armenia - 12:00 AM ||S=2026-10-16T00:00:00+05:00||E=3h",
+          "name": "Fulham vs Hull - 7:00 PM||S=2026-10-17T19:00:00+05:00||E=3h",
           "videoId": "15273722257003"
         },
         {
-          "name": "Marseille vs Olympiacos - 12:00 AM ||S=2026-10-16T00:00:00+05:00||E=3h",
+          "name": "Man City vs Ipswich - 7:00 PM||S=2026-10-17T19:00:00+05:00||E=3h",
           "videoId": "15273739624043"
         },
         {
-          "name": "NEC Nijmegen vs Levski Sofia - 12:00 AM ||S=2026-10-16T00:00:00+05:00||E=3h",
+          "name": "Newcastle vs Aston Villa - 9:30 PM||S=2026-10-17T21:30:00+05:00||E=3h",
           "videoId": "15273750175339"
         },
         {
-          "name": "Rennes vs OFI Crete - 12:00 AM ||S=2026-10-16T00:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15273760071275"
         },
         {
@@ -226,15 +226,15 @@
       "activeThumbnail": "SerieA",
       "channels": [
         {
-          "name": "Frosinone vs Sassuolo - 11:45 PM||S=2026-10-16T23:45:00+05:00||E=3h",
+          "name": "Venezia vs Napoli - 6:00 PM||S=2026-10-17T18:00:00+05:00||E=3h",
           "videoId": "14204232736303"
         },
         {
-          "name": "",
+          "name": "Bologna vs Inter - 9:00 PM||S=2026-10-17T21:00:00+05:00||E=3h",
           "videoId": "14204288179759"
         },
         {
-          "name": "",
+          "name": "Roma vs Genoa - 11:45 PM||S=2026-10-17T23:45:00+05:00||E=3h",
           "videoId": "14204319768111"
         },
         {

@@ -1,5 +1,5 @@
 {
-  "activeMode": 1,
+  "activeMode": 2,
   "isLive": true,
   "title": "⚠️ Note: The live stream will start when the match starts. !! Copyright © 2026 bulbul4u-live. All Rights Reserved.",
   "mode2Note": "⚠️ Important Note: If Server 1 is buffering or not working, please try Server 2 or other available servers below the player.",
@@ -375,17 +375,17 @@
       "matches": [
         {
           "matchId": "c1",
-          "matchTitle": "Pakistan vs England - Test||S=2026-09-08T10:00:00+05:00||E=8h",
-          "thumbnail": "pak_vs_eng_test",
+          "matchTitle": "Pakistan vs Sri Lanka, 1st Match - 1:00 PM - Today||S=2026-10-18T13:00:00+05:00||E=8h",
+          "thumbnail": "cricket_all",
           "isLive": false,
           "servers": [
             {
-              "serverName": "PTV Sports Server",
-              "iframeUrl": "https://example.com/embed4"
+              "serverName": "Server 1 ",
+              "iframeUrl": "https://dlive.sx/stream/stream-598.php"
             },
             {
-              "serverName": "Ten Sports Server",
-              "iframeUrl": "https://example.com/embed5"
+              "serverName": "Server 2",
+              "iframeUrl": "https://dlive.sx/cast/stream-598.php"
             }
           ]
         }

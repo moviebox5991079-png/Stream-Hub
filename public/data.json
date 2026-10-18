@@ -7,7 +7,7 @@
     "UEFA_Europe_League": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7PQOdyEmj6MuaTqfdnm_BMElSDTO08m4f-e9GMbCMfQ&s=10",
     "SerieA": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ50j3BSa8Cwy66KxJrKAlxc_xkt0-NdpWaA&s",
     "laliga1": "https://w0.peakpx.com/wallpaper/125/610/HD-wallpaper-laliga-golden-logo-football-leagues-artwork-la-liga-brown-metal-background-creative-laliga-logo-brands-laliga-thumbnail.jpg",
-    "laliga2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAYkeMf-fM1_LJReoyzIuNh-rC5KQZWsXclA&s",
+    "NFL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-tjZwRyWmIDECObT8u0KZYroI2hM9ELndEtHtjttIBA&s",
     "franceLeague1": "https://1000logos.net/wp-content/uploads/2019/01/Ligue-1-Logo.jpg",
     "laliga3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLDxyZ3-b-NHD1rg7LC6b-GMsjnF6GMg4Zxw&s",
     "cl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTbIoDSTiIOutjudqROnl_-vcoKB1rXvuWiA&s",
@@ -108,13 +108,13 @@
       ]
     },
     {
-      "videoTitle": "Cricket",
+      "videoTitle": "NFL",
       "videoId": "",
       "isLive": true,
-      "activeThumbnail": "cricket_all",
+      "activeThumbnail": "NFL",
       "channels": [
         {
-          "name": "Pakistan vs Sri Lanka, 1st Match - 1:00 PM - Today||S=2026-10-18T13:00:00+05:00||E=8h",
+          "name": "Buffalo Bills vs. Las Vegas Raiders ||S=2026-10-19T01:30:00+05:00||E=4h",
           "videoId": "15254299352683"
         },
         {

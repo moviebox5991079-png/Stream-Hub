@@ -108,13 +108,13 @@
       ]
     },
     {
-      "videoTitle": "NFL",
+      "videoTitle": "Cricket",
       "videoId": "",
       "isLive": true,
-      "activeThumbnail": "NFL",
+      "activeThumbnail": "cricket_all",
       "channels": [
         {
-          "name": "Buffalo Bills vs. Las Vegas Raiders ||S=2026-10-19T01:30:00+05:00||E=4h",
+          "name": "Australia vs South Africa - Test  ||S=2026-10-19T13:30:00+05:00||E=8h",
           "videoId": "15254299352683"
         },
         {

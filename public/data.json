@@ -52,45 +52,45 @@
   },
   "streams": [
     {
-      "videoTitle": "Germany Bundesliga",
+      "videoTitle": "UEFA Champions League",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "germany_bundesliga",
+      "isLive": true,
+      "activeThumbnail": "uefc champion league",
       "channels": [
         {
-          "name": "Leverkusen vs Freiburg - 6:30 PM||S=2026-10-18T18:30:00+05:00||E=3h",
+          "name": "Fenerbahçe vs Slavia Prague - 9:45 PM||S=2026-10-20T21:45:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
-          "name": "M'gladbach vs Hoffenheim - 8:30 PM||S=2026-10-18T20:30:00+05:00||E=3h",
+          "name": "Sabah FK vs Dortmund - 9:45 PM||S=2026-10-20T21:45:00+05:00||E=3h",
           "videoId": "15254260751979"
         },
         {
-          "name": "",
+          "name": "FC Porto vs PSV Eindhoven - 12:00 AM ||S=2026-10-21T00:00:00+05:00||E=3h",
           "videoId": "15254285524587"
         },
         {
-          "name": "",
+          "name": "Liverpool vs Villarreal - 12:00 AM ||S=2026-10-21T00:00:00+05:00||E=3h",
           "videoId": "16983200374379"
         },
         {
-          "name": "",
+          "name": "Man City vs AEK Athens - 12:00 AM ||S=2026-10-21T00:00:00+05:00||E=3h",
           "videoId": "16983242579563"
         },
         {
-          "name": "",
+          "name": "PSG vs Barcelona - 12:00 AM ||S=2026-10-21T00:00:00+05:00||E=3h",
           "videoId": "16983247822443"
         },
         {
-          "name": "",
+          "name": "Roma vs Slovan Bratislava - 12:00 AM ||S=2026-10-21T00:00:00+05:00||E=3h",
           "videoId": "16983254834795"
         },
         {
-          "name": "",
+          "name": "Napoli vs Bodø/Glimt - 12:00 AM ||S=2026-10-21T00:00:00+05:00||E=3h",
           "videoId": "16983259553387"
         },
         {
-          "name": "",
+          "name": "VfB Stuttgart vs Atlético Madrid - 12:00 AM - Tomorrow||S=2026-10-20T00:00:00+05:00||E=3h",
           "videoId": "16983264468587"
         },
         {
@@ -114,11 +114,11 @@
       "activeThumbnail": "cricket_all",
       "channels": [
         {
-          "name": "Australia vs South Africa - Test  ||S=2026-10-19T13:30:00+05:00||E=8h",
+          "name": "Pakistan vs England, 2nd Match - 1:00 PM - Today||S=2026-10-20T13:00:00+05:00||E=8h",
           "videoId": "15254299352683"
         },
         {
-          "name": "Afghanistan vs Zimbabwe, 2nd Match - 4:30 PM ||S=2026-10-19T16:30:00+05:00||E=8h",
+          "name": "",
           "videoId": "15254308986475"
         },
         {
@@ -166,7 +166,7 @@
     {
       "videoTitle": "Spain  Laliga",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
@@ -198,7 +198,7 @@
     {
       "videoTitle": "England Premier League",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "epl1",
       "channels": [
         {
@@ -238,7 +238,7 @@
     {
       "videoTitle": "Italy Serie A",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "SerieA",
       "channels": [
         {

@@ -58,39 +58,39 @@
       "activeThumbnail": "uefc champion league",
       "channels": [
         {
-          "name": "Fenerbahçe vs Slavia Prague - 9:45 PM||S=2026-10-20T21:45:00+05:00||E=3h",
+          "name": "Como vs Man United - 9:45 PM||S=2026-10-21T21:45:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
-          "name": "Sabah FK vs Dortmund - 9:45 PM||S=2026-10-20T21:45:00+05:00||E=3h",
+          "name": "Lille vs Galatasaray - 9:45 PM||S=2026-10-21T21:45:00+05:00||E=3h",
           "videoId": "15254260751979"
         },
         {
-          "name": "FC Porto vs PSV Eindhoven - 12:00 AM ||S=2026-10-21T00:00:00+05:00||E=3h",
+          "name": "Aston Villa vs Viking - 12:00 AM ||S=2026-10-22T00:00:00+05:00||E=3h",
           "videoId": "15254285524587"
         },
         {
-          "name": "Liverpool vs Villarreal - 12:00 AM ||S=2026-10-21T00:00:00+05:00||E=3h",
+          "name": "Bayern München vs Arsenal - 12:00 AM ||S=2026-10-22T00:00:00+05:00||E=3h",
           "videoId": "16983200374379"
         },
         {
-          "name": "Man City vs AEK Athens - 12:00 AM ||S=2026-10-21T00:00:00+05:00||E=3h",
+          "name": "Club Brugge vs Lens - 12:00 AM ||S=2026-10-22T00:00:00+05:00||E=3h",
           "videoId": "16983242579563"
         },
         {
-          "name": "PSG vs Barcelona - 12:00 AM ||S=2026-10-21T00:00:00+05:00||E=3h",
+          "name": "Inter vs Shakhtar Donetsk - 12:00 AM ||S=2026-10-22T00:00:00+05:00||E=3h",
           "videoId": "16983247822443"
         },
         {
-          "name": "Roma vs Slovan Bratislava - 12:00 AM ||S=2026-10-21T00:00:00+05:00||E=3h",
+          "name": "Real Betis vs Feyenoord - 12:00 AM ||S=2026-10-22T00:00:00+05:00||E=3h",
           "videoId": "16983254834795"
         },
         {
-          "name": "Napoli vs Bodø/Glimt - 12:00 AM ||S=2026-10-21T00:00:00+05:00||E=3h",
+          "name": "Real Madrid vs RB Leipzig - 12:00 AM ||S=2026-10-22T00:00:00+05:00||E=3h",
           "videoId": "16983259553387"
         },
         {
-          "name": "VfB Stuttgart vs Atlético Madrid - 12:00 AM - Tomorrow||S=2026-10-20T00:00:00+05:00||E=3h",
+          "name": "Sporting CP vs LASK - 12:00 AM ||S=2026-10-22T00:00:00+05:00||E=3h",
           "videoId": "16983264468587"
         },
         {
@@ -114,11 +114,11 @@
       "activeThumbnail": "cricket_all",
       "channels": [
         {
-          "name": "Pakistan vs England, 2nd Match - 1:00 PM - Today||S=2026-10-20T13:00:00+05:00||E=8h",
+          "name": "South Africa vs Australia, 2nd Test, Day 4 - 1:00 PM - Today||S=2026-10-21T13:00:00+05:00||E=9h",
           "videoId": "15254299352683"
         },
         {
-          "name": "",
+          "name": "Afghanistan vs Bangladesh, 3rd Match - 4:30 PM - Today||S=2026-10-21T16:30:00+05:00||E=9h",
           "videoId": "15254308986475"
         },
         {
@@ -166,11 +166,11 @@
     {
       "videoTitle": "Spain  Laliga",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Getafe vs Rayo Vallecano - 12:00 AM ||S=2026-10-20T00:00:00+05:00||E=3h",
+          "name": "Levante vs Athletic Club - 11:00 PM||S=2026-10-21T23:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {

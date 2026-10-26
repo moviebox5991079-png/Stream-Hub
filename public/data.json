@@ -54,7 +54,7 @@
     {
       "videoTitle": "Italy Serie A",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "SerieA",
       "channels": [
         {
@@ -114,15 +114,15 @@
       "activeThumbnail": "cricket_all",
       "channels": [
         {
-          "name": "Pakistan vs England, 4th Match -Today||S=2026-10-25T13:00:00+05:00||E=8h",
+          "name": "New Zealand vs India, 3rd T20I ||S=2026-10-27T12:00:00+05:00||E=5h",
           "videoId": "15254299352683"
         },
         {
-          "name": "",
+          "name": "Pakistan vs Sri Lanka, 5th Match ||S=2026-10-27T13:00:00+05:00||E=8h",
           "videoId": "15254308986475"
         },
         {
-          "name": "",
+          "name": "Afghanistan vs Zimbabwe, 1st T20I ||S=2026-10-27T19:30:00+05:00||E=5h",
           "videoId": "15254328122987"
         }
       ]
@@ -134,27 +134,27 @@
       "activeThumbnail": "france_league_1",
       "channels": [
         {
-          "name": "Monaco vs Lille - 7:00 PM||S=2026-10-25T19:00:00+05:00||E=3h",
+          "name": "PSG vs Lyon ||S=2026-10-27T00:30:00+05:00||E=3h",
           "videoId": "15254341885547"
         },
         {
-          "name": "Angers vs Lorient - 9:15 PM||S=2026-10-25T21:15:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254357089899"
         },
         {
-          "name": "Auxerre vs Le Mans - 9:15 PM||S=2026-10-25T21:15:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254367510123"
         },
         {
-          "name": "Marseille vs Le Havre - 9:15 PM||S=2026-10-25T21:15:00+05:00||E=3h",
+          "name": "",
           "videoId": "17485986405995"
         },
         {
-          "name": "Rennes vs Strasbourg - 9:15 PM||S=2026-10-25T21:15:00+05:00||E=3h",
+          "name": "",
           "videoId": "17485996039787"
         },
         {
-          "name": "Toulouse vs Troyes - 9:15 PM||S=2026-10-25T21:15:00+05:00||E=3h",
+          "name": "",
           "videoId": "17486002789995"
         },
         {
@@ -170,19 +170,19 @@
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Athletic Club vs Getafe - 6:00 PM||S=2026-10-25T18:00:00+05:00||E=3h",
+          "name": "Sevilla vs Osasuna ||S=2026-10-27T01:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
-          "name": "Celta Vigo vs Real Betis - 8:15 PM||S=2026-10-25T20:15:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255038074475"
         },
         {
-          "name": "Real Sociedad vs Levante - 10:30 PM||S=2026-10-25T22:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255045480043"
         },
         {
-          "name": "Barcelona vs Real Madrid - 1:00 AM ||S=2026-10-26T01:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255208599147"
         },
         {
@@ -198,7 +198,7 @@
     {
       "videoTitle": "England Premier League",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "epl1",
       "channels": [
         {
@@ -286,7 +286,7 @@
     {
       "videoTitle": "Germany - Bundesliga",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "germany_bundesliga",
       "channels": [
         {

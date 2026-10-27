@@ -54,27 +54,27 @@
     {
       "videoTitle": "Italy Serie A",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "SerieA",
       "channels": [
         {
-          "name": "Inter vs Fiorentina - 4:30 PM||S=2026-10-25T16:30:00+05:00||E=3h",
+          "name": "Sassuolo vs Lazio - 10:30 PM||S=2026-10-27T22:30:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
-          "name": "Atalanta vs Frosinone - 7:00 PM||S=2026-10-25T19:00:00+05:00||E=3h",
+          "name": "Roma vs Cagliari - 12:45 AM ||S=2026-10-28T00:45:00+05:00||E=3h",
           "videoId": "15254260751979"
         },
         {
-          "name": "Genoa vs Venezia - 7:00 PM||S=2026-10-25T19:00:00+05:00||E=3h",
+          "name": "Torino vs Como - 12:45 AM ||S=2026-10-28T00:45:00+05:00||E=3h",
           "videoId": "15254285524587"
         },
         {
-          "name": "Lecce vs Juventus - 10:00 PM||S=2026-10-25T22:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983200374379"
         },
         {
-          "name": "Udinese vs Milan - 12:45 AM ||S=2026-10-26T00:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983242579563"
         },
         {
@@ -130,7 +130,7 @@
     {
       "videoTitle": "France Ligue 1",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "france_league_1",
       "channels": [
         {
@@ -166,7 +166,7 @@
     {
       "videoTitle": "Spain  Laliga",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
@@ -196,29 +196,29 @@
       ]
     },
     {
-      "videoTitle": "England Premier League",
+      "videoTitle": "England EFL Cup",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "epl1",
+      "isLive": true,
+      "activeThumbnail": "EFL CUP",
       "channels": [
         {
-          "name": "Crystal Palace vs Newcastle - 7:00 PM||S=2026-10-25T19:00:00+05:00||E=3h",
+          "name": "Bradford vs Peterborough ||S=2026-10-28T00:45:00+05:00||E=3h",
           "videoId": "17135767461483"
         },
         {
-          "name": "Hull vs Brentford - 7:00 PM||S=2026-10-25T19:00:00+05:00||E=3h",
+          "name": "Fleetwood vs Arsenal ||S=2026-10-28T01:00:00+05:00||E=3h",
           "videoId": "15273713933931"
         },
         {
-          "name": "Liverpool vs Brighton - 7:00 PM||S=2026-10-25T19:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15273722257003"
         },
         {
-          "name": "Man United vs Bournemouth - 7:00 PM||S=2026-10-25T19:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15273739624043"
         },
         {
-          "name": "Sunderland vs Leeds - 9:30 PM||S=2026-10-25T21:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15273750175339"
         },
         {
@@ -236,41 +236,41 @@
       ]
     },
     {
-      "videoTitle": "Italy Serie A",
+      "videoTitle": "Germany DFB Pokal",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "SerieA",
+      "isLive": true,
+      "activeThumbnail": "dfbPokal",
       "channels": [
         {
-          "name": "Monza vs Cagliari - 9:30 PM||S=2026-10-19T21:30:00+05:00||E=3h",
+          "name": "Bochum vs Mainz - 10:00 PM||S=2026-10-27T22:00:00+05:00||E=3h",
           "videoId": "14204232736303"
         },
         {
-          "name": "Parma vs Torino - 11:45 PM||S=2026-10-19T23:45:00+05:00||E=3h",
+          "name": "Hamburger SV vs Frankfurt - 10:00 PM||S=2026-10-27T22:00:00+05:00||E=3h",
           "videoId": "14204288179759"
         },
         {
-          "name": "",
+          "name": "RW Essen vs RB Leipzig - 10:00 PM||S=2026-10-27T22:00:00+05:00||E=3h",
           "videoId": "14204319768111"
         },
         {
-          "name": "",
+          "name": "Sonnenhof Großaspach vs Augsburg - 10:00 PM||S=2026-10-27T22:00:00+05:00||E=3h",
           "videoId": "14204331957807"
         },
         {
-          "name": "",
+          "name": "Dortmund vs Werder Bremen ||S=2026-10-28T00:45:00+05:00||E=3h",
           "videoId": "14204346572335"
         },
         {
-          "name": "",
+          "name": "M'gladbach vs Karlsruher SC ||S=2026-10-28T00:45:00+05:00||E=3h",
           "videoId": "14204361252399"
         },
         {
-          "name": "",
+          "name": "Elversberg vs Darmstadt ||S=2026-10-28T00:45:00+05:00||E=3h",
           "videoId": "14204370492975"
         },
         {
-          "name": "",
+          "name": "Köln vs Union Berlin ||S=2026-10-28T00:45:00+05:00||E=3h",
           "videoId": "14204395527727"
         },
         {

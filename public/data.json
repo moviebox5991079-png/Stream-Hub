@@ -55,7 +55,7 @@
     {
       "videoTitle": "Our servers are currently facing technical difficulties. The team is working around the clock to get everything back online. We expect services to return to normal within the next 1–3 days. We sincerely apologize for the inconvenience.",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "server error",
       "channels": [
         {
@@ -199,15 +199,15 @@
     {
       "videoTitle": "England EFL Cup",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "EFL CUP",
       "channels": [
         {
-          "name": "Bradford vs Peterborough ||S=2026-10-28T00:45:00+05:00||E=3h",
+          "name": "Liverpool vs Chelsea - 1:00 AM||S=2026-10-29T01:00:00+05:00||E=4h",
           "videoId": "17135767461483"
         },
         {
-          "name": "Fleetwood vs Arsenal ||S=2026-10-28T01:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15273713933931"
         },
         {

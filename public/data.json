@@ -48,25 +48,26 @@
     "women-asia-cup": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMfnjkWiHBzG_orgZrW2n1dUNRJQAWoN3PJoV4csIeWA&s",
     "uefa_champion_league": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSst0rgnznzlTKsfMwD_GzHE6BKaBYSbyLICVCAD6WX189V-ggAfuIQSE&s=10",
     "EFL CUP": "https://www.manunited.uk/wp-content/uploads/2016/12/english-football-league-cup.jpg",
-    "uefa_nation_league": "https://m.itsnicethat.com/original_images/59c8d8927fa44c9e4d00e2a7.jpg"
+    "uefa_nation_league": "https://m.itsnicethat.com/original_images/59c8d8927fa44c9e4d00e2a7.jpg",
+    "server error": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvbTU9iRINM4zRbSioctAhyg1N1sdO3zpAAt2G_cGTgg&s=10"
   },
   "streams": [
     {
-      "videoTitle": "Italy Serie A",
+      "videoTitle": "Our servers are currently facing technical difficulties. The team is working around the clock to get everything back online. We expect services to return to normal within the next 1–3 days. We sincerely apologize for the inconvenience.",
       "videoId": "",
       "isLive": true,
-      "activeThumbnail": "SerieA",
+      "activeThumbnail": "server error",
       "channels": [
         {
-          "name": "Sassuolo vs Lazio - 10:30 PM||S=2026-10-27T22:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254238731883"
         },
         {
-          "name": "Roma vs Cagliari - 12:45 AM ||S=2026-10-28T00:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254260751979"
         },
         {
-          "name": "Torino vs Como - 12:45 AM ||S=2026-10-28T00:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "15254285524587"
         },
         {
@@ -110,7 +111,7 @@
     {
       "videoTitle": "Cricket",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "cricket_all",
       "channels": [
         {
@@ -198,7 +199,7 @@
     {
       "videoTitle": "England EFL Cup",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "EFL CUP",
       "channels": [
         {
@@ -238,7 +239,7 @@
     {
       "videoTitle": "Germany DFB Pokal",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "dfbPokal",
       "channels": [
         {

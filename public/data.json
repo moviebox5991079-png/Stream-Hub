@@ -55,7 +55,7 @@
     {
       "videoTitle": "Italy Serie A",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "SerieA",
       "channels": [
         {
@@ -131,19 +131,19 @@
     {
       "videoTitle": "France Ligue 1",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "france_league_1",
       "channels": [
         {
-          "name": "PSG vs Lyon ||S=2026-10-27T00:30:00+05:00||E=3h",
+          "name": "Le Havre vs PSG - 11:00 PM||S=2026-10-30T23:00:00+05:00||E=3h",
           "videoId": "15254341885547"
         },
         {
-          "name": "",
+          "name": "Nice vs Rennes - 11:00 PM||S=2026-10-30T23:00:00+05:00||E=3h",
           "videoId": "15254357089899"
         },
         {
-          "name": "",
+          "name": "Lille vs Lens - 1:05 AM ||S=2026-10-31T01:05:00+05:00||E=3h",
           "videoId": "15254367510123"
         },
         {
@@ -167,11 +167,11 @@
     {
       "videoTitle": "Spain  Laliga",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "Sevilla vs Osasuna ||S=2026-10-27T01:00:00+05:00||E=3h",
+          "name": "Villarreal vs Espanyol - 1:00 AM ||S=2026-10-31T01:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
@@ -199,7 +199,7 @@
     {
       "videoTitle": "England EFL Cup",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "EFL CUP",
       "channels": [
         {
@@ -287,15 +287,15 @@
     {
       "videoTitle": "Germany - Bundesliga",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "germany_bundesliga",
       "channels": [
         {
-          "name": "Hoffenheim vs Leverkusen - 7:30 PM||S=2026-10-25T19:30:00+05:00||E=3h",
+          "name": "Elversberg vs Mainz - 12:30 AM ||S=2026-10-31T00:30:00+05:00||E=3h",
           "videoId": "14204490948143"
         },
         {
-          "name": "Freiburg vs Bayern München - 9:30 PM||S=2026-10-25T21:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "14204506742319"
         },
         {

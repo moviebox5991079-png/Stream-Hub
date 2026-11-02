@@ -59,11 +59,11 @@
       "activeThumbnail": "SerieA",
       "channels": [
         {
-          "name": "",
+          "name": "Sassuolo vs Fiorentina - 10:30 PM||S=2026-11-02T22:30:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
-          "name": "",
+          "name": "Atalanta vs Parma - 12:45 AM ||S=2026-11-03T00:45:00+05:00||E=3h",
           "videoId": "15254260751979"
         },
         {
@@ -75,7 +75,7 @@
           "videoId": "16983200374379"
         },
         {
-          "name": "Juventus vs Napoli - 12:45 AM ||S=2026-11-02T00:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983242579563"
         },
         {
@@ -111,7 +111,7 @@
     {
       "videoTitle": "Cricket",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "cricket_all",
       "channels": [
         {
@@ -135,7 +135,7 @@
       "activeThumbnail": "france_league_1",
       "channels": [
         {
-          "name": "",
+          "name": "Lorient vs Brest - 12:45 AM ||S=2026-11-03T00:45:00+05:00||E=3h",
           "videoId": "15254341885547"
         },
         {
@@ -147,7 +147,7 @@
           "videoId": "15254367510123"
         },
         {
-          "name": "Marseille vs Toulouse - 12:45 AM ||S=2026-11-02T00:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "17485986405995"
         },
         {
@@ -171,7 +171,7 @@
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {
-          "name": "",
+          "name": "Deportivo A Coruña vs Osasuna - 1:00 AM ||S=2026-11-03T01:00:00+05:00||E=3h",
           "videoId": "15255022345835"
         },
         {
@@ -179,11 +179,11 @@
           "videoId": "15255038074475"
         },
         {
-          "name": "Elche vs Valencia -  ||S=2026-11-01T21:30:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255045480043"
         },
         {
-          "name": "Athletic Club vs Real Sociedad - ||S=2026-11-02T01:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "15255208599147"
         },
         {
@@ -203,7 +203,7 @@
       "activeThumbnail": "epl1",
       "channels": [
         {
-          "name": "Arsenal vs Liverpool ||S=2026-11-01T01:20:00+05:00||E=3h",
+          "name": "Newcastle vs Everton - 1:00 AM ||S=2026-11-03T01:00:00+05:00||E=3h",
           "videoId": "17135767461483"
         },
         {

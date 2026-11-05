@@ -53,45 +53,45 @@
   },
   "streams": [
     {
-      "videoTitle": "Champions League",
+      "videoTitle": "Europe League",
       "videoId": "",
       "isLive": true,
-      "activeThumbnail": "uefc champion league",
+      "activeThumbnail": "UEFA_Europe_League",
       "channels": [
         {
-          "name": "AEK Athens vs Real Madrid - 10:45 PM||S=2026-11-04T22:45:00+05:00||E=3h",
+          "name": "Milan vs Ferencváros - 10:45 PM||S=2026-11-05T22:45:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
-          "name": "Fenerbahçe vs Liverpool - 10:45 PM||S=2026-11-04T22:45:00+05:00||E=3h",
+          "name": "Anderlecht vs Salzburg - 10:45 PM||S=2026-11-05T22:45:00+05:00||E=3h",
           "videoId": "15254260751979"
         },
         {
-          "name": "Dortmund vs Real Betis - 1:00 AM ||S=2026-11-05T01:00:00+05:00||E=3h",
+          "name": "Crystal Palace vs Hoffenheim - 10:45 PM||S=2026-11-05T22:45:00+05:00||E=3h",
           "videoId": "15254285524587"
         },
         {
-          "name": "FC Porto vs Napoli - 1:00 AM ||S=2026-11-05T01:00:00+05:00||E=3h",
+          "name": "Real Sociedad vs Lyon - 10:45 PM||S=2026-11-05T22:45:00+05:00||E=3h",
           "videoId": "16983200374379"
         },
         {
-          "name": "Lens vs Como - 1:00 AM ||S=2026-11-05T01:00:00+05:00||E=3h",
+          "name": "Sparta Prague vs Bournemouth - 10:45 PM||S=2026-11-05T22:45:00+05:00||E=3h",
           "videoId": "16983242579563"
         },
         {
-          "name": "PSV Eindhoven vs Club Brugge - 1:00 AM ||S=2026-11-05T01:00:00+05:00||E=3h",
+          "name": "AZ Alkmaar vs Juventus - 1:00 AM ||S=2026-11-06T01:00:00+05:00||E=3h",
           "videoId": "16983247822443"
         },
         {
-          "name": "RB Leipzig vs Man City - 1:00 AM ||S=2026-11-05T01:00:00+05:00||E=3h",
+          "name": "Leverkusen vs Marseille - 1:00 AM ||S=2026-11-06T01:00:00+05:00||E=3h",
           "videoId": "16983254834795"
         },
         {
-          "name": "Slavia Prague vs Arsenal - 1:00 AM ||S=2026-11-05T01:00:00+05:00||E=3h",
+          "name": "Celtic vs Beşiktaş - 1:00 AM ||S=2026-11-06T01:00:00+05:00||E=3h",
           "videoId": "16983259553387"
         },
         {
-          "name": "Viking vs Sabah FK - 1:00 AM ||S=2026-11-05T01:00:00+05:00||E=3h",
+          "name": "Sunderland vs Dinamo Zagreb - 1:00 AM ||S=2026-11-06T01:00:00+05:00||E=3h",
           "videoId": "16983264468587"
         },
         {
@@ -111,7 +111,7 @@
     {
       "videoTitle": "Cricket",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "cricket_all",
       "channels": [
         {

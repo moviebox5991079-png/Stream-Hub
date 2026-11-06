@@ -111,11 +111,11 @@
     {
       "videoTitle": "Cricket",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "cricket_all",
       "channels": [
         {
-          "name": "New Zealand vs India, 1st ODI -||S=2026-11-04T07:00:00+05:00||E=10h",
+          "name": "New Zealand vs India, 2nd ODI ||S=2026-11-07T07:00:00+05:00||E=10h",
           "videoId": "15254299352683"
         },
         {

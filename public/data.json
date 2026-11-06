@@ -55,43 +55,43 @@
     {
       "videoTitle": "Italy Serie A",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "SerieA",
       "channels": [
         {
-          "name": "Milan vs Ferencváros - 10:45 PM||S=2026-11-07T22:45:00+05:00||E=3h",
+          "name": "Venezia vs Udinese - 12:45 AM||S=2026-11-07T00:45:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
-          "name": "Anderlecht vs Salzburg - 10:45 PM||S=2026-11-07T22:45:00+05:00||E=3h",
+          "name": "Cagliari vs Frosinone - 7:00 PM||S=2026-11-07T19:00:00+05:00||E=3h",
           "videoId": "15254260751979"
         },
         {
-          "name": "Crystal Palace vs Hoffenheim - 10:45 PM||S=2026-11-07T22:45:00+05:00||E=3h",
+          "name": "Torino vs Lecce - 7:00 PM||S=2026-11-07T19:00:00+05:00||E=3h",
           "videoId": "15254285524587"
         },
         {
-          "name": "Real Sociedad vs Lyon - 10:45 PM||S=2026-11-07T22:45:00+05:00||E=3h",
+          "name": "Parma vs Bologna - 10:00 PM||S=2026-11-07T22:00:00+05:00||E=3h",
           "videoId": "16983200374379"
         },
         {
-          "name": "Sparta Prague vs Bournemouth - 10:45 PM||S=2026-11-07T22:45:00+05:00||E=3h",
+          "name": "Roma vs Sassuolo - 12:45 AM ||S=2026-11-08T00:45:00+05:00||E=3h",
           "videoId": "16983242579563"
         },
         {
-          "name": "AZ Alkmaar vs Juventus - 1:00 AM ||S=2026-11-07T01:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983247822443"
         },
         {
-          "name": "Leverkusen vs Marseille - 1:00 AM ||S=2026-11-06T01:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983254834795"
         },
         {
-          "name": "Celtic vs Beşiktaş - 1:00 AM ||S=2026-11-06T01:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983259553387"
         },
         {
-          "name": "Sunderland vs Dinamo Zagreb - 1:00 AM ||S=2026-11-06T01:00:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983264468587"
         },
         {
@@ -131,19 +131,19 @@
     {
       "videoTitle": "France Ligue 1",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "france_league_1",
       "channels": [
         {
-          "name": "Lorient vs Brest - 12:45 AM ||S=2026-11-03T00:45:00+05:00||E=3h",
+          "name": "Toulouse vs Strasbourg - 12:45 AM ||S=2026-11-07T00:45:00+05:00||E=3h",
           "videoId": "15254341885547"
         },
         {
-          "name": "",
+          "name": "Auxerre vs Paris FC - 11:00 PM||S=2026-11-07T23:00:00+05:00||E=3h",
           "videoId": "15254357089899"
         },
         {
-          "name": "",
+          "name": "PSG vs Troyes - 1:05 AM ||S=2026-11-08T01:05:00+05:00||E=3h",
           "videoId": "15254367510123"
         },
         {
@@ -287,31 +287,31 @@
     {
       "videoTitle": "Germany - Bundesliga",
       "videoId": "",
-      "isLive": false,
+      "isLive": true,
       "activeThumbnail": "germany_bundesliga",
       "channels": [
         {
-          "name": "Augsburg vs Freiburg - 7:30 PM||S=2026-10-31T19:30:00+05:00||E=3h",
+          "name": "Hamburger SV vs M'gladbach - 12:30 AM||S=2026-11-07T00:30:00+05:00||E=3h",
           "videoId": "14204490948143"
         },
         {
-          "name": "Leverkusen vs VfB Stuttgart - 7:30 PM||S=2026-10-31T19:30:00+05:00||E=3h",
+          "name": "Dortmund vs Elversberg - 7:30 PM||S=2026-11-07T19:30:00+05:00||E=3h",
           "videoId": "14204506742319"
         },
         {
-          "name": "M'gladbach vs Paderborn - 7:30 PM||S=2026-10-31T19:30:00+05:00||E=3h",
+          "name": "Mainz vs Bayern München - 7:30 PM||S=2026-11-07T19:30:00+05:00||E=3h",
           "videoId": "14204523322927"
         },
         {
-          "name": "Schalke 04 vs RB Leipzig - 7:30 PM||S=2026-10-31T19:30:00+05:00||E=3h",
+          "name": "Paderborn vs Frankfurt - 7:30 PM||S=2026-11-07T19:30:00+05:00||E=3h",
           "videoId": "14204540034607"
         },
         {
-          "name": "Werder Bremen vs Hoffenheim - 7:30 PM||S=2026-10-31T19:30:00+05:00||E=3h",
+          "name": "RB Leipzig vs Augsburg - 7:30 PM||S=2026-11-07T19:30:00+05:00||E=3h",
           "videoId": "14204555304495"
         },
         {
-          "name": "",
+          "name": "VFB Stuttgart vs Werder Bremen - 10:30 PM||S=2026-11-07T22:30:00+05:00||E=3h",
           "videoId": "14204565200431"
         },
         {

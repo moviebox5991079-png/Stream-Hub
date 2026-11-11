@@ -115,7 +115,7 @@
       "activeThumbnail": "cricket_all",
       "channels": [
         {
-          "name": "Pakistan vs Sri Lanka, 1st Test, Day 3 - 9:30 AM - Today||S=2026-11-11T09:30:00+05:00||E=10h",
+          "name": "Pakistan vs Sri Lanka, 1st Test, Day 4 - 9:30 AM - Today||S=2026-11-12T09:30:00+05:00||E=10h",
           "videoId": "15254299352683"
         },
         {
@@ -167,7 +167,7 @@
     {
       "videoTitle": "Spain  Laliga",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "laliag-2026 to 2027",
       "channels": [
         {

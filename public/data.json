@@ -1,5 +1,5 @@
 {
-  "activeMode": 1,
+  "activeMode": 2,
   "isLive": true,
   "title": "⚠️ Note: The live stream will start when the match starts. !! Copyright © 2026 bulbul4u-live. All Rights Reserved.",
   "mode2Note": "⚠️ Important Note: If Server 1 is buffering or not working, please try Server 2 or other available servers below the player.",
@@ -347,7 +347,7 @@
           "servers": [
             {
               "serverName": "Server 1 (HD)",
-              "iframeUrl": "https://embed.st/embed/admin/ppv-crystal-palace-vs-middlesbrough/1"
+              "iframeUrl": "https://thedaddy.li/stream/stream-111.php"
             },
             {
               "serverName": "Server 2 (SD)",

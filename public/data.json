@@ -1,5 +1,5 @@
 {
-  "activeMode": 2,
+  "activeMode": 1,
   "isLive": true,
   "title": "⚠️ Note: The live stream will start when the match starts. !! Copyright © 2026 bulbul4u-live. All Rights Reserved.",
   "mode2Note": "⚠️ Important Note: If Server 1 is buffering or not working, please try Server 2 or other available servers below the player.",
@@ -53,41 +53,41 @@
   },
   "streams": [
     {
-      "videoTitle": "Italy Serie A",
+      "videoTitle": "UEFA Nations League",
       "videoId": "",
-      "isLive": false,
-      "activeThumbnail": "SerieA",
+      "isLive": true,
+      "activeThumbnail": "uefa_nation_league",
       "channels": [
         {
-          "name": "Napoli vs Lazio - 4:30 PM||S=2026-11-08T16:30:00+05:00||E=3h",
+          "name": "Turkiya vs Belgium - 10:00 PM ||S=2026-11-12T22:00:00+05:00||E=4h",
           "videoId": "15254238731883"
         },
         {
-          "name": "Genoa vs Milan - 7:00 PM||S=2026-11-08T19:00:00+05:00||E=3h",
+          "name": "Cyprus vs Armenia - 10:00 PM ||S=2026-11-12T22:00:00+05:00||E=4h",
           "videoId": "15254260751979"
         },
         {
-          "name": "Monza vs Atalanta - 7:00 PM||S=2026-11-08T19:00:00+05:00||E=3h",
+          "name": "Italy vs France - 12:45 AM ||S=2026-11-13T00:45:00+05:00||E=4h",
           "videoId": "15254285524587"
         },
         {
-          "name": "Inter vs Como - 10:00 PM||S=2026-11-08T22:00:00+05:00||E=3h",
+          "name": "Czechia vs Spain - 12:45 AM ||S=2026-11-13T00:45:00+05:00||E=4h",
           "videoId": "16983200374379"
         },
         {
-          "name": "Fiorentina vs Juventus - 12:45 AM ||S=2026-11-09T00:45:00+05:00||E=3h",
+          "name": "England vs Croatia - 12:45 AM ||S=2026-11-13T00:45:00+05:00||E=4h",
           "videoId": "16983242579563"
         },
         {
-          "name": "",
+          "name": "Albania vs Finland - 12:45 AM ||S=2026-11-13T00:45:00+05:00||E=4h",
           "videoId": "16983247822443"
         },
         {
-          "name": "",
+          "name": "San Marino vs Belarus - 12:45 AM ||S=2026-11-12T00:45:00+05:00||E=4h",
           "videoId": "16983254834795"
         },
         {
-          "name": "",
+          "name": "Montenegro vs Latvia - 12:45 AM ||S=2026-11-12T00:45:00+05:00||E=4h",
           "videoId": "16983259553387"
         },
         {
@@ -111,7 +111,7 @@
     {
       "videoTitle": "Cricket",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "cricket_all",
       "channels": [
         {
@@ -199,7 +199,7 @@
     {
       "videoTitle": "England premier League",
       "videoId": "",
-      "isLive": true,
+      "isLive": false,
       "activeThumbnail": "epl1",
       "channels": [
         {

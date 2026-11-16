@@ -115,15 +115,15 @@
       "activeThumbnail": "cricket_all",
       "channels": [
         {
-          "name": "New Zealand vs India, 5th ODI - 7:00 AM ||S=2026-11-15T07:00:00+05:00||E=10h",
+          "name": "Afghanistan vs Zimbabwe, 2nd Test, Day 4 - Today||S=2026-11-16T11:00:00+05:00||E=10h",
           "videoId": "15254299352683"
         },
         {
-          "name": "Australia vs England, 2nd ODI - 8:30 AM ||S=2026-11-15T08:30:00+05:00||E=10h",
+          "name": "South Africa vs Bangladesh, 1st Test, Day 2 - Today||S=2026-11-16T13:00:00+05:00||E=3h",
           "videoId": "15254308986475"
         },
         {
-          "name": "South Africa vs Bangladesh, 1st Test, Day 1 - 1:00 PM ||S=2026-11-15T13:00:00+05:00||E=10h",
+          "name": "",
           "videoId": "15254328122987"
         }
       ]

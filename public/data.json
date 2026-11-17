@@ -59,43 +59,43 @@
       "activeThumbnail": "uefa_nation_league",
       "channels": [
         {
-          "name": "Faroe Islands vs Moldova - 8:00 PM||S=2026-11-16T20:00:00+05:00||E=3h",
+          "name": "Denmark vs Norway ||S=2026-11-18T00:45:00+05:00||E=3h",
           "videoId": "15254238731883"
         },
         {
-          "name": "Kazakhstan vs Slovakia - 8:00 PM||S=2026-11-16T20:00:00+05:00||E=3h",
+          "name": "Wales vs Portugal ||S=2026-11-18T00:45:00+05:00||E=3h",
           "videoId": "15254260751979"
         },
         {
-          "name": "Estonia vs Bulgaria - 10:00 PM||S=2026-11-16T22:00:00+05:00||E=3h",
+          "name": "Hungary vs Northern Ireland ||S=2026-11-18T00:45:00+05:00||E=3h",
           "videoId": "15254285524587"
         },
         {
-          "name": "Iceland vs Luxembourg - 10:00 PM||S=2026-11-16T22:00:00+05:00||E=3h",
+          "name": "Ukraine vs Georgia ||S=2026-11-18T00:45:00+05:00||E=3h",
           "videoId": "16983200374379"
         },
         {
-          "name": "Lithuania vs Liechtenstein - 10:00 PM||S=2026-11-16T22:00:00+05:00||E=3h",
+          "name": "Ireland vs Kosovo ||S=2026-11-18T00:45:00+05:00||E=3h",
           "videoId": "16983242579563"
         },
         {
-          "name": "Germany vs Netherlands ||S=2026-11-17T00:45:00+05:00||E=3h",
+          "name": "Israel vs Austria ||S=2026-11-18T00:45:00+05:00||E=3h",
           "videoId": "16983247822443"
         },
         {
-          "name": "Greece vs Serbia - ||S=2026-11-17T00:45:00+05:00||E=3h",
+          "name": "Bosnia and Herzegovina vs Romania ||S=2026-11-18T00:45:00+05:00||E=3h",
           "videoId": "16983254834795"
         },
         {
-          "name": "North Macedonia vs Slovenia - ||S=2026-11-17T00:45:00+05:00||E=3h",
+          "name": "Poland vs Sweden ||S=2026-11-18T00:45:00+05:00||E=3h",
           "videoId": "16983259553387"
         },
         {
-          "name": "Switzerland vs Scotland ||S=2026-11-17T00:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983264468587"
         },
         {
-          "name": "Gibraltar vs Malta ||S=2026-11-17T00:45:00+05:00||E=3h",
+          "name": "",
           "videoId": "16983269514859"
         },
         {
@@ -115,15 +115,15 @@
       "activeThumbnail": "cricket_all",
       "channels": [
         {
-          "name": "Pakistan vs Sri Lanka, 2nd Test, Day 1 ||S=2026-11-17T09:30:00+05:00||E=10h",
+          "name": "Australia vs England, 3rd ODI ||S=2026-11-18T08:30:00+05:00||E=10h",
           "videoId": "15254299352683"
         },
         {
-          "name": "South Africa vs Bangladesh, 1st Test, Day 3 ||S=2026-11-17T13:00:00+05:00||E=10h",
+          "name": "Pakistan vs Sri Lanka, 2nd Test, Day 2 ||S=2026-11-18T09:30:00+05:00||E=10h",
           "videoId": "15254308986475"
         },
         {
-          "name": "",
+          "name": "South Africa vs Bangladesh, 1st Test, Day 4 ||S=2026-11-17T13:00:00+05:00||E=10h",
           "videoId": "15254328122987"
         }
       ]

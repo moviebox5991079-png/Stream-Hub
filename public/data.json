@@ -115,15 +115,15 @@
       "activeThumbnail": "cricket_all",
       "channels": [
         {
-          "name": "Australia vs England, 3rd ODI ||S=2026-11-18T08:30:00+05:00||E=10h",
+          "name": "Pakistan vs Sri Lanka, 2nd Test, Day 2 - 9:30 AM - Wednesday, November 18||S=2026-11-19T09:30:00+05:00||E=10h",
           "videoId": "15254299352683"
         },
         {
-          "name": "Pakistan vs Sri Lanka, 2nd Test, Day 2 ||S=2026-11-18T09:30:00+05:00||E=10h",
+          "name": "South Africa vs Bangladesh, 1st Test, Day 4 - 1:00 PM - Wednesday, November 18||S=2026-11-19T13:00:00+05:00||E=10h",
           "videoId": "15254308986475"
         },
         {
-          "name": "South Africa vs Bangladesh, 1st Test, Day 4 ||S=2026-11-17T13:00:00+05:00||E=10h",
+          "name": "",
           "videoId": "15254328122987"
         }
       ]

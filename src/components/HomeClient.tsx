@@ -422,134 +422,78 @@ const [selectedVideo, setSelectedVideo] = useState<StreamData | null>(null);
       <div className="min-h-screen bg-[#0f0f0f] text-white font-sans relative overflow-x-hidden">
         
         
-{/* === PREMIUM WELCOME MODAL === */}
+
+{/* === WELCOME MODAL === */}
 {showWelcomeModal && (
   <div
     ref={welcomeModalRef}
-    className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/90 backdrop-blur-lg px-4 py-5"
+    className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/80 backdrop-blur-md px-4 py-4 transition-all duration-300"
   >
-    <div className="relative w-full max-w-lg overflow-hidden rounded-[28px] border border-red-500/40 bg-gradient-to-b from-[#1c1014] via-[#101014] to-[#08080b] shadow-[0_0_80px_rgba(220,38,38,0.25)] animate-in fade-in zoom-in-95 duration-500">
+    <div className="bg-gradient-to-b from-[#1a1a1a] to-[#0f0f0f] border border-gray-800 rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto p-5 sm:p-8 relative shadow-[0_0_50px_rgba(220,38,38,0.25)] animate-in fade-in zoom-in duration-500 scrollbar-hide">
 
-      {/* Decorative Background Glow */}
-      <div className="pointer-events-none absolute -top-24 left-1/2 h-52 w-72 -translate-x-1/2 rounded-full bg-red-600/20 blur-[80px]" />
-
-      <div className="pointer-events-none absolute -bottom-20 left-1/2 h-40 w-64 -translate-x-1/2 rounded-full bg-red-600/10 blur-[80px]" />
-
-      {/* Top Accent Line */}
-      <div className="h-1 w-full bg-gradient-to-r from-transparent via-red-500 to-transparent" />
+      <div className="absolute -top-20 -right-20 w-40 h-40 bg-red-600/20 blur-3xl rounded-full pointer-events-none"></div>
 
       {/* Close Button */}
       <button
-        type="button"
-        aria-label="Close welcome modal"
         onClick={() => setShowWelcomeModal(false)}
-        className="absolute right-4 top-5 z-20 rounded-full border border-white/10 bg-white/5 p-2 text-gray-400 transition-all hover:bg-red-600 hover:text-white"
+        className="absolute top-4 right-4 text-gray-400 hover:text-white bg-gray-800/50 hover:bg-red-600 p-2 rounded-full transition-colors z-[100000]"
       >
-        <X size={19} />
+        <X size={20} />
       </button>
 
-      <div className="relative z-10 px-5 pb-6 pt-8 sm:px-9 sm:pb-9">
-
-        {/* Logo/Icon */}
-        <div className="mb-5 flex justify-center">
-          <div className="relative flex h-20 w-20 items-center justify-center rounded-3xl border border-red-500/30 bg-red-500/10 shadow-[0_0_35px_rgba(239,68,68,0.22)]">
-
-            <div className="absolute inset-0 rounded-3xl border border-red-500/20 animate-pulse" />
-
-            <ShieldAlert
-              size={43}
-              strokeWidth={1.8}
-              className="text-red-500"
-            />
-          </div>
+      {/* Welcome Header */}
+      <div className="text-center mb-6 relative z-10">
+        <div className="mx-auto w-20 h-20 bg-red-600/10 border-2 border-red-500/40 rounded-full flex items-center justify-center mb-4 shadow-[0_0_25px_rgba(220,38,38,0.4)]">
+          <ShieldAlert
+            className="text-red-500 animate-pulse"
+            size={42}
+          />
         </div>
 
-        {/* Brand Title */}
-        <div className="mb-7 text-center">
-          <h2 className="text-2xl font-black tracking-tight text-white sm:text-3xl">
-            <span className="text-red-500">SPORTS</span>HUB
-          </h2>
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-wide mb-2">
+          Welcome to{" "}
+          <span className="text-red-600">SPORTS</span>HUB
+        </h2>
+      </div>
 
-          <div className="mt-3 flex items-center justify-center gap-2">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-red-300 sm:text-xs">
-              Important Streaming Notice
-            </span>
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500" />
-          </div>
-        </div>
+      {/* BIG AD-BLOCKER WARNING */}
+      <div className="relative z-10 text-center bg-red-950/40 border-2 border-red-500 rounded-2xl p-6 sm:p-8 shadow-[0_0_35px_rgba(239,68,68,0.3)]">
 
-        {/* Main Warning Card */}
-        <div className="relative overflow-hidden rounded-[22px] border-2 border-red-500/60 bg-gradient-to-b from-red-950/50 via-[#190b10] to-[#110c10] p-5 text-center shadow-[0_0_40px_rgba(239,68,68,0.15)] sm:p-7">
+        <ShieldAlert
+          className="mx-auto text-yellow-400 animate-pulse mb-4"
+          size={55}
+        />
 
-          {/* Warning Header */}
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-yellow-500/30 bg-yellow-500/10 px-4 py-2">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-yellow-400" />
-            <span className="text-xs font-extrabold uppercase tracking-[0.15em] text-yellow-400">
-              Attention Everyone
-            </span>
-          </div>
+        <h3 className="text-3xl sm:text-5xl font-black text-yellow-400 uppercase tracking-wide leading-tight">
+          GUYS!
+        </h3>
 
-          {/* Big GUYS Text */}
-          <h3 className="text-4xl font-black uppercase tracking-tight text-yellow-400 drop-shadow-[0_0_18px_rgba(250,204,21,0.3)] sm:text-5xl">
-            GUYS!
-          </h3>
+        <h2 className="text-3xl sm:text-5xl font-black text-white uppercase leading-tight mt-3">
+          ADS-BLOCKER
+        </h2>
 
-          {/* ADS BLOCKER */}
-          <h2 className="mt-3 text-[clamp(2rem,8vw,3.5rem)] font-black uppercase leading-[1.1] tracking-tighter text-white">
-            AD-BLOCKER
-          </h2>
+        <h2 className="text-4xl sm:text-6xl font-black text-red-500 uppercase animate-pulse leading-tight mt-3 drop-shadow-[0_0_15px_rgba(239,68,68,0.7)]">
+          MUST BE ON!
+        </h2>
 
-          {/* MUST BE ON */}
-          <h2 className="mt-2 text-[clamp(2.3rem,9vw,4rem)] font-black uppercase leading-[1.1] tracking-tighter text-red-500 drop-shadow-[0_0_22px_rgba(239,68,68,0.45)]">
-            MUST BE ON!
-          </h2>
-
-          {/* Divider */}
-          <div className="mx-auto my-6 h-px w-3/4 bg-gradient-to-r from-transparent via-red-500/60 to-transparent" />
-
-          {/* Explanation */}
-          <p className="mx-auto max-w-sm text-sm font-medium leading-relaxed text-gray-300 sm:text-base">
-            Please enable your{" "}
-            <span className="font-extrabold text-white">
-              Ad-Blocker
-            </span>{" "}
-            before watching the live stream.
-          </p>
-
-          {/* ON Status Reminder */}
-          <div className="mt-5 inline-flex items-center gap-3 rounded-xl border border-green-500/25 bg-green-500/10 px-5 py-3">
-            <span className="relative flex h-3 w-3">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-30" />
-              <span className="relative inline-flex h-3 w-3 rounded-full bg-green-500" />
-            </span>
-
-            <span className="text-sm font-extrabold uppercase tracking-wide text-green-400">
-              Keep Ad-Blocker ON
-            </span>
-          </div>
-        </div>
-
-        {/* Continue Button */}
-        <button
-          type="button"
-          onClick={() => setShowWelcomeModal(false)}
-          className="group relative mt-6 w-full overflow-hidden rounded-2xl bg-gradient-to-r from-red-600 via-red-500 to-red-700 px-5 py-4 text-base font-extrabold uppercase tracking-wide text-white shadow-[0_8px_30px_rgba(220,38,38,0.3)] transition-all duration-300 hover:scale-[1.02] hover:from-red-500 hover:to-red-600 hover:shadow-[0_10px_40px_rgba(220,38,38,0.5)] active:scale-[0.98] sm:text-lg"
-        >
-          <span className="relative z-10">
-            Continue to Website →
-          </span>
-        </button>
-
-        {/* Footer */}
-        <p className="mt-4 text-center text-xs font-medium text-gray-500">
-          Enjoy a smoother streaming experience.
+        <p className="text-gray-300 text-sm sm:text-base font-semibold mt-5">
+          Please turn ON your Ad-Blocker before watching the live stream.
         </p>
 
       </div>
+
+      {/* Continue Button */}
+      <button
+        onClick={() => setShowWelcomeModal(false)}
+        className="w-full mt-6 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold py-4 rounded-xl transition-all duration-300 shadow-lg shadow-red-900/40 text-lg hover:scale-[1.02] active:scale-[0.98] relative z-10 tracking-wide"
+      >
+        Continue to Website
+      </button>
+
     </div>
   </div>
 )}
+
 
 
         {/* BLACK OVERLAY FOR ADS */}

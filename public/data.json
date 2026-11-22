@@ -382,7 +382,8 @@
           "isLive": false,
           "servers": []
         }
-      ]
+      ],
+      "isLive": false
     },
     {
       "categoryId": "cricket",
@@ -391,22 +392,22 @@
       "matches": [
         {
           "matchId": "c1",
-          "matchTitle": "Pakistan vs Sri Lanka, 1st Match - 1:00 PM - Today||S=2026-10-18T13:00:00+05:00||E=8h",
+          "matchTitle": "New Zealand vs India, 1st Test, Day 5||S=2026-11-22T03:00:00+05:00||E=10h",
           "thumbnail": "cricket_all",
-          "isLive": false,
+          "isLive": true,
           "servers": [
             {
-              "serverName": "Server 1 ",
-              "iframeUrl": "https://dlive.sx/stream/stream-598.php"
+              "serverName": "Hindi",
+              "iframeUrl": "https://thedaddy.li/stream/stream-887.php"
             },
             {
-              "serverName": "Server 2",
-              "iframeUrl": "https://dlive.sx/cast/stream-598.php"
+              "serverName": "English",
+              "iframeUrl": "https://thedaddy.li/stream/stream-588.php"
             }
           ]
         }
       ],
-      "isLive": false
+      "isLive": true
     }
   ]
 }

@@ -335,13 +335,13 @@
   ],
   "mode2Categories": [
     {
-      "categoryId": "football",
-      "categoryName": "Football",
+      "categoryId": "football-1",
+      "categoryName": "England Premier League",
       "categoryThumbnail": "epl1",
       "matches": [
         {
           "matchId": "f1",
-          "matchTitle": "Real Madrid vs Barcelona - 10:00 PM||S=2026-11-13T22:00:00+05:00||E=3h",
+          "matchTitle": "Hull vs Brighton||S=2026-11-22T19:00:00+05:00||E=3h",
           "thumbnail": "laliga1",
           "isLive": true,
           "servers": [
@@ -352,20 +352,12 @@
             {
               "serverName": "Server 2 (SD)",
               "iframeUrl": "https://w6.sportsonliine.click/channels/hd/hd1.php"
-            },
-            {
-              "serverName": "Server 1 (HD)",
-              "iframeUrl": "https://taifood-blog.asia/embed/247-willow"
-            },
-            {
-              "serverName": "Server 1 (HD)",
-              "iframeUrl": "https://strmfree.pk/embed/cricket/willow"
             }
           ]
         },
         {
           "matchId": "f2",
-          "matchTitle": "New Zealand vs India, 1st Test, Day 5||S=2026-11-23T03:00:00+05:00||E=3h",
+          "matchTitle": "Liverpool vs Man United||S=2026-11-22T21:30:00+05:00||E=3h",
           "thumbnail": "psg vs lens",
           "isLive": true,
           "servers": [
@@ -374,13 +366,6 @@
               "iframeUrl": "https://example.com/embed3"
             }
           ]
-        },
-        {
-          "matchId": "m-1794494922779",
-          "matchTitle": "New Match||S=2026-09-08T22:00:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": false,
-          "servers": []
         }
       ],
       "isLive": false
@@ -408,6 +393,85 @@
         }
       ],
       "isLive": true
+    },
+    {
+      "categoryId": "Football-2",
+      "categoryName": "Spain Laliga",
+      "categoryThumbnail": "laliag-2026 to 2027",
+      "isLive": true,
+      "matches": [
+        {
+          "matchId": "m-1795341937436",
+          "matchTitle": "Barcelona vs Villarreal||S=2026-11-22T18:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        },
+        {
+          "matchId": "m-1795341937437",
+          "matchTitle": "Racing Santander vs Real Sociedad||S=2026-11-22T20:15:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        },
+        {
+          "matchId": "m-1795341937438",
+          "matchTitle": "Osasuna vs Málaga||S=2026-11-22T22:30:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        },
+        {
+          "matchId": "m-1795341937439",
+          "matchTitle": "Getafe vs Atlético Madrid||S=2026-11-23T01:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        }
+      ]
+    },
+    {
+      "categoryId": "football-3",
+      "categoryName": "Italy-Serie A",
+      "categoryThumbnail": "SerieA",
+      "isLive": true,
+      "matches": [
+        {
+          "matchId": "m-1795342017884",
+          "matchTitle": "Juventus vs Venezia||S=2026-11-22T16:30:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        },
+        {
+          "matchId": "m-1795342017885",
+          "matchTitle": "Bologna vs Udinese||S=2026-11-22T19:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        },
+        {
+          "matchId": "m-1795342017886",
+          "matchTitle": "Sassuolo vs Genoa||S=2026-11-22T19:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        },
+        {
+          "matchId": "m-1795342017887",
+          "matchTitle": "Milan vs Frosinone||S=2026-11-22T22:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        },
+        {
+          "matchId": "m-1795342017888",
+          "matchTitle": "Atalanta vs Inter||S=2026-11-23T00:45:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        }
+      ]
     }
   ]
 }

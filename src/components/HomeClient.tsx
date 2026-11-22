@@ -37,6 +37,7 @@ interface CategoryData {
   categoryId: string;
   categoryName: string;
   categoryThumbnail: string;
+  isLive?: boolean;
   matches: MatchData[];
 }
 

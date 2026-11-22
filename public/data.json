@@ -441,7 +441,28 @@
           "matchTitle": "Juventus vs Venezia||S=2026-11-22T16:30:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
-          "servers": []
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD) 🔴",
+              "iframeUrl": "https://sportsoonline.click/channels/hd/hd11.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD) 🔴",
+              "iframeUrl": "https://sportsoonline.click/channels/hd/hd7.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD) 🔴",
+              "iframeUrl": "https://sportsoonline.click/channels/pt/sporttv1.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD) 🔴",
+              "iframeUrl": "https://sportsoonline.click/channels/bra/br5.php"
+            }
+          ]
         },
         {
           "matchId": "m-1795342017885",
@@ -467,6 +488,57 @@
         {
           "matchId": "m-1795342017888",
           "matchTitle": "Atalanta vs Inter||S=2026-11-23T00:45:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        }
+      ]
+    },
+    {
+      "categoryId": "football-4",
+      "categoryName": "Germany Bundesliga",
+      "categoryThumbnail": "germany_bundesliga",
+      "isLive": true,
+      "matches": [
+        {
+          "matchId": "m-1795342156889",
+          "matchTitle": "Augsburg vs Mainz||S=2026-11-22T19:30:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        },
+        {
+          "matchId": "m-1795342156890",
+          "matchTitle": "Werder Bremen vs Hamburger SV||S=2026-11-22T21:30:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        }
+      ]
+    },
+    {
+      "categoryId": "footbll-5",
+      "categoryName": "France Ligue 1",
+      "categoryThumbnail": "franceLeague1",
+      "isLive": true,
+      "matches": [
+        {
+          "matchId": "m-1795342196409",
+          "matchTitle": "Paris FC vs Angers||S=2026-11-22T19:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        },
+        {
+          "matchId": "m-1795342196410",
+          "matchTitle": "Lorient vs Rennes||S=2026-11-22T21:15:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        },
+        {
+          "matchId": "m-1795342196411",
+          "matchTitle": "Marseille vs Le Mans||S=2026-11-23T00:45:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
           "servers": []

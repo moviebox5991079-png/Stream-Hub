@@ -554,7 +554,7 @@ const [selectedVideo, setSelectedVideo] = useState<StreamData | null>(null);
                              <p className="text-gray-400 text-base sm:text-lg font-medium">Select a category below to view matches</p>
                            </div>
                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
-                             {initialData.mode2Categories?.map((cat) => (
+                             {initialData.mode2Categories?.filter((cat) => cat.isLive !== false).map((cat) => (
                                <div key={cat.categoryId} onClick={() => { setSelectedCategory(cat); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="group cursor-pointer rounded-2xl overflow-hidden bg-transparent transition-all duration-500 hover:-translate-y-2 relative shadow-[0_10px_40px_rgba(0,0,0,0.8)] flex flex-col">
                                  <div className="absolute inset-0 rounded-2xl animate-rainbow opacity-50 group-hover:opacity-100 transition-opacity duration-500 -z-10 p-[2px]"><div className="bg-[#121212] w-full h-full rounded-[14px]"></div></div>
                                  <div className="aspect-video w-full relative overflow-hidden shadow-inner bg-black rounded-t-[14px]">

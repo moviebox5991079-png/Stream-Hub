@@ -347,11 +347,26 @@
           "servers": [
             {
               "serverName": "Server 1 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-111.php"
+              "iframeUrl": "https://sportsoonline.click/channels/hd/hd1.php"
             },
             {
               "serverName": "Server 2 (SD)",
-              "iframeUrl": "https://w6.sportsonliine.click/channels/hd/hd1.php"
+              "iframeUrl": "https://taifood-blog.asia/embed/pl/2026-11-22/hul-bha"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/bra/br2.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/pt/eleven2.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 5 (HD)",
+              "iframeUrl": "https://thedaddy.li/cast/stream-343.php"
             }
           ]
         },
@@ -363,7 +378,22 @@
           "servers": [
             {
               "serverName": "Main Server",
-              "iframeUrl": "https://example.com/embed3"
+              "iframeUrl": "https://sportsoonline.click/channels/hd/hd1.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/hd/hd2.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/pt/eleven1.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/bra/br2.php"
             }
           ]
         }
@@ -405,28 +435,97 @@
           "matchTitle": "Barcelona vs Villarreal||S=2026-11-22T18:00:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
-          "servers": []
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/hd/hd5.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/hd/hd6.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/pt/eleven1.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/bra/br4.php"
+            }
+          ]
         },
         {
           "matchId": "m-1795341937437",
           "matchTitle": "Racing Santander vs Real Sociedad||S=2026-11-22T20:15:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
-          "servers": []
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/hd/hd5.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/hd/hd6.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/pt/eleven3.php"
+            }
+          ]
         },
         {
           "matchId": "m-1795341937438",
           "matchTitle": "Osasuna vs Málaga||S=2026-11-22T22:30:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
-          "servers": []
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/hd/hd5.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/hd/hd6.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/pt/eleven2.php"
+            }
+          ]
         },
         {
           "matchId": "m-1795341937439",
           "matchTitle": "Getafe vs Atlético Madrid||S=2026-11-23T01:00:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
-          "servers": []
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/hd/hd5.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/hd/hd6.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/pt/eleven1.php"
+            }
+          ]
         }
       ]
     },
@@ -483,14 +582,51 @@
           "matchTitle": "Milan vs Frosinone||S=2026-11-22T22:00:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
-          "servers": []
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/hd/hd8.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/pt/sporttv2.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/bra/br4.php"
+            }
+          ]
         },
         {
           "matchId": "m-1795342017888",
           "matchTitle": "Atalanta vs Inter||S=2026-11-23T00:45:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
-          "servers": []
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/hd/hd2.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/hd/hd7.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/pt/sporttv2.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/bra/br2.php"
+            }
+          ]
         }
       ]
     },

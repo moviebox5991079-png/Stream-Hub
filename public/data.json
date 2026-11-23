@@ -50,7 +50,8 @@
     "EFL CUP": "https://www.manunited.uk/wp-content/uploads/2016/12/english-football-league-cup.jpg",
     "uefa_nation_league": "https://m.itsnicethat.com/original_images/59c8d8927fa44c9e4d00e2a7.jpg",
     "server error": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvbTU9iRINM4zRbSioctAhyg1N1sdO3zpAAt2G_cGTgg&s=10",
-    "ads_1": "https://pomf2.lain.la/f/s98nhz0o.png"
+    "ads_1": "https://pomf2.lain.la/f/s98nhz0o.png",
+    "ads_2": "https://pomf2.lain.la/f/1t2vgf0u.png"
   },
   "streams": [
     {
@@ -337,12 +338,12 @@
   "mode2Categories": [
     {
       "categoryId": "Solve Ads Problem",
-      "categoryName": "How to Stop Ads on sport4u online",
-      "categoryThumbnail": "ads_1",
+      "categoryName": "Mobile + Desktop Both Users , Watch This First: Ho to Stop Ads!",
+      "categoryThumbnail": "ads_2",
       "matches": [
         {
           "matchId": "f1",
-          "matchTitle": "Hull vs Brighton||S=2090-11-22T19:00:00+05:00||E=3h",
+          "matchTitle": "How to Setup Ads blocker ||S=2090-11-22T19:00:00+05:00||E=3h",
           "thumbnail": "laliga1",
           "isLive": true,
           "servers": [
@@ -410,98 +411,29 @@
       "matches": [
         {
           "matchId": "m-1795341937436",
-          "matchTitle": "Barcelona vs Villarreal||S=2026-11-22T18:00:00+05:00||E=3h",
+          "matchTitle": "Levante vs Elche||S=2026-11-24T01:00:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
           "servers": [
             {
               "serverType": "url",
               "serverName": "Server 1 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/hd/hd5.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 2 (HD)",
               "iframeUrl": "https://sportsoonline.click/channels/hd/hd6.php"
             },
             {
               "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/pt/eleven2.php"
+            },
+            {
+              "serverType": "url",
               "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/pt/eleven1.php"
+              "iframeUrl": "https://thedaddy.li/stream/stream-68.php"
             },
             {
               "serverType": "url",
               "serverName": "Server 4 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/bra/br4.php"
-            }
-          ]
-        },
-        {
-          "matchId": "m-1795341937437",
-          "matchTitle": "Racing Santander vs Real Sociedad||S=2026-11-22T20:15:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": [
-            {
-              "serverType": "url",
-              "serverName": "Server 1 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/hd/hd5.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/hd/hd6.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/pt/eleven3.php"
-            }
-          ]
-        },
-        {
-          "matchId": "m-1795341937438",
-          "matchTitle": "Osasuna vs Málaga||S=2026-11-22T22:30:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": [
-            {
-              "serverType": "url",
-              "serverName": "Server 1 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/hd/hd5.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/hd/hd6.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/pt/eleven2.php"
-            }
-          ]
-        },
-        {
-          "matchId": "m-1795341937439",
-          "matchTitle": "Getafe vs Atlético Madrid||S=2026-11-23T01:00:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": [
-            {
-              "serverType": "url",
-              "serverName": "Server 1 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/hd/hd5.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/hd/hd6.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/pt/eleven1.php"
+              "iframeUrl": "https://thedaddy.li/cast/stream-68.php"
             }
           ]
         }
@@ -515,94 +447,29 @@
       "matches": [
         {
           "matchId": "m-1795342017884",
-          "matchTitle": "Juventus vs Venezia||S=2026-11-22T16:30:00+05:00||E=3h",
+          "matchTitle": "Monza vs Fiorentina||S=2026-11-24T00:45:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
           "servers": [
             {
               "serverType": "url",
               "serverName": "Server 1 (HD) 🔴",
-              "iframeUrl": "https://sportsoonline.click/channels/hd/hd11.php"
+              "iframeUrl": "https://sportsoonline.click/channels/hd/hd7.php"
             },
             {
               "serverType": "url",
               "serverName": "Server 2 (HD) 🔴",
-              "iframeUrl": "https://sportsoonline.click/channels/hd/hd7.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 3 (HD) 🔴",
               "iframeUrl": "https://sportsoonline.click/channels/pt/sporttv1.php"
             },
             {
               "serverType": "url",
+              "serverName": "Server 3 (HD) 🔴",
+              "iframeUrl": "https://thedaddy.li/stream/stream-6.php"
+            },
+            {
+              "serverType": "url",
               "serverName": "Server 4 (HD) 🔴",
-              "iframeUrl": "https://sportsoonline.click/channels/bra/br5.php"
-            }
-          ]
-        },
-        {
-          "matchId": "m-1795342017885",
-          "matchTitle": "Bologna vs Udinese||S=2026-11-22T19:00:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": []
-        },
-        {
-          "matchId": "m-1795342017886",
-          "matchTitle": "Sassuolo vs Genoa||S=2026-11-22T19:00:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": []
-        },
-        {
-          "matchId": "m-1795342017887",
-          "matchTitle": "Milan vs Frosinone||S=2026-11-22T22:00:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": [
-            {
-              "serverType": "url",
-              "serverName": "Server 1 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/hd/hd8.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/pt/sporttv2.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/bra/br4.php"
-            }
-          ]
-        },
-        {
-          "matchId": "m-1795342017888",
-          "matchTitle": "Atalanta vs Inter||S=2026-11-23T00:45:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": [
-            {
-              "serverType": "url",
-              "serverName": "Server 1 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/hd/hd2.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/hd/hd7.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/pt/sporttv2.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 4 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/bra/br2.php"
+              "iframeUrl": "https://thedaddy.li/cast/stream-6.php"
             }
           ]
         }
@@ -610,23 +477,37 @@
     },
     {
       "categoryId": "football-4",
-      "categoryName": "Germany Bundesliga",
-      "categoryThumbnail": "germany_bundesliga",
+      "categoryName": "England Premier League",
+      "categoryThumbnail": "epl3",
       "isLive": true,
       "matches": [
         {
-          "matchId": "m-1795342156889",
-          "matchTitle": "Augsburg vs Mainz||S=2026-11-22T19:30:00+05:00||E=3h",
+          "matchId": "m-1795435895709",
+          "matchTitle": "Brentford vs Everton||S=2026-11-24T01:00:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
-          "servers": []
-        },
-        {
-          "matchId": "m-1795342156890",
-          "matchTitle": "Werder Bremen vs Hamburger SV||S=2026-11-22T21:30:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": []
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/hd/hd1.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/pt/eleven1.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/bra/br2.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-38.php"
+            }
+          ]
         }
       ]
     },
@@ -634,7 +515,7 @@
       "categoryId": "footbll-5",
       "categoryName": "France Ligue 1",
       "categoryThumbnail": "franceLeague1",
-      "isLive": true,
+      "isLive": false,
       "matches": [
         {
           "matchId": "m-1795342196409",

@@ -420,6 +420,29 @@
               "iframeUrl": "https://thedaddy.li/stream/stream-588.php"
             }
           ]
+        },
+        {
+          "matchId": "m-1795412797767",
+          "matchTitle": "South Africa vs Bangladesh, 2nd Test, Day 1||S=2026-11-23T13:00:00+05:00||E=12h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/247-willow"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://thedaddy.li/cast/stream-346.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-346.php"
+            }
+          ]
         }
       ],
       "isLive": true

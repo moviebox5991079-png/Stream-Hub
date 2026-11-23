@@ -49,7 +49,8 @@
     "uefa_champion_league": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSst0rgnznzlTKsfMwD_GzHE6BKaBYSbyLICVCAD6WX189V-ggAfuIQSE&s=10",
     "EFL CUP": "https://www.manunited.uk/wp-content/uploads/2016/12/english-football-league-cup.jpg",
     "uefa_nation_league": "https://m.itsnicethat.com/original_images/59c8d8927fa44c9e4d00e2a7.jpg",
-    "server error": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvbTU9iRINM4zRbSioctAhyg1N1sdO3zpAAt2G_cGTgg&s=10"
+    "server error": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvbTU9iRINM4zRbSioctAhyg1N1sdO3zpAAt2G_cGTgg&s=10",
+    "ads_1": "https://pomf2.lain.la/f/s98nhz0o.png"
   },
   "streams": [
     {
@@ -335,9 +336,9 @@
   ],
   "mode2Categories": [
     {
-      "categoryId": "football-1",
-      "categoryName": "England Premier League",
-      "categoryThumbnail": "epl1",
+      "categoryId": "Solve Ads Problem",
+      "categoryName": "How to Stop Ads on sport4u online",
+      "categoryThumbnail": "ads_1",
       "matches": [
         {
           "matchId": "f1",
@@ -346,54 +347,8 @@
           "isLive": true,
           "servers": [
             {
-              "serverName": "Server 1 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/hd/hd1.php"
-            },
-            {
-              "serverName": "Server 2 (SD)",
-              "iframeUrl": "https://taifood-blog.asia/embed/pl/2026-11-22/hul-bha"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/bra/br2.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 4 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/pt/eleven2.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 5 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-343.php"
-            }
-          ]
-        },
-        {
-          "matchId": "f2",
-          "matchTitle": "Liverpool vs Man United||S=2026-11-22T21:30:00+05:00||E=3h",
-          "thumbnail": "psg vs lens",
-          "isLive": true,
-          "servers": [
-            {
-              "serverName": "Main Server",
-              "iframeUrl": "https://sportsoonline.click/channels/hd/hd1.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/hd/hd2.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/pt/eleven1.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 4 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/bra/br2.php"
+              "serverName": "Video",
+              "iframeUrl": "https://ok.ru/videoembed/16998175410745?nochat=1"
             }
           ]
         }

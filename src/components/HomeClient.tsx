@@ -634,7 +634,7 @@ const [selectedVideo, setSelectedVideo] = useState<StreamData | null>(null);
                              <h1 className="text-xl sm:text-2xl font-bold text-white mb-2">
                                {selectedCategory.categoryName} - {activeMode2Data?.displayName || 'Match'}
                              </h1>
-                             <button onClick={() => { setSelectedCategory(null); setActiveIframeUrl(null); }} className="text-sm bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg mb-4 mt-2">
+                             <button onClick={() => { setSelectedCategory(null); setActiveIframeUrl(null); setActiveMatchId(null); setIsManualOverride(false); }} className="text-sm bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg mb-4 mt-2">
                                ← View Categories
                              </button>
                            </div>

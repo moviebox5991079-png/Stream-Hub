@@ -1,5 +1,5 @@
 {
-  "activeMode": 2,
+  "activeMode": 1,
   "isLive": true,
   "title": "⚠️ Note: The live stream will start when the match starts. !! Copyright © 2026 bulbul4u-live. All Rights Reserved.",
   "mode2Note": "⚠️ Important Note: If Server 1 is buffering or not working, please try Server 2 or other available servers below the player.",
@@ -117,7 +117,7 @@
       "activeThumbnail": "cricket_all",
       "channels": [
         {
-          "name": "New Zealand vs India, 1st Test, Day 3 ||S=2026-11-21T03:00:00+05:00||E=10h",
+          "name": "New Zealand vs India, 1st Test, Day 3 ||S=2026-11-24T03:00:00+05:00||E=20h",
           "videoId": "15254299352683"
         },
         {
@@ -352,6 +352,25 @@
               "iframeUrl": "https://www.youtube.com/embed/l8Ltfa4RlB8?si=snawOCm5T53s4ha6"
             }
           ]
+        },
+        {
+          "matchId": "m-1795505608004",
+          "matchTitle": "New Match||S=2026-09-08T22:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": [
+            {
+              "serverType": "okru",
+              "serverName": "Server 2 (OK.ru)",
+              "videoId": "15254260751979",
+              "iframeUrl": "https://ok.ru/videoembed/15254260751979"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": ""
+            }
+          ]
         }
       ],
       "isLive": true
@@ -363,39 +382,40 @@
       "matches": [
         {
           "matchId": "c1",
-          "matchTitle": "South Africa vs Bangladesh, 2nd Test, Day 2||S=2026-11-24T13:00:00+05:00||E=10h",
+          "matchTitle": "New Zealand vs India, 1st Test, Day 5||S=2026-11-22T03:00:00+05:00||E=10h",
           "thumbnail": "cricket_all",
           "isLive": true,
           "servers": [
             {
-              "serverType": "okru",
-              "serverName": "Server 1 (HD)",
-              "videoId": "15254299352683",
-              "iframeUrl": "https://ok.ru/videoembed/15254299352683"
+              "serverName": "Hindi",
+              "iframeUrl": "https://thedaddy.li/stream/stream-887.php"
             },
             {
-              "serverType": "url",
-              "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-746.php"
+              "serverName": "English",
+              "iframeUrl": "https://thedaddy.li/stream/stream-588.php"
             }
           ]
         },
         {
           "matchId": "m-1795412797767",
-          "matchTitle": "Australia vs England, 2nd T20 ||S=2026-11-24T13:15:00+05:00||E=10h",
+          "matchTitle": "South Africa vs Bangladesh, 2nd Test, Day 1||S=2026-11-23T13:00:00+05:00||E=12h",
           "thumbnail": "",
           "isLive": true,
           "servers": [
             {
-              "serverType": "okru",
-              "serverName": "Server 2 (HD)",
-              "videoId": "15254308986475",
-              "iframeUrl": "https://ok.ru/videoembed/15254308986475"
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/247-willow"
             },
             {
               "serverType": "url",
               "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-598.php"
+              "iframeUrl": "https://thedaddy.li/cast/stream-346.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-346.php"
             }
           ]
         }
@@ -404,72 +424,37 @@
     },
     {
       "categoryId": "Football-2",
-      "categoryName": "UEFA Champions League",
-      "categoryThumbnail": "uefc champion league",
+      "categoryName": "Spain Laliga",
+      "categoryThumbnail": "laliag-2026 to 2027",
       "isLive": true,
       "matches": [
         {
           "matchId": "m-1795341937436",
-          "matchTitle": "Bodø/Glimt vs LASK||S=2026-11-24T22:45:00+05:00||E=3h",
+          "matchTitle": "Levante vs Elche||S=2026-11-24T01:00:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
-          "servers": []
-        },
-        {
-          "matchId": "m-1795512515409",
-          "matchTitle": "Galatasaray vs Aston Villa||S=2026-11-24T22:45:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": []
-        },
-        {
-          "matchId": "m-1795512515410",
-          "matchTitle": "Arsenal vs Dortmund||S=2026-11-25T01:00:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": []
-        },
-        {
-          "matchId": "m-1795512515411",
-          "matchTitle": "Como vs AEK Athens||S=2026-11-25T01:00:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": []
-        },
-        {
-          "matchId": "m-1795512515412",
-          "matchTitle": "Feyenoord vs FC Porto||S=2026-11-25T01:00:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": []
-        },
-        {
-          "matchId": "m-1795512515413",
-          "matchTitle": "Man City vs Napoli||S=2026-11-25T01:00:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": []
-        },
-        {
-          "matchId": "m-1795512515414",
-          "matchTitle": "RB Leipzig vs Lens||S=2026-11-25T01:00:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": []
-        },
-        {
-          "matchId": "m-1795512515415",
-          "matchTitle": "Real Madrid vs PSV Eindhoven||S=2026-11-25T01:00:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": []
-        },
-        {
-          "matchId": "m-1795512515416",
-          "matchTitle": "Slovan Bratislava vs Real Betis||S=2026-11-25T01:00:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": []
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/hd/hd6.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://sportsoonline.click/channels/pt/eleven2.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-68.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://thedaddy.li/cast/stream-68.php"
+            }
+          ]
         }
       ]
     },
@@ -477,7 +462,7 @@
       "categoryId": "football-3",
       "categoryName": "Italy-Serie A",
       "categoryThumbnail": "SerieA",
-      "isLive": false,
+      "isLive": true,
       "matches": [
         {
           "matchId": "m-1795342017884",
@@ -513,7 +498,7 @@
       "categoryId": "football-4",
       "categoryName": "England Premier League",
       "categoryThumbnail": "epl3",
-      "isLive": false,
+      "isLive": true,
       "matches": [
         {
           "matchId": "m-1795435895709",

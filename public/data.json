@@ -423,37 +423,72 @@
     },
     {
       "categoryId": "Football-2",
-      "categoryName": "Spain Laliga",
-      "categoryThumbnail": "laliag-2026 to 2027",
+      "categoryName": "UEFA Champions League",
+      "categoryThumbnail": "uefc champion league",
       "isLive": true,
       "matches": [
         {
-          "matchId": "m-1795341937436",
-          "matchTitle": "Levante vs Elche||S=2026-11-24T01:00:00+05:00||E=3h",
+          "matchId": "m-1795515451167",
+          "matchTitle": "Bodø/Glimt vs LASK||S=2026-11-24T22:45:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
-          "servers": [
-            {
-              "serverType": "url",
-              "serverName": "Server 1 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/hd/hd6.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/pt/eleven2.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-68.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 4 (HD)",
-              "iframeUrl": "https://thedaddy.li/cast/stream-68.php"
-            }
-          ]
+          "servers": []
+        },
+        {
+          "matchId": "m-1795515451168",
+          "matchTitle": "Galatasaray vs Aston Villa||S=2026-11-24T22:45:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        },
+        {
+          "matchId": "m-1795515479089",
+          "matchTitle": "Arsenal vs Dortmund||S=2026-11-25T01:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        },
+        {
+          "matchId": "m-1795515479090",
+          "matchTitle": "Como vs AEK Athens||S=2026-11-25T01:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        },
+        {
+          "matchId": "m-1795515479091",
+          "matchTitle": "Feyenoord vs FC Porto||S=2026-11-25T01:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        },
+        {
+          "matchId": "m-1795515479092",
+          "matchTitle": "Man City vs Napoli||S=2026-11-25T01:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        },
+        {
+          "matchId": "m-1795515479093",
+          "matchTitle": "RB Leipzig vs Lens||S=2026-11-25T01:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        },
+        {
+          "matchId": "m-1795515479094",
+          "matchTitle": "Real Madrid vs PSV Eindhoven||S=2026-11-25T01:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
+        },
+        {
+          "matchId": "m-1795515479095",
+          "matchTitle": "Slovan Bratislava vs Real Betis||S=2026-11-25T01:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
         }
       ]
     },
@@ -461,7 +496,7 @@
       "categoryId": "football-3",
       "categoryName": "Italy-Serie A",
       "categoryThumbnail": "SerieA",
-      "isLive": true,
+      "isLive": false,
       "matches": [
         {
           "matchId": "m-1795342017884",
@@ -497,7 +532,7 @@
       "categoryId": "football-4",
       "categoryName": "England Premier League",
       "categoryThumbnail": "epl3",
-      "isLive": true,
+      "isLive": false,
       "matches": [
         {
           "matchId": "m-1795435895709",

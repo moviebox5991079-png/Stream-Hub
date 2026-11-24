@@ -382,40 +382,39 @@
       "matches": [
         {
           "matchId": "c1",
-          "matchTitle": "New Zealand vs India, 1st Test, Day 5||S=2026-11-22T03:00:00+05:00||E=10h",
+          "matchTitle": "South Africa vs Bangladesh, 2nd Test, Day 2||S=2026-11-24T13:00:00+05:00||E=3h",
           "thumbnail": "cricket_all",
           "isLive": true,
           "servers": [
             {
-              "serverName": "Hindi",
-              "iframeUrl": "https://thedaddy.li/stream/stream-887.php"
+              "serverType": "okru",
+              "serverName": "Server 1 (HD)",
+              "videoId": "15254299352683",
+              "iframeUrl": "https://ok.ru/videoembed/15254299352683"
             },
             {
-              "serverName": "English",
-              "iframeUrl": "https://thedaddy.li/stream/stream-588.php"
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-346.php"
             }
           ]
         },
         {
           "matchId": "m-1795412797767",
-          "matchTitle": "South Africa vs Bangladesh, 2nd Test, Day 1||S=2026-11-23T13:00:00+05:00||E=12h",
+          "matchTitle": "Australia vs England, 2nd T20I||S=2026-11-24T13:15:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
           "servers": [
             {
-              "serverType": "url",
+              "serverType": "okru",
               "serverName": "Server 1 (HD)",
-              "iframeUrl": "https://taifood-blog.asia/embed/247-willow"
+              "videoId": "15254308986475",
+              "iframeUrl": "https://ok.ru/videoembed/15254308986475"
             },
             {
               "serverType": "url",
               "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://thedaddy.li/cast/stream-346.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-346.php"
+              "iframeUrl": "https://thedaddy.li/stream/stream-598.php"
             }
           ]
         }

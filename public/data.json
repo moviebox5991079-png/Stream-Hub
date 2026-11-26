@@ -362,114 +362,201 @@
       "categoryThumbnail": "cricket_all",
       "matches": [
         {
-          "matchId": "c1",
-          "matchTitle": "South Africa vs Bangladesh, 2nd Test, Day 2||S=2026-11-24T13:00:00+05:00||E=10h",
-          "thumbnail": "cricket_all",
-          "isLive": true,
-          "servers": [
-            {
-              "serverType": "okru",
-              "serverName": "Server 1 (HD)",
-              "videoId": "15254308986475",
-              "iframeUrl": "https://ok.ru/videoembed/15254308986475"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-346.php"
-            }
-          ]
-        },
-        {
-          "matchId": "m-1795412797767",
-          "matchTitle": "Australia vs England, 2nd T20I||S=2026-11-24T13:15:00+05:00||E=10h",
+          "matchId": "m-1795691499987",
+          "matchTitle": "New Zealand vs India, 2nd Test, Day 1||S=2026-11-27T03:00:00+05:00||E=10h",
           "thumbnail": "",
           "isLive": true,
-          "servers": [
-            {
-              "serverType": "okru",
-              "serverName": "Server 1 (HD)",
-              "videoId": "15254299352683",
-              "iframeUrl": "https://ok.ru/videoembed/15254299352683"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-598.php"
-            }
-          ]
+          "servers": []
+        },
+        {
+          "matchId": "m-1795691499988",
+          "matchTitle": "Australia vs England, 3rd T20I||S=2026-11-27T13:15:00+05:00||E=7h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": []
         }
       ],
-      "isLive": false
+      "isLive": true
     },
     {
       "categoryId": "Football-2",
-      "categoryName": "UEFA Champions League",
-      "categoryThumbnail": "uefc champion league",
+      "categoryName": "UEFA Europe League",
+      "categoryThumbnail": "UEFA_Europe_League",
       "isLive": true,
       "matches": [
         {
-          "matchId": "m-1795606978609",
-          "matchTitle": "Sabah FK vs Barcelona||S=2026-11-25T22:45:00+05:00||E=3h",
+          "matchId": "m-1795689166798",
+          "matchTitle": "Beşiktaş vs Hapoel Beer Sheva||S=2026-11-26T22:45:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
           "servers": [
             {
-              "serverType": "okru",
+              "serverType": "url",
               "serverName": "Server 1 (HD)",
-              "videoId": "15254238731883",
-              "iframeUrl": "https://ok.ru/videoembed/15254238731883"
+              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd9.php"
             },
             {
               "serverType": "url",
               "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd5.php"
+              "iframeUrl": "https://thedaddy.li/stream/stream-1012.php"
             },
             {
               "serverType": "url",
               "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://taifood-blog.asia/embed/ucl/2026-11-25/sab-bar"
+              "iframeUrl": "https://taifood-blog.asia/embed/uel/2026-11-26/bes-hbe"
             },
             {
               "serverType": "url",
               "serverName": "Server 4 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd6.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 5 (HD)",
-              "iframeUrl": "https://streamec.st/embed/ch4.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 6 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd3.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 7 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-34.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 8 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/pt/eleven1.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 9 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/bra/br2.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 10 (HD)",
-              "iframeUrl": "https://streamec.st/embed/ch10.php"
+              "iframeUrl": "https://thedaddy.li/stream/stream-171.php"
             }
           ]
         },
         {
-          "matchId": "m-1795606978610",
-          "matchTitle": "Slavia Prague vs Villarreal||S=2026-11-25T22:45:00+05:00||E=3h",
+          "matchId": "m-1795689166799",
+          "matchTitle": "Celta Vigo vs Bournemouth||S=2026-11-26T22:45:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd1.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-31.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd6.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-170.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 5 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/pt/eleven3.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 6 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/uel/2026-11-26/cel-bou"
+            }
+          ]
+        },
+        {
+          "matchId": "m-1795689166800",
+          "matchTitle": "Dinamo Zagreb vs Leverkusen||S=2026-11-26T22:45:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd3.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-615.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-169.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/uel/2026-11-26/dzg-b04"
+            }
+          ]
+        },
+        {
+          "matchId": "m-1795689166801",
+          "matchTitle": "Marseille vs Levski Sofia||S=2026-11-26T22:45:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd4.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-616.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-168.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/uel/2026-11-26/olm-lev"
+            }
+          ]
+        },
+        {
+          "matchId": "m-1795689166802",
+          "matchTitle": "Olympiacos vs Milan||S=2026-11-26T22:45:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd5.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://streamec.st/embed/ch4.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd7.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-9.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 5 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/pt/eleven2.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 6 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-34.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 7 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-167.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 8 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/uel/2026-11-26/oly-mil"
+            }
+          ]
+        },
+        {
+          "matchId": "m-1795689166803",
+          "matchTitle": "Salzburg vs Ararat Armenia||S=2026-11-26T22:45:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
           "servers": [
@@ -481,126 +568,298 @@
             {
               "serverType": "url",
               "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://streamec.st/embed/ch5.php"
+              "iframeUrl": "https://thedaddy.li/stream/stream-994.php"
             },
             {
               "serverType": "url",
               "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd10.php"
+              "iframeUrl": "https://thedaddy.li/stream/stream-165.php"
             },
             {
               "serverType": "url",
               "serverName": "Server 4 (HD)",
-              "iframeUrl": "https://taifood-blog.asia/embed/ucl/2026-11-25/slp-vil"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 5 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/pt/eleven2.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 6 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/bra/br5.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 7 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-614.php"
+              "iframeUrl": "https://taifood-blog.asia/embed/uel/2026-11-26/slz-ara"
             }
           ]
         },
         {
-          "matchId": "m-1795606978611",
-          "matchTitle": "Atlético Madrid vs Viking||S=2026-11-26T01:00:00+05:00||E=3h",
+          "matchId": "m-1795689166804",
+          "matchTitle": "Union St.Gilloise vs Lech Poznań||S=2026-11-26T22:45:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
           "servers": [
             {
-              "serverType": "okru",
-              "serverName": "Server 1 (HD)",
-              "videoId": "15254260751979",
-              "iframeUrl": "https://ok.ru/videoembed/15254260751979"
-            },
-            {
               "serverType": "url",
-              "serverName": "Server 2 (HD)",
+              "serverName": "Server 1 (HD)",
               "iframeUrl": "https://sporrtsonline.top/channels/hd/hd10.php"
             },
             {
               "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-1.php"
+            },
+            {
+              "serverType": "url",
               "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://streamec.st/embed/ch3.php"
+              "iframeUrl": "https://thedaddy.li/stream/stream-166.php"
             },
             {
               "serverType": "url",
               "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/uel/2026-11-26/usg-lech"
+            }
+          ]
+        },
+        {
+          "matchId": "m-1795689166805",
+          "matchTitle": "Viktoria Plzeň vs Benfica||S=2026-11-26T22:45:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/pt/sporttv5.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://thedaddy.li/cast/stream-1025.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-617.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-164.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 5 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/uel/2026-11-26/plz-slb"
+            }
+          ]
+        },
+        {
+          "matchId": "m-1795689205989",
+          "matchTitle": "Crystal Palace vs Real Sociedad||S=2026-11-27T01:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd1.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-31.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
               "iframeUrl": "https://sporrtsonline.top/channels/hd/hd6.php"
             },
             {
               "serverType": "url",
-              "serverName": "Server 5 (HD)",
-              "iframeUrl": "https://taifood-blog.asia/embed/ucl/2026-11-25/atm-vfk"
-            }
-          ]
-        },
-        {
-          "matchId": "m-1795606978612",
-          "matchTitle": "Club Brugge vs Liverpool||S=2026-11-26T01:00:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": [
-            {
-              "serverType": "okru",
-              "serverName": "Server 1 (HD)",
-              "videoId": "15254285524587",
-              "iframeUrl": "https://ok.ru/videoembed/15254285524587"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd2.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://streamec.st/embed/ch2.php"
-            },
-            {
-              "serverType": "url",
               "serverName": "Server 4 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/pt/eleven2.php"
+              "iframeUrl": "https://thedaddy.li/stream/stream-183.php"
             },
             {
               "serverType": "url",
               "serverName": "Server 5 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-15.php"
+              "iframeUrl": "https://thedaddy.li/cast/stream-183.php"
             },
             {
               "serverType": "url",
               "serverName": "Server 6 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/bra/br6.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 7 (HD)",
-              "iframeUrl": "https://taifood-blog.asia/embed/ucl/2026-11-25/bru-liv"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 8 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-32.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 9 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-885.php"
+              "iframeUrl": "https://taifood-blog.asia/embed/uel/2026-11-26/cry-rso"
             }
           ]
         },
         {
-          "matchId": "m-1795606978613",
-          "matchTitle": "Inter vs VfB Stuttgart||S=2026-11-26T01:00:00+05:00||E=3h",
+          "matchId": "m-1795689205990",
+          "matchTitle": "Ferencváros vs NK Celje||S=2026-11-27T01:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-182.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/uel/2026-11-26/fer-nkc"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-2.php"
+            }
+          ]
+        },
+        {
+          "matchId": "m-1795689205991",
+          "matchTitle": "Hoffenheim vs Sturm Graz||S=2026-11-27T01:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-11.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-616.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-184.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/uel/2026-11-26/tsg-stg"
+            }
+          ]
+        },
+        {
+          "matchId": "m-1795689205992",
+          "matchTitle": "Juventus vs Omonia Nicosia||S=2026-11-27T01:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd5.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://streamec.st/embed/ch4.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd7.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-185.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 5 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/pt/eleven3.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 6 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-185.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 7 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-34.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 8 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/uel/2026-11-26/juv-omon"
+            }
+          ]
+        },
+        {
+          "matchId": "m-1795689205993",
+          "matchTitle": "Lyon vs Lillestrøm||S=2026-11-27T01:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd10.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-186.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://thedaddy.li/watch.php?id=615"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/uel/2026-11-26/lyon-lsk"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 5 (HD)",
+              "iframeUrl": ""
+            }
+          ]
+        },
+        {
+          "matchId": "m-1795689205994",
+          "matchTitle": "NEC Nijmegen vs Rennes||S=2026-11-27T01:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd4.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/uel/2026-11-26/nec-ren"
+            }
+          ]
+        },
+        {
+          "matchId": "m-1795689205995",
+          "matchTitle": "OFI Crete vs Anderlecht||S=2026-11-27T01:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/uel/2026-11-26/ofi-and"
+            }
+          ]
+        },
+        {
+          "matchId": "m-1795689205996",
+          "matchTitle": "Sparta Prague vs AZ Alkmaar||S=2026-11-27T01:00:00+05:00||E=3h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/uel/2026-11-26/spp-az"
+            }
+          ]
+        },
+        {
+          "matchId": "m-1795689205997",
+          "matchTitle": "Sunderland vs Jagiellonia Białystok||S=2026-11-27T01:00:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
           "servers": [
@@ -612,217 +871,40 @@
             {
               "serverType": "url",
               "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://streamec.st/embed/ch7.php"
+              "iframeUrl": "https://taifood-blog.asia/embed/uel/2026-11-26/sun-jag"
             },
             {
               "serverType": "url",
               "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/bra/br4.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 4 (HD)",
-              "iframeUrl": "https://thedaddy.li/cast/stream-616.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 5 (HD)",
-              "iframeUrl": "https://taifood-blog.asia/embed/ucl/2026-11-25/int-vfb"
+              "iframeUrl": "https://thedaddy.li/stream/stream-32.php"
             }
           ]
         },
         {
-          "matchId": "m-1795606978614",
-          "matchTitle": "Lille vs Bayern München||S=2026-11-26T01:00:00+05:00||E=3h",
+          "matchId": "m-1795689205998",
+          "matchTitle": "Torreense vs Celtic||S=2026-11-27T01:00:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
           "servers": [
             {
-              "serverType": "okru",
+              "serverType": "url",
               "serverName": "Server 1 (HD)",
-              "videoId": "16983200374379",
-              "iframeUrl": "https://ok.ru/videoembed/16983200374379"
+              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd2.php"
             },
             {
               "serverType": "url",
               "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd9.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://streamec.st/embed/ch8.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 4 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd3.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 5 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-615.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 6 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/pt/eleven3.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 7 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-13.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 8 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/bra/br5.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 9 (HD)",
-              "iframeUrl": "https://taifood-blog.asia/embed/ucl/2026-11-25/lill-bay"
-            }
-          ]
-        },
-        {
-          "matchId": "m-1795606978615",
-          "matchTitle": "PSG vs Roma||S=2026-11-26T01:00:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": [
-            {
-              "serverType": "okru",
-              "serverName": "Server 1 (HD)",
-              "videoId": "16983242579563",
-              "iframeUrl": "https://ok.ru/videoembed/16983242579563"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd5.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://streamec.st/embed/ch10.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 4 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd4.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 5 (HD)",
-              "iframeUrl": "https://streamec.st/embed/ch4.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 6 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd7.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 7 (HD)",
-              "iframeUrl": "https://thedaddy.li/cast/stream-180.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 8 (HD)",
               "iframeUrl": "https://sporrtsonline.top/channels/pt/eleven1.php"
             },
             {
               "serverType": "url",
-              "serverName": "Server 9 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-180.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 10 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/bra/br2.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 11 (HD)",
-              "iframeUrl": "https://taifood-blog.asia/embed/ucl/2026-11-25/psg-roma"
-            }
-          ]
-        },
-        {
-          "matchId": "m-1795606978616",
-          "matchTitle": "Shakhtar Donetsk vs Fenerbahçe||S=2026-11-26T01:00:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": [
-            {
-              "serverType": "url",
-              "serverName": "Server 1 (HD)",
-              "iframeUrl": "https://streamec.st/embed/ch6.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd11.php"
-            },
-            {
-              "serverType": "url",
               "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-618.php"
+              "iframeUrl": "https://thedaddy.li/stream/stream-33.php"
             },
             {
               "serverType": "url",
               "serverName": "Server 4 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-165.php"
-            }
-          ]
-        },
-        {
-          "matchId": "m-1795606978617",
-          "matchTitle": "Sporting CP vs Man United||S=2026-11-26T01:00:00+05:00||E=3h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": [
-            {
-              "serverType": "okru",
-              "serverName": "Server 1 (HD)",
-              "videoId": "16983247822443",
-              "iframeUrl": "https://ok.ru/videoembed/16983247822443"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd1.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://streamec.st/embed/ch1.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 4 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/pt/sporttv5.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 5 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-31.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 6 (HD)",
-              "iframeUrl": "https://sporrtsonline.top/channels/bra/br3.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 7 (HD)",
-              "iframeUrl": "https://thedaddy.li/cast/stream-31.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 8 (HD)",
-              "iframeUrl": "https://taifood-blog.asia/embed/ucl/2026-11-25/scp-mun"
+              "iframeUrl": "https://taifood-blog.asia/embed/uel/2026-11-26/tor-cel"
             }
           ]
         }

@@ -366,14 +366,82 @@
           "matchTitle": "New Zealand vs India, 2nd Test, Day 1||S=2026-11-27T03:00:00+05:00||E=10h",
           "thumbnail": "",
           "isLive": true,
-          "servers": []
+          "servers": [
+            {
+              "serverType": "okru",
+              "serverName": "Server 1 (HD)",
+              "videoId": "15254299352683",
+              "iframeUrl": "https://ok.ru/videoembed/15254299352683"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-346.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/247-willow"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://strmfree.pk/embed/cricket/willow"
+            }
+          ]
         },
         {
           "matchId": "m-1795691499988",
           "matchTitle": "Australia vs England, 3rd T20I||S=2026-11-27T13:15:00+05:00||E=7h",
           "thumbnail": "",
           "isLive": true,
-          "servers": []
+          "servers": [
+            {
+              "serverType": "okru",
+              "serverName": "Server 1 (HD)",
+              "videoId": "15254299352683",
+              "iframeUrl": "https://ok.ru/videoembed/15254299352683"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-346.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/247-willow"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://strmfree.pk/embed/cricket/willow"
+            }
+          ]
+        },
+        {
+          "matchId": "m-1795722895096",
+          "matchTitle": "Pakistan A vs Bangladesh A||S=2026-11-27T19:00:00+05:00||E=10h",
+          "thumbnail": "",
+          "isLive": true,
+          "servers": [
+            {
+              "serverType": "okru",
+              "serverName": "Server 1 (HD)",
+              "videoId": "15254308986475",
+              "iframeUrl": "https://ok.ru/videoembed/15254308986475"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-450.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-598.php"
+            }
+          ]
         }
       ],
       "isLive": true

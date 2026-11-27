@@ -363,83 +363,24 @@
       "matches": [
         {
           "matchId": "m-1795691499987",
-          "matchTitle": "New Zealand vs India, 2nd Test, Day 1||S=2026-11-27T03:00:00+05:00||E=10h",
+          "matchTitle": "New Zealand vs India, 2nd Test, Day 2||S=2026-11-28T03:00:00+05:00||E=12h",
           "thumbnail": "",
           "isLive": true,
           "servers": [
             {
-              "serverType": "okru",
-              "serverName": "Server 1 (HD)",
-              "videoId": "15254299352683",
-              "iframeUrl": "https://ok.ru/videoembed/15254299352683"
-            },
-            {
               "serverType": "url",
-              "serverName": "Server 2 (HD)",
+              "serverName": "Server 1 (HD)",
               "iframeUrl": "https://thedaddy.li/stream/stream-346.php"
             },
             {
               "serverType": "url",
-              "serverName": "Server 3 (HD)",
+              "serverName": "Server 2 (HD)",
               "iframeUrl": "https://taifood-blog.asia/embed/247-willow"
             },
             {
               "serverType": "url",
-              "serverName": "Server 4 (HD)",
-              "iframeUrl": "https://strmfree.pk/embed/cricket/willow"
-            }
-          ]
-        },
-        {
-          "matchId": "m-1795691499988",
-          "matchTitle": "Australia vs England, 3rd T20I||S=2026-11-27T13:15:00+05:00||E=7h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": [
-            {
-              "serverType": "okru",
-              "serverName": "Server 1 (HD)",
-              "videoId": "15254299352683",
-              "iframeUrl": "https://ok.ru/videoembed/15254299352683"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-346.php"
-            },
-            {
-              "serverType": "url",
               "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://taifood-blog.asia/embed/247-willow"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 4 (HD)",
               "iframeUrl": "https://strmfree.pk/embed/cricket/willow"
-            }
-          ]
-        },
-        {
-          "matchId": "m-1795722895096",
-          "matchTitle": "Pakistan A vs Bangladesh A||S=2026-11-27T19:00:00+05:00||E=10h",
-          "thumbnail": "",
-          "isLive": true,
-          "servers": [
-            {
-              "serverType": "okru",
-              "serverName": "Server 1 (HD)",
-              "videoId": "15254308986475",
-              "iframeUrl": "https://ok.ru/videoembed/15254308986475"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-450.php"
-            },
-            {
-              "serverType": "url",
-              "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-598.php"
             }
           ]
         }
@@ -450,7 +391,7 @@
       "categoryId": "Football-2",
       "categoryName": "UEFA Europe League",
       "categoryThumbnail": "UEFA_Europe_League",
-      "isLive": true,
+      "isLive": false,
       "matches": [
         {
           "matchId": "m-1795689166798",
@@ -982,33 +923,38 @@
       "categoryId": "football-3",
       "categoryName": "Italy-Serie A",
       "categoryThumbnail": "SerieA",
-      "isLive": false,
+      "isLive": true,
       "matches": [
         {
-          "matchId": "m-1795342017884",
-          "matchTitle": "Monza vs Fiorentina||S=2026-11-24T00:45:00+05:00||E=3h",
+          "matchId": "m-1795805509208",
+          "matchTitle": "Venezia vs Bologna||S=2026-11-28T00:45:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
           "servers": [
             {
               "serverType": "url",
-              "serverName": "Server 1 (HD) 🔴",
-              "iframeUrl": "https://sportsoonline.click/channels/hd/hd7.php"
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd7.php"
             },
             {
               "serverType": "url",
-              "serverName": "Server 2 (HD) 🔴",
-              "iframeUrl": "https://sportsoonline.click/channels/pt/sporttv1.php"
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://streamec.st/embed/ch9.php"
             },
             {
               "serverType": "url",
-              "serverName": "Server 3 (HD) 🔴",
-              "iframeUrl": "https://thedaddy.li/stream/stream-6.php"
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/pt/sporttv2.php"
             },
             {
               "serverType": "url",
-              "serverName": "Server 4 (HD) 🔴",
-              "iframeUrl": "https://thedaddy.li/cast/stream-6.php"
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-871.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 5 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/seriea/2026-11-27/ven-bol"
             }
           ]
         }
@@ -1018,33 +964,43 @@
       "categoryId": "football-4",
       "categoryName": "England Premier League",
       "categoryThumbnail": "epl3",
-      "isLive": false,
+      "isLive": true,
       "matches": [
         {
-          "matchId": "m-1795435895709",
-          "matchTitle": "Brentford vs Everton||S=2026-11-24T01:00:00+05:00||E=3h",
+          "matchId": "m-1795805175689",
+          "matchTitle": "Nottm Forest vs Chelsea||S=2026-11-28T01:00:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
           "servers": [
             {
               "serverType": "url",
               "serverName": "Server 1 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/hd/hd1.php"
+              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd1.php"
             },
             {
               "serverType": "url",
               "serverName": "Server 2 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/pt/eleven1.php"
+              "iframeUrl": "https://streamec.st/embed/ch1.php"
             },
             {
               "serverType": "url",
               "serverName": "Server 3 (HD)",
-              "iframeUrl": "https://sportsoonline.click/channels/bra/br2.php"
+              "iframeUrl": "https://sporrtsonline.top/channels/pt/eleven1.php"
             },
             {
               "serverType": "url",
               "serverName": "Server 4 (HD)",
-              "iframeUrl": "https://thedaddy.li/stream/stream-38.php"
+              "iframeUrl": "https://thedaddy.li/stream/stream-343.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 5 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/bra/br2.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 6 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/pl/2026-11-27/nfo-che"
             }
           ]
         }
@@ -1054,28 +1010,122 @@
       "categoryId": "footbll-5",
       "categoryName": "France Ligue 1",
       "categoryThumbnail": "franceLeague1",
-      "isLive": false,
+      "isLive": true,
       "matches": [
         {
-          "matchId": "m-1795342196409",
-          "matchTitle": "Paris FC vs Angers||S=2026-11-22T19:00:00+05:00||E=3h",
+          "matchId": "m-1795805793072",
+          "matchTitle": "Brest vs Paris FC||S=2026-11-28T00:45:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
-          "servers": []
-        },
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd4.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://streamec.st/embed/ch7.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/pt/sporttv3.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-960.php"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "categoryId": "football-6",
+      "categoryName": "Spain Laliga",
+      "categoryThumbnail": "laliag-2026 to 2027",
+      "isLive": true,
+      "matches": [
         {
-          "matchId": "m-1795342196410",
-          "matchTitle": "Lorient vs Rennes||S=2026-11-22T21:15:00+05:00||E=3h",
+          "matchId": "m-1795805386010",
+          "matchTitle": "Levante vs Racing Santander||S=2026-11-28T01:00:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
-          "servers": []
-        },
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd2.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://streamec.st/embed/ch6.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd6.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-77.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 5 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/pt/eleven2.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 6 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/laliga/2026-11-27/lev-rac"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "categoryId": "football-7",
+      "categoryName": "Germany Bundesliga",
+      "categoryThumbnail": "germany_bundesliga",
+      "isLive": true,
+      "matches": [
         {
-          "matchId": "m-1795342196411",
-          "matchTitle": "Marseille vs Le Mans||S=2026-11-23T00:45:00+05:00||E=3h",
+          "matchId": "m-1795805652700",
+          "matchTitle": "Werder Bremen vs M'gladbach||S=2026-11-28T00:30:00+05:00||E=3h",
           "thumbnail": "",
           "isLive": true,
-          "servers": []
+          "servers": [
+            {
+              "serverType": "url",
+              "serverName": "Server 1 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/hd/hd3.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 2 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-68.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 3 (HD)",
+              "iframeUrl": "https://sporrtsonline.top/channels/pt/eleven3.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 4 (HD)",
+              "iframeUrl": "https://thedaddy.li/stream/stream-558.php"
+            },
+            {
+              "serverType": "url",
+              "serverName": "Server 5 (HD)",
+              "iframeUrl": "https://taifood-blog.asia/embed/bundesliga/2026-11-27/svw-bmg"
+            }
+          ]
         }
       ]
     }

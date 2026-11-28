@@ -1,3 +1,4 @@
+
 name: Purge Cloudflare Cache
 
 on:
@@ -5,15 +6,68 @@ on:
     branches:
       - main
     paths:
-      - 'public/data.json'  # Sirf is file ke change hone par action chalega
+      - 'public/data.json'
+
+concurrency:
+  group: purge-cloudflare
+  cancel-in-progress: true
 
 jobs:
   purge:
     runs-on: ubuntu-latest
     steps:
-      - name: Purge Cache Everything on Cloudflare
+      - name: Wait for site build to finish
+        run: sleep 120
+
+      - name: Purge Cloudflare (1st)
         run: |
-          curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CF_ZONE_ID }}/purge_cache" \
+          curl -sS -f -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CF_ZONE_ID }}/purge_cache" \
                -H "Authorization: Bearer ${{ secrets.CF_API_TOKEN }}" \
                -H "Content-Type: application/json" \
                --data '{"purge_everything":true}'
+
+      - name: Wait again (slow builds)
+        run: sleep 150
+
+      - name: Purge Cloudflare (2nd)
+        run: |
+          curl -sS -f -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CF_ZONE_ID }}/purge_cache" \
+               -H "Authorization: Bearer ${{ secrets.CF_API_TOKEN }}" \
+               -H "Content-Type: application/json" \
+               --data '{"purge_everything":true}'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ============================== Alhamdullah poorey 1 year taak yeh chalaaa , aabbb mode 2 ayaaa tuu kabey kabeyy purge nahey hutaa hai ==============
+
+
+# name: Purge Cloudflare Cache
+
+# on:
+#   push:
+#     branches:
+#       - main
+#     paths:
+#       - 'public/data.json'  # Sirf is file ke change hone par action chalega
+
+# jobs:
+#   purge:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Purge Cache Everything on Cloudflare
+#         run: |
+#           curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CF_ZONE_ID }}/purge_cache" \
+#                -H "Authorization: Bearer ${{ secrets.CF_API_TOKEN }}" \
+#                -H "Content-Type: application/json" \
+#                --data '{"purge_everything":true}'
